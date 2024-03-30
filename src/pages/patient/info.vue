@@ -257,7 +257,8 @@ export default {
         .right{
           display: flex;
           width: 200rpx;
-          margin-left: 200rpx;
+          margin-left: 100rpx;
+          font-size:20rpx ;
           
           justify-content: space-around;
           .phone{
@@ -392,8 +393,6 @@ export default {
       margin-left: 240rpx;
       // justify-content: flex-end;
     }
-
-
 
  }
 
