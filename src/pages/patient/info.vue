@@ -1,95 +1,401 @@
-<script lang="ts" setup>
-
-import { ref } from 'vue'
-
-const statusBarHeight = ref(90);
-
-</script>
-
 <template>
-
   <view class="main">
 
     <view class="header">
 
       <view :style="{ 'height': statusBarHeight + 'rpx' }"></view>
+      <view  class="title">
+        <image class="img" src="../../static/img/return.png"></image>
 
-      <view class="content">
-
-        <view  class="title">
-        首页
-        </view>
-
-        <view class="base">
-
-          <image class="img" src="../../static/logo.png" />
-
-
-
-          <view class="info">
-            <view class="name">缺水的鱼</view>
-            <view class="phone">18855162578</view>
-          </view>
-        </view>
-
+        <view class="text">病人信息</view>
       </view>
+    </view>
+
+    <view class="info">
+
+      <view class="base-info">
+        <view class="first">
+
+          <view class="name">陈敏</view>
+
+          <wd-tag custom-class="space" round bg-color="#d0e8ff"  type="success">三次随诊</wd-tag>
+          <wd-tag custom-class="space" round bg-color="#d0e8ff"  type="success">1008611</wd-tag>
+
+        </view>
+
+        <view class="second">
+
+          <view class="left">
+            <view class="up">
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space" bg-color="white" plain>女</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space" bg-color="white" plain>36</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space" bg-color="white" plain>tak</wd-tag>
+
+            </view>
+            <view class="down">
+              距离下次诊疗已逾10天
+            </view>
+          </view>
+
+          <view class="right">
+            <view class="phone">
+              <image class="img" src="../../static/img/phone.png"></image>
+              <view>拨打电话</view>
+            </view>
+            <view class="message">
+              <image class="img" src="../../static/img/message.png"></image>
+              <view>发短信</view>
+            </view>
+          </view>
+          
+        </view>
+      </view>
+
+     
 
     </view>
 
+    <view class="follow">
+      <wd-cell title="标题文字" center>
+      
+        <wd-icon custom-class="custom-value" name="fill-arrow-down" size="22px"></wd-icon>
+      </wd-cell>
+        <view class="zlList">
+          <view class="item">
+            <view class="top">
+              <view class="status">未诊疗</view>
+              <view class="date">2024-3-11</view>
+            </view>
+            <view class="address">
+              李丽(北京市顺义区医院)
+            </view>
+          </view>
+
+          <view class="item">
+            <view class="top">
+              <view class="status">未诊疗</view>
+              <view class="date">2024-3-11</view>
+            </view>
+            <view class="address">
+              李丽(北京市顺义区医院)
+            </view>
+          </view>
+        </view>
+    </view>
+
+    <view class="history">
+
+      <wd-cell title="病史" center>
+        <wd-icon custom-class="custom-value" name="fill-arrow-down" size="22px"></wd-icon>
+      </wd-cell>
+
+      <wd-form ref="form" :model="model">
+
+        <wd-cell-group border>
+
+          <view class="content">
+            <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" v-model="model.date" />
+            <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" v-model="model.date" />
+            
+            <wd-cell title="脑卒中" title-width="100px" prop="count">
+            <view>
+              <wd-radio-group v-model="model.radioValue" shape="dot" inline>
+            <wd-radio value="1">有</wd-radio>
+            <wd-radio value="2">无</wd-radio>
+          </wd-radio-group>
+            </view>
+          </wd-cell>
+
+          </view>
+
+
+        </wd-cell-group>
+      
+      </wd-form>
+
+     
+
+    </view>
+ 
+
+
+  
+
   </view>
+ </template>
 
-</template>
+<script lang="ts" setup>
 
-<style lang="scss">
-.main{
 
-  .header{
+  import { ref ,reactive} from 'vue'
+
+  const statusBarHeight = ref(90);
+
+  const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+  const value = ref('选项1')
+
+  function handleConfirm({ value }) {
+    value.value = value
+  }
+
+
+  const model = reactive({
+      value1: '',
+      value2: '',
+      date:'2024',
+      radioValue: 0
+
+    })
+
+  const form = ref()
+
+
+  const handleSubmit = () => {
+
+    console.log(111)
+
+    form.value
+      .validate()
+      .then((data:any) => {
+        if (data.valid) {
+          console.log(data.valid)
+        } else {
+          console.log(333)
+        }
+      })
+      .catch((error:any) => {
+        console.log(error, 'error')
+      })
+}
+
+</script>
+
+<script lang="ts">
+export default {
+  options: {
+    styleIsolation: 'shared',
+
+  }
+}
+</script>
+
+ <style lang="scss">
+
+
+ .main{
+   opacity: 1;
+   background: rgba(255, 255, 255, 1);
+   .header{
+    height: 328rpx;
     opacity: 1;
-    background: linear-gradient(180deg, rgba(226, 244, 243, 1) 0%, rgba(226, 244, 243, 0) 100%);
-    height: 400rpx;
-    .content{
-      padding: 0 30rpx;
-
-      .title{
-
-        height: 88rpx;
-
-        font-size: 36rpx;
-        font-weight: 600;
-        letter-spacing: -0.36px;
-        line-height: 25.99px;
-        color: rgba(56, 56, 56, 1);
+    border-radius: 0px 0px, 24rpx, 24rpx;
+    background: linear-gradient(180deg, rgba(30, 217, 167, 1) 0%, rgba(17, 194, 147, 1) 100%);
+    .title{
+      padding:0 30rpx;
+      height:110rpx;
+      display: flex;
+      image{
+        margin-left: 8.34rpx;
+        margin-top:58.78rpx;
+        width: 15.32rpx;
+        height: 26.44rpx;
+        .img{
+          width: 100%;
+        }
       }
+      .text{
+        margin-top:46rpx;
+        margin-left: 30rpx;
+        opacity: 1;
+        /** 文本1 */
+        font-size: 36rpx;
+        font-weight: 700;
+        letter-spacing: -0.5rpx;
+        line-height: 50rpx;
+        color: rgba(255, 255, 255, 1);
 
-      .base{
+      }
+    }
+   }
+
+   .info{
+    padding: 30rpx;
+
+    background: rgba(245, 245, 245, 1);
+
+    .base-info{
+      opacity: 1;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 1);
+      margin-top: -120rpx;
+      padding-left: 50rpx;
+      
+
+      .first{
+        display: flex;
+        padding-top: 32rpx;
+        .name{
+      
+      
+        }
+
+      }
+      .second{
+        display: flex;
+        
+        .left{
+          .up{
+            margin-top: 20rpx;
+            display: flex;
+            
+          }
+          .down{
+            margin-top:12rpx ;
+            margin-bottom: 30rpx ;
+          }
+        }
+        .right{
           display: flex;
+          width: 200rpx;
+          margin-left: 200rpx;
+          
+          justify-content: space-around;
+          .phone{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            image{
+              width: 24rpx;
+              height: 32rpx;
+              .img{
+                height: 100%;
+              }
 
-          height: 120rpx;
-
-          image{
-            width: 120rpx;
-            height: 120rpx;
-            opacity: 1;
-            border-radius: 260rpx;
-            background: rgba(255, 255, 255, 1);
-            .img{
-              width: 100%;
             }
           }
-          .info{
+          .message{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            image{
+              width:36rpx;
+              height: 32rpx;
+              .img{
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
 
+    }
+   }
+
+   .follow{
+    
+      padding: 30rpx;
+      opacity: 1;
+      width: 110%;
+      background: rgba(255, 255, 255, 1);
+
+      .zlList{
+        .item{
+          opacity: 1;
+          border-radius: 8px;
+          background: rgba(245, 252, 252, 1);
+      
+          padding-left: 40rpx;
+          padding-top: 20rpx;
+          margin-bottom: 20rpx;
+        
+          .top{
+            display: flex;
+          
+            .date{
+              margin-left: 400rpx;
+              margin-bottom: 20rpx;
+            }
+           
+          }
+          .address{
+
+            padding-bottom: 20rpx;
           }
         }
 
+      }
+    }
+
+    .history{
+
+      height: 200rpx;
+      padding: 30rpx;
+      opacity: 1;
+      width: 110%;
+      background: rgba(255, 255, 255, 1);
+
+      .content{
+       
+        opacity: 1;
+        border-radius: 8px;
+        background: rgba(247, 247, 247, 1);
+      }
+
+
+
+    }
+
+    .submit{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 200rpx;
+      height: 100rpx;
+      opacity: 1;
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 1);
+      font-size: 16px;
+      font-weight: 700;
+      background: rgba(0, 191, 140, 1);
+    }
+
+    :deep(.space) {
+      margin: 0rpx 10rpx 10rpx;
+    }
+
+    :deep(.custom-value) {
+      position: absolute;
+      top: 50%;
+      right: 100rpx;
+      transform: translate(0, -50%);
+      white-space: nowrap;
+    }
+
+    :deep(.wd-calendar__value-wraper){
+      margin-left: 200rpx;
+      display: flex;
+
+    }
+
+    :deep(.wd-calendar__value){
+      
+      flex: 0 auto;
+
+    }
+
+    :deep(.wd-cell__wrapper){
+      align-items: center;
+    }
+    :deep(.wd-radio-group){
+      display: flex;
+      align-items: center;
+      margin-left: 240rpx;
+      // justify-content: flex-end;
     }
 
 
 
-  }
+ }
 
-}
-
-
-
-</style>
-
+ 
+ </style>
