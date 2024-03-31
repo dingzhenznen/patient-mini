@@ -82,8 +82,8 @@
               <wd-form ref="form" :model="model">
 
                 <wd-cell-group  custom-class="group" border>
-                  <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" align-right="true" v-model="model.date" />
-                  <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" align-right="true" v-model="model.date" />
+                  <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" v-model="model.date" />
+                  <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" v-model="model.date" />
                   
                   <wd-cell title="脑卒中" title-width="100px" prop="count">
                   
