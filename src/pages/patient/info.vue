@@ -360,43 +360,14 @@ export default {
       margin: 0rpx 10rpx 10rpx;
     }
 
-    :deep(.custom-value) {
-      position: absolute;
-      top: 50%;
-      right: 100rpx;
-      transform: translate(0, -50%);
-      white-space: nowrap;
+    :deep(.wd-cell__wrapper){
+      align-items: center;
     }
-
-    :deep(.custom-value1) {
-      position: absolute;
-      top: 50%;
-      right: -30rpx;
-      transform: translate(0, -50%);
-      white-space: nowrap;
+    :deep(.wd-radio-group){
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
-
-    // :deep(.wd-calendar__value-wraper){
-    //   margin-left: 200rpx;
-    //   display: flex;
-
-    // }
-
-    // :deep(.wd-calendar__value){
-      
-    //   flex: 0 auto;
-
-    // }
-
-    // :deep(.wd-cell__wrapper){
-    //   align-items: center;
-    // }
-    // :deep(.wd-radio-group){
-    //   display: flex;
-    //   align-items: center;
-    //   margin-left: 240rpx;
-    //   // justify-content: flex-end;
-    // }
 
  }
 
