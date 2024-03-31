@@ -67,6 +67,12 @@
       "style": {
         "navigationBarTitleText": "uni-app"
       }
+    },
+    {
+      "path": "pages/disease/spa",
+      "style": {
+        "navigationBarTitleText": "脊柱关节炎诊断"
+      }
     }
   ],
   "tabBar": {
