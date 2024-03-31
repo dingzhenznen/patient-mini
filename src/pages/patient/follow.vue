@@ -5,13 +5,11 @@
 
     <wd-form ref="form" :model="model">
       <wd-cell-group border>
-        <wd-picker :columns="columns" label="单列选项" v-model="value" @confirm="handleConfirm" />
-        <wd-calendar label="本次访视实施日期" label-width="240rpx"  placeholder="2024-3-24" prop="date" center="true" v-model="model.date" />
-        <wd-calendar label="本次访视实施日期" label-width="240rpx" placeholder="2024-3-24" prop="date"  center="true" v-model="model.date" />
+        <wd-picker :columns="columns" label="单列选项" align-right="true" v-model="value" @confirm="handleConfirm" />
+        <wd-calendar label="本次访视实施日期" label-width="240rpx"  placeholder="2024-3-24" prop="date" center= true align-right="true" v-model="model.date" />
+        <wd-calendar label="下次访视实施日期" label-width="240rpx" placeholder="2024-3-24" prop="date"  center= true align-right="true" v-model="model.date" />
         <wd-cell title="医嘱">
-          <wd-input no-border placeholder=" ">
-
-          </wd-input>
+          <wd-input no-border placeholder=" "></wd-input>
 
         </wd-cell>
       </wd-cell-group>
@@ -47,7 +45,8 @@ function handleConfirm({ value }) {
   const model = reactive({
       value1: '',
     value2: '',
-      date:''
+      date:2024,
+      flag:true
 
     })
 
@@ -107,16 +106,16 @@ export default {
     }
 
 
-    :deep(.wd-calendar__value-wraper){
-      margin-left: 150rpx;
-      display: flex;
-      align-items: center;
+    // :deep(.wd-calendar__value-wraper){
+    //   margin-left: 150rpx;
+    //   display: flex;
+    //   align-items: center;
 
-    }
+    // }
 
-    :deep(.wd-cell__wrapper){
-      align-items: center;
-    }
+    // :deep(.wd-cell__wrapper){
+    //   align-items: center;
+    // }
 
    }
 

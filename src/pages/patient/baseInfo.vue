@@ -11,63 +11,63 @@
         <view>基本信息</view>
       </view>
       <wd-cell-group border>
-      <wd-input
-      label="姓名"
-      label-width="100px"
-      prop="value1"
-      clearable
-      v-model="model.value1"
-      placeholder="请输入患者姓名"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
-    />
-    <wd-input
-      label="身份证"
-      label-width="100px"
-      prop="value1"
-      clearable
-      v-model="model.value1"
-      placeholder="340602197006152466"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
-    />
-    <wd-input
-      label="手机号"
-      label-width="100px"
-      prop="value1"
-      clearable
-      v-model="model.value1"
-      placeholder="请输入手机号码"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
-    />
+          <wd-input
+          label="姓名"
+          label-width="100px"
+          prop="value1"
 
-    <wd-input
-      label="ID或病历号"
-      label-width="100px"
-      prop="value1"
-      clearable
-      v-model="model.value1"
-      placeholder="请输入ID或病历号(必填)"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
-    />
+          v-model="model.value1"
+          placeholder="请输入患者姓名"
+          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+        />
+        <wd-input
+          label="身份证"
+          label-width="100px"
+          prop="value1"
+         
+          v-model="model.value1"
+          placeholder="340602197006152466"
+          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+        />
+        <wd-input
+          label="手机号"
+          label-width="100px"
+          prop="value1"
+        
+          v-model="model.value1"
+          placeholder="请输入手机号码"
+          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+        />
 
-    <wd-input
-      label="身高"
-      label-width="100px"
-      prop="value1"
-      clearable
-      v-model="model.value1"
-      placeholder="请输入身高"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
-    />
+        <wd-input
+          label="ID或病历号"
+          label-width="100px"
+          prop="value1"
+         
+          v-model="model.value1"
+          placeholder="请输入ID或病历号(必填)"
+          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+        />
 
-    <wd-input
-      label="体重"
-      label-width="100px"
-      prop="value1"
-      clearable
-      v-model="model.value1"
-      placeholder="请输入体重"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
-    />
+        <wd-input
+          label="身高"
+          label-width="100px"
+          prop="value1"
+        
+          v-model="model.value1"
+          placeholder="请输入身高"
+          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+        />
+
+        <wd-input
+          label="体重"
+          label-width="100px"
+          prop="value1"
+         
+          v-model="model.value1"
+          placeholder="请输入体重"
+          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+        />
 
     <view class="other">
 
@@ -79,7 +79,6 @@
       label="备注"
       label-width="100px"
       prop="value1"
-      clearable
       v-model="model.value1"
       placeholder="请输入备注(可选)"
       :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
@@ -92,8 +91,8 @@
       <image class="img" src="../../static/img/base-info.png"></image>
       <view>病史</view>
     </view>
-    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="date" v-model="model.date" />
-    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="date" v-model="model.date" />
+    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="date" align-right="true"  v-model="model.date" />
+    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="date" align-right="true" v-model="model.date" />
 
     <view class="other">
 
@@ -132,7 +131,7 @@
 
 
 
-      <view class="submit">
+      <view class="submit" @click="handleSubmit">
         注册完成
       </view>
     </wd-form>
@@ -274,20 +273,13 @@ export default {
       background: rgba(0, 191, 140, 1);
     }
 
+
+    // 背景色
     :deep(.wd-cell-group__body){
       opacity: 1;
       background: rgba(245, 245, 245, 1);
     }
-
-    :deep(.wd-input) {
-      justify-content: space-between;
-
-    }
-
-    :deep(.d-input__body){
-
-
-    }
+    // input 文字位置
     :deep(.wd-input__value){
 
       opacity: 1;
@@ -300,45 +292,23 @@ export default {
       // height: 84rpx;
     }
 
-    :deep(.wd-input__suffix) {
-      display: none;
-      content: none;
-      color: transparent;
-
-    }
-
+    // 报错信息
     :deep(.wd-input__error-message) {
       display: none;
       content: none;
       color: transparent;
 
     }
-    :deep(.wd-calendar__value-wraper){
-      margin-left: 340rpx;
-      display: flex;
 
-    }
 
+    // 冠心病 脑卒
     :deep(.wd-cell__wrapper){
       align-items: center;
     }
-
     :deep(.wd-radio-group){
       display: flex;
       align-items: center;
       justify-content: flex-end;
-    }
-    .title{
-
-      font-size: 16px;
-      margin-top: 30rpx;
-      font-weight: 700;
-      letter-spacing: 0px;
-      line-height: 22.4px;
-      color: rgba(56, 56, 56, 1);
-      margin-bottom: 20rpx;
-
-
     }
 
    }

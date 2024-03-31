@@ -50,77 +50,71 @@
           
         </view>
       </view>
-
-     
-
     </view>
-
-    <view class="follow">
-      <wd-cell title="标题文字" center>
-      
-        <wd-icon custom-class="custom-value" name="fill-arrow-down" size="22px"></wd-icon>
-      </wd-cell>
-        <view class="zlList">
-          <view class="item">
-            <view class="top">
-              <view class="status">未诊疗</view>
-              <view class="date">2024-3-11</view>
-            </view>
-            <view class="address">
-              李丽(北京市顺义区医院)
-            </view>
-          </view>
-
-          <view class="item">
-            <view class="top">
-              <view class="status">未诊疗</view>
-              <view class="date">2024-3-11</view>
-            </view>
-            <view class="address">
-              李丽(北京市顺义区医院)
-            </view>
-          </view>
-        </view>
-    </view>
-
+    
     <view class="history">
 
-      <wd-cell title="病史" center>
-        <wd-icon custom-class="custom-value" name="fill-arrow-down" size="22px"></wd-icon>
-      </wd-cell>
+          <wd-collapse v-model="Collapse">
+            <wd-collapse-item title="随诊" name="item1">
+              <view class="zlList">
+                <view class="item">
+                  <view class="top">
+                    <view class="status">未诊疗</view>
+                    <view class="date">2024-3-11</view>
+                  </view>
+                  <view class="address">
+                    李丽(北京市顺义区医院)
+                  </view>
+                </view>
 
-      <wd-form ref="form" :model="model">
+                <view class="item">
+                  <view class="top">
+                    <view class="status">未诊疗</view>
+                    <view class="date">2024-3-11</view>
+                  </view>
+                  <view class="address">
+                    李丽(北京市顺义区医院)
+                  </view>
+                </view>
+              </view>
+            </wd-collapse-item>
+            <wd-collapse-item title="病史" name="item2">
+              <wd-form ref="form" :model="model">
 
-        <wd-cell-group border>
+                <wd-cell-group  custom-class="group" border>
+                  <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" v-model="model.date" />
+                  <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" v-model="model.date" />
+                  
+                  <wd-cell title="脑卒中" title-width="100px" prop="count">
+                  
+                    <wd-radio-group v-model="model.radioValue" shape="dot" inline>
+                    <wd-radio value="1">有</wd-radio>
+                    <wd-radio value="2">无</wd-radio>
+                    </wd-radio-group>
+                  
+                  </wd-cell>
 
-          <view class="content">
-            <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" v-model="model.date" />
-            <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" v-model="model.date" />
-            
-            <wd-cell title="脑卒中" title-width="100px" prop="count">
-            <view>
-              <wd-radio-group v-model="model.radioValue" shape="dot" inline>
-            <wd-radio value="1">有</wd-radio>
-            <wd-radio value="2">无</wd-radio>
-          </wd-radio-group>
-            </view>
-          </wd-cell>
+                  <wd-cell title="脑卒中" title-width="100px" prop="count">
+                  
+                    <wd-radio-group v-model="model.radioValue" shape="dot" inline>
+                    <wd-radio value="1">有</wd-radio>
+                    <wd-radio value="2">无</wd-radio>
+                    </wd-radio-group>
 
-          </view>
+                </wd-cell>
+                </wd-cell-group>
 
-
-        </wd-cell-group>
-      
-      </wd-form>
-
-     
+              </wd-form>
+            </wd-collapse-item>
+            <wd-collapse-item title="tak" name="item3">
+              <view>强直性脊柱炎(修订的纽约标准，1984年)</view>
+              <view>
+                1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解
+              </view>
+            </wd-collapse-item>
+          </wd-collapse>
 
     </view>
- 
-
-
-  
-
   </view>
  </template>
 
@@ -130,6 +124,9 @@
   import { ref ,reactive} from 'vue'
 
   const statusBarHeight = ref(90);
+
+
+  const Collapse = ref<string[]>(['item1'])
 
   const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
   const value = ref('选项1')
@@ -142,7 +139,7 @@
   const model = reactive({
       value1: '',
       value2: '',
-      date:'2024',
+      date:2024,
       radioValue: 0
 
     })
@@ -329,10 +326,9 @@ export default {
 
     .history{
 
-      height: 200rpx;
+    
       padding: 30rpx;
       opacity: 1;
-      width: 110%;
       background: rgba(255, 255, 255, 1);
 
       .content{
@@ -372,27 +368,35 @@ export default {
       white-space: nowrap;
     }
 
-    :deep(.wd-calendar__value-wraper){
-      margin-left: 200rpx;
-      display: flex;
-
+    :deep(.custom-value1) {
+      position: absolute;
+      top: 50%;
+      right: -30rpx;
+      transform: translate(0, -50%);
+      white-space: nowrap;
     }
 
-    :deep(.wd-calendar__value){
+    // :deep(.wd-calendar__value-wraper){
+    //   margin-left: 200rpx;
+    //   display: flex;
+
+    // }
+
+    // :deep(.wd-calendar__value){
       
-      flex: 0 auto;
+    //   flex: 0 auto;
 
-    }
+    // }
 
-    :deep(.wd-cell__wrapper){
-      align-items: center;
-    }
-    :deep(.wd-radio-group){
-      display: flex;
-      align-items: center;
-      margin-left: 240rpx;
-      // justify-content: flex-end;
-    }
+    // :deep(.wd-cell__wrapper){
+    //   align-items: center;
+    // }
+    // :deep(.wd-radio-group){
+    //   display: flex;
+    //   align-items: center;
+    //   margin-left: 240rpx;
+    //   // justify-content: flex-end;
+    // }
 
  }
 
