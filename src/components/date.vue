@@ -22,7 +22,7 @@ const props = defineProps({
 <view class="text">签署知情同意书日期</view>
 
 <view class="rili">
-  <wd-calendar v-model="date" label="" @confirm="handleConfirm" />
+  <wd-calendar v-model="date" label="" align-right="true" @confirm="handleConfirm" />
 </view>
 
 </view>
@@ -43,6 +43,7 @@ const props = defineProps({
      margin: 30rpx 200rpx 30rpx 34rpx;
   }
   .rili{
+    top:20rpx;
     position:absolute;
     left: 480rpx;
     width: 282rpx;
