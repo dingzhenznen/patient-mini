@@ -18,8 +18,8 @@
 
           <view class="name">陈敏</view>
 
-          <wd-tag custom-class="space" round bg-color="#d0e8ff"  type="success">三次随诊</wd-tag>
-          <wd-tag custom-class="space" round bg-color="#d0e8ff"  type="success">1008611</wd-tag>
+          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">三次随诊</wd-tag>
+          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">1008611</wd-tag>
 
         </view>
 
@@ -27,9 +27,9 @@
 
           <view class="left">
             <view class="up">
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space" bg-color="white" plain>女</wd-tag>
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space" bg-color="white" plain>36</wd-tag>
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space" bg-color="white" plain>tak</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >女</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >36</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >tak</wd-tag>
 
             </view>
             <view class="down">
@@ -52,7 +52,7 @@
       </view>
     </view>
     
-    <view class="history">
+    <view class="follow">
 
           <wd-collapse v-model="Collapse">
             <wd-collapse-item title="随诊" name="item1">
@@ -76,41 +76,64 @@
                     李丽(北京市顺义区医院)
                   </view>
                 </view>
+
+                <view class="item">
+                  <view class="top">
+                    <view class="status">未诊疗</view>
+                    <view class="date">2024-3-11</view>
+                  </view>
+                  <view class="address">
+                    李丽(北京市顺义区医院)
+                  </view>
+                </view>
               </view>
             </wd-collapse-item>
             <wd-collapse-item title="病史" name="item2">
-              <wd-form ref="form" :model="model">
+              <view class="history">
 
-                <wd-cell-group  custom-class="group" border>
-                  <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" align-right="true" v-model="model.date" />
-                  <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" align-right="true" v-model="model.date" />
-                  
-                  <wd-cell title="脑卒中" title-width="100px" prop="count">
-                  
-                    <wd-radio-group v-model="model.radioValue" shape="dot" inline>
-                    <wd-radio value="1">有</wd-radio>
-                    <wd-radio value="2">无</wd-radio>
-                    </wd-radio-group>
-                  
+                <wd-form ref="form" :model="model">
+
+                  <wd-cell-group  custom-class="cell-group" border>
+                    <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" align-right="true" v-model="model.date" />
+                    <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" align-right="true" v-model="model.date" />
+                    
+                    <wd-cell title="脑卒中" title-width="100px" prop="count">
+                    
+                      <wd-radio-group v-model="model.radioValue" shape="dot" inline>
+                      <wd-radio value="1">有</wd-radio>
+                      <wd-radio value="2">无</wd-radio>
+                      </wd-radio-group>
+                    
+                    </wd-cell>
+
+                    <wd-cell title="脑卒中" title-width="100px" prop="count">
+                    
+                      <wd-radio-group v-model="model.radioValue" shape="dot" inline>
+                      <wd-radio value="1">有</wd-radio>
+                      <wd-radio value="2">无</wd-radio>
+                      </wd-radio-group>
+
                   </wd-cell>
+                  </wd-cell-group>
 
-                  <wd-cell title="脑卒中" title-width="100px" prop="count">
-                  
-                    <wd-radio-group v-model="model.radioValue" shape="dot" inline>
-                    <wd-radio value="1">有</wd-radio>
-                    <wd-radio value="2">无</wd-radio>
-                    </wd-radio-group>
+                  </wd-form>
 
-                </wd-cell>
-                </wd-cell-group>
-
-              </wd-form>
+              </view>
+              
             </wd-collapse-item>
             <wd-collapse-item title="tak" name="item3">
-              <view>强直性脊柱炎(修订的纽约标准，1984年)</view>
-              <view>
-                1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解
+              <view class="disease">
+                <view class="title">
+                  <view class="name">tak</view>
+                  <wd-button type="success" size="small"> 转病种</wd-button>
+                </view>
+                
+                <view class="content">
+                  <view>1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解</view>
+                  <view>1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解</view>
+                </view>
               </view>
+              
             </wd-collapse-item>
           </wd-collapse>
 
@@ -291,9 +314,9 @@ export default {
 
    .follow{
     
-      padding: 30rpx;
+      padding: 0rpx;
       opacity: 1;
-      width: 110%;
+      width: 100%;
       background: rgba(255, 255, 255, 1);
 
       .zlList{
@@ -310,7 +333,7 @@ export default {
             display: flex;
           
             .date{
-              margin-left: 400rpx;
+              margin-left: 300rpx;
               margin-bottom: 20rpx;
             }
            
@@ -322,25 +345,56 @@ export default {
         }
 
       }
-    }
 
-    .history{
+      .history{
 
-    
-      padding: 30rpx;
-      opacity: 1;
-      background: rgba(255, 255, 255, 1);
-
-      .content{
-       
-        opacity: 1;
+        padding: 0rpx;
         border-radius: 8px;
-        background: rgba(247, 247, 247, 1);
+        opacity: 1;
+       // background: rgba(247, 247, 247, 1);
+
+        .content{
+          background: rgba(245, 252, 252, 1);
+        
+          opacity: 1;
+          border-radius: 8px;
+  
+        }
+
+       
+        }
+
+        .disease{
+
+          background: rgba(245, 252, 252, 1);
+          padding-left: 20rpx;
+
+          .title{
+            padding-top: 20rpx;
+           
+            display: flex;
+            justify-content: space-around;
+            .name{
+              margin-top:16rpx;
+              margin-right: 300rpx;
+            }
+          }
+          
+          .content{
+            margin-top:40rpx;
+            background: rgba(245, 252, 252, 1);
+            padding-bottom: 20rpx;
+            view{
+              margin-bottom: 20rpx;
+            }
+          }
+
+
+
       }
-
-
-
     }
+
+  
 
     .submit{
       display: flex;
@@ -358,6 +412,14 @@ export default {
 
     :deep(.space) {
       margin: 0rpx 10rpx 10rpx;
+    }
+    :deep(.space2) {
+      margin: 0rpx 10rpx 10rpx;
+      font-size: 26rpx;
+    }
+
+    :deep(.cell-group){
+      background: rgb(188, 14, 14);
     }
 
     :deep(.wd-cell__wrapper){
