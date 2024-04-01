@@ -1,18 +1,14 @@
 <template>
   <view class="main">
-    <Header />
-    <!-- <view class="status_bar">
-      <view :style="{ 'height': statusBarHeight + 'px' }"></view>
-      <view :style="{ 'height': customNavBarHeight + 'px' }" class="title">首页</view>
-    <view class="search">
-      <uni-easyinput :styles="searchStyles" prefixIcon="search" placeholder="搜索" />
-      <view class="filter-btn">
-        <text>筛选</text>
-        <uni-icons type="bars" color="white"></uni-icons>
+    <view class="status_bar">
+      <view class="search">
+        <uni-easyinput prefixIcon="search" placeholder="搜索" />
+        <view class="filter-btn">
+          <text>筛选</text>
+          <uni-icons type="bars" color="white"></uni-icons>
+        </view>
       </view>
-
     </view>
-  </view> -->
     <!-- 录入: 拍照录入 与 手动录入 -->
     <view class="input-area">
       <view class="camera-input">
@@ -58,16 +54,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onReady } from '@dcloudio/uni-app';
-import Header from '@/components/header.vue'
-// 自定义导航栏代码，届时删除
-// import { storeToRefs } from 'pinia'
-// import { useGlobalStore } from '@/store'
-// const store = useGlobalStore()
-// const { sysInfo, customNavBarHeight, statusBarHeight, menuButtonRect } = storeToRefs(store)
-// const searchStyles = ref({
-//   backgroundColor: '#fff',
-//   borderRadius: '35px',
-// })
 
 const patientList = ref([
   { id: 1, name: '韩可可', age: 31, sex: '男', daysToNextDiag: 3, diagTimes: 6 },
