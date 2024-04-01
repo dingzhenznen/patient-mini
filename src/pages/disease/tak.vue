@@ -10,29 +10,14 @@
     </view>
 
     <view class="content">
-
       <form>
-
-        <wd-checkbox-group v-model="value"  checked-color="rgba(0, 191, 140, 1)" cell shape="button" @change="handleChange">
-          <wd-checkbox modelValue="1" >11.发病年龄低于40岁 </wd-checkbox>
-          <wd-checkbox modelValue="2" >2.肢体间歇性跛行</wd-checkbox>
-          <wd-checkbox modelValue="3">3.肱动脉脉搏减弱:一侧或双侧上肢动脉搏动减弱</wd-checkbox>
-          <wd-checkbox modelValue="4">4.血压差>10mmHg:双上肢收缩压相差10mmHg以上</wd-checkbox>
-          <wd-checkbox modelValue="5">5.锁骨下动脉或者主动脉区血管杂音</wd-checkbox>
-          <wd-checkbox modelValue="6">
-            6.血管造影异常:主动脉及其一级分支、四肢近端动脉狭窄或闭塞(除外动脉栓塞、肌纤维营养不良等原因)
-          </wd-checkbox>
-        </wd-checkbox-group>
-
+        <DiseaseCheckbox :optionList="optionList" @handleCheckbox="handleCheckbox"></DiseaseCheckbox>
       </form>
     </view>
-
-    <Date></Date>
-
+    <DateSelect :date="form.datetime" @handleDatetime="handleDate"></DateSelect>
     <view class="button">
-     <view class="submit" >患者注册</view>
-
-
+    
+      <view class="submit" @click="handleSubmit">患者注册</view>
    </view>
 
    </view>
@@ -45,18 +30,34 @@
  import { ref ,reactive} from 'vue'
 import Header from '../../components/header.vue';
 
-import Date from '../../components/date.vue';
+import DateSelect from '../../components/date.vue';
 
-const value = ref([])
+import DiseaseCheckbox from './disease-checkbox.vue';
 
-const handleChange = (value: any) => {
+const form = reactive({
+  datetime: Date.now(),
+  selectOption:[]
+})
 
-  console.log(value)
+const optionList =[
+  '1.发病年龄低于40岁 ','2.肢体间歇性跛行','3.肱动脉脉搏减弱:一侧或双侧上肢动脉搏动减弱',
+  '4.血压差>10mmHg:双上肢收缩压相差10mmHg以上 ','5.锁骨下动脉或者主动脉区血管杂音',
+  '6.血管造影异常:主动脉及其一级分支、四肢近端动脉狭窄或闭塞(除外动脉栓塞、肌纤维营养不良等原因)',
+]
+const handleCheckbox = (data:any)=>{
+  form.selectOption= data.value
 
 }
 
+const handleDate =(date:any)=>{
+  form.datetime= date.value
+  console.log(form.datetime)
+}
 
- </script>
+const handleSubmit =()=>{
+  console.log(form)
+}
+</script>
 
 <script lang="ts">
 export default {
@@ -103,29 +104,7 @@ export default {
 
       }
       .content{
-        //padding-left: 4rpx;
-
-        :deep(.wd-checkbox) {
-          display: flex;
-
-        }
-
-        :deep(.wd-checkbox__label){
-          margin-left: 12rpx;
-        }
-
-        :deep(.wd-checkbox__txt){
-          white-space: normal;
-        }
-
-        opacity: 1;
-
-        background: rgba(255, 255, 255, 1);
-        form{
-
-
-
-        }
+        
 
       }
 

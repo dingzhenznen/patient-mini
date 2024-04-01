@@ -2,18 +2,17 @@
 
 import { ref } from 'vue'
 
-const date = ref<number>(Date.now())
+const flag = ref<boolean>(true)
 const handleConfirm = (date:any) =>{
-  console.log(date)
+  emit('handleDatetime', date)
 }
-
 const props = defineProps({
-  title: {
-    type: String,
-    default: () => ''
-  },
-
+  date: {
+    type: Number,
+    default: () => Date.now()
+  }
 })
+const emit = defineEmits(['handleDatetime'])
 </script>
 
 <template>
@@ -22,7 +21,7 @@ const props = defineProps({
 <view class="text">签署知情同意书日期</view>
 
 <view class="rili">
-  <wd-calendar v-model="date" label="" align-right="true" @confirm="handleConfirm" />
+  <wd-calendar v-model="props.date" label="" :align-right=flag @confirm="handleConfirm" />
 </view>
 
 </view>
