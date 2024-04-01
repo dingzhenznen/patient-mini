@@ -5,7 +5,7 @@
 // 导航栏，未来删除
 .status_bar {
   width: 100%;
-  height: 150px;
+  height: 150rpx;
   background: linear-gradient(180deg, rgba(30, 217, 167, 1) 0%, rgba(17, 194, 147, 1) 100%);
   display: flex;
   flex-direction: column;
@@ -55,7 +55,7 @@
     flex-direction: column;
     border-radius: 20rpx;
     padding: 20rpx 0 0 20rpx;
-    overflow: hidden
+    overflow: hidden;
   }
 
   @mixin bg-image {

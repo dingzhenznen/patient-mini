@@ -11,25 +11,25 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "首页"
       }
     },
     {
       "path": "pages/login/index",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "登录"
       }
     },
     {
       "path": "pages/my/index",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "我的"
       }
     },
     {
       "path": "pages/patient/info",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "患者信息"
       }
     },
     {
@@ -41,7 +41,7 @@
     {
       "path": "pages/patient/selectDisease",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "选择疾病"
       }
     },
     {
@@ -89,19 +89,23 @@
       },
       {
         "pagePath": "pages/patient/info",
+        "iconPath": "static/tabBar/patients.png",
+        "selectedIconPath": "static/tabBar/patients-active.png",
         "text": "患者"
       },
       {
         "pagePath": "pages/my/index",
+        "iconPath": "static/tabBar/my.png",
+        "selectedIconPath": "static/tabBar/my-active.png",
         "text": "我的"
       }
     ]
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "患者服务",
     "navigationBarBackgroundColor": "#FFFFFF",
-    "backgroundColor": "#F8F8F8",
-    "navigationStyle": "custom"
+    "backgroundColor": "#F8F8F8"
+    // "navigationStyle": "custom"
   }
 }
