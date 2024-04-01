@@ -1,8 +1,35 @@
 <script lang="ts" setup>
 
 import { ref } from 'vue'
+import {initUserInfo} from "@/apis/user/index"
+import { useUserStore }  from "@/store/user"
 
 const statusBarHeight = ref(90);
+const userStore =useUserStore();
+
+const buttonRef = ref()
+
+import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
+
+const handleLogin = ()=>{
+
+  initUserInfo()
+}
+
+const getPhoneNumber =(data:any)=>{
+
+  console.log(data)
+
+}
+onShow(()=>{
+
+  console.log(buttonRef)
+
+  //buttonRef.click()
+
+  console.log(222,userStore.userInfo)
+
+})
 
 </script>
 
@@ -63,6 +90,10 @@ const statusBarHeight = ref(90);
       </wd-cell-group>
 
     </view>
+
+    <!-- <button @click="handleLogin">login</button> -->
+
+    <button ref="buttonRef" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">shouji</button>
 
   </view>
 
