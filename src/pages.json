@@ -89,10 +89,14 @@
       },
       {
         "pagePath": "pages/patient/info",
+        "iconPath": "static/tabBar/patients.png",
+        "selectedIconPath": "static/tabBar/patients-active.png",
         "text": "患者"
       },
       {
         "pagePath": "pages/my/index",
+        "iconPath": "static/tabBar/my.png",
+        "selectedIconPath": "static/tabBar/my-active.png",
         "text": "我的"
       }
     ]
