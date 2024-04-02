@@ -17,6 +17,13 @@ const props = defineProps({
 
 const emit = defineEmits(['handleCheckbox'])
 </script>
+<script lang="ts">
+export default {
+  options: {
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <template>
   <view class="main">

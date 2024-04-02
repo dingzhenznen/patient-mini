@@ -11,11 +11,21 @@ export const initUserInfo = async (callback?: Function) => {
       success: async res => {
         const code = res.code
         const { data: { access_token, expires_in, user } } = await cloud.invoke('mini/user/mp-login', { code })
-        useUser.updateUserInfo(user)
-        saveToken(access_token, expires_in)
-        if (callback) {
-          callback()
+        if(user.phone){
+
+          useUser.updateUserInfo(user)
+          saveToken(access_token, expires_in)
+          if (callback) {
+            callback()
+          }
+
+        }else{
+          useUser.updateUserInfo(user)
+          uni.switchTab({'url':'/pages/login/index'})
+          
         }
+       
+  
       },
       fail: () => {
         showError("用户信息获取失败")
@@ -33,5 +43,10 @@ export const initUserInfo = async (callback?: Function) => {
 
   }
 
+}
+
+export const getUserPhone = async(data:any)=>{
+
+  return await cloud.invoke('mini/user/get-user-phone', data)
 }
 

@@ -90,9 +90,9 @@ onShow(()=>{
 
     </view>
 
-    <!-- <button @click="handleLogin">login</button> -->
+    <button @click="handleLogin">login</button>
 
-    <button ref="buttonRef" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">shouji</button>
+    <!-- <button ref="buttonRef" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">shouji</button> -->
 
   </view>
 

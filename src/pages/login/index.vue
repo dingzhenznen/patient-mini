@@ -2,12 +2,12 @@
   <view class="main" >
 
     <view class="background">
-      <image :style="{ 'margin-top': 240-2*statusBarHeight + 'rpx' }" class="img" src="../../static/img/patient-log.png"></image>
+      <image style="margin-top:140rpx" class="img" src="../../static/img/patient-log.png"></image>
       <view class="title">患者管理平台</view>
     </view>
 
     <view class="login">
-      <view class="phone">
+      <!-- <view class="phone">
         手机号
       </view>
       <view>
@@ -20,27 +20,40 @@
         <wd-input type="text"  value="{{ value18 }}" placeholder="请输入验证码" use-suffix-slot clearable>
 				<Text class="send" slot="suffix" size="small" custom-class="button">获取验证码</Text>
 			</wd-input>
-      </view>
+      </view> -->
 
-      <view class="phone-login">手机号登陆</view>
-      <view class="wx-login">微信一键登录</view>
+      <!-- <view class="phone-login">手机号登陆</view> -->
+      <button class="wx-login" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">微信一键登录</button>
     </view>
 
   </view>
 </template>
 
 <script lang="ts" setup>
+import { getUserPhone } from '@/apis/user/index'
 
-import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useGlobalStore } from '@/store'
+import { useUserStore }  from "@/store/user"
 
-const store = useGlobalStore()
+const getPhoneNumber = async(data:any)=>{
 
-const { sysInfo, customNavBarHeight, statusBarHeight, menuButtonRect } = storeToRefs(store)
+  const userStore = useUserStore();
 
-const phone = ref();
-const code = ref();
+  console.log(userStore.userInfo)
+  
+  console.log(data.detail.code)
+
+  return;
+
+  const res = await getUserPhone({code:data.detail.code})
+
+
+  if(res.code==0){
+
+  }
+
+}
+
+
 
 
 </script>
