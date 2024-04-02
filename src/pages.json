@@ -23,55 +23,70 @@
     {
       "path": "pages/my/index",
       "style": {
-        "navigationBarTitleText": "我的"
+        "navigationBarTitleText": "我的",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
+
     {
       "path": "pages/patient/info",
       "style": {
-        "navigationBarTitleText": "患者信息"
+        "navigationBarTitleText": "患者信息",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
+
     {
       "path": "pages/patient/idCard",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "身份证",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
+
     {
       "path": "pages/patient/selectDisease",
       "style": {
-        "navigationBarTitleText": "选择疾病"
+        "navigationBarTitleText": "选择疾病",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
-    {
-      "path": "pages/patient/follow",
-      "style": {
-        "navigationBarTitleText": "uni-app"
-      }
-    },
+
     {
       "path": "pages/patient/baseInfo",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "患者注册",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
+
+    {
+      "path": "pages/patient/follow",
+      "style": {
+        "navigationBarTitleText": "访视信息修改",
+        "navigationBarBackgroundColor":"#5ae8b1"
+      }
+    },
+   
     {
       "path": "pages/patient/finish",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "随诊",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
     {
       "path": "pages/disease/tak",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "大动脉炎",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
     {
       "path": "pages/disease/spa",
       "style": {
-        "navigationBarTitleText": "脊柱关节炎诊断"
+        "navigationBarTitleText": "脊柱关节炎诊断",
+        "navigationBarBackgroundColor":"#5ae8b1"
       }
     }
   ],

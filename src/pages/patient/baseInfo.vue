@@ -1,9 +1,7 @@
 <template>
   <view class="main">
-   <Header title="输入" />
+
    <view class="body">
-
-
     <wd-form ref="form" :model="model">
       <view class="base_info">
         <image class="img" src="../../static/img/base-info.png"></image>
@@ -91,8 +89,8 @@
       <image class="img" src="../../static/img/base-info.png"></image>
       <view>病史</view>
     </view>
-    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="date" align-right="true"  v-model="model.date" />
-    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="date" align-right="true" v-model="model.date" />
+    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="date" :align-right="flag"  v-model="model.date" />
+    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="date" :align-right="flag" v-model="model.date" />
 
     <view class="other">
 
@@ -129,8 +127,6 @@
 
   </wd-cell-group>
 
-
-
       <view class="submit" @click="handleSubmit">
         注册完成
       </view>
@@ -143,8 +139,8 @@
  </template>
 
  <script lang="ts" setup>
- import { ref ,reactive} from 'vue'
-import Header from '../../components/header.vue';
+import { ref ,reactive} from 'vue'
+
 import Tags from '../../components/tags.vue';
 
 
@@ -152,9 +148,11 @@ import Tags from '../../components/tags.vue';
   const model = reactive({
       value1: '',
     value2: '',
-      date:''
+      date:Date.now()
 
     })
+
+    const flag = ref<boolean>(true)
 
 const form = ref()
 
@@ -170,20 +168,21 @@ const radioChange = (e: any) => {
 
 const handleSubmit = () => {
 
-  console.log(111)
+  uni.navigateTo({'url':"/pages/patient/follow"})
+  
 
-  form.value
-    .validate()
-    .then((data:any) => {
-      if (data.valid) {
-        console.log(data.valid)
-      } else {
-        console.log(333)
-      }
-    })
-    .catch((error:any) => {
-      console.log(error, 'error')
-    })
+  // form.value
+  //   .validate()
+  //   .then((data:any) => {
+  //     if (data.valid) {
+  //       console.log(data.valid)
+  //     } else {
+  //       console.log(333)
+  //     }
+  //   })
+  //   .catch((error:any) => {
+  //     console.log(error, 'error')
+  //   })
 }
 
  </script>

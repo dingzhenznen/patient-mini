@@ -16,7 +16,7 @@
         <text class="uno-text-sm uno-opacity-50 uno-mt-1">拍照识别录入</text>
         <image class="bg" src="../../static/img/path.png"></image>
       </view>
-      <view class="manual-input">
+      <view class="manual-input" @click="goIdCard">
         <text class="uno-text-base">手动录入</text>
         <text class="uno-text-sm uno-opacity-50 uno-mt-1">填写添加患者</text>
         <image class="bg" src="../../static/img/edit.png"></image>
@@ -68,6 +68,9 @@ const callPatient = (item: any) => {
 
 const messagePatient = (item: any) => {
   console.log('短信提醒', item)
+}
+const goIdCard =()=>{
+  uni.navigateTo({'url':'/pages/patient/idCard'})
 }
 </script>
 

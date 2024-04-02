@@ -1,7 +1,7 @@
 <template>
   <view class="main">
 
-    <view class="header">
+    <!-- <view class="header">
 
       <view :style="{ 'height': statusBarHeight + 'rpx' }"></view>
       <view  class="title">
@@ -9,7 +9,7 @@
 
         <view class="text">病人信息</view>
       </view>
-    </view>
+    </view> -->
 
     <view class="info">
 
@@ -247,7 +247,7 @@ export default {
       opacity: 1;
       border-radius: 16px;
       background: rgba(255, 255, 255, 1);
-      margin-top: -120rpx;
+      margin-top: 30rpx;
       padding-left: 50rpx;
       
 

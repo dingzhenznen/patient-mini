@@ -1,6 +1,6 @@
 <template>
   <view class="main">
-   <Header title="身份证" />
+   <!-- <Header title="身份证" /> -->
    <view class="input">
      <view class="text">身份证号</view>
      <view class="number">
@@ -8,7 +8,7 @@
      </view>
    </view>
 
-   <view class="button">
+   <view class="button" @click="goSelectDisease">
      <view class="submit" >确定</view>
    </view>
 
@@ -17,18 +17,21 @@
 
  <script lang="ts" setup>
  import { ref } from 'vue'
- import Header from '../../components/header.vue';
 
- const statusBarHeight = ref(90);
+ const goSelectDisease = ()=>{
+  uni.navigateTo({'url':"/pages/patient/selectDisease"})
+ }
+
  </script>
 
  <style lang="scss">
  .main{
    opacity: 1;
    background: rgba(245, 245, 245, 1);
+   padding-top: 40rpx;
 
    .input{
-     margin: 40rpx 30rpx;
+     margin: 0 30rpx;
      height: 100rpx;
      opacity: 1;
      border-radius: 8rpx;

@@ -1,7 +1,5 @@
 <template>
   <view class="main">
-    <Header title="随诊" />
-
    <view class="list">
 
     <!-- <view class="item" v-for="item in diseaseList" :key="item.en">
@@ -20,7 +18,7 @@
 
 
    <view class="submit">
-        注册完成
+        本次随诊结束
       </view>
 
 
@@ -29,7 +27,6 @@
 
  <script lang="ts" setup>
 import { ref, reactive } from 'vue'
-import Header from '../../components/header.vue';
 
 const statusBarHeight = ref(90);
 

@@ -28,7 +28,6 @@
 
  <script lang="ts" setup>
  import { ref ,reactive} from 'vue'
-import Header from '../../components/header.vue';
 
 import DateSelect from '../../components/date.vue';
 
@@ -55,6 +54,7 @@ const handleDate =(date:any)=>{
 }
 
 const handleSubmit =()=>{
+  uni.navigateTo({url:"/pages/patient/baseInfo"})
   console.log(form)
 }
 </script>

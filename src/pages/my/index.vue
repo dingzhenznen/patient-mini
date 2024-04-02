@@ -39,12 +39,11 @@ onShow(()=>{
 
     <view class="header">
 
-      <view :style="{ 'height': statusBarHeight + 'rpx' }"></view>
-
+   
       <view class="content">
 
         <view  class="title">
-        首页
+      
         </view>
 
         <view class="base">
