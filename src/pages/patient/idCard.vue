@@ -16,24 +16,25 @@
  </template>
 
  <script lang="ts" setup>
- import { ref ,reactive} from 'vue'
+ import {reactive} from 'vue'
+
+ import { addPatient } from "@/apis/patient/index"
+ import { usePatientStore } from "@/store/patient"
 
  const form = reactive({
   idCard:""
  })
 
- import {addPatient} from "@/apis/patient/index"
- import { usePatientStore } from "@/store/patient"
+
 
  const patientStore = usePatientStore()
 
  const goSelectDisease = async()=>{
   const res = await addPatient(form);
-  console.log(res)
 
   if(res.code==0){
     patientStore.updatePatientInfo(res.data)
-    console.log(222222,patientStore.patientInfo)
+  
     uni.navigateTo({'url':"/pages/patient/selectDisease"})
   }else{
   
