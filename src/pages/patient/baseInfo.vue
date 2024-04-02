@@ -2,7 +2,7 @@
   <view class="main">
 
    <view class="body">
-    <wd-form ref="form" :model="model">
+    <wd-form ref="formRef" :model="form">
       <view class="base_info">
         <image class="img" src="../../static/img/base-info.png"></image>
 
@@ -12,59 +12,59 @@
           <wd-input
           label="姓名"
           label-width="100px"
-          prop="value1"
+          prop="name"
 
-          v-model="model.value1"
+          v-model="form.name"
           placeholder="请输入患者姓名"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: true, pattern: /\d{6}/, message: '请输入6位字符' }]"
         />
         <wd-input
           label="身份证"
           label-width="100px"
-          prop="value1"
+          prop="idCard"
          
-          v-model="model.value1"
+          v-model="form.idCard"
           placeholder="340602197006152466"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: true, pattern: /\d{18}/, message: '请输入6位字符' }]"
         />
         <wd-input
           label="手机号"
           label-width="100px"
-          prop="value1"
+          prop="phone"
         
-          v-model="model.value1"
+          v-model="form.phone"
           placeholder="请输入手机号码"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: true, pattern: /\d{11}/, message: '请输入6位字符' }]"
         />
 
         <wd-input
           label="ID或病历号"
           label-width="100px"
-          prop="value1"
+          prop="caseId"
          
-          v-model="model.value1"
+          v-model="form.caseId"
           placeholder="请输入ID或病历号(必填)"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: true, message: '请输入6位字符' }]"
         />
 
         <wd-input
           label="身高"
           label-width="100px"
-          prop="value1"
+          prop="height"
         
-          v-model="model.value1"
+          v-model="form.height"
           placeholder="请输入身高"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: true, message: '请输入6位字符' }]"
         />
 
         <wd-input
           label="体重"
           label-width="100px"
-          prop="value1"
+          prop="weight"
          
-          v-model="model.value1"
+          v-model="form.weight"
           placeholder="请输入体重"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: true, message: '请输入6位字符' }]"
         />
 
     <view class="other">
@@ -76,10 +76,10 @@
     <wd-input
       label="备注"
       label-width="100px"
-      prop="value1"
-      v-model="model.value1"
+      prop="remark"
+      v-model="form.remark"
       placeholder="请输入备注(可选)"
-      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+      :rules="[]"
     />
     </view>
 
@@ -89,25 +89,20 @@
       <image class="img" src="../../static/img/base-info.png"></image>
       <view>病史</view>
     </view>
-    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="date" :align-right="flag"  v-model="model.date" />
-    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="date" :align-right="flag" v-model="model.date" />
+    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"  v-model="form.attackTime" @confirm="attackConfirm"/>
+    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="confirmTime" :align-right="flag" v-model="form.confirmTime" @confirm="confirmConfirm" />
 
     <view class="other">
 
 
       <wd-cell title="冠心病" title-width="100px" prop="count">
 
-        <wd-radio-group v-model="radioValue" shape="dot" inline @change="radioChange">
+        <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline @change="gxbRadioChange">
           <wd-radio value="1">有</wd-radio>
           <wd-radio value="2">无</wd-radio>
         </wd-radio-group>
 
       </wd-cell>
-
-      <!-- <wd-radio-group modelValue="1" shape="dot" inline>
-        <wd-radio value="1">单选框1</wd-radio>
-        <wd-radio value="2">单选框2</wd-radio>
-      </wd-radio-group> -->
 
     </view>
 
@@ -115,7 +110,7 @@
 
       <wd-cell title="脑卒中" title-width="100px" prop="count">
         <view>
-          <wd-radio-group v-model="radioValue" shape="dot" inline>
+          <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
         <wd-radio value="1">有</wd-radio>
         <wd-radio value="2">无</wd-radio>
       </wd-radio-group>
@@ -143,46 +138,81 @@ import { ref ,reactive} from 'vue'
 
 import Tags from '../../components/tags.vue';
 
+import { updatePatient } from "@/apis/patient/index"
+
+import { usePatientStore }  from "@/store/patient"
+
+const patientStore =usePatientStore();
+
+console.log(11111,patientStore.patientInfo)
 
 
-  const model = reactive({
-      value1: '',
-    value2: '',
-      date:Date.now()
+const form = reactive({
+  name: '1111111',
+  idCard:'340602197006152466',
+  phone:"18866162578",
+  caseId:'11111',
+  height:'111',
+  weight:'11',
+  remark:'',
+  attackTime:Date.now(),
+  confirmTime:Date.now(),
+  coronaryHeartDisease: 0,
+  cerebralApoplexy:0,
 
-    })
+})
+const formRef = ref()
 
-    const flag = ref<boolean>(true)
+const flag = ref<boolean>(true)
 
-const form = ref()
+const attackConfirm =(data:any)=>{
 
-const radioValue = ref<number>(0)
+  form.attackTime= data.value
 
-const radioChange = (e: any) => {
-  radioValue.value = e.value
-  console.log(radioValue.value)
-  console.log(e)
+}
+const confirmConfirm =(data:any)=>{
+  form.confirmTime= data.value
+}
+
+const gxbRadioChange = (e: any) => {
+  form.coronaryHeartDisease = e.value
+}
+
+const nzzRadioChange = (e: any) => {
+  form.cerebralApoplexy = e.value
 
 }
 
 
 const handleSubmit = () => {
 
-  uni.navigateTo({'url':"/pages/patient/follow"})
+  //uni.navigateTo({'url':"/pages/patient/follow"})
+
+  console.log(3333,form)
   
 
-  // form.value
-  //   .validate()
-  //   .then((data:any) => {
-  //     if (data.valid) {
-  //       console.log(data.valid)
-  //     } else {
-  //       console.log(333)
-  //     }
-  //   })
-  //   .catch((error:any) => {
-  //     console.log(error, 'error')
-  //   })
+  formRef.value
+    .validate()
+    .then(async (data:any) => {
+      if (data.valid) {
+        console.log(data.valid)
+
+        const res = await updatePatient({idCard:form.idCard,userInfo:form});
+    
+        if(res.code==0){
+          uni.navigateTo({'url':"/pages/patient/follow"})
+
+        }else{
+          console.log(res)
+        }
+      } else {
+        console.log(data)
+        return
+      }
+    })
+    .catch((error:any) => {
+      console.log(error, 'error')
+    })
 }
 
  </script>

@@ -4,7 +4,7 @@
    <view class="input">
      <view class="text">身份证号</view>
      <view class="number">
-       <input placeholder="请输入18位身份证号码" />
+       <input v-model="form.idCard" placeholder="请输入18位身份证号码" />
      </view>
    </view>
 
@@ -16,10 +16,29 @@
  </template>
 
  <script lang="ts" setup>
- import { ref } from 'vue'
+ import { ref ,reactive} from 'vue'
 
- const goSelectDisease = ()=>{
-  uni.navigateTo({'url':"/pages/patient/selectDisease"})
+ const form = reactive({
+  idCard:""
+ })
+
+ import {addPatient} from "@/apis/patient/index"
+ import { usePatientStore } from "@/store/patient"
+
+ const patientStore = usePatientStore()
+
+ const goSelectDisease = async()=>{
+  const res = await addPatient(form);
+  console.log(res)
+
+  if(res.code==0){
+    patientStore.updatePatientInfo(res.data)
+    console.log(222222,patientStore.patientInfo)
+    uni.navigateTo({'url':"/pages/patient/selectDisease"})
+  }else{
+  
+  }
+  
  }
 
  </script>

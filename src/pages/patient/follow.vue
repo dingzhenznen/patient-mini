@@ -2,13 +2,15 @@
   <view class="main">
    <view class="body">
 
-    <wd-form ref="form" :model="model">
+    <wd-form ref="formRef" :model="form">
       <wd-cell-group border>
-        <wd-picker :columns="columns" label="单列选项" :align-right="flag" v-model="value" @confirm="handleConfirm" />
-        <wd-calendar label="本次访视实施日期" label-width="240rpx"  placeholder="2024-3-24" prop="date" :center= "flag" :align-right="flag" v-model="model.date" />
-        <wd-calendar label="下次访视实施日期" label-width="240rpx" placeholder="2024-3-24" prop="date"  :center= "flag" :align-right="flag" v-model="model.date" />
+        <wd-picker :columns="columns" label="单列选项" :align-right="flag" v-model="form.followUpType" @confirm="handleConfirm"  />
+        <wd-calendar label="本次访视实施日期" label-width="240rpx"   prop="thisDate" :center= "flag" :align-right="flag" v-model="form.thisDate" @confirm="thisConfirm" />
+        <wd-calendar label="下次访视实施日期" label-width="240rpx" 
+          placeholder="2024-3-24" prop="nextDate"  :center= "flag" :align-right="flag" 
+          v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请输入6位字符' }]" @confirm="nextConfirm" />
         <wd-cell title="医嘱">
-          <wd-input no-border placeholder=" "></wd-input>
+          <wd-input v-model="form.remark" no-border placeholder=" 请输入"></wd-input>
 
         </wd-cell>
       </wd-cell-group>
@@ -28,28 +30,39 @@
  </template>
 
 <script lang="ts" setup>
-
-
 import { ref ,reactive} from 'vue'
-import Header from '../../components/header.vue';
+import { addFollow } from '@/apis/follow/index'
+import { usePatientStore }  from "@/store/patient"
+const patientStore =usePatientStore();
 
-  const model = reactive({
-      value1: '',
-      value2: '',
-      date:2024,
-      flag:true
+console.log(11111,patientStore.patientInfo)
+
+  const form = reactive({
+      idCard:patientStore.patientInfo.idCard,
+      followUpType: '正常随访',
+      thisDate:new Date(new Date().toLocaleDateString()).getTime(),
+      nextDate:0,
+      remark: '',
 
     })
 
-const form = ref()
+const formRef = ref()
 
 const flag = ref<boolean>(true)
 
-const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-const value = ref('选项1')
+const columns = ref(['正常随访', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
 
 function handleConfirm({ value }) {
-  value.value = value
+  form.followUpType = value
+}
+
+const thisConfirm =(data:any)=>{
+
+form.thisDate= data.value
+
+}
+const nextConfirm =(data:any)=>{
+form.nextDate= data.value
 }
 
 
@@ -57,19 +70,27 @@ const handleSubmit = () => {
 
   console.log(111)
 
-  // form.value
-  //   .validate()
-  //   .then((data:any) => {
-  //     if (data.valid) {
-  //       console.log(data.valid)
-  //     } else {
-  //       console.log(333)
-  //     }
-  //   })
-  //   .catch((error:any) => {
-  //     console.log(error, 'error')
-  //   })
-  uni.navigateTo({'url':'/pages/patient/finish'})
+  formRef.value
+    .validate()
+    .then(async (data:any) => {
+      if (data.valid) {
+        console.log(data.valid)
+
+        const res = await addFollow(form);
+
+        uni.navigateTo({'url':'/pages/patient/finish?thisDate='+form.thisDate})
+
+        console.log(res)
+
+      } else {
+        console.log(form)
+        console.log(data)
+      }
+    })
+    .catch((error:any) => {
+      console.log(error, 'error')
+    })
+   //uni.navigateTo({'url':'/pages/patient/finish'})
 }
 
 </script>
@@ -106,6 +127,12 @@ export default {
       background: rgba(0, 191, 140, 1);
     }
 
+    :deep(.wd-calendar__error-message) {
+      display: none;
+      content: none;
+      color: transparent;
+
+    }
 
     // :deep(.wd-calendar__value-wraper){
     //   margin-left: 150rpx;

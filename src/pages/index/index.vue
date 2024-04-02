@@ -55,6 +55,9 @@
 import { ref } from 'vue'
 import { onReady } from '@dcloudio/uni-app';
 
+var nowDate = new Date(new Date().toLocaleDateString()).getTime();
+console.log(111,nowDate)
+
 const patientList = ref([
   { id: 1, name: '韩可可', age: 31, sex: '男', daysToNextDiag: 3, diagTimes: 6 },
   { id: 2, name: '陈州', age: 33, sex: '男', daysToNextDiag: 10, diagTimes: 3 },

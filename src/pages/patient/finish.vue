@@ -17,7 +17,7 @@
    </view>
 
 
-   <view class="submit">
+   <view class="submit" @click="handleSubmit">
         本次随诊结束
       </view>
 
@@ -28,7 +28,13 @@
  <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 
-const statusBarHeight = ref(90);
+import { onLoad } from '@dcloudio/uni-app';
+import { updateFollow } from '@/apis/follow/index'
+import { usePatientStore }  from "@/store/patient"
+
+const patientStore = usePatientStore();
+
+console.log(11111,patientStore.patientInfo)
 
 const List = reactive([
 
@@ -43,6 +49,27 @@ const List = reactive([
   { 'title': "状态刷新",'src': "../../static/img/shuaxin.png", 'bg': 'linear-gradient(153.97deg, rgba(254, 147, 0, 1) 0%, rgba(255, 136, 0, 1) 20%, rgba(255, 125, 0, 1) 40%, rgba(255, 114, 0, 1) 60%, rgba(255, 102, 0, 1) 80%, rgba(255, 88, 0, 1) 100%);'},
 
 ])
+
+const thisDate = ref(0);
+
+
+onLoad((option:any)=>{
+
+  thisDate.value=option.thisDate
+})
+
+const handleSubmit = async()=>{
+
+  const res = await updateFollow({idCard:patientStore.patientInfo.idCard,thisDate:thisDate.value});
+
+  if(res.code==0){
+    //uni.navigateTo({'url':"/pages/index/index"})
+  }
+
+}
+
+
+
  </script>
 
  <style lang="scss">
@@ -90,6 +117,7 @@ const List = reactive([
       .title{
         width: 96rpx;
         margin-top:16rpx;
+        font-size: 20rpx;
         text-align: center;
       }
 
