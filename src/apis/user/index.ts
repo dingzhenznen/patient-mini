@@ -4,23 +4,26 @@ import { cloud } from "../cloud"
 import { useUserStore }  from "@/store/user"
 
 export const initUserInfo = async (callback?: Function) => {
-  const useUser= useUserStore()
+  const userStore= useUserStore()
+
   if (!getToken()) {
     return uni.login({
       provider: 'weixin',
       success: async res => {
         const code = res.code
         const { data: { access_token, expires_in, user } } = await cloud.invoke('mini/user/mp-login', { code })
+        // 后台配置了手机号
         if(user.phone){
 
-          useUser.updateUserInfo(user)
+          userStore.updateUserInfo(user)
           saveToken(access_token, expires_in)
           if (callback) {
             callback()
           }
 
         }else{
-          useUser.updateUserInfo(user)
+          
+          userStore.updateUserInfo(user)
           uni.switchTab({'url':'/pages/login/index'})
           
         }

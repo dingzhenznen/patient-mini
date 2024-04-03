@@ -15,18 +15,7 @@ const handleLogin = ()=>{
 
   initUserInfo()
 }
-
-const getPhoneNumber =(data:any)=>{
-
-  console.log(data)
-
-}
 onShow(()=>{
-
-  console.log(buttonRef)
-
-  //buttonRef.click()
-
   console.log(222,userStore.userInfo)
 
 })
@@ -90,9 +79,7 @@ onShow(()=>{
 
     </view>
 
-    <button @click="handleLogin">login</button>
-
-    <!-- <button ref="buttonRef" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">shouji</button> -->
+    <!-- <button @click="handleLogin">login</button> -->
 
   </view>
 

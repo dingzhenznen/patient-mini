@@ -34,21 +34,24 @@ import { getUserPhone } from '@/apis/user/index'
 
 import { useUserStore }  from "@/store/user"
 
+import { getToken, saveToken } from "@/utils"
+
 const getPhoneNumber = async(data:any)=>{
 
   const userStore = useUserStore();
 
-  console.log(userStore.userInfo)
-  
-  console.log(data.detail.code)
-
-  return;
-
-  const res = await getUserPhone({code:data.detail.code})
-
+  const res = await getUserPhone({code:data.detail.code,openid:userStore.userInfo.openid})
 
   if(res.code==0){
 
+    userStore.updateUserInfo(res.data.user)
+    saveToken(res.data.access_token, res.data.exp)
+
+
+    uni.switchTab({'url':'/pages/my/index'})
+
+  }else{
+     console.log('errps',res)
   }
 
 }

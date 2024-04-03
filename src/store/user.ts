@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user',  {
   
   state: () =>{
     return {
-      userInfo:{},
+      userInfo:{} as {openid:''},
       age:0
     }
   },
