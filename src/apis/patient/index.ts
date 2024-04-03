@@ -7,3 +7,7 @@ export const addPatient = async(data:any)=>{
 export const updatePatient = async(data:any)=>{
   return await cloud.invoke('mini/patient/update', data)
 }
+
+export const getPatient = async(data:any)=>{
+  return await cloud.invoke('mini/patient/getPatient', data)
+}

@@ -123,7 +123,7 @@
 
     <wd-cell title="脆性骨折" title-width="100px" prop="count">
       <view>
-        <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
+        <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline @change="cxgzRadioChange">
       <wd-radio value="1">有</wd-radio>
       <wd-radio value="2">无</wd-radio>
     </wd-radio-group>
@@ -137,7 +137,7 @@
 
     <wd-cell title="脑瘤" title-width="100px" prop="count">
       <view>
-        <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
+        <wd-radio-group v-model="form.brainTumor" shape="dot" inline @change="nlRadioChange">
       <wd-radio value="1">有</wd-radio>
       <wd-radio value="2">无</wd-radio>
     </wd-radio-group>
@@ -189,6 +189,8 @@ const form = reactive({
   confirmTime:Date.now(),
   coronaryHeartDisease: 0,
   cerebralApoplexy:0,
+  fragilityFractures:0,
+  brainTumor:0
 
 })
 const formRef = ref()
@@ -209,6 +211,15 @@ const gxbRadioChange = (e: any) => {
 }
 
 const nzzRadioChange = (e: any) => {
+  form.cerebralApoplexy = e.value
+
+}
+
+const cxgzRadioChange = (e: any) => {
+  form.coronaryHeartDisease = e.value
+}
+
+const nlRadioChange = (e: any) => {
   form.cerebralApoplexy = e.value
 
 }
