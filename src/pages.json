@@ -53,6 +53,27 @@
     },
 
     {
+      "path": "pages/patient/updateBaseInfo",
+      "style": {
+        "navigationBarTitleText": "患者基本信息",
+        "navigationBarBackgroundColor":"#5ae8b1"
+      }
+    },
+    {
+      "path": "pages/patient/updateHistory",
+      "style": {
+        "navigationBarTitleText": "病史",
+        "navigationBarBackgroundColor":"#5ae8b1"
+      }
+    },
+    {
+      "path": "pages/patient/updateHb",
+      "style": {
+        "navigationBarTitleText": "合并症",
+        "navigationBarBackgroundColor":"#5ae8b1"
+      }
+    },
+    {
       "path": "pages/patient/baseInfo",
       "style": {
         "navigationBarTitleText": "患者注册",
