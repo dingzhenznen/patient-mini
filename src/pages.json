@@ -73,6 +73,14 @@
         "navigationBarBackgroundColor":"#5ae8b1"
       }
     },
+
+    {
+      "path": "pages/patient/updateFollow",
+      "style": {
+        "navigationBarTitleText": "访视信息修改",
+        "navigationBarBackgroundColor":"#5ae8b1"
+      }
+    },
     {
       "path": "pages/patient/baseInfo",
       "style": {

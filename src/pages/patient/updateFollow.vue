@@ -19,7 +19,7 @@
 
 
       <view class="submit" @click="handleSubmit">
-        保存
+        更新
       </view>
 
 
@@ -31,20 +31,22 @@
 
 <script lang="ts" setup>
 import { ref ,reactive} from 'vue'
-import { addFollow } from '@/apis/follow/index'
-import { usePatientStore }  from "@/store/patient"
+import { storeToRefs } from 'pinia'
 
 import { updatePatient } from "@/apis/patient/index"
-const patientStore =usePatientStore();
 
-console.log(11111,patientStore.patientInfo)
+import { usePatientStore }  from "@/store/patient"
+
+const patientStore = usePatientStore();
+
+const { patientInfo } = storeToRefs(patientStore)
+
 
   const form = reactive({
-      idCard:patientStore.patientInfo.idCard,
-      followUpType: '正常随访',
-      thisDate:new Date(new Date().toLocaleDateString()).getTime(),
-      nextDate:0,
-      followRemark: 'test',
+      followUpType: patientInfo.value.followUpType,
+      thisDate: patientInfo.value.thisDate ?? new Date(new Date().toLocaleDateString()).getTime(),
+      nextDate: patientInfo.value.nextDate ?? 0,
+      followRemark: patientInfo.value.followRemark,
 
     })
 
@@ -72,17 +74,22 @@ const handleSubmit = () => {
 
   console.log(111)
 
+  const formData = {idCard:patientInfo.value.idCard,userInfo:form};
+
+  console.log(formData)
+  // return;
+
   formRef.value
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
         console.log(data.valid)
 
-        const res = await updatePatient({idCard:form.idCard,userInfo:form});
+        const res = await updatePatient(formData);
 
         patientStore.updatePatientInfo(res.data)
 
-        uni.navigateTo({'url':'/pages/patient/finish?thisDate='+form.thisDate})
+        uni.navigateTo({'url':'/pages/patient/finish'})
 
         console.log(res)
 
