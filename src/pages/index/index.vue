@@ -26,12 +26,12 @@
     </view>
     <!-- 病人信息列表 -->
     <view class="patient-list">
-      <wd-card custom-class="item" v-for="item in patientList" :key="item.id">
+      <wd-card custom-class="item" v-for="item in patientList" :key="item._id" @click="goToPatient">
         <!-- 病人信息展示 -->
         <view class="line-one">
           <!-- 第一行: 病人姓名，随诊次数 -->
           <text class="name">{{ item.name }}</text>
-          <wd-tag type="success" round custom-class="uno-opacity-80 uno-ml-2 uno-center">{{ item.diagTimes }}次随诊
+          <wd-tag type="success" round custom-class="uno-opacity-80 uno-ml-2 uno-center">{{ item.followList?.length }}次随诊
           </wd-tag>
           <view class="line-three"></view>
         </view>
@@ -39,7 +39,7 @@
         <view class="line-two">
           <text>{{ item.sex }}</text>
           <text class="uno-ml-1">{{ item.age }}岁</text>
-          <text class="uno-ml-1"> TAK </text>
+          <text class="uno-ml-1"> {{ item.diseaseName }} </text>
         </view>
         <!-- 电话/短信提醒 -->
         <view class="action uno-flex-content-between">
@@ -70,7 +70,7 @@ import type { Patient } from '@/utils/types';
 // 用户信息这里就代表当前登录的医生信息
 const { userInfo, age } = storeToRefs(useUserStore())
 const allPatients = usePatientStore().patients
-const patientList = ref()
+const patientList = ref([]as Patient[]) 
 const q = ref('') // 搜索/筛选条件
 
 // 进页面拉数据
@@ -82,7 +82,7 @@ onReady(async () => {
     }
     
     // set patients data
-    patientList.value = r.data
+    patientList.value = r.data as any
     usePatientStore().setPatients(r.data as Patient[])
     
   } catch (error) {
@@ -129,6 +129,12 @@ const messagePatient = (item: any) => {
 }
 const goIdCard =()=>{
   uni.navigateTo({'url':'/pages/patient/idCard'})
+}
+
+const goToPatient = (patient: Patient) => {
+  uni.navigateTo({
+    url: '/pages/patient/info?thisDate='+patient.idCard,
+  })
 }
 
 
