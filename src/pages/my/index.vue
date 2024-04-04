@@ -3,25 +3,22 @@
 import { reactive, ref } from 'vue'
 import {initUserInfo} from "@/apis/user/index"
 import { useUserStore }  from "@/store/user"
+import { storeToRefs } from 'pinia'
+import { onShow } from "@dcloudio/uni-app";
 
 const userStore =useUserStore();
-
-import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 
 const handleLogin = ()=>{
 
   initUserInfo()
 }
+
 onShow(()=>{
-  console.log(222,userStore.userInfo)
+  console.log('myindex',userStore.userInfo)
 
 })
 
-const userInfo = reactive({
-  username:userStore.userInfo.username,
-  phone:userStore.userInfo.phone,
-  avatar:userStore.userInfo.avatar
-})
+const {userInfo} = storeToRefs(userStore)
 
 </script>
 

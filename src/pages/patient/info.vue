@@ -16,10 +16,10 @@
       <view class="base-info">
         <view class="first">
 
-          <view class="name">{{ form.info.name }}</view>
+          <view class="name">{{ form.name }}</view>
 
-          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">{{form.info.followList.length}}次随诊</wd-tag>
-          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">{{ form.info.caseId }}</wd-tag>
+          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">{{form.followList.length}}次随诊</wd-tag>
+          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">{{ form.caseId }}</wd-tag>
 
         </view>
 
@@ -27,9 +27,9 @@
 
           <view class="left">
             <view class="up">
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.info.sex }}</wd-tag>
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.info.age }}</wd-tag>
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.info.diseaseName }}</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.age }}</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.sex }}</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.selectDisease?.en }}</wd-tag>
 
             </view>
             <view class="down">
@@ -58,13 +58,13 @@
             <wd-collapse-item title="随诊" name="item1">
               <view class="zlList">
 
-                <view class="item" v-for="item in form.info.followList" :key="item._id" @click="handleSelect(item.status)">
+                <view class="item" v-for="item in form.followList" :key="item._id" @click="handleSelect(item.status)">
                   <view class="top">
                     <view class="status">{{item.status==0?"未诊疗":item.status==1?"诊疗中":"诊疗结束"}}</view>
                     <view class="date">{{ 2024}}</view>
                   </view>
                   <view class="address">
-                    {{ item.doctor }}
+                    {{ item.doctorName }}
                   </view>
                 </view>
 
@@ -95,12 +95,12 @@
                 <wd-form ref="form" :model="form">
 
                   <wd-cell-group  custom-class="cell-group" border>
-                    <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" :align-right="flag" v-model="form.info.attackTime" />
-                    <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" :align-right="flag" v-model="form.info.confirmTime" />
+                    <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" :align-right="flag" v-model="form.attackTime" />
+                    <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" :align-right="flag" v-model="form.confirmTime" />
                     
                     <wd-cell title="冠心病" title-width="100px" prop="count">
                     
-                      <wd-radio-group v-model="form.info.coronaryHeartDisease" shape="dot" inline>
+                      <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline>
                       <wd-radio value="1">有</wd-radio>
                       <wd-radio value="2">无</wd-radio>
                       </wd-radio-group>
@@ -109,7 +109,7 @@
 
                     <wd-cell title="脑卒中" title-width="100px" prop="count">
                     
-                      <wd-radio-group v-model="form.info.cerebralApoplexy" shape="dot" inline>
+                      <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline>
                       <wd-radio value="1">有</wd-radio>
                       <wd-radio value="2">无</wd-radio>
                       </wd-radio-group>
@@ -118,7 +118,7 @@
 
                   <wd-cell title="脆性骨折" title-width="100px" prop="count">
                     
-                    <wd-radio-group v-model="form.info.fragilityFractures" shape="dot" inline>
+                    <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline>
                     <wd-radio value="1">有</wd-radio>
                     <wd-radio value="2">无</wd-radio>
                     </wd-radio-group>
@@ -127,7 +127,7 @@
 
                 <wd-cell title="脑瘤" title-width="100px" prop="count">
                     
-                    <wd-radio-group v-model="form.info.brainTumor" shape="dot" inline>
+                    <wd-radio-group v-model="form.brainTumor" shape="dot" inline>
                     <wd-radio value="1">有</wd-radio>
                     <wd-radio value="2">无</wd-radio>
                     </wd-radio-group>
@@ -170,7 +170,46 @@
 
   import { getPatient } from '@/apis/patient/index'
 
-  import { formatDate } from '@/utils/index'
+ type Patient ={
+  _id?: string
+  doctorId?: string, //sys_user id
+  doctorName?:string, //
+  caseId?: any, //// 身份证号
+  idCard?: string, //病例id
+  name?:any,
+  sex?: string// "男", '女'
+  age?: number,
+  phone?: string //"18866162578",
+
+  height?: string,//身高
+
+  weight?: string, //体重
+
+  remark?: string,//备注
+  
+  tags?: [],// 标签
+  followList?:[],
+  
+  attackTime?: any,// 发病时间
+  confirmTime?: any , // 确诊时间 
+
+  coronaryHeartDisease?: number, //冠心病  0 ,1
+  cerebralApoplexy?: number,// 0 ,1
+                      
+
+  fragilityFractures?: number, // 脆性骨折 0 ,1
+  brainTumor?: number,// 脑瘤  // 0 ,1
+                              
+  thisDate?: number, // "1712056432364" 本次随访时间
+  nextDate?: number, // "1712056432364", 下次随访时间
+  selectDisease?: {  // 选择的疾病
+    en: string, // tak 英文名称
+    china : string,// "干燥综合征",
+    content: {   // 选择内容
+
+    }
+  }
+}
 
   const idCard = ref('')
 
@@ -181,23 +220,23 @@
   const Collapse = ref<string[]>(['item1'])
 
 
-  const form = reactive({
-    info:{
+  const form = reactive<Patient>(
+    {
         name: '',
-        caseId: '',
+        caseId: 0,
         sex:'',
         age:44,
-        diseaseName: 0,
+
         phone:'',
         attackTime: 0,
         confirmTime: 0,
-        coronaryHeartDisease:'',
-        cerebralApoplexy:"",
-        fragilityFractures:'',
-        brainTumor:'',
+        coronaryHeartDisease:0,
+        cerebralApoplexy:0,
+        fragilityFractures:0,
+        brainTumor:0,
+        tags:[],
         followList:[]
       
-      }
     })
 
 
@@ -225,8 +264,8 @@
     const res = await getPatient({'idCard':idCard.value})
     console.log(res)
 
-    form.info= res.data.data[0]
-    console.log(form.info)
+    Object.assign(form, res.data.data[0]);
+    console.log(44444,form)
   })
 
 </script>
@@ -475,4 +514,4 @@ export default {
  }
 
  
- </style>
+ </style>../../utils/types/index

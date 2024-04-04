@@ -56,3 +56,16 @@ export const getUserPhone = async(data:any)=>{
   return await cloud.invoke('mini/user/get-user-phone', data)
 }
 
+export const getUserInfo = async(data:any)=>{
+
+  console.log('h5login')
+
+  const res =  await cloud.invoke('mini/user/get-user-info', data)
+
+  const userStore= useUserStore()
+
+  userStore.updateUserInfo(res.data)
+
+
+}
+
