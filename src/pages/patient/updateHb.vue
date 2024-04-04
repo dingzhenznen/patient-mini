@@ -10,11 +10,9 @@
     
 
     <view class="other">
-
-
       <wd-cell title="冠心病" title-width="100px" prop="count">
 
-        <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline @change="gxbRadioChange">
+        <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline >
           <wd-radio value="1">有</wd-radio>
           <wd-radio value="2">无</wd-radio>
         </wd-radio-group>
@@ -26,40 +24,40 @@
     <view class="other">
 
       <wd-cell title="脑卒中" title-width="100px" prop="count">
-        <view>
-          <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
-        <wd-radio value="1">有</wd-radio>
-        <wd-radio value="2">无</wd-radio>
-      </wd-radio-group>
-        </view>
+       
+        <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline >
+          <wd-radio value="1">有</wd-radio>
+          <wd-radio value="2">无</wd-radio>
+        </wd-radio-group>
+       
       </wd-cell>
 
     </view>
 
     <view class="other">
 
-    <wd-cell title="脆性骨折" title-width="100px" prop="count">
-      <view>
-        <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline @change="cxgzRadioChange">
-      <wd-radio value="1">有</wd-radio>
-      <wd-radio value="2">无</wd-radio>
-    </wd-radio-group>
-      </view>
-    </wd-cell>
+      <wd-cell title="脆性骨折" title-width="100px" prop="count">
+      
+        <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline >
+          <wd-radio value="1">有</wd-radio>
+          <wd-radio value="2">无</wd-radio>
+        </wd-radio-group>
+        
+      </wd-cell>
 
     </view>
 
 
     <view class="other">
 
-    <wd-cell title="脑瘤" title-width="100px" prop="count">
-      <view>
-        <wd-radio-group v-model="form.brainTumor" shape="dot" inline @change="nlRadioChange">
-      <wd-radio value="1">有</wd-radio>
-      <wd-radio value="2">无</wd-radio>
-    </wd-radio-group>
-      </view>
-    </wd-cell>
+      <wd-cell title="脑瘤" title-width="100px" prop="count">
+        
+        <wd-radio-group v-model="form.brainTumor" shape="dot" inline>
+          <wd-radio value="1">有</wd-radio>
+          <wd-radio value="2">无</wd-radio>
+        </wd-radio-group>
+      
+      </wd-cell>
 
     </view>
 
@@ -70,7 +68,7 @@
       </wd-cell-group>
 
       <view class="submit" @click="handleSubmit">
-        注册完成
+        更新
       </view>
     </wd-form>
 
@@ -83,45 +81,30 @@
  <script lang="ts" setup>
 import { ref ,reactive} from 'vue'
 
-import Tags from '../../components/tags.vue';
+import { storeToRefs } from 'pinia'
 
 import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
-const patientStore =usePatientStore();
+const patientStore = usePatientStore();
 
-console.log(11111,patientStore.patientInfo)
+const { patientInfo } = storeToRefs(patientStore)
+
+console.log('patientInfo',patientInfo.value)
 
 
 const form = reactive({
-  name: '1111111',
-  idCard:'340602197006152466',
-  phone:"18866162578",
-  caseId:'11111',
-  height:'111',
-  weight:'11',
-  remark:'',
-  attackTime:Date.now(),
-  confirmTime:Date.now(),
-  coronaryHeartDisease: 0,
-  cerebralApoplexy:0,
-  fragilityFractures:0,
-  brainTumor:0
+
+  coronaryHeartDisease: patientInfo.value.complication?.coronaryHeartDisease,
+  cerebralApoplexy: patientInfo.value.complication?.cerebralApoplexy,
+  fragilityFractures: patientInfo.value.complication?.fragilityFractures,
+  brainTumor: patientInfo.value.complication?.brainTumor
 
 })
+
 const formRef = ref()
 
-const flag = ref<boolean>(true)
-
-const attackConfirm =(data:any)=>{
-
-  form.attackTime= data.value
-
-}
-const confirmConfirm =(data:any)=>{
-  form.confirmTime= data.value
-}
 
 const gxbRadioChange = (e: any) => {
   form.coronaryHeartDisease = e.value
@@ -146,7 +129,12 @@ const handleSubmit = () => {
 
   //uni.navigateTo({'url':"/pages/patient/follow"})
 
-  console.log(3333,form)
+  const formInfo = {complication:form}
+
+  console.log(3333,formInfo)
+
+
+
   
 
   formRef.value
@@ -155,7 +143,7 @@ const handleSubmit = () => {
       if (data.valid) {
         console.log(data.valid)
 
-        const res = await updatePatient({idCard:form.idCard,userInfo:form});
+        const res = await updatePatient({idCard:patientInfo.value.idCard,userInfo:formInfo});
     
         if(res.code==0){
           uni.navigateTo({'url':"/pages/patient/follow"})
