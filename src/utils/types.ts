@@ -17,19 +17,27 @@ export type Patient ={
   
   tags?: [],// 标签
   followList?:[],
-  
-  attackTime?: number,// 发病时间
-  confirmTime?: number , // 确诊时间 
 
-  coronaryHeartDisease?: number, //冠心病  0 ,1
-  cerebralApoplexy?: number,// 0 ,1
-                      
+  history?:{  // 病史
+    attackTime?: number,// 发病时间
+    confirmTime?: number , // 确诊时间 
+  },
 
-  fragilityFractures?: number, // 脆性骨折 0 ,1
-  brainTumor?: number,// 脑瘤  // 0 ,1
-                              
+  complication?:{// 合并症状
+
+    coronaryHeartDisease?: number, //冠心病  0 ,1
+    cerebralApoplexy?: number,// 0 ,1
+    fragilityFractures?: number, // 脆性骨折 0 ,1
+    brainTumor?: number,// 脑瘤  // 0 ,1
+
+  }
+
+       
+  followUpType?:string,// 随访类型
   thisDate?: number, // "1712056432364" 本次随访时间
   nextDate?: number, // "1712056432364", 下次随访时间
+  followRemark?:string,
+
   selectDisease?: {  // 选择的疾病
     en: string, // tak 英文名称
     china : string,// "干燥综合征",

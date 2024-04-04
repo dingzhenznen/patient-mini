@@ -22,10 +22,10 @@
           label="身份证"
           label-width="100px"
           prop="idCard"
-         
+          readonly
           v-model="form.idCard"
           placeholder="340602197006152466"
-          :rules="[{ required: false, pattern: /\d{18}/, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\d{18}/, message: '请输入合法身份证' }]"
         />
         <wd-input
           label="手机号"
@@ -34,7 +34,7 @@
         
           v-model="form.phone"
           placeholder="请输入手机号码"
-          :rules="[{ required: false, pattern: /\d{11}/, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\d{11}/, message: '请输入合法手机号' }]"
         />
 
         <wd-input
@@ -44,7 +44,7 @@
          
           v-model="form.caseId"
           placeholder="请输入ID或病历号(必填)"
-          :rules="[{ required: false, message: '请输入6位字符' }]"
+          :rules="[{ required: false,pattern: /\S/, message: '请输入病例号' }]"
         />
 
         <wd-input
@@ -54,7 +54,7 @@
         
           v-model="form.height"
           placeholder="请输入身高"
-          :rules="[{ required: false, message: '请输入6位字符' }]"
+          :rules="[{ required: false,pattern: /\S/, message: '请输入身高' }]"
         />
 
         <wd-input
@@ -64,7 +64,7 @@
          
           v-model="form.weight"
           placeholder="请输入体重"
-          :rules="[{ required: false, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\S/,message: '请输入体重' }]"
         />
 
     <view class="other">
@@ -128,10 +128,6 @@ const form = reactive({
 
 })
 const formRef = ref()
-
-const flag = ref<boolean>(true)
-
-
 
 
 const handleSubmit = () => {

@@ -16,16 +16,16 @@
 
           v-model="form.name"
           placeholder="请输入患者姓名"
-          :rules="[{ required: true, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\S/, message: '请输入姓名' }]"
         />
         <wd-input
           label="身份证"
           label-width="100px"
           prop="idCard"
-         
+          readonly
           v-model="form.idCard"
           placeholder="340602197006152466"
-          :rules="[{ required: true, pattern: /\d{18}/, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\d{18}/, message: '请输入合法身份证' }]"
         />
         <wd-input
           label="手机号"
@@ -34,7 +34,7 @@
         
           v-model="form.phone"
           placeholder="请输入手机号码"
-          :rules="[{ required: true, pattern: /\d{11}/, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\d{11}/, message: '请输入合法手机号' }]"
         />
 
         <wd-input
@@ -44,7 +44,7 @@
          
           v-model="form.caseId"
           placeholder="请输入ID或病历号(必填)"
-          :rules="[{ required: true, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\S/,message: '请输入病例号' }]"
         />
 
         <wd-input
@@ -54,7 +54,7 @@
         
           v-model="form.height"
           placeholder="请输入身高"
-          :rules="[{ required: true, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\S/,message: '请输入身高' }]"
         />
 
         <wd-input
@@ -64,7 +64,7 @@
          
           v-model="form.weight"
           placeholder="请输入体重"
-          :rules="[{ required: true, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\S/, message: '请输入体重' }]"
         />
 
     <view class="other">
@@ -178,12 +178,12 @@ console.log(11111,patientStore.patientInfo)
 
 
 const form = reactive({
-  name: '1111111',
-  idCard:'340602197006152466',
-  phone:"18866162578",
-  caseId:'11111',
-  height:'111',
-  weight:'11',
+  name: '',
+  idCard:patientStore.patientInfo.idCard,
+  phone:"",
+  caseId:'',
+  height:'',
+  weight:'',
   tags:[],// 其他
   remark:'',
   history:{

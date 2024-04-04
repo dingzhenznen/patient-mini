@@ -95,12 +95,12 @@
                 <wd-form ref="form" :model="form">
 
                   <wd-cell-group  custom-class="cell-group" border>
-                    <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" :align-right="flag" v-model="form.attackTime" />
-                    <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" :align-right="flag" v-model="form.confirmTime" />
+                    <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" :align-right="flag" v-model="form.history.attackTime" />
+                    <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" :align-right="flag" v-model="form.history.confirmTime" />
                     
                     <wd-cell title="冠心病" title-width="100px" prop="count">
                     
-                      <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline>
+                      <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline>
                       <wd-radio value="1">有</wd-radio>
                       <wd-radio value="2">无</wd-radio>
                       </wd-radio-group>
@@ -109,7 +109,7 @@
 
                     <wd-cell title="脑卒中" title-width="100px" prop="count">
                     
-                      <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline>
+                      <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline>
                       <wd-radio value="1">有</wd-radio>
                       <wd-radio value="2">无</wd-radio>
                       </wd-radio-group>
@@ -118,7 +118,7 @@
 
                   <wd-cell title="脆性骨折" title-width="100px" prop="count">
                     
-                    <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline>
+                    <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline>
                     <wd-radio value="1">有</wd-radio>
                     <wd-radio value="2">无</wd-radio>
                     </wd-radio-group>
@@ -127,7 +127,7 @@
 
                 <wd-cell title="脑瘤" title-width="100px" prop="count">
                     
-                    <wd-radio-group v-model="form.brainTumor" shape="dot" inline>
+                    <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline>
                     <wd-radio value="1">有</wd-radio>
                     <wd-radio value="2">无</wd-radio>
                     </wd-radio-group>
@@ -191,12 +191,17 @@
         age:44,
 
         phone:'',
-        attackTime: 0,
-        confirmTime: 0,
-        coronaryHeartDisease:0,
-        cerebralApoplexy:0,
-        fragilityFractures:0,
-        brainTumor:0,
+        history:{
+          attackTime:0,
+          confirmTime: 0,
+        },
+        complication:{
+          coronaryHeartDisease:0,
+          cerebralApoplexy:0,
+          fragilityFractures:0,
+          brainTumor:0,
+        },
+        
         tags:[],
         followList:[]
       
