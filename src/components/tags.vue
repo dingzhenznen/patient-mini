@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { reactive, ref } from 'vue'
+import { reactive, ref ,computed, toRefs } from 'vue'
 
 const show = ref(false)
 
@@ -8,14 +8,39 @@ function handleClick() {
   show.value = true
 }
 
+const props = defineProps({
+  title: {
+    type: String,
+    default: () => ''
+  },
+  originTags:{
+    type: Array,
+    default: () => []
+  }
+
+})
+
 
 const tags = ref(['标签一', '标签二'])
 
-const selectTags = ref([]);
+
+
+const computedOrigin = computed({
+  get() {
+    return props.originTags;
+  },
+  set(value) {
+    //emit('handleSelect', value);
+  }
+})
+
+ const selectTags = ref([]);
+
+ console.log('tagess',computedOrigin.value)
+
+ selectTags.value = [ ...computedOrigin.value]
 
 const handleSelect =(event:any)=>{
-
-  console.log(event)
 
   const array = tags.value;
 
@@ -27,7 +52,6 @@ const handleSelect =(event:any)=>{
   }
 
   emit('handleSelect',selectTags.value)
-  console.log('ee')
 }
 
 function handleClose(order) {
@@ -40,13 +64,7 @@ function handleConfirm({ value }) {
   tags.value = [...tags.value, value]
 }
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: () => ''
-  },
 
-})
 
 const emit = defineEmits(['handleSelect'])
 </script>
@@ -63,7 +81,7 @@ export default {
 <template>
   <view class="header">
 
-    <wd-cell title="其他" value="内容" is-link @click="handleClick" />
+    <wd-cell title="其他" :value="selectTags.join(',')" is-link @click="handleClick" />
 
   <wd-popup v-model="show" position="bottom" closable custom-style="height: 100px;padding:30rpx;" >
 

@@ -70,7 +70,7 @@
     <view class="other">
 
       <!-- <wd-cell title="其他" value="内容" is-link @click="handleClick" /> -->
-      <Tags @handleSelect="handleTagsSelect"></Tags>
+      <Tags @handleSelect="handleTagsSelect" :originTags="form.tags"></Tags>
 
 
       <wd-input
@@ -131,7 +131,9 @@ const formRef = ref()
 
 const handleTagsSelect =(data:any)=>{
 
-  console.log('huoqu',data)
+  form.tags = data
+
+  console.log('tags',form)
 
 }
 
@@ -140,7 +142,6 @@ const handleSubmit = () => {
 
   //uni.navigateTo({'url':"/pages/patient/follow"})
 
-  console.log(3333,form)
   
 
   formRef.value
