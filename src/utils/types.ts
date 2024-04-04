@@ -40,7 +40,7 @@ export type Patient = {
     arthroplasty?:number, //关节置换术
     diabetes?:number ,// 糖尿病
     hypertension?:number, // 高血压
-    Hyperlipidemia?:number,                      // 高血脂
+    hyperlipidemia?:number,                      // 高血脂
     metabolicSyndrome?:number,                       // 代谢综合症
     chronicHepatitis?:number                      // 慢性肝炎（乙丙）
     tuberculosis?:number,                      // 结核

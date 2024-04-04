@@ -5,67 +5,123 @@
     <wd-form ref="formRef" :model="form">
   
       <wd-cell-group border>
-      
-
     
+        <view class="other">
+          <wd-cell title="冠心病" title-width="100px" prop="count">
 
-    <view class="other">
-      <wd-cell title="冠心病" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline >
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
 
-        <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline >
-          <wd-radio value="1">有</wd-radio>
-          <wd-radio value="2">无</wd-radio>
-        </wd-radio-group>
+          </wd-cell>
 
-      </wd-cell>
+        </view>
 
-    </view>
+        <view class="other">
 
-    <view class="other">
+          <wd-cell title="脑卒中" title-width="100px" prop="count">
+          
+            <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline >
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          
+          </wd-cell>
 
-      <wd-cell title="脑卒中" title-width="100px" prop="count">
-       
-        <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline >
-          <wd-radio value="1">有</wd-radio>
-          <wd-radio value="2">无</wd-radio>
-        </wd-radio-group>
-       
-      </wd-cell>
+        </view>
 
-    </view>
+        <view class="other">
 
-    <view class="other">
+          <wd-cell title="脆性骨折" title-width="100px" prop="count">
+          
+            <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline >
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+            
+          </wd-cell>
 
-      <wd-cell title="脆性骨折" title-width="100px" prop="count">
-      
-        <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline >
-          <wd-radio value="1">有</wd-radio>
-          <wd-radio value="2">无</wd-radio>
-        </wd-radio-group>
-        
-      </wd-cell>
-
-    </view>
-
-
-    <view class="other">
-
-      <wd-cell title="脑瘤" title-width="100px" prop="count">
-        
-        <wd-radio-group v-model="form.brainTumor" shape="dot" inline>
-          <wd-radio value="1">有</wd-radio>
-          <wd-radio value="2">无</wd-radio>
-        </wd-radio-group>
-      
-      </wd-cell>
-
-    </view>
+        </view>
 
 
+        <view class="other">
 
+          <wd-cell title="脑瘤" title-width="100px" prop="count">
+            
+            <wd-radio-group v-model="form.brainTumor" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          
+          </wd-cell>
 
+        </view>
 
-      </wd-cell-group>
+        <view class="other">
+          <wd-cell title="关节置换术" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.arthroplasty" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+        <view class="other">
+          <wd-cell title="糖尿病" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.diabetes" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+        <view class="other">
+          <wd-cell title="高血压" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.hypertension" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+        <view class="other">
+          <wd-cell title="高血脂" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.hyperlipidemia" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+        <view class="other">
+          <wd-cell title="代谢综合症" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.metabolicSyndrome" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+        <view class="other">
+          <wd-cell title="慢性肝炎" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.chronicHepatitis" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+        <view class="other">
+          <wd-cell title="结核病" title-width="100px" prop="count">
+            <wd-radio-group v-model="form.tuberculosis" shape="dot" inline>
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+          </wd-cell>
+        </view>
+
+      </wd-cell-group>  
 
       <view class="submit" @click="handleSubmit">
         更新
@@ -99,7 +155,14 @@ const form = reactive({
   coronaryHeartDisease: patientInfo.value.complication?.coronaryHeartDisease,
   cerebralApoplexy: patientInfo.value.complication?.cerebralApoplexy,
   fragilityFractures: patientInfo.value.complication?.fragilityFractures,
-  brainTumor: patientInfo.value.complication?.brainTumor
+  brainTumor: patientInfo.value.complication?.brainTumor,
+  arthroplasty:patientInfo.value.complication?.arthroplasty,
+  diabetes:patientInfo.value.complication?.diabetes??"2",
+  hypertension:patientInfo.value.complication?.hypertension??"2",
+  hyperlipidemia:patientInfo.value.complication?.hyperlipidemia??"2",
+  metabolicSyndrome:patientInfo.value.complication?.metabolicSyndrome??"2",
+  chronicHepatitis:patientInfo.value.complication?.chronicHepatitis??"2",
+  tuberculosis:patientInfo.value.complication?.tuberculosis??"2",
 
 })
 
@@ -132,11 +195,6 @@ const handleSubmit = () => {
   const formInfo = {complication:form}
 
   console.log(3333,formInfo)
-
-
-
-  
-
   formRef.value
     .validate()
     .then(async (data:any) => {
@@ -146,7 +204,8 @@ const handleSubmit = () => {
         const res = await updatePatient({idCard:patientInfo.value.idCard,userInfo:formInfo});
     
         if(res.code==0){
-          uni.navigateTo({'url':"/pages/patient/follow"})
+          patientStore.updatePatientInfo(res.data)
+          uni.navigateTo({'url':"/pages/patient/finish"})
 
         }else{
           console.log(res)
