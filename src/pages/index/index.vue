@@ -2,7 +2,9 @@
   <view class="main">
     <view class="status_bar">
       <view class="search">
-        <uni-easyinput prefixIcon="search" placeholder="搜索" />
+        <uni-easyinput prefixIcon="search" placeholder="搜索" v-model="q"
+        @input="searchInput" @confirm="search" @clear="search" @iconClick="search"
+        />
         <view class="filter-btn">
           <text>筛选</text>
           <uni-icons type="bars" color="white"></uni-icons>
@@ -47,23 +49,76 @@
           <wd-icon name="" size="22px"></wd-icon>
         </view>
       </wd-card>
+
+      <wd-toast />
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { onReady } from '@dcloudio/uni-app';
+import { storeToRefs } from 'pinia'
+import { onReady } from '@dcloudio/uni-app'
 
-var nowDate = new Date(new Date().toLocaleDateString()).getTime();
-console.log(111,nowDate)
+import { useToast } from '@/uni_modules/wot-design-uni'
+const toast = useToast()
 
-const patientList = ref([
-  { id: 1, name: '韩可可', age: 31, sex: '男', daysToNextDiag: 3, diagTimes: 6 },
-  { id: 2, name: '陈州', age: 33, sex: '男', daysToNextDiag: 10, diagTimes: 3 },
-  { id: 3, name: '陈敏', age: 40, sex: '女', daysToNextDiag: -5, diagTimes: 2 },
-])
+import { list } from '@/apis/patient'
+import { useUserStore, usePatientStore } from '@/store'
+import type { Patient } from '@/utils/types';
 
+// 用户信息这里就代表当前登录的医生信息
+const { userInfo, age } = storeToRefs(useUserStore())
+const allPatients = usePatientStore().patients
+const patientList = ref()
+const q = ref('') // 搜索/筛选条件
+
+// 进页面拉数据
+onReady(async () => {
+  try {
+    const r = await list({userId: userInfo.value._id})
+    if (r.code) {
+      toast.error('获取病人信息失败')
+    }
+    
+    // set patients data
+    patientList.value = r.data
+    usePatientStore().setPatients(r.data as Patient[])
+    
+  } catch (error) {
+    console.log(' Get patient list caught error: ', error)
+    toast.error('获取病人信息失败')
+  }
+})
+
+const filterFn = (patient: Patient) => {
+  const qStr = String(q.value)
+  if (patient.age == Number(q.value)) return true // 按年龄筛选
+  if (patient.doctorName?.includes(qStr)) return true // 按医生名称筛选
+  if (patient.name?.includes(qStr)) return true // 按病人名称筛选
+  if (patient.sex?.includes(qStr)) return true // 按性别筛选
+  // if (patient.idCard?.includes(qStr)) return true // 按病人身份证号筛选
+  if (patient.remark?.includes(qStr)) return true // 按病人备注筛选
+  if (patient.selectDisease?.china.includes(qStr)) return true // 按病人疾病中文名筛选
+  if (patient.selectDisease?.en.includes(qStr)) return true // 按病人疾病英文名筛选
+
+}
+
+// 添加此函数是因为 v-model 绑定的会慢一次键盘输入
+const searchInput = (e: any) => {
+  q.value = e
+  search()
+}
+
+const search = () => {
+  console.log('start search: ', q.value)
+  // 清除搜索/筛选条件时，展示所有病人
+  if (!q.value || q.value === '') {
+    patientList.value = usePatientStore().patients  
+  }
+  // 按条件搜索或筛选病人
+  patientList.value = usePatientStore().patients.filter(filterFn)
+}
 
 const callPatient = (item: any) => {
   console.log('拨打电话', item)
@@ -75,6 +130,8 @@ const messagePatient = (item: any) => {
 const goIdCard =()=>{
   uni.navigateTo({'url':'/pages/patient/idCard'})
 }
+
+
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-export type Patient ={
+export type Patient = {
   _id?: string
   doctorId?: string, //sys_user id
   doctorName?:string, //
@@ -30,6 +30,8 @@ export type Patient ={
     other?:number
   },
 
+  diseaseName?: string // 疾病名称
+
   complication?:{// 合并症状
     coronaryHeartDisease?: number, //冠心病  0 ,1
     cerebralApoplexy?: number,// 脑卒中 0 ,1
@@ -59,4 +61,25 @@ export type Patient ={
 
     }
   }
+}
+
+export type User = {
+  
+  _id: string
+  deptId: string
+  role: string
+
+  avatar?: string
+  email?: string
+
+  username: string
+  openid: string
+  phone: string
+  nickname: string
+}
+
+export type Response<T> = {
+  code: number
+  data?: T
+  msg?: string
 }

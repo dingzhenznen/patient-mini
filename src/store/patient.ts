@@ -10,12 +10,16 @@ export const usePatientStore = defineStore('patient',  {
   state: () =>{
     return {
       patientInfo:{} as Patient,
+      patients: [] as Patient[]
     }
   },
   actions: {
     updatePatientInfo(patient:any) {
         this.patientInfo = patient
     },
+    setPatients(patients: Patient[]) {
+      this.patients = patients
+    }
   },
   
 })
