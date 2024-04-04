@@ -169,49 +169,10 @@
   import { onLoad } from '@dcloudio/uni-app';
   import { getPatient } from '@/apis/patient/index'
   import { usePatientStore }  from "@/store/patient"
+  import type { Patient } from '@/utils/types'
 
   const patientStore = usePatientStore();
 
- type Patient ={
-  _id?: string
-  doctorId?: string, //sys_user id
-  doctorName?:string, //
-  caseId?: any, //// 身份证号
-  idCard?: string, //病例id
-  name?:any,
-  sex?: string// "男", '女'
-  age?: number,
-  phone?: string //"18866162578",
-
-  height?: string,//身高
-
-  weight?: string, //体重
-
-  remark?: string,//备注
-  
-  tags?: [],// 标签
-  followList?:[],
-  
-  attackTime?: any,// 发病时间
-  confirmTime?: any , // 确诊时间 
-
-  coronaryHeartDisease?: number, //冠心病  0 ,1
-  cerebralApoplexy?: number,// 0 ,1
-                      
-
-  fragilityFractures?: number, // 脆性骨折 0 ,1
-  brainTumor?: number,// 脑瘤  // 0 ,1
-                              
-  thisDate?: number, // "1712056432364" 本次随访时间
-  nextDate?: number, // "1712056432364", 下次随访时间
-  selectDisease?: {  // 选择的疾病
-    en: string, // tak 英文名称
-    china : string,// "干燥综合征",
-    content: {   // 选择内容
-
-    }
-  }
-}
 
   const idCard = ref('')
 

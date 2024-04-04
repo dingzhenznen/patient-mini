@@ -31,9 +31,6 @@ const patientStore = usePatientStore()
   idCard:"",
  })
 
-
-
-
  const goSelectDisease = async()=>{ 
   console.log(form)
 

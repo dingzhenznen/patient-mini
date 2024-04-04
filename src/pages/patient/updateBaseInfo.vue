@@ -109,7 +109,7 @@ import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
-const patientStore =usePatientStore();
+const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
 
@@ -117,14 +117,14 @@ console.log('patientInfo',patientInfo.value.name)
 
 
 const form = reactive({
-  name: '1111111',
-  idCard:'340602197006152466',
-  phone:"18866162578",
-  caseId:'11111',
-  height:'111',
-  weight:'11',
-  remark:'',
-  tags:[],
+  name: patientInfo.value.name,
+  idCard:patientInfo.value.idCard,
+  phone:patientInfo.value.phone,
+  caseId:patientInfo.value.caseId,
+  height:patientInfo.value.height,
+  weight:patientInfo.value.weight,
+  remark:patientInfo.value.remark,
+  tags:patientInfo.value.tags
 
 })
 const formRef = ref()
