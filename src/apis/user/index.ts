@@ -5,8 +5,9 @@ import { useUserStore }  from "@/store/user"
 
 export const initUserInfo = async (callback?: Function) => {
   const userStore= useUserStore()
-
+  console.log('login',1111)
   if (!getToken()) {
+    console.log('login',2222)
     return uni.login({
       provider: 'weixin',
       success: async res => {
@@ -17,6 +18,8 @@ export const initUserInfo = async (callback?: Function) => {
 
           userStore.updateUserInfo(user)
           saveToken(access_token, expires_in)
+
+          uni.switchTab({'url':'/pages/my/index'})
           if (callback) {
             callback()
           }

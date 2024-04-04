@@ -66,9 +66,6 @@ const handleSelect =(item:any)=>{
   else{
     uni.navigateTo({'url':item.url})
   }
-
-  
-
 }
 
 const handleSubmit = async()=>{

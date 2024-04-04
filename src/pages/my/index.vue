@@ -1,13 +1,10 @@
 <script lang="ts" setup>
 
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import {initUserInfo} from "@/apis/user/index"
 import { useUserStore }  from "@/store/user"
 
-const statusBarHeight = ref(90);
 const userStore =useUserStore();
-
-const buttonRef = ref()
 
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 
@@ -18,6 +15,12 @@ const handleLogin = ()=>{
 onShow(()=>{
   console.log(222,userStore.userInfo)
 
+})
+
+const userInfo = reactive({
+  username:userStore.userInfo.username,
+  phone:userStore.userInfo.phone,
+  avatar:userStore.userInfo.avatar
 })
 
 </script>
@@ -39,8 +42,8 @@ onShow(()=>{
 
           <image class="img" src="../../static/logo.png" />
           <view class="info">
-            <view class="name">缺水的鱼</view>
-            <view class="phone">18855162578</view>
+            <view class="name">{{userInfo.username}}</view>
+            <view class="phone">{{userInfo.phone}}</view>
           </view>
         </view>
 

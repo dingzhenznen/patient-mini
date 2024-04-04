@@ -19,5 +19,9 @@ export const useUserStore = defineStore('user',  {
       this.age=value
     }
   },
+  persist: {
+    key: "userInfo",
+    paths: ["userInfo"]
+}
   
 })
