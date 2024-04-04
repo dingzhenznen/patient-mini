@@ -13,17 +13,53 @@
         <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"  v-model="form.attackTime" @confirm="attackConfirm"/>
         <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="confirmTime" :align-right="flag" v-model="form.confirmTime" @confirm="confirmConfirm" />
 
-        <wd-cell title="其他病史" center>
-          
-        </wd-cell>
+        <view class="other">
+          <wd-cell title="吸烟史" title-width="100px" prop="count">
 
-        <wd-cell title="时间" center>
+            <wd-radio-group v-model="form.smoke" shape="dot" inline >
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+
+          </wd-cell>
+
+        </view>
+
+        <view class="other">
+          <wd-cell title="家族史" title-width="100px" prop="count">
+
+            <wd-radio-group v-model="form.family" shape="dot" inline >
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+
+          </wd-cell>
+
+        </view>
+
+        <view class="other">
+          <wd-cell title="过敏史" title-width="100px" prop="count">
+
+            <wd-radio-group v-model="form.allergy" shape="dot" inline >
+              <wd-radio value="1">有</wd-radio>
+              <wd-radio value="2">无</wd-radio>
+            </wd-radio-group>
+
+          </wd-cell>
+
+        </view>
+
+        <!-- <wd-cell title="其他病史" center>
+          
+        </wd-cell> -->
+
+        <!-- <wd-cell title="时间" center>
           <wd-cell title="病史内容">
             <wd-icon name="add" size="22px" @click="handleAdd"></wd-icon>
           </wd-cell>
-        </wd-cell>
+        </wd-cell> -->
 
-        <view class="otherHistory">
+        <!-- <view class="otherHistory">
           <view class="item">
            
             <wd-calendar use-default-slot >
@@ -32,11 +68,11 @@
 
             <wd-input custom-class="otherInput"></wd-input>
           </view>
-        </view>
+        </view> -->
       </wd-cell-group>
 
       <view class="submit" @click="handleSubmit">
-        注册完成
+        更新
       </view>
     </wd-form>
 
@@ -49,14 +85,15 @@
  <script lang="ts" setup>
 import { ref ,reactive} from 'vue'
 
+import { storeToRefs } from 'pinia'
+
 import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
+const patientStore = usePatientStore();
 
-const patientStore =usePatientStore();
-
-console.log(11111,patientStore.patientInfo)
+const { patientInfo } = storeToRefs(patientStore)
 
 interface PhoneItem {
   datetime: number
@@ -65,19 +102,13 @@ interface PhoneItem {
 
 
 const form = reactive({
-  name: '1111111',
-  idCard:'340602197006152466',
-  phone:"18866162578",
-  caseId:'11111',
-  height:'111',
-  weight:'11',
-  remark:'',
-  attackTime:Date.now(),
-  confirmTime:Date.now(),
-  coronaryHeartDisease: 0,
-  cerebralApoplexy:0,
-  fragilityFractures:0,
-  brainTumor:0,
+  
+  attackTime: patientInfo.value.history?.attackTime,
+  confirmTime: patientInfo.value.history?.confirmTime,
+  smoke:patientInfo.value.history?.smoke??"2",
+  family:patientInfo.value.history?.family??"2",
+  allergy:patientInfo.value.history?.allergy??"2",
+
   otherHistory:[] as PhoneItem[]
 
 })
@@ -111,6 +142,14 @@ const handleSubmit = () => {
   //uni.navigateTo({'url':"/pages/patient/follow"})
 
   console.log(3333,form)
+
+  const formData = { 
+    idCard:patientInfo.value.idCard,
+    userInfo:{ history:form}
+  }
+
+  console.log(3333,formData)
+  // return
   
 
   formRef.value
@@ -119,10 +158,11 @@ const handleSubmit = () => {
       if (data.valid) {
         console.log(data.valid)
 
-        const res = await updatePatient({idCard:form.idCard,userInfo:form});
+        const res = await updatePatient(formData);
     
         if(res.code==0){
-          uni.navigateTo({'url':"/pages/patient/follow"})
+          patientStore.updatePatientInfo(res.data)
+          uni.navigateTo({'url':"/pages/patient/finish"})
 
         }else{
           console.log(res)
