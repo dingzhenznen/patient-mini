@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const show = ref(false)
 
@@ -10,6 +10,25 @@ function handleClick() {
 
 
 const tags = ref(['标签一', '标签二'])
+
+const selectTags = ref([]);
+
+const handleSelect =(event:any)=>{
+
+  console.log(event)
+
+  const array = tags.value;
+
+  if(selectTags.value.includes(array[event])){
+    console.log('contain')
+    selectTags.value =selectTags.value.filter(item=> {return item !== array[event]})
+  }else{
+    selectTags.value.push(array[event])
+  }
+
+  emit('handleSelect',selectTags.value)
+  console.log('ee')
+}
 
 function handleClose(order) {
   tags.value = tags.value.filter((value, index) => index !== order)
@@ -28,7 +47,18 @@ const props = defineProps({
   },
 
 })
+
+const emit = defineEmits(['handleSelect'])
 </script>
+
+<script lang="ts">
+export default {
+  options: {
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 
 <template>
   <view class="header">
@@ -37,7 +67,13 @@ const props = defineProps({
 
   <wd-popup v-model="show" position="bottom" closable custom-style="height: 100px;padding:30rpx;" >
 
-      <wd-tag v-for="(tag, index) in tags" :key="index" custom-class="space" type="warning" round closable @close="handleClose(index)">{{tag}}</wd-tag>
+      <wd-tag v-for="(tag, index) in tags" :key="index" custom-class="space" type="warning" round closable 
+        @close="handleClose(index)"
+        @click="handleSelect(index)"
+        >
+        <view :class="{active:selectTags.includes(tag)}"> {{tag}}</view>
+        
+      </wd-tag>
       <wd-tag custom-class="space" round dynamic @confirm="handleConfirm"></wd-tag>
 
   </wd-popup>
@@ -47,6 +83,14 @@ const props = defineProps({
 <style lang="scss">
 
 .header{
+
+  :deep(.space) {
+    margin: 0 10px 10px;
+  }
+
+.active{
+  color: red;
+}
 
 
 }

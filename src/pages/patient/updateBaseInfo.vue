@@ -70,7 +70,7 @@
     <view class="other">
 
       <!-- <wd-cell title="其他" value="内容" is-link @click="handleClick" /> -->
-      <Tags></Tags>
+      <Tags @handleSelect="handleTagsSelect"></Tags>
 
 
       <wd-input
@@ -128,6 +128,12 @@ const form = reactive({
 
 })
 const formRef = ref()
+
+const handleTagsSelect =(data:any)=>{
+
+  console.log('huoqu',data)
+
+}
 
 
 const handleSubmit = () => {
