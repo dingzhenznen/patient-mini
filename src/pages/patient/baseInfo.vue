@@ -89,15 +89,15 @@
       <image class="img" src="../../static/img/base-info.png"></image>
       <view>病史</view>
     </view>
-    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"  v-model="form.attackTime" @confirm="attackConfirm"/>
-    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="confirmTime" :align-right="flag" v-model="form.confirmTime" @confirm="confirmConfirm" />
+    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"  v-model="form.history.attackTime" @confirm="attackConfirm"/>
+    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="confirmTime" :align-right="flag" v-model="form.history.confirmTime" @confirm="confirmConfirm" />
 
     <view class="other">
 
 
       <wd-cell title="冠心病" title-width="100px" prop="count">
 
-        <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline @change="gxbRadioChange">
+        <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline @change="gxbRadioChange">
           <wd-radio value="1">有</wd-radio>
           <wd-radio value="2">无</wd-radio>
         </wd-radio-group>
@@ -110,7 +110,7 @@
 
       <wd-cell title="脑卒中" title-width="100px" prop="count">
         <view>
-          <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
+          <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
         <wd-radio value="1">有</wd-radio>
         <wd-radio value="2">无</wd-radio>
       </wd-radio-group>
@@ -123,7 +123,7 @@
 
     <wd-cell title="脆性骨折" title-width="100px" prop="count">
       <view>
-        <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline @change="cxgzRadioChange">
+        <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline @change="cxgzRadioChange">
       <wd-radio value="1">有</wd-radio>
       <wd-radio value="2">无</wd-radio>
     </wd-radio-group>
@@ -137,7 +137,7 @@
 
     <wd-cell title="脑瘤" title-width="100px" prop="count">
       <view>
-        <wd-radio-group v-model="form.brainTumor" shape="dot" inline @change="nlRadioChange">
+        <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline @change="nlRadioChange">
       <wd-radio value="1">有</wd-radio>
       <wd-radio value="2">无</wd-radio>
     </wd-radio-group>
@@ -172,7 +172,7 @@ import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
-const patientStore =usePatientStore();
+const patientStore = usePatientStore();
 
 console.log(11111,patientStore.patientInfo)
 
@@ -184,13 +184,18 @@ const form = reactive({
   caseId:'11111',
   height:'111',
   weight:'11',
+  tags:[],// 其他
   remark:'',
-  attackTime:Date.now(),
-  confirmTime:Date.now(),
-  coronaryHeartDisease: 0,
-  cerebralApoplexy:0,
-  fragilityFractures:0,
-  brainTumor:0
+  history:{
+    attackTime:Date.now(),
+    confirmTime:Date.now(),
+  },
+  complication:{
+    coronaryHeartDisease: 0,
+    cerebralApoplexy:0,
+    fragilityFractures:0,
+    brainTumor:0
+  }
 
 })
 const formRef = ref()
@@ -199,28 +204,28 @@ const flag = ref<boolean>(true)
 
 const attackConfirm =(data:any)=>{
 
-  form.attackTime= data.value
+  form.history.attackTime= data.value
 
 }
 const confirmConfirm =(data:any)=>{
-  form.confirmTime= data.value
+  form.history.confirmTime= data.value
 }
 
 const gxbRadioChange = (e: any) => {
-  form.coronaryHeartDisease = e.value
+  form.complication.coronaryHeartDisease = e.value
 }
 
 const nzzRadioChange = (e: any) => {
-  form.cerebralApoplexy = e.value
+  form.complication.cerebralApoplexy = e.value
 
 }
 
 const cxgzRadioChange = (e: any) => {
-  form.coronaryHeartDisease = e.value
+  form.complication.coronaryHeartDisease = e.value
 }
 
 const nlRadioChange = (e: any) => {
-  form.cerebralApoplexy = e.value
+  form.complication.cerebralApoplexy = e.value
 
 }
 
@@ -241,6 +246,7 @@ const handleSubmit = () => {
         const res = await updatePatient({idCard:form.idCard,userInfo:form});
     
         if(res.code==0){
+          patientStore.updatePatientInfo(res.data)
           uni.navigateTo({'url':"/pages/patient/follow"})
 
         }else{

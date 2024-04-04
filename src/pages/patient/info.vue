@@ -167,8 +167,10 @@
 
   import { ref ,reactive} from 'vue'
   import { onLoad } from '@dcloudio/uni-app';
-
   import { getPatient } from '@/apis/patient/index'
+  import { usePatientStore }  from "@/store/patient"
+
+  const patientStore = usePatientStore();
 
  type Patient ={
   _id?: string
@@ -263,7 +265,7 @@
     idCard.value='340602197006152466'
     const res = await getPatient({'idCard':idCard.value})
     console.log(res)
-
+    patientStore.updatePatientInfo(res.data.data[0])
     Object.assign(form, res.data.data[0]);
     console.log(44444,form)
   })

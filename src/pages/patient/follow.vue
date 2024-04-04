@@ -10,7 +10,7 @@
           placeholder="2024-3-24" prop="nextDate"  :center= "flag" :align-right="flag" 
           v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请输入6位字符' }]" @confirm="nextConfirm" />
         <wd-cell title="医嘱">
-          <wd-input v-model="form.remark" no-border placeholder=" 请输入"></wd-input>
+          <wd-input v-model="form.followRemark" no-border placeholder=" 请输入"></wd-input>
 
         </wd-cell>
       </wd-cell-group>
@@ -33,6 +33,8 @@
 import { ref ,reactive} from 'vue'
 import { addFollow } from '@/apis/follow/index'
 import { usePatientStore }  from "@/store/patient"
+
+import { updatePatient } from "@/apis/patient/index"
 const patientStore =usePatientStore();
 
 console.log(11111,patientStore.patientInfo)
@@ -42,7 +44,7 @@ console.log(11111,patientStore.patientInfo)
       followUpType: '正常随访',
       thisDate:new Date(new Date().toLocaleDateString()).getTime(),
       nextDate:0,
-      remark: '',
+      followRemark: 'test',
 
     })
 
@@ -50,7 +52,7 @@ const formRef = ref()
 
 const flag = ref<boolean>(true)
 
-const columns = ref(['正常随访', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const columns = ref(['正常随访', '住院治疗', '等待转诊', '疗程终止', '服务终止', '临时加诊', '远程咨询'])
 
 function handleConfirm({ value }) {
   form.followUpType = value
@@ -76,7 +78,9 @@ const handleSubmit = () => {
       if (data.valid) {
         console.log(data.valid)
 
-        const res = await addFollow(form);
+        const res = await updatePatient({idCard:form.idCard,userInfo:form});
+
+        patientStore.updatePatientInfo(res.data)
 
         uni.navigateTo({'url':'/pages/patient/finish?thisDate='+form.thisDate})
 

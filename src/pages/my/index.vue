@@ -6,7 +6,7 @@ import { useUserStore }  from "@/store/user"
 import { storeToRefs } from 'pinia'
 import { onShow } from "@dcloudio/uni-app";
 
-const userStore =useUserStore();
+const userStore = useUserStore();
 
 const handleLogin = ()=>{
 
@@ -18,7 +18,9 @@ onShow(()=>{
 
 })
 
-const {userInfo} = storeToRefs(userStore)
+const { userInfo } = storeToRefs(userStore)
+
+console.log('userinfo',userInfo)
 
 </script>
 

@@ -101,6 +101,7 @@
 
  <script lang="ts" setup>
 import { ref ,reactive} from 'vue'
+import { storeToRefs } from 'pinia'
 
 import Tags from '../../components/tags.vue'
 
@@ -110,7 +111,9 @@ import { usePatientStore }  from "@/store/patient"
 
 const patientStore =usePatientStore();
 
-console.log(11111,patientStore.patientInfo)
+const { patientInfo } = storeToRefs(patientStore)
+
+console.log('patientInfo',patientInfo.value.name)
 
 
 const form = reactive({
@@ -147,6 +150,9 @@ const handleSubmit = () => {
         const res = await updatePatient({idCard:form.idCard,userInfo:form});
     
         if(res.code==0){
+
+          patientStore.updatePatientInfo(res.data)
+
           uni.navigateTo({'url':"/pages/patient/finish"})
 
         }else{

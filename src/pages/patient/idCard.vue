@@ -20,16 +20,23 @@
 
  import { addPatient } from "@/apis/patient/index"
  import { usePatientStore } from "@/store/patient"
+ import { useUserStore } from "@/store/user"
+
+ const userStore = useUserStore();
+
+const patientStore = usePatientStore()
 
  const form = reactive({
-  idCard:""
+  doctorId:userStore.userInfo._id,
+  idCard:"",
  })
 
 
 
- const patientStore = usePatientStore()
 
- const goSelectDisease = async()=>{
+ const goSelectDisease = async()=>{ 
+  console.log(form)
+
   const res = await addPatient(form);
 
   if(res.code==0){
