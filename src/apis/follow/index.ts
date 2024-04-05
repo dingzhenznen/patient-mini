@@ -1,10 +1,9 @@
-import { cloud } from '../cloud'
-import request from '../request'
+import request from '../uni-request'
 
 export const addFollow = async (data: any) => {
-  return await request.post('mini/follow/add', data)
+  return await request({ url: 'mini/follow/add', data, method: 'POST' })
 }
 
 export const updateFollow = async (data: any) => {
-  return await request.post('mini/follow/update', data)
+  return await request({ url: 'mini/follow/update', data, method: 'POST' })
 }

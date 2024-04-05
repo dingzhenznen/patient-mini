@@ -78,6 +78,7 @@ const q = ref('') // 搜索/筛选条件
 onReady(async () => {
   try {
     const r = await list({ userId: userInfo.value._id })
+    console.log(r)
     if (r.code) {
       toast.error('获取病人信息失败')
     }
