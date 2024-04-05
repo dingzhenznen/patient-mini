@@ -1,4 +1,3 @@
-import { cloud } from '../cloud'
 import request from '../request'
 import type { Response, Patient } from '@/utils/types'
 
@@ -6,6 +5,7 @@ export const addPatient = async (data: any) => {
   return await request.post('mini/patient/add', data)
 }
 
+// 更新患者信息
 export const updatePatient = async (data: any) => {
   return await request.post('mini/patient/update', data)
 }

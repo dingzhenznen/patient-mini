@@ -1,8 +1,8 @@
 import { getToken, saveToken } from '@/utils'
 import { showError } from '@/utils/show'
-import { cloud } from '../cloud'
 import { useUserStore } from '@/store/user'
-import request from '../request'
+// import request from '../request'
+import request from '../uni-request'
 
 export const initUserInfo = async (callback?: Function) => {
   const userStore = useUserStore()
@@ -14,8 +14,12 @@ export const initUserInfo = async (callback?: Function) => {
       success: async (res) => {
         const code = res.code
         const {
-          data: { access_token, expires_in, user }
-        } = await request.post('mini/user/mp-login', { code })
+          data: { access_token, expires_in, user },
+        } = await request({
+          url: '/mini/user/mp-login',
+          data: { code },
+          method: 'POST',
+        })
         // 后台配置了手机号
         if (user.phone) {
           userStore.updateUserInfo(user)
@@ -32,7 +36,7 @@ export const initUserInfo = async (callback?: Function) => {
       },
       fail: () => {
         showError('用户信息获取失败')
-      }
+      },
     })
   } else {
     // 更新用户信息
@@ -44,13 +48,21 @@ export const initUserInfo = async (callback?: Function) => {
 }
 
 export const getUserPhone = async (data: any) => {
-  return await request.post('mini/user/get-user-phone', data)
+  return await request({
+    url: '/mini/user/get-user-phone',
+    data,
+    method: 'POST',
+  })
 }
 
 export const getUserInfo = async (data: any) => {
   console.log('h5login')
 
-  const res = await request.post('mini/user/get-user-info', data)
+  const res = await request({
+    url: '/mini/user/get-user-info',
+    data,
+    method: 'POST',
+  })
 
   const userStore = useUserStore()
 

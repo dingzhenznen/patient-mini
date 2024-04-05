@@ -46,11 +46,28 @@
         <DiseaseRadio title="7. 虹膜炎" desc="既往或现在被眼科医生确诊的前葡萄膜炎" v-model="spaASAS.indicator7" />
 
         <DiseaseRadio title="8. 银屑病" desc="既往或现在被医生诊断的银屑病" v-model="spaASAS.indicator8" />
-        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.1. 过去" v-model="spaASAS.indicator81" />
-        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.2. 现在(近一周)" v-model="spaASAS.indicator82"
-          :option-number="3" option-label="不详" />
-        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.3. 过去" v-model="spaASAS.indicator83" />
-        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.4. 现在(近一周)" v-model="spaASAS.indicator84" />
+        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.1. 银屑病" desc="既往或现在被医生诊断的银屑病,或者一级/二级亲属中有银屑病"
+          v-model="spaASAS.indicator81" />
+        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.2. 指甲病变" desc="甲剥离, 指甲凹陷,角化过度"
+          v-model="spaASAS.indicator82" :option-number="3" option-label="不详" />
+        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.3. RF阴性" v-model="spaASAS.indicator83" />
+        <DiseaseRadio v-if="spaASAS.indicator8 === 1" title="8.4. x-ray阳性" desc="手或足平片可见关节边缘新骨形成（不包括骨赘形成）"
+          v-model="spaASAS.indicator84" :option-number="3" option-label="不详" />
+
+        <DiseaseRadio title="9. 炎性肠病" desc="既往或现在被医生诊断为克罗恩病或溃疡性结肠炎" v-model="spaASAS.indicator9" />
+        <DiseaseRadio v-if="spaASAS.indicator9 === 1" title="9.1. 克罗恩病" v-model="spaASAS.indicator91" />
+        <DiseaseRadio v-if="spaASAS.indicator9 === 1" title="9.2. 溃疡性结肠炎" v-model="spaASAS.indicator92" />
+
+        <DiseaseRadio title="10. 对NSAIDs反应好" desc="服用足量NSAIDs后24-48小时内背痛消失或明显缓解" v-model="spaASAS.indicator10" />
+        <DiseaseRadio title="11. 家族史" desc="出现在第一级母亲、父亲、姐妹、兄弟、子女或二级祖父母、婶婶/姨、叔伯/舅、侄女、侄子被诊断为强直性脊柱炎,银屑病,葡萄膜炎,反应性关节炎,炎性肠病"
+          v-model="spaASAS.indicator11" />
+        <DiseaseRadio title="12. 前驱感染" desc="在关节炎,附着点炎,指炎/趾炎发病前1个月内出现的尿道炎/宫颈炎/腹泻" v-model="spaASAS.indicator12" />
+        <DiseaseRadio title="13. HLA-B27阳性" v-model="spaASAS.indicator13" :option-number="3" />
+        <DiseaseRadio title="14. CRP升高" desc="出现背痛时,CRP高于正常范围,并除外其他原因引起的CRP升高" :option-number="3"
+          v-model="spaASAS.indicator14" />
+        <DiseaseRadio title="15. X线显示骶髂关节炎" desc="骶髂关节双侧2-4级或单侧3-4级。0=正常,1=可疑,2=轻度关节面破坏,硬化,3=中度关节间隙增宽,狭窄,部分强直,4=全部强直"
+          v-model="spaASAS.indicator15" />
+        <DiseaseRadio title="16. MRI显示骶髂关节炎" desc="有活动性炎症表现,如骨髓水肿或骨炎" v-model="spaASAS.indicator16" />
         <text></text>
       </form>
     </view>
@@ -64,22 +81,39 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
+import { onLoad } from '@dcloudio/uni-app'
 
 import DateSelect from '../../components/date.vue'
 import DiseaseRadio from './disease-radio.vue'
 import { usePatientStore } from "@/store/patient"
 
+import { updatePatient } from "@/apis/patient/index"
 const patientStore = usePatientStore()
-const { patientInfo } = storeToRefs(patientStore)
+const { patientInfo } = patientStore
+
+// 1. 患者注册 2.随访回显/可修改 3.随访结束不可编辑
+const pageType = ref('1')
+
+// 进页面确定页面类型
+onLoad(async (option: any) => {
+  // 1. 患者注册 2.随访回显/可修改 3.随访结束不可编辑
+  option.pageType = ''
+
+})
 
 const form = reactive({
-  datetime: patientInfo.value.selectDisease?.datetime ?? Date.now(),
+  datetime: patientInfo.selectDisease?.datetime ?? Date.now(),
 })
 
 const handleDate = (date: any) => {
   form.datetime = date.value
-  console.log(form.datetime)
 }
+
+const handleSubmit = async () => {
+  console.log('submit')
+
+}
+
 // 该疾病下指标1-8, 0为无, 1为有, 2为未做
 const spaDefault = reactive({
   indicator1: 0,
@@ -91,6 +125,7 @@ const spaDefault = reactive({
   indicator7: 0,
   indicator8: 0,
 })
+// 该疾病下指标1-16, 0为无, 1为有, 2为未做, 3为不详
 const spaASAS = reactive({
   indicator1: 0,
   indicator2: 0,
@@ -124,14 +159,6 @@ const spaASAS = reactive({
   indicator16: 0,
 })
 
-</script>
-
-<script lang="ts">
-export default {
-  options: {
-    styleIsolation: 'shared',
-  },
-}
 </script>
 
 <style lang="scss">

@@ -15,10 +15,11 @@ export function getToken(): string | undefined {
   return uni.getStorageSync(kToken) || undefined
 }
 
-
-
-
-
+export function clearUserInfo() {
+  uni.removeStorageSync(kToken)
+  uni.removeStorageSync(kUserInfo)
+  uni.removeStorageSync(kTokenExpire)
+}
 
 export function getOptions() {
   const pages = getCurrentPages()
@@ -26,7 +27,6 @@ export function getOptions() {
   const options = (currentPages as any).options
   return options
 }
-
 
 // 手机号验证
 export function checkphone(phone: string) {
@@ -43,9 +43,6 @@ export function checkphone(phone: string) {
     return false
   }
 }
-
-
-
 
 /**
  * 获取当前日期是第几周
@@ -109,13 +106,32 @@ export function formatDate(date: Date, format: string): string {
     '4': '四',
   }
   if (/(W+)/.test(format))
-    format = format.replace(RegExp.$1, RegExp.$1.length > 1 ? (RegExp.$1.length > 2 ? '星期' + week[we] : '周' + week[we]) : week[we])
-  if (/(Q+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 4 ? '第' + quarter[qut] + '季度' : quarter[qut])
-  if (/(Z+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 3 ? '第' + z + '周' : z + '')
+    format = format.replace(
+      RegExp.$1,
+      RegExp.$1.length > 1
+        ? RegExp.$1.length > 2
+          ? '星期' + week[we]
+          : '周' + week[we]
+        : week[we]
+    )
+  if (/(Q+)/.test(format))
+    format = format.replace(
+      RegExp.$1,
+      RegExp.$1.length == 4 ? '第' + quarter[qut] + '季度' : quarter[qut]
+    )
+  if (/(Z+)/.test(format))
+    format = format.replace(
+      RegExp.$1,
+      RegExp.$1.length == 3 ? '第' + z + '周' : z + ''
+    )
   for (let k in opt) {
     let r = new RegExp('(' + k + ')').exec(format)
     // 若输入的长度不为1，则前面补零
-    if (r) format = format.replace(r[1], RegExp.$1.length == 1 ? opt[k] : opt[k].padStart(RegExp.$1.length, '0'))
+    if (r)
+      format = format.replace(
+        r[1],
+        RegExp.$1.length == 1 ? opt[k] : opt[k].padStart(RegExp.$1.length, '0')
+      )
   }
   return format
 }

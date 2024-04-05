@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios'
+
 import { API_BASE_URL } from '../config'
 import { getToken } from '../utils'
 // import qs from 'qs'
@@ -8,7 +9,7 @@ import { getToken } from '../utils'
  */
 const service: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 50000 // 全局超时时间
+  timeout: 50000, // 全局超时时间
 })
 
 /**
@@ -56,10 +57,11 @@ const handleResponse = (response: AxiosResponse<any>) => {
  * 添加 Axios 的响应拦截器，用于全局响应结果处理
  */
 service.interceptors.response.use(handleResponse, (error) => {
-  const status = Number(error.response.status) || 200
-  if (status !== 200) {
-  }
-  return Promise.reject(error.response.data)
+  console.log(error)
+  // const status = Number(error.response.status) || 200
+  // if (status !== 200) {
+  // }
+  // return Promise.reject(error.response.data)
 })
 
 // 导出 axios 实例
