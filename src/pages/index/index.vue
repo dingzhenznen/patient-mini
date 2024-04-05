@@ -25,15 +25,18 @@
     </view>
     <!-- 病人信息列表 -->
     <view class="patient-list">
-      <wd-card custom-class="item" v-for="item in patientList" :key="item._id" @click="goToPatient(item)">
+      <wd-status-tip v-if="patientList.length === 0" image="content" tip="暂无患者" />
+      <wd-card v-else custom-class="item" v-for="item in patientList" :key="item._id" @click="goToPatient(item)">
         <!-- 病人信息展示 -->
         <view class="line-one">
           <!-- 第一行: 病人姓名，随诊次数 -->
-          <text class="name">{{ item.name }}</text>
-          <wd-tag type="success" round custom-class="uno-opacity-80 uno-ml-2 uno-center">{{ item.followList?.length
-            }}次随诊
-          </wd-tag>
-          <view class="next">距离下次诊疗还有</view>
+          <view class="name-wrap">
+            <text class="name">{{ item.name }}</text>
+            <wd-tag type="success" round custom-class="uno-opacity-80 uno-ml-2 uno-center">{{ item.followList?.length
+              }}次随诊
+            </wd-tag>
+          </view>
+          <view class="next">{{ formatFollowDate(item) }}</view>
         </view>
         <!-- 第二行: 性别，年龄，TAK -->
         <view class="line-two">
@@ -58,7 +61,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { onReady } from '@dcloudio/uni-app'
+import { onLoad } from '@dcloudio/uni-app'
 import dayjs from 'dayjs'
 
 import { useToast } from '@/uni_modules/wot-design-uni'
@@ -74,9 +77,19 @@ const allPatients = usePatientStore().patients
 const patientList = ref([] as Patient[])
 const q = ref('') // 搜索/筛选条件
 
+async function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
+
 // 进页面拉数据
-onReady(async () => {
+onLoad(async () => {
+
   try {
+    // 先用笨方法解决，后续再优化
+    // 因为 useUserStore().userInfo 会在页面加载时为空，所以这里等待2秒
+    await sleep(2000)
     const r = await list({ userId: userInfo.value._id })
     console.log(r)
     if (r.code) {
@@ -133,13 +146,19 @@ const goIdCard = () => {
 }
 
 const goToPatient = (patient: Patient) => {
-  const diffDay = dayjs(patient.nextDate).diff(dayjs(), 'day')
-  console.log(diffDay)
-  console.log(patient.nextDate)
-  console.log(dayjs(patient.nextDate).format('YYYY-MM-DD hh:mm:ss'))
+
   // uni.navigateTo({
   //   url: '/pages/patient/info?idCard=' + patient.idCard,
   // })
+}
+
+const formatFollowDate = (patient: Patient) => {
+  const diffDay = dayjs(patient.nextDate).diff(dayjs(), 'day')
+  if (diffDay >= 0) {
+    return `距离下次诊疗还有 ${Math.abs(diffDay)} 天`
+  } else {
+    return `距离下次诊疗已逾期 ${diffDay} 天`
+  }
 }
 
 

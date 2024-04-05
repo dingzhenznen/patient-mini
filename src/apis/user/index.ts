@@ -6,14 +6,13 @@ import request from '../uni-request'
 
 export const initUserInfo = async (callback?: Function) => {
   const userStore = useUserStore()
-  console.log('login', 1111)
   if (!getToken()) {
-    console.log('login', 2222)
     return uni.login({
       provider: 'weixin',
       success: async (res) => {
         const code = res.code
         const {
+          //@ts-ignore
           data: { access_token, expires_in, user },
         } = await request({
           url: '/mini/user/mp-login',
@@ -56,14 +55,12 @@ export const getUserPhone = async (data: any) => {
 }
 
 export const getUserInfo = async (data: any) => {
-  console.log('h5login')
-
   const res = await request({
     url: '/mini/user/get-user-info',
     data,
     method: 'POST',
   })
-
+  console.log('getUserInfo: ', res.data)
   const userStore = useUserStore()
 
   userStore.updateUserInfo(res.data)

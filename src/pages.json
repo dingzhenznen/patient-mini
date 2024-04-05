@@ -24,7 +24,7 @@
       "path": "pages/my/index",
       "style": {
         "navigationBarTitleText": "我的",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
 
@@ -32,7 +32,7 @@
       "path": "pages/patient/info",
       "style": {
         "navigationBarTitleText": "患者信息",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
 
@@ -40,7 +40,7 @@
       "path": "pages/patient/idCard",
       "style": {
         "navigationBarTitleText": "身份证",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
 
@@ -48,7 +48,7 @@
       "path": "pages/patient/selectDisease",
       "style": {
         "navigationBarTitleText": "选择疾病",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
 
@@ -56,21 +56,21 @@
       "path": "pages/patient/updateBaseInfo",
       "style": {
         "navigationBarTitleText": "患者基本信息",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
       "path": "pages/patient/updateHistory",
       "style": {
         "navigationBarTitleText": "病史",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
       "path": "pages/patient/updateHb",
       "style": {
         "navigationBarTitleText": "合并症",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
 
@@ -78,14 +78,14 @@
       "path": "pages/patient/updateFollow",
       "style": {
         "navigationBarTitleText": "访视信息修改",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
       "path": "pages/patient/baseInfo",
       "style": {
         "navigationBarTitleText": "患者注册",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
 
@@ -93,29 +93,29 @@
       "path": "pages/patient/follow",
       "style": {
         "navigationBarTitleText": "访视信息修改",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-   
+
     {
       "path": "pages/patient/finish",
       "style": {
         "navigationBarTitleText": "随诊",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
       "path": "pages/disease/tak",
       "style": {
         "navigationBarTitleText": "大动脉炎",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
       "path": "pages/disease/spa",
       "style": {
         "navigationBarTitleText": "脊柱关节炎诊断",
-        "navigationBarBackgroundColor":"#5ae8b1"
+        "navigationBarBackgroundColor": "#5ae8b1"
       }
     }
   ],
@@ -123,10 +123,6 @@
     "color": "#000000",
     "selectedColor": "#07c160",
     "list": [
-      {
-        "pagePath": "pages/login/index",
-        "text": "登录"
-      },
       {
         "pagePath": "pages/index/index",
         "text": "首页"

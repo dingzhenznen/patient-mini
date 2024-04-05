@@ -63,6 +63,8 @@ export type Patient = {
     content: {
       // 选择内容
     }
+    spaDefault?: {}
+    spaASAS?: {}
   }
 }
 
