@@ -17,9 +17,9 @@
    </view>
 
 
-   <view class="submit" @click="handleSubmit">
+   <view v-if="followStatus==1" class="submit" @click="handleSubmit">
         本次随诊结束
-      </view>
+  </view>
 
 
   </view>
@@ -50,12 +50,12 @@ const List = reactive([
 
 ])
 
-const thisDate = ref(0);
-
+const followStatus = ref(0)
 
 onLoad((option:any)=>{
 
-  thisDate.value=option.thisDate
+  console.log(option)
+  followStatus.value = option.status
 })
 
 const handleSelect =(item:any)=>{
@@ -69,13 +69,16 @@ const handleSelect =(item:any)=>{
 }
 
 const handleSubmit = async()=>{
+  //进行中的可以结束
+  if(followStatus.value==1){
 
-  const res = await updateFollow({idCard:patientStore.patientInfo.idCard,thisDate:thisDate.value});
+    const res = await updateFollow({idCard:patientStore.patientInfo.idCard});
 
-  if(res.code==0){
-    //uni.navigateTo({'url':"/pages/index/index"})
+    if(res.code==0){
+      //uni.navigateTo({'url':"/pages/index/index"})
+    }
+
   }
-
 }
 
 

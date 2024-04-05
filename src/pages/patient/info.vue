@@ -61,30 +61,10 @@
                 <view class="item" v-for="item in form.followList" :key="item._id" @click="handleSelect(item.status)">
                   <view class="top">
                     <view class="status">{{item.status==0?"未诊疗":item.status==1?"诊疗中":"诊疗结束"}}</view>
-                    <view class="date">{{ 2024}}</view>
+                    <view class="date">{{ dayjs(item.thisDate).format('YYYY-MM-DD')}}</view>
                   </view>
                   <view class="address">
                     {{ item.doctorName }}
-                  </view>
-                </view>
-
-                <view class="item">
-                  <view class="top">
-                    <view class="status">未诊疗</view>
-                    <view class="date">2024-3-11</view>
-                  </view>
-                  <view class="address">
-                    李丽(北京市顺义区医院)
-                  </view>
-                </view>
-
-                <view class="item">
-                  <view class="top">
-                    <view class="status">未诊疗</view>
-                    <view class="date">2024-3-11</view>
-                  </view>
-                  <view class="address">
-                    李丽(北京市顺义区医院)
                   </view>
                 </view>
               </view>
@@ -170,6 +150,7 @@
   import { getPatient } from '@/apis/patient/index'
   import { usePatientStore }  from "@/store/patient"
   import type { Patient } from '@/utils/types'
+  import dayjs from 'dayjs'
 
   const patientStore = usePatientStore();
 
@@ -214,13 +195,13 @@
 
     // 0 未开始  1 诊疗中 2 已结束
     if(status==0){
-      uni.navigateTo({'url':'/pages/patient/finish'})
+      uni.navigateTo({'url':'/pages/patient/finish?status=0'})
 
     }else if(status==1){
-      uni.navigateTo({'url':'/pages/patient/finish'})
+      uni.navigateTo({'url':'/pages/patient/finish?status=1'})
 
     }else{
-      uni.navigateTo({'url':'/pages/patient/finish'})
+      uni.navigateTo({'url':'/pages/patient/finish?status=2'})
     }
   }
 
