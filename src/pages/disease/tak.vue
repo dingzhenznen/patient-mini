@@ -80,11 +80,13 @@ const handleSubmit = async()=>{
     
     if(res.code==0){
 
-      patientStore.updatePatientInfo(res.data)
+      
 
-      if(form.selectedOption.length>0){
+      if(patientInfo.value?.selectDisease?.selectedOption?.length>0){
+        patientStore.updatePatientInfo(res.data)
         uni.navigateTo({'url':"/pages/patient/finish"})
       }else{
+        patientStore.updatePatientInfo(res.data)
 
         uni.navigateTo({url:"/pages/patient/baseInfo"})
         console.log(form)
