@@ -11,7 +11,7 @@
 
     <view class="content">
       <form>
-        <DiseaseCheckbox :optionList="optionList" @handleCheckbox="handleCheckbox"></DiseaseCheckbox>
+        <DiseaseCheckbox :optionList="optionList" :selectedList="form.selectedOption" @handleCheckbox="handleCheckbox"></DiseaseCheckbox>
       </form>
     </view>
     <DateSelect :date="form.datetime" @handleDatetime="handleDate"></DateSelect>
@@ -27,24 +27,41 @@
  </template>
 
  <script lang="ts" setup>
- import { ref ,reactive} from 'vue'
-
+import { ref ,reactive} from 'vue'
+import { storeToRefs } from 'pinia'
 import DateSelect from '../../components/date.vue';
-
 import DiseaseCheckbox from './disease-checkbox.vue';
 
-const form = reactive({
-  datetime: Date.now(),
-  selectOption:[]
-})
+import { updatePatient } from "@/apis/patient/index"
+
+import { usePatientStore }  from "@/store/patient"
+
+const patientStore = usePatientStore();
+
+const { patientInfo } = storeToRefs(patientStore)
+
+console.log('patientInfo222',patientInfo.value.selectDisease)
 
 const optionList =[
   '1.发病年龄低于40岁 ','2.肢体间歇性跛行','3.肱动脉脉搏减弱:一侧或双侧上肢动脉搏动减弱',
   '4.血压差>10mmHg:双上肢收缩压相差10mmHg以上 ','5.锁骨下动脉或者主动脉区血管杂音',
   '6.血管造影异常:主动脉及其一级分支、四肢近端动脉狭窄或闭塞(除外动脉栓塞、肌纤维营养不良等原因)',
 ]
+
+const form = reactive({
+  en:"tak",
+  china:'大动脉炎症',
+  datetime: patientInfo.value.selectDisease?.datetime??Date.now(),
+
+  selectedOption:patientInfo.value.selectDisease?.selectedOption??[]
+})
+
+console.log('tak',form)
+
 const handleCheckbox = (data:any)=>{
-  form.selectOption= data.value
+  form.selectedOption= data.value
+
+  console.log(form)
 
 }
 
@@ -53,9 +70,26 @@ const handleDate =(date:any)=>{
   console.log(form.datetime)
 }
 
-const handleSubmit =()=>{
-  uni.navigateTo({url:"/pages/patient/baseInfo"})
-  console.log(form)
+const handleSubmit = async()=>{
+
+  const formData = {idCard:patientInfo.value.idCard,userInfo:{selectDisease:form}};
+
+  console.log(formData)
+
+  const res = await updatePatient(formData);
+    
+    if(res.code==0){
+
+      patientStore.updatePatientInfo(res.data)
+
+      if(form.selectedOption.length>0){
+        uni.navigateTo({'url':"/pages/patient/finish"})
+      }else{
+
+        uni.navigateTo({url:"/pages/patient/baseInfo"})
+        console.log(form)
+      }
+    }
 }
 </script>
 

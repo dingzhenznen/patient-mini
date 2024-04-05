@@ -57,6 +57,8 @@ export type Patient = {
   selectDisease?: {  // 选择的疾病
     en: string, // tak 英文名称
     china : string,// "干燥综合征",
+    datetime:number,
+    selectedOption?:[],
     content: {   // 选择内容
 
     }
