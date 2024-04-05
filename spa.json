@@ -1,0 +1,58 @@
+{
+  "diseaseNameEn": "spa",
+  "diseaseNameCh": "强制性脊柱炎",
+  "diagnoseStandard": [
+    {
+      "name": "强制性脊柱炎诊断标准",
+      "desc": "修订的纽约标准, 1984年",
+      "indicators": [
+        {
+          "index": "1",
+          "content": "下背痛的病程至少有3个月, 疼痛随活动改善，休息不缓解",
+          "labels": [
+            {
+              "key": "有",
+              "value": 1
+            },
+            {
+              "key": "无",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "index": "2",
+          "content": "腰椎在前、后屈和侧屈方向活动受限",
+          "labels": [
+            {
+              "key": "有",
+              "value": 1
+            },
+            {
+              "key": "无",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "index": "2.1",
+          "content": "过去",
+          "labels": [
+            {
+              "key": "有",
+              "value": 1
+            },
+            {
+              "key": "无",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "脊柱关节炎诊断标准",
+      "desc": "ASAS标准"
+    }
+  ]
+}

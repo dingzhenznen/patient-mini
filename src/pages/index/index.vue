@@ -2,9 +2,8 @@
   <view class="main">
     <view class="status_bar">
       <view class="search">
-        <uni-easyinput prefixIcon="search" placeholder="搜索" v-model="q"
-        @input="searchInput" @confirm="search" @clear="search" @iconClick="search"
-        />
+        <uni-easyinput prefixIcon="search" placeholder="搜索" v-model="q" @input="searchInput" @confirm="search"
+          @clear="search" @iconClick="search" />
         <view class="filter-btn">
           <text>筛选</text>
           <uni-icons type="bars" color="white"></uni-icons>
@@ -26,14 +25,15 @@
     </view>
     <!-- 病人信息列表 -->
     <view class="patient-list">
-      <wd-card custom-class="item" v-for="item in patientList" :key="item._id" @click="goToPatient">
+      <wd-card custom-class="item" v-for="item in patientList" :key="item._id" @click="goToPatient(item)">
         <!-- 病人信息展示 -->
         <view class="line-one">
           <!-- 第一行: 病人姓名，随诊次数 -->
           <text class="name">{{ item.name }}</text>
-          <wd-tag type="success" round custom-class="uno-opacity-80 uno-ml-2 uno-center">{{ item.followList?.length }}次随诊
+          <wd-tag type="success" round custom-class="uno-opacity-80 uno-ml-2 uno-center">{{ item.followList?.length
+            }}次随诊
           </wd-tag>
-          <view class="line-three"></view>
+          <view class="next">距离下次诊疗还有</view>
         </view>
         <!-- 第二行: 性别，年龄，TAK -->
         <view class="line-two">
@@ -59,6 +59,7 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { onReady } from '@dcloudio/uni-app'
+import dayjs from 'dayjs'
 
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
@@ -70,21 +71,20 @@ import type { Patient } from '@/utils/types';
 // 用户信息这里就代表当前登录的医生信息
 const { userInfo, age } = storeToRefs(useUserStore())
 const allPatients = usePatientStore().patients
-const patientList = ref([]as Patient[]) 
+const patientList = ref([] as Patient[])
 const q = ref('') // 搜索/筛选条件
 
 // 进页面拉数据
 onReady(async () => {
   try {
-    const r = await list({userId: userInfo.value._id})
+    const r = await list({ userId: userInfo.value._id })
     if (r.code) {
       toast.error('获取病人信息失败')
     }
-    
+
     // set patients data
     patientList.value = r.data as any
     usePatientStore().setPatients(r.data as Patient[])
-    
   } catch (error) {
     console.log(' Get patient list caught error: ', error)
     toast.error('获取病人信息失败')
@@ -114,7 +114,7 @@ const search = () => {
   console.log('start search: ', q.value)
   // 清除搜索/筛选条件时，展示所有病人
   if (!q.value || q.value === '') {
-    patientList.value = usePatientStore().patients  
+    patientList.value = allPatients
   }
   // 按条件搜索或筛选病人
   patientList.value = usePatientStore().patients.filter(filterFn)
@@ -127,14 +127,18 @@ const callPatient = (item: any) => {
 const messagePatient = (item: any) => {
   console.log('短信提醒', item)
 }
-const goIdCard =()=>{
-  uni.navigateTo({'url':'/pages/patient/idCard'})
+const goIdCard = () => {
+  uni.navigateTo({ 'url': '/pages/patient/idCard' })
 }
 
 const goToPatient = (patient: Patient) => {
-  uni.navigateTo({
-    url: '/pages/patient/info?thisDate='+patient.idCard,
-  })
+  const diffDay = dayjs(patient.nextDate).diff(dayjs(), 'day')
+  console.log(diffDay)
+  console.log(patient.nextDate)
+  console.log(dayjs(patient.nextDate).format('YYYY-MM-DD hh:mm:ss'))
+  // uni.navigateTo({
+  //   url: '/pages/patient/info?idCard=' + patient.idCard,
+  // })
 }
 
 

@@ -54,6 +54,7 @@
         <text></text>
       </form>
     </view>
+    <DateSelect :date="form.datetime" @handleDatetime="handleDate"></DateSelect>
     <view class="button">
       <view class="submit">患者注册</view>
     </view>
@@ -62,16 +63,22 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
-import Header from '../../components/header.vue'
-import Date from '../../components/date.vue'
-import DiseaseRadio from './disease-radio.vue';
-const value = ref([])
-const handleChange = (value: any) => {
-  console.log(value)
-}
+import { storeToRefs } from 'pinia'
 
-const print = () => {
-  console.log(spaDefault.indicator1)
+import DateSelect from '../../components/date.vue'
+import DiseaseRadio from './disease-radio.vue'
+import { usePatientStore } from "@/store/patient"
+
+const patientStore = usePatientStore()
+const { patientInfo } = storeToRefs(patientStore)
+
+const form = reactive({
+  datetime: patientInfo.value.selectDisease?.datetime ?? Date.now(),
+})
+
+const handleDate = (date: any) => {
+  form.datetime = date.value
+  console.log(form.datetime)
 }
 // 该疾病下指标1-8, 0为无, 1为有, 2为未做
 const spaDefault = reactive({
