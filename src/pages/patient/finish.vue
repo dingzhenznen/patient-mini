@@ -31,6 +31,7 @@ import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app';
 import { updateFollow } from '@/apis/follow/index'
 import { usePatientStore }  from "@/store/patient"
+import { showError } from '@/utils/show';
 
 const patientStore = usePatientStore();
 
@@ -76,6 +77,8 @@ const handleSubmit = async()=>{
 
     if(res.code==0){
       uni.switchTab({'url':"/pages/index/index"})
+    }else{
+      showError(res.msg)
     }
 
   }

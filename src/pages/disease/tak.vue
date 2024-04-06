@@ -75,8 +75,10 @@ const handleSubmit = async () => {
   const formData = { idCard: patientInfo.value.idCard, userInfo: { selectDisease: form } };
 
   console.log('postdata',formData)
+  
   if(form.selectedOption.length==0){
     showError('请至少选择一项')
+    return
   }
 
   const res = await updatePatient(formData);

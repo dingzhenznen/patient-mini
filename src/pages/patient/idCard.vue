@@ -35,7 +35,8 @@ const patientStore = usePatientStore()
  const goSelectDisease = async()=>{ 
 
   if(form.idCard.length !==18){
-    showError('请输入18位身份证号码')
+    showError('请输入18位身份证号码!')
+    return
   }
   const res = await addPatient(form);
 

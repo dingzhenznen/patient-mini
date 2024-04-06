@@ -5,7 +5,9 @@
     <wd-form ref="formRef" :model="form">
       <wd-cell-group border>
         <wd-picker :columns="columns" label="单列选项" :align-right="flag" v-model="form.followUpType" @confirm="handleConfirm"  />
-        <wd-calendar label="本次访视实施日期" label-width="240rpx"   prop="thisDate" :center= "flag" :align-right="flag" v-model="form.thisDate" @confirm="thisConfirm" />
+        <wd-calendar label="本次访视实施日期" label-width="240rpx"   
+        prop="thisDate" :center= "flag" :align-right="flag"
+         v-model="form.thisDate" @confirm="thisConfirm" />
         <wd-calendar label="下次访视实施日期" label-width="240rpx" 
           placeholder=" " prop="nextDate"  :center= "flag" :align-right="flag" 
           v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请输入6位字符' }]" @confirm="nextConfirm" />
@@ -17,11 +19,9 @@
 
     </wd-form>
 
-
       <view class="submit" @click="handleSubmit">
         保存
       </view>
-
 
    </view>
 
@@ -31,10 +31,9 @@
 
 <script lang="ts" setup>
 import { ref ,reactive} from 'vue'
-import { addFollow } from '@/apis/follow/index'
 import { usePatientStore }  from "@/store/patient"
-
 import { updatePatient } from "@/apis/patient/index"
+import { showError } from '@/utils/show';
 const patientStore =usePatientStore();
 
 console.log(11111,patientStore.patientInfo)
@@ -44,7 +43,7 @@ console.log(11111,patientStore.patientInfo)
       followUpType: '正常随访',
       thisDate:new Date(new Date().toLocaleDateString()).getTime(),
       nextDate:0,
-      followRemark: 'test',
+      followRemark: '',
 
     })
 
@@ -70,29 +69,29 @@ form.nextDate= data.value
 
 const handleSubmit = () => {
 
-  console.log(111)
-
   formRef.value
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-        console.log(data.valid)
 
         const res = await updatePatient({idCard:form.idCard,userInfo:form});
 
-        patientStore.updatePatientInfo(res.data)
+        if(res.code==0){
 
-        uni.navigateTo({'url':'/pages/patient/finish?thisDate='+form.thisDate})
+          patientStore.updatePatientInfo(res.data)
 
-        console.log(res)
+          uni.navigateTo({'url':'/pages/patient/finish?thisDate='+form.thisDate})
 
+        }else{
+          showError(res.msg)
+        }
       } else {
-        console.log(form)
-        console.log(data)
+       showError(data.errors[0].message)
       }
     })
     .catch((error:any) => {
       console.log(error, 'error')
+      showError("异常信息请重新操作")
     })
    //uni.navigateTo({'url':'/pages/patient/finish'})
 }
