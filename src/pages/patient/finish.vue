@@ -75,7 +75,7 @@ const handleSubmit = async()=>{
     const res = await updateFollow({idCard:patientStore.patientInfo.idCard});
 
     if(res.code==0){
-      //uni.navigateTo({'url':"/pages/index/index"})
+      uni.switchTab({'url':"/pages/index/index"})
     }
 
   }

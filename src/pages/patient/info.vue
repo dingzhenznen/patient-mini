@@ -11,6 +11,10 @@
       </view>
     </view> -->
 
+
+    <wd-message-box />
+
+    <wd-toast />
     <view class="info">
 
       <view class="base-info">
@@ -137,8 +141,8 @@
               
             </wd-collapse-item>
           </wd-collapse>
-
     </view>
+
   </view>
  </template>
 
@@ -148,21 +152,26 @@
   import { ref ,reactive} from 'vue'
   import { onLoad } from '@dcloudio/uni-app';
   import { getPatient } from '@/apis/patient/index'
+  import { startFollow } from '@/apis/follow/index'
   import { usePatientStore }  from "@/store/patient"
   import type { Patient } from '@/utils/types'
+  import {showTip} from '@/utils/show'
   import dayjs from 'dayjs'
 
-  const patientStore = usePatientStore();
+  import { useMessage ,useToast} from '@/uni_modules/wot-design-uni'
+  const message = useMessage()
+  const toast = useToast()
 
+
+  const patientStore = usePatientStore();
 
   const idCard = ref('')
 
   const flag = ref<boolean>(true)
 
-
+  const isExistGoing = ref(0)
 
   const Collapse = ref<string[]>(['item1'])
-
 
   const form = reactive<Patient>(
     {
@@ -191,11 +200,37 @@
 
   const handleSelect = (status:any) => {
 
-    console.log(status)
 
     // 0 未开始  1 诊疗中 2 已结束
     if(status==0){
-      uni.navigateTo({'url':'/pages/patient/finish?status=0'})
+      // 没有进行中的
+      if(isExistGoing.value==0){
+        console.log(111)
+        // 确定开始吗  请求接口更新状态为进行中 跳转 
+        message
+        .confirm({
+          msg: '确定开始本次随访',
+          title: '开始随访'
+        })
+        .then(async() => {
+          const res = await startFollow({idCard:patientStore.patientInfo.idCard});
+          if(res.code==0){
+            uni.navigateTo({'url':'/pages/patient/finish?status=1'})
+          }
+        })
+        .catch(() => {
+          console.log('点击了取消按钮')
+        })
+      }
+      else{
+        // 提示结束
+        toast.show('请结束当前随诊')
+        showTip(' 请结束当前随诊')
+
+      }
+
+
+      //uni.navigateTo({'url':'/pages/patient/finish?status=0'})
 
     }else if(status==1){
       uni.navigateTo({'url':'/pages/patient/finish?status=1'})
@@ -214,6 +249,12 @@
     console.log(res)
     patientStore.updatePatientInfo(res.data.data[0])
     Object.assign(form, res.data.data[0]);
+
+    const goingFollow:any = form.followList?.filter((item,index)=> item.status==1)
+
+    isExistGoing.value = goingFollow?.length>0?1:0
+    console.log(isExistGoing.value)
+    console.log('flag',flag)// (value, index) => index !== order
     console.log(44444,form)
   })
 
