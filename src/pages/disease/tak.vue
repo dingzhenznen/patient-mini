@@ -53,7 +53,7 @@ const form = reactive({
   en: "tak",
   china: '大动脉炎症',
   datetime: patientInfo.value.selectDisease?.datetime ?? Date.now(),
-
+  type:1,
   selectedOption: patientInfo.value.selectDisease?.selectedOption ?? []
 })
 
