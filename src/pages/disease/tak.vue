@@ -79,8 +79,6 @@ const handleSubmit = async () => {
     showError('请至少选择一项')
   }
 
-  return;
-
   const res = await updatePatient(formData);
 
   if (res.code == 0) {
