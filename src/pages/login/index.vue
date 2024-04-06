@@ -46,8 +46,6 @@ const getPhoneNumber = async(data:any)=>{
 
     userStore.updateUserInfo(res.data.user)
     saveToken(res.data.access_token, res.data.exp)
-
-
     uni.switchTab({'url':'/pages/my/index'})
 
   }else{
@@ -55,10 +53,6 @@ const getPhoneNumber = async(data:any)=>{
   }
 
 }
-
-
-
-
 </script>
 
 <style lang="scss">
