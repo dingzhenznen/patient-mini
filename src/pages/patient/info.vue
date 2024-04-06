@@ -129,13 +129,17 @@
             <wd-collapse-item title="tak" name="item3">
               <view class="disease">
                 <view class="title">
-                  <view class="name">tak</view>
-                  <wd-button type="success" size="small"> 转病种</wd-button>
+                  <view class="name">{{form.selectDisease?.en}}</view>
+                  <wd-button type="success" size="small" @click="changeDisease"> 转病种</wd-button>
                 </view>
                 
                 <view class="content">
-                  <view>1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解</view>
-                  <view>1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解</view>
+                  <view v-if="form.selectDisease?.type==1">
+                    <view v-for="item in form.selectDisease.selectedOption" :key="item">
+                      {{ item }}
+                    </view>
+                    <view>1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解</view>
+                  </view>
                 </view>
               </view>
               
@@ -193,7 +197,13 @@
         },
         
         tags:[],
-        followList:[]
+        followList:[],
+        selectDisease:{
+          en:'',
+          china:'',
+          type: 1,
+          selectedOption:[]
+        }
       
     })
 
@@ -238,6 +248,10 @@
     }else{
       uni.navigateTo({'url':'/pages/patient/finish?status=2'})
     }
+  }
+
+  const changeDisease = ()=>{
+    uni.navigateTo({'url':'/pages/patient/selectDisease'})
   }
 
 
