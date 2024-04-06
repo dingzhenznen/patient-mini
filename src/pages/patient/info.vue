@@ -42,11 +42,11 @@
           </view>
 
           <view class="right">
-            <view class="phone">
+            <view class="phone" @click="callPatient(form)">
               <image class="img" src="../../static/img/phone.png"></image>
               <view>拨打电话</view>
             </view>
-            <view class="message">
+            <view class="message" @click="messagePatient(form)">
               <image class="img" src="../../static/img/message.png"></image>
               <view>发短信</view>
             </view>
@@ -214,6 +214,16 @@
       } else {
         return `距离下次诊疗已逾期 ${diffDay} 天`
       }
+    }
+
+    const callPatient = (patient: Patient) => {
+      uni.makePhoneCall({
+        phoneNumber: parseInt(patient.phone)//仅为示例
+      });
+    }
+
+    const messagePatient = (patient: Patient) => {
+      console.log('短信提醒', item)
     }
 
 
