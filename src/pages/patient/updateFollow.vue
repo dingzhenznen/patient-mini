@@ -8,7 +8,7 @@
         <wd-calendar label="本次访视实施日期" label-width="240rpx"   prop="thisDate" :center= "flag" :align-right="flag" v-model="form.thisDate" @confirm="thisConfirm" />
         <wd-calendar label="下次访视实施日期" label-width="240rpx" 
           placeholder=" " prop="nextDate"  :center= "flag" :align-right="flag" 
-          v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请输入6位字符' }]" @confirm="nextConfirm" />
+          v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请选择下次访视实施日期' }]" @confirm="nextConfirm" />
         <wd-cell title="医嘱">
           <wd-input v-model="form.followRemark" no-border placeholder=" 请输入"></wd-input>
 
@@ -37,6 +37,8 @@ import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
+import { showError } from '@/utils/show'
+
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
@@ -48,7 +50,7 @@ const { patientInfo } = storeToRefs(patientStore)
       nextDate: patientInfo.value.nextDate ?? 0,
       followRemark: patientInfo.value.followRemark,
 
-    })
+  })
 
 const formRef = ref()
 
@@ -69,36 +71,35 @@ const nextConfirm =(data:any)=>{
 form.nextDate= data.value
 }
 
-
 const handleSubmit = () => {
-
-  console.log(111)
 
   const formData = {idCard:patientInfo.value.idCard,userInfo:form};
 
   console.log(formData)
-  // return;
 
   formRef.value
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-        console.log(data.valid)
-
+       
         const res = await updatePatient(formData);
+        if(res.code==0){
 
-        patientStore.updatePatientInfo(res.data)
+          patientStore.updatePatientInfo(res.data)
 
-        uni.navigateTo({'url':'/pages/patient/finish'})
+          uni.navigateTo({'url':'/pages/patient/finish'})
 
-        console.log(res)
+        }else{
+          showError(res.msg)
+        }
 
       } else {
-        console.log(form)
-        console.log(data)
+    
+        showError(data.errors[0].message)
       }
     })
     .catch((error:any) => {
+      showError('异常信息请重新操作')
       console.log(error, 'error')
     })
    //uni.navigateTo({'url':'/pages/patient/finish'})

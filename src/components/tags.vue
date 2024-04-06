@@ -36,7 +36,6 @@ const computedOrigin = computed({
 
  const selectTags = ref([]);
 
- console.log('tagess',computedOrigin.value)
 
  selectTags.value = [ ...computedOrigin.value]
 
@@ -45,7 +44,7 @@ const handleSelect =(event:any)=>{
   const array = tags.value;
 
   if(selectTags.value.includes(array[event])){
-    console.log('contain')
+   
     selectTags.value =selectTags.value.filter(item=> {return item !== array[event]})
   }else{
     selectTags.value.push(array[event])
@@ -56,7 +55,6 @@ const handleSelect =(event:any)=>{
 
 function handleClose(order) {
   tags.value = tags.value.filter((value, index) => index !== order)
-  console.log('close:index' + order)
 }
 
 function handleConfirm({ value }) {

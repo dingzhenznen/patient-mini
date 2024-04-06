@@ -16,7 +16,7 @@
 
           v-model="form.name"
           placeholder="请输入患者姓名"
-          :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          :rules="[{ required: false, pattern: /\S/, message: '姓名不能为空' }]"
         />
         <wd-input
           label="身份证"
@@ -109,6 +109,8 @@ import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
+import { showError } from '@/utils/show'
+
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
@@ -133,22 +135,14 @@ const handleTagsSelect =(data:any)=>{
 
   form.tags = data
 
-  console.log('tags',form)
-
 }
 
-
 const handleSubmit = () => {
-
-  //uni.navigateTo({'url':"/pages/patient/follow"})
-
-  
 
   formRef.value
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-        console.log(data.valid)
 
         const res = await updatePatient({idCard:form.idCard,userInfo:form});
     
@@ -159,14 +153,15 @@ const handleSubmit = () => {
           uni.navigateTo({'url':"/pages/patient/finish"})
 
         }else{
-          console.log(res)
+          showError(res.msg)
         }
       } else {
-        console.log(data)
+        showError(data.errors[0].message)
         return
       }
     })
     .catch((error:any) => {
+      showError('异常信息请重新操作')
       console.log(error, 'error')
     })
 }
