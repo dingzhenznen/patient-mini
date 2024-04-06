@@ -54,11 +54,11 @@ console.log('userinfo',userInfo)
 
       <wd-cell-group>
 
-        <wd-cell title="修改密码" value="" is-link >
+        <!-- <wd-cell title="修改密码" value="" is-link >
           <template #icon>
             <view class="cell-icon" style="background: url('../../static/img/lock.png') no-repeat;"></view>
           </template>
-        </wd-cell>
+        </wd-cell> -->
 
         <wd-cell title="问题反馈" value="" is-link >
           <template #icon>
@@ -72,11 +72,11 @@ console.log('userinfo',userInfo)
           </template>
         </wd-cell>
 
-        <wd-cell title="退出登录" value="" is-link >
+        <!-- <wd-cell title="退出登录" value="" is-link >
           <template #icon>
             <view class="cell-icon" style="background: url('../../static/img/icon_exit.png') no-repeat;"></view>
           </template>
-        </wd-cell>
+        </wd-cell> -->
       </wd-cell-group>
 
     </view>
