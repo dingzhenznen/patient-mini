@@ -37,11 +37,13 @@ import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore } from "@/store/patient"
 
+import { showError } from '@/utils/show'
+
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
 
-console.log('patientInfo222', patientInfo.value.selectDisease)
+console.log('patientInfo', patientInfo.value.selectDisease)
 
 const optionList = [
   '1.发病年龄低于40岁 ', '2.肢体间歇性跛行', '3.肱动脉脉搏减弱:一侧或双侧上肢动脉搏动减弱',
@@ -57,25 +59,27 @@ const form = reactive({
   selectedOption: patientInfo.value.selectDisease?.selectedOption ?? []
 })
 
-console.log('tak', form)
 
 const handleCheckbox = (data: any) => {
   form.selectedOption = data.value
-
-  console.log(form)
 
 }
 
 const handleDate = (date: any) => {
   form.datetime = date.value
-  console.log(form.datetime)
+
 }
 
 const handleSubmit = async () => {
 
   const formData = { idCard: patientInfo.value.idCard, userInfo: { selectDisease: form } };
 
-  console.log(formData)
+  console.log('postdata',formData)
+  if(form.selectedOption.length==0){
+    showError('请至少选择一项')
+  }
+
+  return;
 
   const res = await updatePatient(formData);
 
@@ -88,8 +92,9 @@ const handleSubmit = async () => {
       patientStore.updatePatientInfo(res.data)
 
       uni.navigateTo({ url: "/pages/patient/baseInfo" })
-      console.log(form)
     }
+  }else{
+    showError(res.msg)
   }
 }
 </script>

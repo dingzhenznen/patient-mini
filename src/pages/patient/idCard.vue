@@ -21,6 +21,7 @@
  import { addPatient } from "@/apis/patient/index"
  import { usePatientStore } from "@/store/patient"
  import { useUserStore } from "@/store/user"
+ import { showError } from '@/utils/show'
 
  const userStore = useUserStore();
 
@@ -32,8 +33,10 @@ const patientStore = usePatientStore()
  })
 
  const goSelectDisease = async()=>{ 
-  console.log(form)
 
+  if(form.idCard.length !==18){
+    showError('请输入18位身份证号码')
+  }
   const res = await addPatient(form);
 
   if(res.code==0){
@@ -41,7 +44,8 @@ const patientStore = usePatientStore()
   
     uni.navigateTo({'url':"/pages/patient/selectDisease"})
   }else{
-  
+    console.log(res)
+    showError(res.msg)
   }
   
  }

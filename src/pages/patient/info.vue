@@ -234,7 +234,7 @@
     if(status==0){
       // 没有进行中的
       if(isExistGoing.value==0){
-        console.log(111)
+       
         // 确定开始吗  请求接口更新状态为进行中 跳转 
         message
         .confirm({
@@ -279,16 +279,14 @@
     idCard.value=option.idCard  
     idCard.value='340602197006152466'
     const res = await getPatient({'idCard':idCard.value})
-    console.log(res)
+   
     patientStore.updatePatientInfo(res.data.data[0])
     Object.assign(form, res.data.data[0]);
 
     const goingFollow:any = form.followList?.filter((item,index)=> item.status==1)
 
     isExistGoing.value = goingFollow?.length>0?1:0
-    console.log(isExistGoing.value)
-    console.log('flag',flag)// (value, index) => index !== order
-    console.log(44444,form)
+    
   })
 
 </script>

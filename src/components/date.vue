@@ -42,7 +42,7 @@ const emit = defineEmits(['handleDatetime'])
      margin: 30rpx 200rpx 30rpx 34rpx;
   }
   .rili{
-    top:20rpx;
+    top:10rpx;
     position:absolute;
     left: 480rpx;
     width: 282rpx;
