@@ -37,7 +37,7 @@
 
             </view>
             <view class="down">
-              距离下次诊疗已逾10天
+              {{ formatFollowDate(form) }}
             </view>
           </view>
 
@@ -138,7 +138,6 @@
                     <view v-for="item in form.selectDisease.selectedOption" :key="item">
                       {{ item }}
                     </view>
-                    <view>1.下背痛的病程至少了个月，疼痛随活动改善休衤啭鬻艫田息不缓解</view>
                   </view>
                 </view>
               </view>
@@ -207,6 +206,16 @@
       
     })
 
+    const formatFollowDate = (patient: Patient) => {
+      console.log('nextdate',patient.nextDate)
+      const diffDay = dayjs(patient.nextDate).diff(dayjs(), 'day')
+      if (diffDay >= 0) {
+        return `距离下次诊疗还有 ${Math.abs(diffDay)} 天`
+      } else {
+        return `距离下次诊疗已逾期 ${diffDay} 天`
+      }
+    }
+
 
   const handleSelect = (status:any) => {
 
@@ -235,7 +244,7 @@
       else{
         // 提示结束
         toast.show('请结束当前随诊')
-        showTip(' 请结束当前随诊')
+        //showTip(' 请结束当前随诊')
 
       }
 
