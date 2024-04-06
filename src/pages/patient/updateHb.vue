@@ -142,12 +142,11 @@ import { storeToRefs } from 'pinia'
 import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
+import { showError } from '@/utils/show'
 
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
-
-console.log('patientInfo',patientInfo.value)
 
 
 const form = reactive({
@@ -169,38 +168,16 @@ const form = reactive({
 const formRef = ref()
 
 
-const gxbRadioChange = (e: any) => {
-  form.coronaryHeartDisease = e.value
-}
-
-const nzzRadioChange = (e: any) => {
-  form.cerebralApoplexy = e.value
-
-}
-
-const cxgzRadioChange = (e: any) => {
-  form.coronaryHeartDisease = e.value
-}
-
-const nlRadioChange = (e: any) => {
-  form.cerebralApoplexy = e.value
-
-}
-
-
 const handleSubmit = () => {
-
-  //uni.navigateTo({'url':"/pages/patient/follow"})
 
   const formInfo = {complication:form}
 
-  console.log(3333,formInfo)
+  console.log('forminfo',formInfo)
   formRef.value
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-        console.log(data.valid)
-
+  
         const res = await updatePatient({idCard:patientInfo.value.idCard,userInfo:formInfo});
     
         if(res.code==0){
@@ -208,14 +185,15 @@ const handleSubmit = () => {
           uni.navigateTo({'url':"/pages/patient/finish"})
 
         }else{
-          console.log(res)
+          showError(res.msg)
         }
       } else {
-        console.log(data)
+        showError(data.errors[0].message)
         return
       }
     })
     .catch((error:any) => {
+      showError('异常信息请重新操作')
       console.log(error, 'error')
     })
 }

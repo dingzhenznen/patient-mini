@@ -91,6 +91,8 @@ import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
 
+import { showError } from '@/utils/show'
+
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
@@ -141,14 +143,12 @@ const handleSubmit = () => {
 
   //uni.navigateTo({'url':"/pages/patient/follow"})
 
-  console.log(3333,form)
-
   const formData = { 
     idCard:patientInfo.value.idCard,
     userInfo:{ history:form}
   }
 
-  console.log(3333,formData)
+  console.log('formData',formData)
   // return
   
 
@@ -156,8 +156,6 @@ const handleSubmit = () => {
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-        console.log(data.valid)
-
         const res = await updatePatient(formData);
     
         if(res.code==0){
@@ -165,15 +163,16 @@ const handleSubmit = () => {
           uni.navigateTo({'url':"/pages/patient/finish"})
 
         }else{
-          console.log(res)
+          showError(res.msg)
         }
       } else {
-        console.log(data)
+        showError(data.errors[0].message)
         return
       }
     })
     .catch((error:any) => {
       console.log(error, 'error')
+      showError('异常信息请重新操作')
     })
 }
 
