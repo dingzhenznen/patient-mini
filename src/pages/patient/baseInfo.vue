@@ -13,7 +13,6 @@
           label="姓名"
           label-width="100px"
           prop="name"
-
           v-model="form.name"
           placeholder="请输入患者姓名"
           :rules="[{ required: false, pattern: /\S/, message: '请输入姓名' }]"
@@ -70,7 +69,7 @@
     <view class="other">
 
       <!-- <wd-cell title="其他" value="内容" is-link @click="handleClick" /> -->
-      <Tags></Tags>
+      <Tags @handleSelect="handleTagsSelect" :originTags="form.tags"></Tags>
 
 
     <wd-input
@@ -89,15 +88,21 @@
       <image class="img" src="../../static/img/base-info.png"></image>
       <view>病史</view>
     </view>
-    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"  v-model="form.history.attackTime" @confirm="attackConfirm"/>
-    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="confirmTime" :align-right="flag" v-model="form.history.confirmTime" @confirm="confirmConfirm" />
+    <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="history.attackTime" 
+    :align-right="flag"  v-model="form.history.attackTime" @confirm="attackConfirm"
+    :rules="[{ required: false,pattern: /\S/, message: '请选择发病时间日期' }]"
+    />
+    <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="history.confirmTime"
+    :align-right="flag" v-model="form.history.confirmTime" @confirm="confirmConfirm" 
+    :rules="[{ required: false,pattern: /\d{13}/, message: '请选择确诊日期' }]"
+    />
 
     <view class="other">
 
 
       <wd-cell title="冠心病" title-width="100px" prop="count">
 
-        <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline @change="gxbRadioChange">
+        <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline >
           <wd-radio value="1">有</wd-radio>
           <wd-radio value="2">无</wd-radio>
         </wd-radio-group>
@@ -110,7 +115,7 @@
 
       <wd-cell title="脑卒中" title-width="100px" prop="count">
         <view>
-          <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline @change="nzzRadioChange">
+          <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline >
         <wd-radio value="1">有</wd-radio>
         <wd-radio value="2">无</wd-radio>
       </wd-radio-group>
@@ -123,7 +128,7 @@
 
     <wd-cell title="脆性骨折" title-width="100px" prop="count">
       <view>
-        <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline @change="cxgzRadioChange">
+        <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline >
       <wd-radio value="1">有</wd-radio>
       <wd-radio value="2">无</wd-radio>
     </wd-radio-group>
@@ -137,7 +142,7 @@
 
     <wd-cell title="脑瘤" title-width="100px" prop="count">
       <view>
-        <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline @change="nlRadioChange">
+        <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline >
       <wd-radio value="1">有</wd-radio>
       <wd-radio value="2">无</wd-radio>
     </wd-radio-group>
@@ -145,10 +150,6 @@
     </wd-cell>
 
     </view>
-
-
-
-
 
   </wd-cell-group>
 
@@ -171,10 +172,11 @@ import Tags from '../../components/tags.vue';
 import { updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
+import { showError } from '@/utils/show';
 
 const patientStore = usePatientStore();
 
-console.log(11111,patientStore.patientInfo)
+console.log('patientinfo',patientStore.patientInfo)
 
 
 const form = reactive({
@@ -187,8 +189,8 @@ const form = reactive({
   tags:[],// 其他
   remark:'',
   history:{
-    attackTime:Date.now(),
-    confirmTime:Date.now(),
+    attackTime: new Date(new Date().toLocaleDateString()).getTime(),
+    confirmTime:new Date(new Date().toLocaleDateString()).getTime(),
   },
   complication:{
     coronaryHeartDisease: 0,
@@ -202,6 +204,12 @@ const formRef = ref()
 
 const flag = ref<boolean>(true)
 
+const handleTagsSelect =(data:any)=>{
+
+form.tags = data
+
+}
+
 const attackConfirm =(data:any)=>{
 
   form.history.attackTime= data.value
@@ -211,38 +219,20 @@ const confirmConfirm =(data:any)=>{
   form.history.confirmTime= data.value
 }
 
-const gxbRadioChange = (e: any) => {
-  form.complication.coronaryHeartDisease = e.value
-}
-
-const nzzRadioChange = (e: any) => {
-  form.complication.cerebralApoplexy = e.value
-
-}
-
-const cxgzRadioChange = (e: any) => {
-  form.complication.coronaryHeartDisease = e.value
-}
-
-const nlRadioChange = (e: any) => {
-  form.complication.cerebralApoplexy = e.value
-
-}
 
 
 const handleSubmit = () => {
 
-  //uni.navigateTo({'url':"/pages/patient/follow"})
-
-  console.log(3333,form)
-  
+  //uni.navigateTo({'url':"/pages/patient/follow"}
+  console.log(form)
 
   formRef.value
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-        console.log(data.valid)
 
+        console.log(form)
+    
         const res = await updatePatient({idCard:form.idCard,userInfo:form});
     
         if(res.code==0){
@@ -250,14 +240,15 @@ const handleSubmit = () => {
           uni.navigateTo({'url':"/pages/patient/follow"})
 
         }else{
-          console.log(res)
+          showError(res.msg)
         }
       } else {
         console.log(data)
-        return
+       showError(data.errors[0].message)
       }
     })
     .catch((error:any) => {
+      showError('异常信息请重新操作')
       console.log(error, 'error')
     })
 }
@@ -370,6 +361,13 @@ export default {
 
     // 报错信息
     :deep(.wd-input__error-message) {
+      display: none;
+      content: none;
+      color: transparent;
+
+    }
+
+    :deep(.wd-calendar__error-message) {
       display: none;
       content: none;
       color: transparent;

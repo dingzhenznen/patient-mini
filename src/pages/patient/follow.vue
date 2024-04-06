@@ -10,7 +10,7 @@
          v-model="form.thisDate" @confirm="thisConfirm" />
         <wd-calendar label="下次访视实施日期" label-width="240rpx" 
           placeholder=" " prop="nextDate"  :center= "flag" :align-right="flag" 
-          v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请输入6位字符' }]" @confirm="nextConfirm" />
+          v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请选择下次访视实施日期' }]" @confirm="nextConfirm" />
         <wd-cell title="医嘱">
           <wd-input v-model="form.followRemark" no-border placeholder=" 请输入"></wd-input>
 
