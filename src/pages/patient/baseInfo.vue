@@ -94,7 +94,7 @@
     />
     <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="history.confirmTime"
     :align-right="flag" v-model="form.history.confirmTime" @confirm="confirmConfirm" 
-    :rules="[{ required: false,pattern: /\d{13}/, message: '请选择确诊日期' }]"
+    :rules="[{ required: false,pattern: /\S/, message: '请选择发病时间日期' }]"
     />
 
     <view class="other">
@@ -190,7 +190,7 @@ const form = reactive({
   remark:'',
   history:{
     attackTime: new Date(new Date().toLocaleDateString()).getTime(),
-    confirmTime:new Date(new Date().toLocaleDateString()).getTime(),
+    confirmTime:'',
   },
   complication:{
     coronaryHeartDisease: 0,
