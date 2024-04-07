@@ -169,10 +169,13 @@ import { ref ,reactive} from 'vue'
 
 import Tags from '../../components/tags.vue';
 
-import { updatePatient } from "@/apis/patient/index"
+import { addPatient } from "@/apis/patient/index"
 
 import { usePatientStore }  from "@/store/patient"
-import { showError } from '@/utils/show';
+import { useUserStore } from "@/store/user"
+import { showError } from '@/utils/show'
+
+ const userStore = useUserStore();
 
 const patientStore = usePatientStore();
 
@@ -233,11 +236,11 @@ const handleSubmit = () => {
 
         console.log(form)
     
-        const res = await updatePatient({idCard:form.idCard,userInfo:form});
+        const res = await addPatient({idCard:form.idCard,doctorId:userStore.userInfo._id,userInfo:form});
     
         if(res.code==0){
           patientStore.updatePatientInfo(res.data)
-          uni.navigateTo({'url':"/pages/patient/follow"})
+          uni.navigateTo({'url':"/pages/patient/selectDisease"})
 
         }else{
           showError(res.msg)

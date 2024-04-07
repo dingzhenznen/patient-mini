@@ -43,7 +43,7 @@ const patientStore = usePatientStore()
   if(res.code==0){
     patientStore.updatePatientInfo(res.data)
   
-    uni.navigateTo({'url':"/pages/patient/selectDisease"})
+    uni.navigateTo({'url':"/pages/patient/baseInfo"})
   }else{
     console.log(res)
     showError(res.msg)
