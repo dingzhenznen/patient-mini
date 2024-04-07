@@ -14,11 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-// 选项 及 选项值 说明
-// 0 无
-// 1 有
-// 2 未做
-// 3 不详
 import { ref } from 'vue'
 const selected = ref(0)
 const props = defineProps({
@@ -43,11 +38,13 @@ const props = defineProps({
     default: ''
   }
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'update:selectDisease'])
 
 const clickBtn = (value: number) => {
   selected.value = value
   emit('update:modelValue', value)
+  //@ts-ignore
+  emit('update:selectDisease', [props.title, value])
 }
 </script>
 

@@ -1,3 +1,4 @@
+import { getUserInfo } from './../apis/user/index'
 const kToken = 'token'
 const kTokenExpire = 'token_expire'
 const kUserInfo = 'user_info'
@@ -13,6 +14,14 @@ export function saveToken(token: string, expire: number) {
 
 export function getToken(): string | undefined {
   return uni.getStorageSync(kToken) || undefined
+}
+
+export function getUserInfo() {
+  return uni.getStorageSync(kUserInfo)
+}
+
+export function saveUserInfo(user: any) {
+  uni.setStorageSync(kUserInfo, user)
 }
 
 export function clearUserInfo() {

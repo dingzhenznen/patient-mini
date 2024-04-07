@@ -1,67 +1,69 @@
 <template>
   <view class="main">
 
-   <view class="body">
-    <wd-form ref="formRef" :model="form">
+    <view class="body">
+      <wd-form ref="formRef" :model="form">
 
-      <wd-cell-group border>
-    
-        <view class="history">
-          <image class="img" src="../../static/img/base-info.png"></image>
-          <view>病史</view>
-        </view>
-        <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"  v-model="form.attackTime" @confirm="attackConfirm"/>
-        <wd-calendar label="确诊时间" label-width="100px" placeholder="必填"  prop="confirmTime" :align-right="flag" v-model="form.confirmTime" @confirm="confirmConfirm" />
+        <wd-cell-group border>
 
-        <view class="other">
-          <wd-cell title="吸烟史" title-width="100px" prop="count">
+          <view class="history">
+            <image class="img" src="../../static/img/base-info.png"></image>
+            <view>病史</view>
+          </view>
+          <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
+            v-model="form.attackTime" @confirm="attackConfirm" />
+          <wd-calendar label="确诊时间" label-width="100px" placeholder="必填" prop="confirmTime" :align-right="flag"
+            v-model="form.confirmTime" @confirm="confirmConfirm" />
 
-            <wd-radio-group v-model="form.smoke" shape="dot" inline >
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
+          <view class="other">
+            <wd-cell title="吸烟史" title-width="100px" prop="count">
 
-          </wd-cell>
+              <wd-radio-group v-model="form.smoke" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
 
-        </view>
+            </wd-cell>
 
-        <view class="other">
-          <wd-cell title="家族史" title-width="100px" prop="count">
+          </view>
 
-            <wd-radio-group v-model="form.family" shape="dot" inline >
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
+          <view class="other">
+            <wd-cell title="家族史" title-width="100px" prop="count">
 
-          </wd-cell>
+              <wd-radio-group v-model="form.family" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
 
-        </view>
+            </wd-cell>
 
-        <view class="other">
-          <wd-cell title="过敏史" title-width="100px" prop="count">
+          </view>
 
-            <wd-radio-group v-model="form.allergy" shape="dot" inline >
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
+          <view class="other">
+            <wd-cell title="过敏史" title-width="100px" prop="count">
 
-          </wd-cell>
+              <wd-radio-group v-model="form.allergy" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
 
-        </view>
+            </wd-cell>
 
-        <!-- <wd-cell title="其他病史" center>
-          
+          </view>
+
+          <!-- <wd-cell title="其他病史" center>
+
         </wd-cell> -->
 
-        <!-- <wd-cell title="时间" center>
+          <!-- <wd-cell title="时间" center>
           <wd-cell title="病史内容">
             <wd-icon name="add" size="22px" @click="handleAdd"></wd-icon>
           </wd-cell>
         </wd-cell> -->
 
-        <!-- <view class="otherHistory">
+          <!-- <view class="otherHistory">
           <view class="item">
-           
+
             <wd-calendar use-default-slot >
               <wd-button >选择日期</wd-button>
             </wd-calendar>
@@ -69,27 +71,27 @@
             <wd-input custom-class="otherInput"></wd-input>
           </view>
         </view> -->
-      </wd-cell-group>
+        </wd-cell-group>
 
-      <view class="submit" @click="handleSubmit">
-        更新
-      </view>
-    </wd-form>
+        <view class="submit" @click="handleSubmit">
+          更新
+        </view>
+      </wd-form>
 
-   </view>
+    </view>
 
 
   </view>
- </template>
+</template>
 
- <script lang="ts" setup>
-import { ref ,reactive} from 'vue'
+<script lang="ts" setup>
+import { ref, reactive } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
 import { updatePatient } from "@/apis/patient/index"
 
-import { usePatientStore }  from "@/store/patient"
+import { usePatientStore } from "@/store/patient"
 
 import { showError } from '@/utils/show'
 
@@ -104,30 +106,30 @@ interface PhoneItem {
 
 
 const form = reactive({
-  
+
   attackTime: patientInfo.value.history?.attackTime,
   confirmTime: patientInfo.value.history?.confirmTime,
-  smoke:patientInfo.value.history?.smoke??"2",
-  family:patientInfo.value.history?.family??"2",
-  allergy:patientInfo.value.history?.allergy??"2",
+  smoke: patientInfo.value.history?.smoke ?? "2",
+  family: patientInfo.value.history?.family ?? "2",
+  allergy: patientInfo.value.history?.allergy ?? "2",
 
-  otherHistory:[] as PhoneItem[]
+  otherHistory: [] as PhoneItem[]
 
 })
 const formRef = ref()
 
 const flag = ref<boolean>(true)
 
-const attackConfirm =(data:any)=>{
+const attackConfirm = (data: any) => {
 
-  form.attackTime= data.value
+  form.attackTime = data.value
 
 }
-const confirmConfirm =(data:any)=>{
-  form.confirmTime= data.value
+const confirmConfirm = (data: any) => {
+  form.confirmTime = data.value
 }
 
-const handleAdd =()=>{
+const handleAdd = () => {
 
   form.otherHistory.push({
     datetime: Date.now(),
@@ -143,26 +145,26 @@ const handleSubmit = () => {
 
   //uni.navigateTo({'url':"/pages/patient/follow"})
 
-  const formData = { 
-    idCard:patientInfo.value.idCard,
-    userInfo:{ history:form}
+  const formData = {
+    idCard: patientInfo.value.idCard,
+    userInfo: { history: form }
   }
 
-  console.log('formData',formData)
+  console.log('formData', formData)
   // return
-  
+
 
   formRef.value
     .validate()
-    .then(async (data:any) => {
+    .then(async (data: any) => {
       if (data.valid) {
         const res = await updatePatient(formData);
-    
-        if(res.code==0){
-          patientStore.updatePatientInfo(res.data)
-          uni.navigateTo({'url':"/pages/patient/finish"})
 
-        }else{
+        if (res.code == 0) {
+          patientStore.updatePatientInfo(res.data)
+          uni.navigateTo({ 'url': "/pages/patient/finish" })
+
+        } else {
           showError(res.msg)
         }
       } else {
@@ -170,36 +172,38 @@ const handleSubmit = () => {
         return
       }
     })
-    .catch((error:any) => {
+    .catch((error: any) => {
       console.log(error, 'error')
       showError('异常信息请重新操作')
     })
 }
 
- </script>
+</script>
 
 
- <style lang="scss">
+<style lang="scss">
+.main {
+  opacity: 1;
+  background: rgba(245, 245, 245, 1);
 
+  .body {
+    padding: 30rpx;
 
- .main{
-   opacity: 1;
-   background: rgba(245, 245, 245, 1);
-   .body{
-    padding: 30rpx ;
-    .base_info{
+    .base_info {
       display: flex;
       align-items: center;
       margin-bottom: 40rpx;
 
-      image{
+      image {
         width: 26rpx;
         height: 28rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
-      view{
+
+      view {
         margin-left: 8rpx;
         font-size: 16px;
         font-weight: 700;
@@ -209,14 +213,14 @@ const handleSubmit = () => {
       }
     }
 
-    .other{
+    .other {
       margin-top: 20rpx;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
 
     }
 
-    .history{
+    .history {
       display: flex;
       align-items: center;
       margin-bottom: 40rpx;
@@ -224,23 +228,26 @@ const handleSubmit = () => {
       display: flex;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
-      image{
+
+      image {
         width: 26rpx;
         height: 28rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
 
-     
+
     }
 
-    .otherHistory{
-       .item{
+    .otherHistory {
+      .item {
         display: flex;
-       }
       }
-    .submit{
+    }
+
+    .submit {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -256,12 +263,13 @@ const handleSubmit = () => {
 
 
     // 背景色
-    :deep(.wd-cell-group__body){
+    :deep(.wd-cell-group__body) {
       opacity: 1;
       background: rgba(245, 245, 245, 1);
     }
+
     // input 文字位置
-    :deep(.wd-input__value){
+    :deep(.wd-input__value) {
 
       opacity: 1;
       background: rgba(255, 255, 255, 1);
@@ -283,21 +291,22 @@ const handleSubmit = () => {
 
 
     // 冠心病 脑卒
-    :deep(.wd-cell__wrapper){
+    :deep(.wd-cell__wrapper) {
       align-items: center;
     }
-    :deep(.wd-radio-group){
+
+    :deep(.wd-radio-group) {
       display: flex;
       align-items: center;
       justify-content: flex-end;
     }
 
-    :deep(.otherInput){
+    :deep(.otherInput) {
       margin-left: 200rpx;
     }
 
-   }
+  }
 
 
- }
- </style>
+}
+</style>

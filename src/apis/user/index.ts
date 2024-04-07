@@ -1,6 +1,6 @@
 import { getToken, saveToken } from '@/utils'
 import { showError } from '@/utils/show'
-import { useUserStore } from '@/store/user'
+import { usePatientStore, useUserStore } from '@/store'
 // import request from '../request'
 import request from '../uni-request'
 
@@ -39,7 +39,6 @@ export const initUserInfo = async (callback?: Function) => {
     })
   } else {
     // 更新用户信息
-
     if (callback) {
       callback()
     }
