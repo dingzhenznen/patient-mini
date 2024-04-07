@@ -47,8 +47,9 @@ onLoad((option: any) => {
 })
 
 const handleSelect = (item: any) => {
-
-  const diagnosisUrl = patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase() || item.url
+  // console.log(item)
+  console.log('store: ', patientStore.patientInfo)
+  const diagnosisUrl = `/pages/disease/${patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase()}` || item.url
   if (item.title == "诊断确认") {
     uni.navigateTo({ url: diagnosisUrl })
   }

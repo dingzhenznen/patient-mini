@@ -46,7 +46,7 @@
         </view>
         <!-- 电话/短信提醒 -->
         <view class="action uno-flex-content-between">
-          <wd-button plain size="small" icon="user-avatar" @click="messagePatient(item)">随诊</wd-button>
+          <wd-button plain size="small" icon="user-avatar" @click="followPatient(item)">随诊</wd-button>
           <wd-button plain size="small" icon="" @click="messagePatient(item)">短信提醒</wd-button>
           <wd-button plain size="small" icon="call" @click="callPatient(item)">拨打电话</wd-button>
           <wd-icon name="" size="22px"></wd-icon>
@@ -148,6 +148,11 @@ const callPatient = (patient: Patient) => {
   })
 }
 
+const followPatient = async (patient: Patient) => {
+  await usePatientStore().updatePatientInfo(patient)
+  uni.navigateTo({ url: '/pages/patient/finish' })
+}
+
 const messagePatient = async (patient: Patient) => {
   const r = await noticePatient({ phone: patient.phone })
   if (r.code) {
@@ -160,10 +165,10 @@ const goIdCard = () => {
 }
 
 const goToPatient = (patient: Patient) => {
-
-  // uni.navigateTo({
-  //   url: '/pages/patient/info?idCard=' + patient.idCard,
-  // })
+  console.log('goToPatient', patient)
+  uni.navigateTo({
+    url: '/pages/patient/info?idCard=' + patient.idCard,
+  })
 }
 
 const formatFollowDate = (patient: Patient) => {

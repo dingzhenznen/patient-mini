@@ -125,13 +125,9 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/patient/info",
         "iconPath": "static/tabBar/patients.png",
         "selectedIconPath": "static/tabBar/patients-active.png",
-        "text": "患者"
+        "text": "首页"
       },
       {
         "pagePath": "pages/my/index",
