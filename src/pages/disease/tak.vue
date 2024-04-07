@@ -55,7 +55,7 @@ const form = reactive({
   en: "tak",
   china: '大动脉炎症',
   datetime: patientInfo.value.selectDisease?.datetime ?? Date.now(),
-  type:1,
+  type: 1,
   selectedOption: patientInfo.value.selectDisease?.selectedOption ?? []
 })
 
@@ -74,26 +74,21 @@ const handleSubmit = async () => {
 
   const formData = { idCard: patientInfo.value.idCard, userInfo: { selectDisease: form } };
 
-  console.log('postdata',formData)
-  
-  if(form.selectedOption.length==0){
-    showError('请至少选择一项')
-    return
+  if (form.selectedOption.length == 0) {
+    return showError('请至少选择一项')
   }
-
   const res = await updatePatient(formData);
 
   if (res.code == 0) {
-
+    //@ts-ignore
     if (patientInfo.value?.selectDisease?.selectedOption?.length > 0) {
       patientStore.updatePatientInfo(res.data)
       uni.navigateTo({ 'url': "/pages/patient/finish" })
     } else {
       patientStore.updatePatientInfo(res.data)
-
       uni.navigateTo({ url: "/pages/patient/baseInfo" })
     }
-  }else{
+  } else {
     showError(res.msg)
   }
 }

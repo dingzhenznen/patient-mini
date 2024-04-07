@@ -106,7 +106,8 @@
     </view>
     <DateSelect :date="form.datetime" @handleDatetime="handleDate"></DateSelect>
     <view class="button">
-      <view class="submit" @click="handleSubmit">患者注册</view>
+      <view v-if="!status" class="submit" @click="handleSubmit">患者注册</view>
+      <view v-if="status == '0' || status == '1'" class="submit" @click="handleSubmit">更新</view>
     </view>
   </view>
 </template>
@@ -125,16 +126,16 @@ const patientStore = usePatientStore()
 const { patientInfo } = patientStore
 
 // 1. 患者注册 2.随访回显/可修改 3.随访结束不可编辑
-const pageType = ref('1')
+const status = ref('')
 type emitData = [string, number]
 const btnDisabled = ref(false)
 
 // 进页面确定页面类型
 onLoad(async (option: any) => {
-  // 1. 患者注册 2.随访回显/可修改 3.随访结束不可编辑
-  pageType.value = option.pageType || '1'
-  if (pageType.value === '3') {
-    // 回显数据
+  // 0 未开始，1 进行中，2 已结束
+  status.value = option.status || '0'
+  if (status.value === '2') {
+    // 仅回显数据, 不可修改
     btnDisabled.value = true
   }
 })

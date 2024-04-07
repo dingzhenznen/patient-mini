@@ -6,7 +6,7 @@
         <wd-checkbox modelValue="tak" shape="button">Tak</wd-checkbox>
         <wd-checkbox modelValue="spa" shape="button">Spa</wd-checkbox>
         <wd-checkbox modelValue="uctd" shape="button">UCTD</wd-checkbox>
-        <wd-checkbox modelValue="spa" shape="button">Spa</wd-checkbox>
+        <wd-checkbox modelValue="xxx" shape="button">XXX</wd-checkbox>
       </wd-checkbox-group>
       <text class="title">性别</text>
       <wd-checkbox-group v-model="sex" inline>
@@ -58,15 +58,12 @@ const confirm = () => {
 </script>
 
 <style lang="scss" scoped>
-:deep(.wd-checkbox.is-button-box) {
+:deep(.wd-checkbox) {
   display: inline-flex;
-  box-sizing: border-box;
-  padding: 12rpx 12rpx 0 0;
   width: 40%;
-}
+  padding: 12px 12px 0 0;
+  box-sizing: border-box;
 
-:deep(.wd-checkbox-group) {
-  width: 100%;
 }
 
 .main {

@@ -1,5 +1,5 @@
 <template>
-  <view class="main" >
+  <view class="main">
 
     <view class="background">
       <image style="margin-top:140rpx" class="img" src="../../static/img/patient-log.png"></image>
@@ -32,31 +32,32 @@
 <script lang="ts" setup>
 import { getUserPhone } from '@/apis/user/index'
 
-import { useUserStore }  from "@/store/user"
+import { useUserStore } from "@/store/user"
 
 import { getToken, saveToken } from "@/utils"
 
-const getPhoneNumber = async(data:any)=>{
+const getPhoneNumber = async (data: any) => {
 
   const userStore = useUserStore();
 
-  const res = await getUserPhone({code:data.detail.code,openid:userStore.userInfo.openid})
+  const res = await getUserPhone({ code: data.detail.code, openid: userStore.userInfo.openid })
 
-  if(res.code==0){
+  if (res.code == 0) {
 
     userStore.updateUserInfo(res.data.user)
     saveToken(res.data.access_token, res.data.exp)
-    uni.switchTab({'url':'/pages/my/index'})
+    // 登录后直接跳转首页
+    uni.switchTab({ 'url': '/pages/index/index' })
 
-  }else{
-     console.log('errps',res)
+  } else {
+    console.log('errors', res)
   }
 
 }
 </script>
 
 <style lang="scss">
-.main{
+.main {
 
   .background {
     width: 100%;
@@ -67,17 +68,18 @@ const getPhoneNumber = async(data:any)=>{
     align-items: center;
     background: linear-gradient(180deg, rgba(226, 244, 243, 1) 0%, rgba(226, 244, 243, 0) 100%);
 
-    image{
+    image {
       // margin-top: 260rpx;
-      width:92rpx ;
+      width: 92rpx;
       height: 92rpx;
-      .img{
+
+      .img {
         width: 100%;
       }
     }
 
-    .title{
-      margin-top:16rpx ;
+    .title {
+      margin-top: 16rpx;
       font-size: 32rpx;
       font-weight: 700;
       letter-spacing: 0px;
@@ -86,12 +88,13 @@ const getPhoneNumber = async(data:any)=>{
 
     }
   }
-  .login{
+
+  .login {
 
     padding: 0 64rpx;
     margin-top: -20rpx;
 
-    .phone{
+    .phone {
       margin-bottom: 24rpx;
       font-size: 32rpx;
       font-weight: 500;
@@ -101,7 +104,8 @@ const getPhoneNumber = async(data:any)=>{
       text-align: left;
       vertical-align: top;
     }
-    .code{
+
+    .code {
 
       margin-top: 48rpx;
       margin-bottom: 24rpx;
@@ -114,7 +118,8 @@ const getPhoneNumber = async(data:any)=>{
       vertical-align: top;
 
     }
-    .send{
+
+    .send {
       font-size: 26rpx;
       font-weight: 400;
       letter-spacing: 0px;
@@ -139,7 +144,7 @@ const getPhoneNumber = async(data:any)=>{
       opacity: 1;
       border-radius: 48rpx;
       background: linear-gradient(221.44deg, rgba(0, 184, 129, 1) 0%, rgba(7, 207, 146, 1) 100%);
-      box-shadow: -2px -4px 10px  rgba(19, 210, 157, 0.2), 2px 4px 10px  rgba(2, 186, 201, 0.2);
+      box-shadow: -2px -4px 10px rgba(19, 210, 157, 0.2), 2px 4px 10px rgba(2, 186, 201, 0.2);
     }
 
     .wx-login {
@@ -155,7 +160,7 @@ const getPhoneNumber = async(data:any)=>{
       opacity: 1;
       border-radius: 48rpx;
       background: linear-gradient(221.44deg, rgba(0, 184, 129, 1) 0%, rgba(7, 207, 146, 1) 100%);
-      box-shadow: -2px -4px 10px  rgba(19, 210, 157, 0.2), 2px 4px 10px  rgba(2, 186, 201, 0.2);
+      box-shadow: -2px -4px 10px rgba(19, 210, 157, 0.2), 2px 4px 10px rgba(2, 186, 201, 0.2);
     }
   }
 }

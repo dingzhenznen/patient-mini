@@ -46,6 +46,8 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue', 'update:selectDisease'])
 
+selected.value = props.modelValue
+
 const clickBtn = (value: number) => {
   selected.value = value
   emit('update:modelValue', value)

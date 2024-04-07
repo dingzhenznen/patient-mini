@@ -38,7 +38,6 @@ const List = reactive([
   { 'title': "状态刷新", 'url': "/pages/patient/finish", 'src': "../../static/img/shuaxin.png", 'bg': 'linear-gradient(153.97deg, rgba(254, 147, 0, 1) 0%, rgba(255, 136, 0, 1) 20%, rgba(255, 125, 0, 1) 40%, rgba(255, 114, 0, 1) 60%, rgba(255, 102, 0, 1) 80%, rgba(255, 88, 0, 1) 100%);' },
 
 ])
-
 const followStatus = ref(0)
 
 onLoad((option: any) => {
@@ -49,7 +48,7 @@ onLoad((option: any) => {
 const handleSelect = (item: any) => {
   // console.log(item)
   console.log('store: ', patientStore.patientInfo)
-  const diagnosisUrl = `/pages/disease/${patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase()}` || item.url
+  const diagnosisUrl = `/pages/disease/${patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase()}?status=${followStatus.value}` || item.url
   if (item.title == "诊断确认") {
     uni.navigateTo({ url: diagnosisUrl })
   }

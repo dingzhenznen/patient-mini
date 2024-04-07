@@ -4,7 +4,7 @@
       <view class="search">
         <uni-easyinput prefixIcon="search" placeholder="搜索" v-model="q" @input="searchInput" @confirm="search"
           @clear="search" @iconClick="search" />
-        <view class="filter-btn">
+        <view class="filter-btn" @click="showFilter = true">
           <text>筛选</text>
           <uni-icons type="bars" color="white"></uni-icons>
         </view>
@@ -42,7 +42,7 @@
         <view class="line-two">
           <text>{{ item.sex }}</text>
           <text class="uno-ml-1">{{ item.age }}岁</text>
-          <text class="uno-ml-1"> {{ item.diseaseName }} </text>
+          <text class="uno-ml-1"> {{ item.selectDisease?.en }} </text>
         </view>
         <!-- 电话/短信提醒 -->
         <view class="action uno-flex-content-between">
@@ -52,7 +52,7 @@
           <wd-icon name="" size="22px"></wd-icon>
         </view>
       </wd-card>
-
+      <Filter v-model="showFilter" />
       <wd-toast />
     </view>
   </view>
@@ -63,6 +63,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { onLoad } from '@dcloudio/uni-app'
 import dayjs from 'dayjs'
+import Filter from './filter.vue'
 
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
@@ -71,12 +72,14 @@ import { list } from '@/apis/patient'
 import { useUserStore, usePatientStore } from '@/store'
 import type { Patient } from '@/utils/types';
 import { noticePatient } from '@/apis/code'
+import { watch } from 'vue'
 
 // 用户信息这里就代表当前登录的医生信息
-const { userInfo, age } = storeToRefs(useUserStore())
 const allPatients = usePatientStore().patients
-const patientList = ref([] as Patient[])
+const { patients } = storeToRefs(usePatientStore())
+const patientList = ref(patients.value as Patient[])
 const q = ref('') // 搜索/筛选条件
+const showFilter = ref(false)
 
 async function sleep(ms: number) {
   return new Promise((resolve) => {
@@ -84,22 +87,26 @@ async function sleep(ms: number) {
   })
 }
 
+watch(patients, (patients, prevPatients) => {
+  patientList.value = patients
+})
+
 // 进页面拉数据
 onLoad(async () => {
 
   try {
     // 先用笨方法解决，后续再优化
     // 因为 useUserStore().userInfo 会在页面加载时为空，所以这里等待2秒
-    await sleep(2000)
-    const r = await list({ userId: userInfo.value._id })
-    console.log(r)
-    if (r.code) {
-      toast.error('获取病人信息失败')
-    }
+    // await sleep(2000)
+    // const r = await list({ userId: userInfo.value._id })
+    // console.log(r)
+    // if (r.code) {
+    //   toast.error('获取病人信息失败')
+    // }
 
     // set patients data
-    patientList.value = r.data as any
-    usePatientStore().setPatients(r.data as Patient[])
+    patientList.value = usePatientStore().patients
+    // usePatientStore().setPatients(r.data as Patient[])
   } catch (error) {
     console.log(' Get patient list caught error: ', error)
     toast.error('获取病人信息失败')
@@ -150,7 +157,7 @@ const callPatient = (patient: Patient) => {
 
 const followPatient = async (patient: Patient) => {
   await usePatientStore().updatePatientInfo(patient)
-  uni.navigateTo({ url: '/pages/patient/finish' })
+  uni.navigateTo({ url: `/pages/patient/info?idCard=${patient.idCard}` })
 }
 
 const messagePatient = async (patient: Patient) => {
