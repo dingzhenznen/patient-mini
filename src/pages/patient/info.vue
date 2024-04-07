@@ -130,7 +130,7 @@
           </view>
 
         </wd-collapse-item>
-        <wd-collapse-item title="tak" name="item3">
+        <wd-collapse-item :title="form.selectDisease?.en" name="item3">
           <view class="disease">
             <view class="title">
               <view class="name">{{ form.selectDisease?.en }}</view>
@@ -139,6 +139,11 @@
 
             <view class="content">
               <view v-if="form.selectDisease?.type == 1">
+                <view v-for="item in form.selectDisease.selectedOption" :key="item">
+                  {{ item }}
+                </view>
+              </view>
+              <view v-else>
                 <view v-for="item in form.selectDisease.selectedOption" :key="item">
                   {{ item }}
                 </view>
@@ -293,7 +298,7 @@ const changeDisease = () => {
 onLoad(async (option: any) => {
 
   idCard.value = option.idCard
-  idCard.value = '340602197006152466'
+  // idCard.value = '340602197006152466'
   const res = await getPatient({ 'idCard': idCard.value })
 
   patientStore.updatePatientInfo(res.data.data[0])
