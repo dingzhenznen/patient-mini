@@ -61,10 +61,20 @@ const handleSubmit = async () => {
   //进行中的可以结束
   if (followStatus.value == 1) {
 
+    if(!patientStore.patientInfo.selectDisease || !patientStore.patientInfo.name || !patientStore.patientInfo.history 
+    || !patientStore.patientInfo.complication || !patientStore.patientInfo.complication )
+    {
+      showError('信息不完善')
+      return;
+    }
+
     const res = await updateFollow({ idCard: patientStore.patientInfo.idCard });
 
     if (res.code == 0) {
-      uni.switchTab({ 'url': "/pages/index/index" })
+      uni.navigateTo({
+        url: '/pages/patient/info?idCard=' + patientStore.patientInfo.idCard,
+      })
+      
     } else {
       showError(res.msg)
     }
