@@ -70,6 +70,7 @@ const toast = useToast()
 import { list } from '@/apis/patient'
 import { useUserStore, usePatientStore } from '@/store'
 import type { Patient } from '@/utils/types';
+import { noticePatient } from '@/apis/code'
 
 // 用户信息这里就代表当前登录的医生信息
 const { userInfo, age } = storeToRefs(useUserStore())
@@ -134,12 +135,25 @@ const search = () => {
   patientList.value = usePatientStore().patients.filter(filterFn)
 }
 
-const callPatient = (item: any) => {
-  console.log('拨打电话', item)
+const callPatient = (patient: Patient) => {
+  console.log('拨打电话', patient)
+  patient.phone && uni.makePhoneCall({
+    phoneNumber: patient.phone,
+    success: () => {
+      console.log('拨打电话成功')
+    },
+    fail: () => {
+      console.log('拨打电话失败')
+    }
+  })
 }
 
-const messagePatient = (item: any) => {
-  console.log('短信提醒', item)
+const messagePatient = async (patient: Patient) => {
+  const r = await noticePatient({ phone: patient.phone })
+  if (r.code) {
+    return toast.error(`${r.msg}`)
+  }
+  toast.success('短信提醒成功')
 }
 const goIdCard = () => {
   uni.navigateTo({ 'url': '/pages/patient/idCard' })

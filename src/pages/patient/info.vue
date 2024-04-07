@@ -22,8 +22,9 @@
 
           <view class="name">{{ form.name }}</view>
 
-          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">{{form.followList.length}}次随诊</wd-tag>
-          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)"  type="success">{{ form.caseId }}</wd-tag>
+          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)" type="success">{{ form.followList.length
+            }}次随诊</wd-tag>
+          <wd-tag custom-class="space" round bg-color="rgba(230, 255, 248, 1)" type="success">{{ form.caseId }}</wd-tag>
 
         </view>
 
@@ -31,9 +32,10 @@
 
           <view class="left">
             <view class="up">
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.age }}</wd-tag>
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.sex }}</wd-tag>
-              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white" >{{ form.selectDisease?.en }}</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white">{{ form.age }}</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white">{{ form.sex }}</wd-tag>
+              <wd-tag color="rgba(0, 0, 0, 1);" custom-class="space2" bg-color="white">{{ form.selectDisease?.en
+                }}</wd-tag>
 
             </view>
             <view class="down">
@@ -51,243 +53,257 @@
               <view>发短信</view>
             </view>
           </view>
-          
+
         </view>
       </view>
     </view>
-    
+
     <view class="follow">
 
-          <wd-collapse v-model="Collapse">
-            <wd-collapse-item title="随诊" name="item1">
-              <view class="zlList">
+      <wd-collapse v-model="Collapse">
+        <wd-collapse-item title="随诊" name="item1">
+          <view class="zlList">
 
-                <view class="item" v-for="item in form.followList" :key="item._id" @click="handleSelect(item.status)">
-                  <view class="top">
-                    <view class="status">{{item.status==0?"未诊疗":item.status==1?"诊疗中":"诊疗结束"}}</view>
-                    <view class="date">{{ dayjs(item.thisDate).format('YYYY-MM-DD')}}</view>
-                  </view>
-                  <view class="address">
-                    {{ item.doctorName }}
-                  </view>
-                </view>
+            <view class="item" v-for="item in form.followList" :key="item._id" @click="handleSelect(item.status)">
+              <view class="top">
+                <view class="status">{{ item.status == 0 ? "未诊疗" : item.status == 1 ? "诊疗中" : "诊疗结束" }}</view>
+                <view class="date">{{ dayjs(item.thisDate).format('YYYY-MM-DD') }}</view>
               </view>
-            </wd-collapse-item>
-            <wd-collapse-item title="病史" name="item2">
-              <view class="history">
+              <view class="address">
+                {{ item.doctorName }}
+              </view>
+            </view>
+          </view>
+        </wd-collapse-item>
+        <wd-collapse-item title="病史" name="item2">
+          <view class="history">
 
-                <wd-form ref="form" :model="form">
+            <wd-form ref="form" :model="form">
 
-                  <wd-cell-group  custom-class="cell-group" border>
-                    <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" :align-right="flag" v-model="form.history.attackTime" />
-                    <wd-calendar label="确诊时间" label-width="100px" placeholder=" "  prop="date" :align-right="flag" v-model="form.history.confirmTime" />
-                    
-                    <wd-cell title="冠心病" title-width="100px" prop="count">
-                    
-                      <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline>
-                      <wd-radio value="1">有</wd-radio>
-                      <wd-radio value="2">无</wd-radio>
-                      </wd-radio-group>
-                    
-                    </wd-cell>
+              <wd-cell-group custom-class="cell-group" border>
+                <wd-calendar label="发病时间" label-width="100px" placeholder=" " prop="date" :align-right="flag"
+                  v-model="form.history.attackTime" />
+                <wd-calendar label="确诊时间" label-width="100px" placeholder=" " prop="date" :align-right="flag"
+                  v-model="form.history.confirmTime" />
 
-                    <wd-cell title="脑卒中" title-width="100px" prop="count">
-                    
-                      <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline>
-                      <wd-radio value="1">有</wd-radio>
-                      <wd-radio value="2">无</wd-radio>
-                      </wd-radio-group>
+                <wd-cell title="冠心病" title-width="100px" prop="count">
 
-                  </wd-cell>
-
-                  <wd-cell title="脆性骨折" title-width="100px" prop="count">
-                    
-                    <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline>
+                  <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline>
                     <wd-radio value="1">有</wd-radio>
                     <wd-radio value="2">无</wd-radio>
-                    </wd-radio-group>
+                  </wd-radio-group>
+
+                </wd-cell>
+
+                <wd-cell title="脑卒中" title-width="100px" prop="count">
+
+                  <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline>
+                    <wd-radio value="1">有</wd-radio>
+                    <wd-radio value="2">无</wd-radio>
+                  </wd-radio-group>
+
+                </wd-cell>
+
+                <wd-cell title="脆性骨折" title-width="100px" prop="count">
+
+                  <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline>
+                    <wd-radio value="1">有</wd-radio>
+                    <wd-radio value="2">无</wd-radio>
+                  </wd-radio-group>
 
                 </wd-cell>
 
                 <wd-cell title="脑瘤" title-width="100px" prop="count">
-                    
-                    <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline>
+
+                  <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline>
                     <wd-radio value="1">有</wd-radio>
                     <wd-radio value="2">无</wd-radio>
-                    </wd-radio-group>
+                  </wd-radio-group>
 
                 </wd-cell>
 
-                
-                  </wd-cell-group>
 
-                  </wd-form>
+              </wd-cell-group>
 
-              </view>
-              
-            </wd-collapse-item>
-            <wd-collapse-item title="tak" name="item3">
-              <view class="disease">
-                <view class="title">
-                  <view class="name">{{form.selectDisease?.en}}</view>
-                  <wd-button type="success" size="small" @click="changeDisease"> 转病种</wd-button>
-                </view>
-                
-                <view class="content">
-                  <view v-if="form.selectDisease?.type==1">
-                    <view v-for="item in form.selectDisease.selectedOption" :key="item">
-                      {{ item }}
-                    </view>
-                  </view>
+            </wd-form>
+
+          </view>
+
+        </wd-collapse-item>
+        <wd-collapse-item title="tak" name="item3">
+          <view class="disease">
+            <view class="title">
+              <view class="name">{{ form.selectDisease?.en }}</view>
+              <wd-button type="success" size="small" @click="changeDisease"> 转病种</wd-button>
+            </view>
+
+            <view class="content">
+              <view v-if="form.selectDisease?.type == 1">
+                <view v-for="item in form.selectDisease.selectedOption" :key="item">
+                  {{ item }}
                 </view>
               </view>
-              
-            </wd-collapse-item>
-          </wd-collapse>
+            </view>
+          </view>
+
+        </wd-collapse-item>
+      </wd-collapse>
     </view>
 
   </view>
- </template>
+</template>
 
 <script lang="ts" setup>
 
 
-  import { ref ,reactive} from 'vue'
-  import { onLoad } from '@dcloudio/uni-app';
-  import { getPatient } from '@/apis/patient/index'
-  import { startFollow } from '@/apis/follow/index'
-  import { usePatientStore }  from "@/store/patient"
-  import type { Patient } from '@/utils/types'
-  import {showTip} from '@/utils/show'
-  import dayjs from 'dayjs'
+import { ref, reactive } from 'vue'
+import { onLoad } from '@dcloudio/uni-app';
+import { getPatient } from '@/apis/patient/index'
+import { startFollow } from '@/apis/follow/index'
+import { usePatientStore } from "@/store/patient"
+import type { Patient } from '@/utils/types'
+import { showTip } from '@/utils/show'
+import dayjs from 'dayjs'
 
-  import { useMessage ,useToast} from '@/uni_modules/wot-design-uni'
-  const message = useMessage()
-  const toast = useToast()
+import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
+import { noticePatient } from '@/apis/code';
+const message = useMessage()
+const toast = useToast()
 
 
-  const patientStore = usePatientStore();
+const patientStore = usePatientStore();
 
-  const idCard = ref('')
+const idCard = ref('')
 
-  const flag = ref<boolean>(true)
+const flag = ref<boolean>(true)
 
-  const isExistGoing = ref(0)
+const isExistGoing = ref(0)
 
-  const Collapse = ref<string[]>(['item1'])
+const Collapse = ref<string[]>(['item1'])
 
-  const form = reactive<Patient>(
-    {
-        name: '',
-        caseId: 0,
-        sex:'',
-        age:44,
+const form = reactive<Patient>(
+  {
+    name: '',
+    caseId: 0,
+    sex: '',
+    age: 44,
 
-        phone:'',
-        history:{
-          attackTime:0,
-          confirmTime: 0,
-        },
-        complication:{
-          coronaryHeartDisease:0,
-          cerebralApoplexy:0,
-          fragilityFractures:0,
-          brainTumor:0,
-        },
-        
-        tags:[],
-        followList:[],
-        selectDisease:{
-          en:'',
-          china:'',
-          type: 1,
-          selectedOption:[]
-        }
-      
-    })
+    phone: '',
+    history: {
+      attackTime: 0,
+      confirmTime: 0,
+    },
+    complication: {
+      coronaryHeartDisease: 0,
+      cerebralApoplexy: 0,
+      fragilityFractures: 0,
+      brainTumor: 0,
+    },
 
-    const formatFollowDate = (patient: Patient) => {
-      console.log('nextdate',patient.nextDate)
-      const diffDay = dayjs(patient.nextDate).diff(dayjs(), 'day')
-      if (diffDay >= 0) {
-        return `距离下次诊疗还有 ${Math.abs(diffDay)} 天`
-      } else {
-        return `距离下次诊疗已逾期 ${diffDay} 天`
-      }
+    tags: [],
+    followList: [],
+    selectDisease: {
+      en: '',
+      china: '',
+      type: 1,
+      selectedOption: []
     }
 
-    const callPatient = (patient: Patient) => {
-      uni.makePhoneCall({
-        phoneNumber: parseInt(patient.phone)//仅为示例
-      });
+  })
+
+const formatFollowDate = (patient: Patient) => {
+  console.log('nextdate', patient.nextDate)
+  const diffDay = dayjs(patient.nextDate).diff(dayjs(), 'day')
+  if (diffDay >= 0) {
+    return `距离下次诊疗还有 ${Math.abs(diffDay)} 天`
+  } else {
+    return `距离下次诊疗已逾期 ${diffDay} 天`
+  }
+}
+
+const callPatient = (patient: Patient) => {
+  console.log('拨打电话', patient)
+  patient.phone && uni.makePhoneCall({
+    phoneNumber: patient.phone,
+    success: () => {
+      console.log('拨打电话成功')
+    },
+    fail: () => {
+      console.log('拨打电话失败')
     }
+  })
+}
 
-    const messagePatient = (patient: Patient) => {
-      console.log('短信提醒', item)
-    }
+const messagePatient = async (patient: Patient) => {
+  const r = await noticePatient({ phone: patient.phone })
+  if (r.code) {
+    return toast.error(`${r.msg}`)
+  }
+  toast.success('短信提醒成功')
+}
 
 
-  const handleSelect = (status:any) => {
+const handleSelect = (status: any) => {
 
 
-    // 0 未开始  1 诊疗中 2 已结束
-    if(status==0){
-      // 没有进行中的
-      if(isExistGoing.value==0){
-       
-        // 确定开始吗  请求接口更新状态为进行中 跳转 
-        message
+  // 0 未开始  1 诊疗中 2 已结束
+  if (status == 0) {
+    // 没有进行中的
+    if (isExistGoing.value == 0) {
+
+      // 确定开始吗  请求接口更新状态为进行中 跳转
+      message
         .confirm({
           msg: '确定开始本次随访',
           title: '开始随访'
         })
-        .then(async() => {
-          const res = await startFollow({idCard:patientStore.patientInfo.idCard});
-          if(res.code==0){
-            uni.navigateTo({'url':'/pages/patient/finish?status=1'})
+        .then(async () => {
+          const res = await startFollow({ idCard: patientStore.patientInfo.idCard });
+          if (res.code == 0) {
+            uni.navigateTo({ 'url': '/pages/patient/finish?status=1' })
           }
         })
         .catch(() => {
           console.log('点击了取消按钮')
         })
-      }
-      else{
-        // 提示结束
-        toast.show('请结束当前随诊')
-        //showTip(' 请结束当前随诊')
-
-      }
-
-
-      //uni.navigateTo({'url':'/pages/patient/finish?status=0'})
-
-    }else if(status==1){
-      uni.navigateTo({'url':'/pages/patient/finish?status=1'})
-
-    }else{
-      uni.navigateTo({'url':'/pages/patient/finish?status=2'})
     }
+    else {
+      // 提示结束
+      toast.show('请结束当前随诊')
+      //showTip(' 请结束当前随诊')
+
+    }
+
+
+    //uni.navigateTo({'url':'/pages/patient/finish?status=0'})
+
+  } else if (status == 1) {
+    uni.navigateTo({ 'url': '/pages/patient/finish?status=1' })
+
+  } else {
+    uni.navigateTo({ 'url': '/pages/patient/finish?status=2' })
   }
+}
 
-  const changeDisease = ()=>{
-    uni.navigateTo({'url':'/pages/patient/selectDisease'})
-  }
+const changeDisease = () => {
+  uni.navigateTo({ 'url': '/pages/patient/selectDisease' })
+}
 
 
-  onLoad(async(option:any)=>{
+onLoad(async (option: any) => {
 
-    idCard.value=option.idCard  
-    idCard.value='340602197006152466'
-    const res = await getPatient({'idCard':idCard.value})
-   
-    patientStore.updatePatientInfo(res.data.data[0])
-    Object.assign(form, res.data.data[0]);
+  idCard.value = option.idCard
+  idCard.value = '340602197006152466'
+  const res = await getPatient({ 'idCard': idCard.value })
 
-    const goingFollow:any = form.followList?.filter((item,index)=> item.status==1)
+  patientStore.updatePatientInfo(res.data.data[0])
+  Object.assign(form, res.data.data[0]);
 
-    isExistGoing.value = goingFollow?.length>0?1:0
-    
-  })
+  const goingFollow: any = form.followList?.filter((item, index) => item.status == 1)
+
+  isExistGoing.value = goingFollow?.length > 0 ? 1 : 0
+
+})
 
 </script>
 
@@ -300,32 +316,35 @@ export default {
 }
 </script>
 
- <style lang="scss">
+<style lang="scss">
+.main {
+  opacity: 1;
+  background: rgba(255, 255, 255, 1);
 
-
- .main{
-   opacity: 1;
-   background: rgba(255, 255, 255, 1);
-   .header{
+  .header {
     height: 328rpx;
     opacity: 1;
     border-radius: 0px 0px, 24rpx, 24rpx;
     background: linear-gradient(180deg, rgba(30, 217, 167, 1) 0%, rgba(17, 194, 147, 1) 100%);
-    .title{
-      padding:0 30rpx;
-      height:110rpx;
+
+    .title {
+      padding: 0 30rpx;
+      height: 110rpx;
       display: flex;
-      image{
+
+      image {
         margin-left: 8.34rpx;
-        margin-top:58.78rpx;
+        margin-top: 58.78rpx;
         width: 15.32rpx;
         height: 26.44rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
-      .text{
-        margin-top:46rpx;
+
+      .text {
+        margin-top: 46rpx;
         margin-left: 30rpx;
         opacity: 1;
         /** 文本1 */
@@ -337,72 +356,79 @@ export default {
 
       }
     }
-   }
+  }
 
-   .info{
+  .info {
     padding: 30rpx;
 
     background: rgba(245, 245, 245, 1);
 
-    .base-info{
+    .base-info {
       opacity: 1;
       border-radius: 16px;
       background: rgba(255, 255, 255, 1);
       margin-top: 30rpx;
       padding-left: 50rpx;
-      
 
-      .first{
+
+      .first {
         display: flex;
         padding-top: 32rpx;
-        .name{
-      
-      
-        }
+
+        .name {}
 
       }
-      .second{
+
+      .second {
         display: flex;
-        
-        .left{
-          .up{
+
+        .left {
+          .up {
             margin-top: 20rpx;
             display: flex;
-            
+
           }
-          .down{
-            margin-top:12rpx ;
-            margin-bottom: 30rpx ;
+
+          .down {
+            margin-top: 12rpx;
+            margin-bottom: 30rpx;
           }
         }
-        .right{
+
+        .right {
           display: flex;
           width: 200rpx;
           margin-left: 100rpx;
-          font-size:20rpx ;
-          
+          font-size: 20rpx;
+
           justify-content: space-around;
-          .phone{
+
+          .phone {
             display: flex;
             flex-direction: column;
             align-items: center;
-            image{
+
+            image {
               width: 24rpx;
               height: 32rpx;
-              .img{
+
+              .img {
                 height: 100%;
               }
 
             }
           }
-          .message{
+
+          .message {
             display: flex;
             flex-direction: column;
             align-items: center;
-            image{
-              width:36rpx;
+
+            image {
+              width: 36rpx;
               height: 32rpx;
-              .img{
+
+              .img {
                 height: 100%;
               }
             }
@@ -411,128 +437,131 @@ export default {
       }
 
     }
-   }
+  }
 
-   .follow{
-    
-      padding: 0rpx;
-      opacity: 1;
-      width: 100%;
-      background: rgba(255, 255, 255, 1);
+  .follow {
 
-      .zlList{
-        .item{
-          opacity: 1;
-          border-radius: 8px;
-          background: rgba(245, 252, 252, 1);
-      
-          padding-left: 40rpx;
-          padding-top: 20rpx;
-          margin-bottom: 20rpx;
-        
-          .top{
-            display: flex;
-          
-            .date{
-              margin-left: 300rpx;
-              margin-bottom: 20rpx;
-            }
-           
-          }
-          .address{
+    padding: 0rpx;
+    opacity: 1;
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
 
-            padding-bottom: 20rpx;
-          }
-        }
-
-      }
-
-      .history{
-
-        padding: 0rpx;
-        border-radius: 8px;
+    .zlList {
+      .item {
         opacity: 1;
-       // background: rgba(247, 247, 247, 1);
+        border-radius: 8px;
+        background: rgba(245, 252, 252, 1);
 
-        .content{
-          background: rgba(245, 252, 252, 1);
-        
-          opacity: 1;
-          border-radius: 8px;
-  
-        }
+        padding-left: 40rpx;
+        padding-top: 20rpx;
+        margin-bottom: 20rpx;
 
-       
-        }
+        .top {
+          display: flex;
 
-        .disease{
-
-          background: rgba(245, 252, 252, 1);
-          padding-left: 20rpx;
-
-          .title{
-            padding-top: 20rpx;
-           
-            display: flex;
-            justify-content: space-around;
-            .name{
-              margin-top:16rpx;
-              margin-right: 300rpx;
-            }
-          }
-          
-          .content{
-            margin-top:40rpx;
-            background: rgba(245, 252, 252, 1);
-            padding-bottom: 20rpx;
-            view{
-              margin-bottom: 20rpx;
-            }
+          .date {
+            margin-left: 300rpx;
+            margin-bottom: 20rpx;
           }
 
+        }
 
+        .address {
+
+          padding-bottom: 20rpx;
+        }
+      }
+
+    }
+
+    .history {
+
+      padding: 0rpx;
+      border-radius: 8px;
+      opacity: 1;
+      // background: rgba(247, 247, 247, 1);
+
+      .content {
+        background: rgba(245, 252, 252, 1);
+
+        opacity: 1;
+        border-radius: 8px;
 
       }
+
+
     }
 
-  
+    .disease {
 
-    .submit{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 200rpx;
-      height: 100rpx;
-      opacity: 1;
-      border-radius: 8px;
-      color: rgba(255, 255, 255, 1);
-      font-size: 16px;
-      font-weight: 700;
-      background: rgba(0, 191, 140, 1);
-    }
+      background: rgba(245, 252, 252, 1);
+      padding-left: 20rpx;
 
-    :deep(.space) {
-      margin: 0rpx 10rpx 10rpx;
-    }
-    :deep(.space2) {
-      margin: 0rpx 10rpx 10rpx;
-      font-size: 26rpx;
-    }
+      .title {
+        padding-top: 20rpx;
 
-    :deep(.cell-group){
-      background: rgb(188, 14, 14);
-    }
+        display: flex;
+        justify-content: space-around;
 
-    :deep(.wd-cell__wrapper){
-      align-items: center;
-    }
-    :deep(.wd-radio-group){
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
+        .name {
+          margin-top: 16rpx;
+          margin-right: 300rpx;
+        }
+      }
 
- }
+      .content {
+        margin-top: 40rpx;
+        background: rgba(245, 252, 252, 1);
+        padding-bottom: 20rpx;
 
- 
- </style>../../utils/types/index
+        view {
+          margin-bottom: 20rpx;
+        }
+      }
+
+
+
+    }
+  }
+
+
+
+  .submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200rpx;
+    height: 100rpx;
+    opacity: 1;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    font-weight: 700;
+    background: rgba(0, 191, 140, 1);
+  }
+
+  :deep(.space) {
+    margin: 0rpx 10rpx 10rpx;
+  }
+
+  :deep(.space2) {
+    margin: 0rpx 10rpx 10rpx;
+    font-size: 26rpx;
+  }
+
+  :deep(.cell-group) {
+    background: rgb(188, 14, 14);
+  }
+
+  :deep(.wd-cell__wrapper) {
+    align-items: center;
+  }
+
+  :deep(.wd-radio-group) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+}
+</style>../../utils/types/index
