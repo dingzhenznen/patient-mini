@@ -47,7 +47,7 @@
         <!-- 电话/短信提醒 -->
         <view class="action uno-flex-content-between">
           <wd-button plain size="small" icon="user-avatar" @click="followPatient(item)">随诊</wd-button>
-          <wd-button plain size="small" icon="" @click="messagePatient(item)">短信提醒</wd-button>
+          <wd-button plain size="small" icon="chat" @click="messagePatient(item)">短信提醒</wd-button>
           <wd-button plain size="small" icon="call" @click="callPatient(item)">拨打电话</wd-button>
           <wd-icon name="" size="22px"></wd-icon>
         </view>
@@ -68,7 +68,6 @@ import Filter from './filter.vue'
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
 
-import { list } from '@/apis/patient'
 import { useUserStore, usePatientStore } from '@/store'
 import type { Patient } from '@/utils/types';
 import { noticePatient } from '@/apis/code'
@@ -91,22 +90,10 @@ watch(patients, (patients, prevPatients) => {
   patientList.value = patients
 })
 
-// 进页面拉数据
+
 onLoad(async () => {
-
   try {
-    // 先用笨方法解决，后续再优化
-    // 因为 useUserStore().userInfo 会在页面加载时为空，所以这里等待2秒
-    // await sleep(2000)
-    // const r = await list({ userId: userInfo.value._id })
-    // console.log(r)
-    // if (r.code) {
-    //   toast.error('获取病人信息失败')
-    // }
-
-    // set patients data
-    patientList.value = usePatientStore().patients
-    // usePatientStore().setPatients(r.data as Patient[])
+    // delete unused code
   } catch (error) {
     console.log(' Get patient list caught error: ', error)
     toast.error('获取病人信息失败')
@@ -114,7 +101,7 @@ onLoad(async () => {
 })
 
 const filterFn = (patient: Patient) => {
-  const qStr = String(q.value)
+  const qStr = String(q.value).toLocaleLowerCase()
   if (patient.age == Number(q.value)) return true // 按年龄筛选
   if (patient.doctorName?.includes(qStr)) return true // 按医生名称筛选
   if (patient.name?.includes(qStr)) return true // 按病人名称筛选
@@ -122,7 +109,7 @@ const filterFn = (patient: Patient) => {
   // if (patient.idCard?.includes(qStr)) return true // 按病人身份证号筛选
   if (patient.remark?.includes(qStr)) return true // 按病人备注筛选
   if (patient.selectDisease?.china.includes(qStr)) return true // 按病人疾病中文名筛选
-  if (patient.selectDisease?.en.includes(qStr)) return true // 按病人疾病英文名筛选
+  if (patient.selectDisease?.en.toLocaleLowerCase().includes(qStr)) return true // 按病人疾病英文名筛选
 
 }
 
@@ -136,7 +123,7 @@ const search = () => {
   console.log('start search: ', q.value)
   // 清除搜索/筛选条件时，展示所有病人
   if (!q.value || q.value === '') {
-    patientList.value = allPatients
+    patientList.value = usePatientStore().patients
   }
   // 按条件搜索或筛选病人
   patientList.value = usePatientStore().patients.filter(filterFn)

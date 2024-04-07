@@ -22,14 +22,14 @@ export const initUserInfo = async (callback?: Function) => {
         })
         const r = await list({ userId: user._id })
         usePatientStore().setPatients(r.data)
-        console.log('获取病人列表: ', r.data)
-        console.log('store 中的病人列表: ', usePatientStore().patients)
+        // console.log('获取病人列表: ', r.data)
+        // console.log('store 中的病人列表: ', usePatientStore().patients)
         // 后台配置了手机号
         if (user.phone) {
           userStore.updateUserInfo(user)
           saveToken(access_token, expires_in)
-
-          uni.switchTab({ url: '/pages/my/index' })
+          // 跳转首页
+          uni.switchTab({ url: '/pages/index/index' })
           if (callback) {
             callback()
           }
