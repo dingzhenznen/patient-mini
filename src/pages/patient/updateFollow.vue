@@ -45,7 +45,7 @@ const { patientInfo } = storeToRefs(patientStore)
 
 
   const form = reactive({
-      followUpType: patientInfo.value.followUpType,
+      followUpType: patientInfo.value.followUpType??"正常随访",
       thisDate: patientInfo.value.thisDate ?? new Date(new Date().toLocaleDateString()).getTime(),
       nextDate: patientInfo.value.nextDate ?? 0,
       followRemark: patientInfo.value.followRemark,
