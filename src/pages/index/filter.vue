@@ -24,6 +24,14 @@
 
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { watch } from 'vue';
 import { ref } from 'vue'
@@ -60,13 +68,13 @@ const confirm = () => {
 <style lang="scss" scoped>
 :deep(.wd-checkbox) {
   width: 100%;
+}
 
-  :deep(.is-button-box) {
+:deep(.wd-checkbox.is-button-box) {
     display: inline-flex;
     width: 40%;
-    padding: 12px 12px 0 20rpx;
+    padding: 12px 30rpx 12rpx 20rpx;
     box-sizing: border-box;
-  }
 }
 
 
