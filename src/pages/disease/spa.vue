@@ -231,7 +231,7 @@ const handleSubmit = async () => {
       uni.navigateTo({ 'url': "/pages/patient/finish" })
     } else {
       patientStore.updatePatientInfo(res.data)
-      uni.navigateTo({ url: "/pages/patient/baseInfo" })
+      uni.navigateTo({ url: "/pages/patient/follow" })
     }
   }
 

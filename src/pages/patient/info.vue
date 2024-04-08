@@ -130,7 +130,7 @@
           </view>
 
         </wd-collapse-item>
-        <wd-collapse-item :title="form.selectDisease?.en" name="item3">
+        <wd-collapse-item :title="form.selectDisease?.en" name="item3" v-if="form.selectDisease?.en">
           <view class="disease">
             <view class="title">
               <view class="name">{{ form.selectDisease?.en }}</view>
