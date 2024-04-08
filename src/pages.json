@@ -117,6 +117,12 @@
         "navigationBarTitleText": "脊柱关节炎诊断",
         "navigationBarBackgroundColor": "#5ae8b1"
       }
+    },
+    {
+      "path": "pages/401/401",
+      "style": {
+        "navigationBarTitleText": "无权访问"
+      }
     }
   ],
   "tabBar": {

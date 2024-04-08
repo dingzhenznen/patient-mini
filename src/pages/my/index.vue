@@ -81,8 +81,8 @@ const onChooseAvatar = async (e: any) => {
     opacity: 1;
     background: linear-gradient(180deg,
         rgba(226, 244, 243, 1) 0%,
-        rgba(226, 244, 243, 0) 100%);
-    height: 400rpx;
+        rgba(194, 209, 208, 0) 100%);
+    height: 320rpx;
     padding: 20rpx 0 20rpx 40rpx;
 
     .title {
@@ -142,11 +142,14 @@ const onChooseAvatar = async (e: any) => {
   }
 
   .setting {
+    border-top: 1px solid rgb(202, 232, 240);
+    box-shadow: 0 0 10px rgba(102, 124, 123, 0);
     margin-top: -40rpx;
     opacity: 1;
-    border-radius: 20px 20px, 0px, 0px;
+    border-radius: 40px 40px, 0px, 0px;
     background: rgba(255, 255, 255, 1);
     padding: 30rpx;
+    height: calc(100vh - 320rpx);
 
     .cell-icon {
       display: block;

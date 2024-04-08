@@ -56,6 +56,7 @@
     </view>
     <Filter v-model="showFilter" @update:confirm="onConfirmFilter" />
     <wd-toast />
+    <wd-message-box />
   </view>
 </template>
 
@@ -66,7 +67,8 @@ import { onLoad, onShow } from '@dcloudio/uni-app'
 import dayjs from 'dayjs'
 import Filter from './filter.vue'
 
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
 const toast = useToast()
 
 import { useUserStore, usePatientStore } from '@/store'
@@ -172,11 +174,23 @@ const followPatient = async (patient: Patient) => {
 }
 
 const messagePatient = async (patient: Patient) => {
-  const r = await noticePatient({ phone: patient.phone })
-  if (r.code) {
-    return toast.error(`${r.msg}`)
-  }
-  toast.success('短信提醒成功')
+  console.log('message')
+  message
+    .confirm({
+      msg: '发送短信',
+      title: '确认发送'
+    })
+    .then(async () => {
+      const r = await noticePatient({ phone: patient.phone })
+      if (r.code) {
+        return toast.error(`${r.msg}`)
+      }
+      toast.success('短信提醒成功')
+    })
+    .catch(() => {
+      console.log('点击了取消按钮')
+    })
+
 }
 const goIdCard = () => {
   uni.navigateTo({ 'url': '/pages/patient/idCard' })

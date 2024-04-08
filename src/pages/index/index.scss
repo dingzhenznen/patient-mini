@@ -1,4 +1,14 @@
+/*每个页面公共css */
+body,
+html {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
 .main {
+  overflow-x: hidden;
   background-color: rgb(245, 245, 245);
   height: 100vh;
   :deep(.wd-card) {
@@ -21,6 +31,10 @@
     padding: 0;
     margin: 0;
   }
+}
+
+.main::-webkit-scrollbar {
+  display: none;
 }
 
 // 导航栏，未来删除

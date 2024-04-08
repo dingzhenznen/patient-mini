@@ -37,8 +37,10 @@ export const initUserInfo = async (callback?: Function) => {
             callback()
           }
         } else {
-          userStore.updateUserInfo(user)
-          uni.navigateTo({ url: '/pages/login/index' })
+          // 禁止其他用户登录
+          uni.navigateTo({ url: '/pages/401/401' })
+          // userStore.updateUserInfo(user)
+          // uni.navigateTo({ url: '/pages/login/index' })
         }
       },
       fail: () => {
