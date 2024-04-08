@@ -14,11 +14,11 @@ export const initUserInfo = async (callback?: Function) => {
         const code = res.code
         const {
           //@ts-ignore
-          data: { access_token, expires_in, user }
+          data: { access_token, expires_in, user },
         } = await request({
           url: '/mini/user/mp-login',
           data: { code },
-          method: 'POST'
+          method: 'POST',
         })
         const r = await list({ userId: user._id })
         usePatientStore().setPatients(r.data)
@@ -40,7 +40,7 @@ export const initUserInfo = async (callback?: Function) => {
       },
       fail: () => {
         showError('用户信息获取失败')
-      }
+      },
     })
   } else {
     // 更新用户信息
@@ -54,7 +54,7 @@ export const getUserPhone = async (data: any) => {
   return await request({
     url: '/mini/user/get-user-phone',
     data,
-    method: 'POST'
+    method: 'POST',
   })
 }
 
@@ -62,10 +62,19 @@ export const getUserInfo = async (data: any) => {
   const res = await request({
     url: '/mini/user/get-user-info',
     data,
-    method: 'POST'
+    method: 'POST',
   })
   console.log('getUserInfo: ', res.data)
   const userStore = useUserStore()
 
   userStore.updateUserInfo(res.data)
+}
+
+export const updateUserInfo = async (data: any) => {
+  const res = await request({
+    url: '/mini/user/update-user-info',
+    data,
+    method: 'POST',
+  })
+  return res
 }
