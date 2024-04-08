@@ -52,16 +52,17 @@
           <wd-icon name="" size="22px"></wd-icon>
         </view>
       </wd-card>
-      <Filter v-model="showFilter" />
-      <wd-toast />
+
     </view>
+    <Filter v-model="showFilter" @update:confirm="onConfirmFilter" />
+    <wd-toast />
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { onLoad } from '@dcloudio/uni-app'
+import { onLoad, onShow } from '@dcloudio/uni-app'
 import dayjs from 'dayjs'
 import Filter from './filter.vue'
 
@@ -72,6 +73,12 @@ import { useUserStore, usePatientStore } from '@/store'
 import type { Patient } from '@/utils/types';
 import { noticePatient } from '@/apis/code'
 import { watch } from 'vue'
+import { list } from '@/apis/patient'
+
+type filterOptions = {
+  diseases: [string],
+  sex: [string]
+}
 
 // 用户信息这里就代表当前登录的医生信息
 const allPatients = usePatientStore().patients
@@ -91,9 +98,13 @@ watch(patients, (patients, prevPatients) => {
 })
 
 
-onLoad(async () => {
+onShow(async () => {
   try {
-    // delete unused code
+    // 每次进页面请求数据
+    const r = await list({ userId: useUserStore().userInfo._id })
+    if (r.code === 0) {
+      usePatientStore().setPatients(r.data as Patient[])
+    }
   } catch (error) {
     console.log(' Get patient list caught error: ', error)
     toast.error('获取病人信息失败')
@@ -127,6 +138,19 @@ const search = () => {
   }
   // 按条件搜索或筛选病人
   patientList.value = usePatientStore().patients.filter(filterFn)
+}
+
+const onConfirmFilter = (data: filterOptions) => {
+  console.log(data)
+  patientList.value = usePatientStore().patients.filter((patient) => {
+    if (data.diseases.length > 0 && !data.diseases.includes(patient.selectDisease?.en.toLocaleLowerCase() as string)) {
+      return false
+    }
+    if (data.sex.length > 0 && !data.sex.includes(patient.sex as string)) {
+      return false
+    }
+    return true
+  })
 }
 
 const callPatient = (patient: Patient) => {
@@ -170,7 +194,7 @@ const formatFollowDate = (patient: Patient) => {
   if (diffDay >= 0) {
     return `距离下次诊疗还有 ${Math.abs(diffDay)} 天`
   } else {
-    return `距离下次诊疗已逾期 ${diffDay} 天`
+    return `距离下次诊疗已逾期 ${Math.abs(diffDay)} 天`
   }
 }
 

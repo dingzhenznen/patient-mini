@@ -15,7 +15,7 @@
       </wd-checkbox-group>
       <view class="btn-wrap">
         <button @click="reset">重置 </button>
-        <button @click="confirm">筛选</button>
+        <button @click="confirm" style="margin-left: 30rpx;">筛选</button>
       </view>
 
     </view>
@@ -45,26 +45,31 @@ const handleClose = () => {
 }
 
 const reset = () => {
-  _show.value = false
-  emits('update:modelValue', false)
+  diseases.value = [] as any
+  sex.value = [] as any
 }
 
 const confirm = () => {
   _show.value = false
   emits('update:modelValue', false)
-  emits('update:confirm', { disease: [], sex: [] })
+  emits('update:confirm', { diseases: diseases.value.map(item => item.toLowerCase()), sex: sex.value.map(item => item.toLowerCase()) })
 }
 
 </script>
 
 <style lang="scss" scoped>
 :deep(.wd-checkbox) {
-  display: inline-flex;
-  width: 40%;
-  padding: 12px 12px 0 0;
-  box-sizing: border-box;
+  width: 100%;
 
+  :deep(.is-button-box) {
+    display: inline-flex;
+    width: 40%;
+    padding: 12px 12px 0 20rpx;
+    box-sizing: border-box;
+  }
 }
+
+
 
 .main {
   width: 100%;
@@ -83,8 +88,9 @@ const confirm = () => {
 
   .btn-wrap {
     display: flex;
-    justify-content: space-between;
-    margin: 20rpx 0;
+    justify-content: flex-start;
+    margin: 40rpx 0;
+    width: 100%;
 
     button {
       height: 80rpx;
@@ -93,6 +99,7 @@ const confirm = () => {
       color: #333;
       font-size: 32rpx;
       font-weight: bold;
+      margin: 0;
     }
   }
 }
