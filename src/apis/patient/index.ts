@@ -1,6 +1,10 @@
 import request from '../uni-request'
 import type { Response, Patient } from '@/utils/types'
 
+export const isExistPatient = async (data: any) => {
+  return await request({ url: '/mini/patient/isExist', data, method: 'POST' })
+}
+
 export const addPatient = async (data: any) => {
   return await request({ url: '/mini/patient/add', data, method: 'POST' })
 }

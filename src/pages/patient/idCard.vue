@@ -1,10 +1,12 @@
 <template>
   <view class="main">
    <!-- <Header title="身份证" /> -->
+
+   <wd-message-box />
    <view class="input">
      <view class="text">身份证号</view>
      <view class="number">
-       <input v-model="form.idCard" placeholder="请输入18位身份证号码" />
+       <input v-model="form.idCard" style="width:300rpx" placeholder="请输入18位身份证号码" />
      </view>
    </view>
 
@@ -18,10 +20,14 @@
  <script lang="ts" setup>
  import {reactive} from 'vue'
 
- import { addPatient } from "@/apis/patient/index"
+ import { isExistPatient } from "@/apis/patient/index"
  import { usePatientStore } from "@/store/patient"
  import { useUserStore } from "@/store/user"
  import { showError } from '@/utils/show'
+
+ import { useMessage } from '@/uni_modules/wot-design-uni'
+
+const message = useMessage()
 
  const userStore = useUserStore();
 
@@ -38,12 +44,33 @@ const patientStore = usePatientStore()
     showError('请输入18位身份证号码!')
     return
   }
-  const res = await addPatient(form);
+  const res = await isExistPatient(form);
 
   if(res.code==0){
-    patientStore.updatePatientInfo(res.data)
+
+    if(res.data == true){
+
+      message
+        .confirm({
+          msg: '身份证号码已经存在,是否进入',
+          title: '提示'
+        })
+        .then(async () => {
+          uni.navigateTo({
+            url: '/pages/patient/info?idCard=' + form.idCard,
+          })
+        })
+        .catch(() => {
+          console.log('点击了取消按钮')
+        })
+     
+
+    }else{
+      patientStore.updatePatientInfo(form)
   
-    uni.navigateTo({'url':"/pages/patient/baseInfo"})
+      uni.navigateTo({'url':"/pages/patient/baseInfo"})
+    }
+   
   }else{
     console.log(res)
     showError(res.msg)
@@ -69,7 +96,7 @@ const patientStore = usePatientStore()
      .text{
        margin: 30rpx;
        width: 140rpx;
-       margin-right: 200rpx;
+       margin-right: 160rpx;
        font-size: 14px;
        font-weight: 400;
        letter-spacing: 0px;
@@ -82,7 +109,7 @@ const patientStore = usePatientStore()
 
      .number{
 
-       margin: 30rpx;
+       margin: 30rpx 0;
        font-size: 28rpx;
        font-weight: 400;
        letter-spacing: 0px;
