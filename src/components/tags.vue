@@ -23,21 +23,13 @@ const props = defineProps({
 
 const tags = ref(['标签一', '标签二'])
 
-
-
-const computedOrigin = computed({
-  get() {
-    return props.originTags;
-  },
-  set(value) {
-    //emit('handleSelect', value);
-  }
-})
-
  const selectTags = ref([]);
 
+ selectTags.value = [ ...props.originTags]
 
- selectTags.value = [ ...computedOrigin.value]
+ const filterArray =  selectTags.value.filter((item)=> !tags.value.includes(item))
+
+ tags.value = tags.value.concat(filterArray);
 
 const handleSelect =(event:any)=>{
 
