@@ -68,6 +68,8 @@ const patientStore = usePatientStore()
      display: flex;
      .text{
        margin: 30rpx;
+       width: 140rpx;
+       margin-right: 200rpx;
        font-size: 14px;
        font-weight: 400;
        letter-spacing: 0px;
@@ -80,7 +82,7 @@ const patientStore = usePatientStore()
 
      .number{
 
-       margin: 30rpx 30rpx 30rpx 232rpx;
+       margin: 30rpx;
        font-size: 28rpx;
        font-weight: 400;
        letter-spacing: 0px;

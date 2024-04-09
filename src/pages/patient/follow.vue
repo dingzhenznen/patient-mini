@@ -80,7 +80,7 @@ const handleSubmit = () => {
 
           patientStore.updatePatientInfo(res.data)
 
-          uni.navigateTo({'url':'/pages/patient/finish?thisDate='+form.thisDate})
+          uni.navigateTo({'url':'/pages/patient/finish?status=1'})
 
         }else{
           showError(res.msg)

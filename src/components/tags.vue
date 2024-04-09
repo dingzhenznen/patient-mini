@@ -83,7 +83,7 @@ export default {
 
   <wd-popup v-model="show" position="bottom" closable custom-style="height: 100px;padding:30rpx;" >
 
-      <wd-tag v-for="(tag, index) in tags" :key="index" custom-class="space" type="warning" round closable 
+      <wd-tag v-for="(tag, index) in tags" :key="index" custom-class="space" type="warning" round  
         @close="handleClose(index)"
         @click="handleSelect(index)"
         >

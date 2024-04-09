@@ -20,7 +20,7 @@
         />
         <wd-input
           label="身份证"
-          label-width="100px"
+          label-width="160rpx"
           prop="idCard"
           readonly
           v-model="form.idCard"
@@ -39,7 +39,7 @@
 
         <wd-input
           label="ID或病历号"
-          label-width="100px"
+          label-width="160rpx"
           prop="caseId"
          
           v-model="form.caseId"
@@ -48,7 +48,7 @@
         />
 
         <wd-input
-          label="身高"
+          label="身高(cm)"
           label-width="100px"
           prop="height"
         
@@ -58,7 +58,7 @@
         />
 
         <wd-input
-          label="体重"
+          label="体重(kg)"
           label-width="100px"
           prop="weight"
          

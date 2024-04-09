@@ -1,6 +1,9 @@
 <template>
   <view class="main">
 
+    <wd-overlay :show="show">
+    </wd-overlay>
+
     <view class="background">
       <image style="margin-top:140rpx" class="img" src="../../static/img/patient-log.png"></image>
       <view class="title">患者管理平台</view>
@@ -35,6 +38,10 @@ import { getUserPhone } from '@/apis/user/index'
 import { useUserStore } from "@/store/user"
 
 import { getToken, saveToken } from "@/utils"
+import { showError } from '@/utils/show'
+import { ref } from 'vue'
+
+const show = ref(false)
 
 const getPhoneNumber = async (data: any) => {
 
@@ -50,6 +57,8 @@ const getPhoneNumber = async (data: any) => {
     uni.switchTab({ 'url': '/pages/index/index' })
 
   } else {
+    showError('对不起您没有权限')
+    show.value= true
     console.log('errors', res)
   }
 
@@ -58,6 +67,13 @@ const getPhoneNumber = async (data: any) => {
 
 <style lang="scss">
 .main {
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 
   .background {
     width: 100%;
