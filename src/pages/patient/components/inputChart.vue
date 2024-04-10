@@ -10,9 +10,7 @@
         <text class="custom-txt">g/L</text>
       </view>
       <view class="fanwei">4-11</view>
-      <Echart></Echart>
-
-      <!-- <wd-icon name="transfer" size="22px" @click="handleClick"></wd-icon> -->
+      <Mychart></Mychart>
     </view>
 
   </view>
@@ -21,13 +19,17 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import Echart from "./echarts.vue"
+
+import Mychart from "./chart.vue"
+
 
 const value = ref(0)
 
 
 const handleClick = () => {
-  uni.navigateTo({ 'url': "/pages/patient/components/echarts" })
+  uni.navigateTo({
+    url: '/pages/patient/components/chart'
+  })
 
 }
 
