@@ -58,7 +58,7 @@ export type Patient = {
     // 选择的疾病
     en: string // tak 英文名称
     china: string // "干燥综合征",
-    type?:number, // 1 多选
+    type?: number // 1 多选
     datetime?: number
     selectedOption?: []
     content?: {
@@ -66,6 +66,141 @@ export type Patient = {
     }
     spaDefault?: {}
     spaASAS?: {}
+  }
+
+  checkList?: {
+    // 检验单
+    bloodRoutine?: {
+      // 血常规
+      status: number // 0 未做 1 正常 2 异常
+      WBC: number
+      L: number
+      Hb: number
+      PLT
+      number
+    }
+    renalFunction?: {
+      // 肾功能
+      status: number
+      ALT:number,
+      AST: number,
+      TBIL: number
+      DBIL: number,
+      ALB: number,
+      PA: number,
+      Cr: number,
+      UA: number,
+      BS:number
+    }
+    bloodFat?: {
+      // 血脂
+      CHO: number,
+      TG: number,
+      HDL_C: number
+      LDL_C: number,
+    }
+    immunity?: {
+      //免疫
+      ESR: number,
+      CRP: number,
+      IgG: number,
+      IgA: number,
+      IGM: number,
+      RF:number
+    }
+    hepatitis?: {
+      // 肝炎
+      HBsAg: Boolean,
+      HBsAg: Boolean,
+      HBeAg: Boolean,
+      HBeAb: Boolean,
+      HBcAb: Boolean,
+      HBV_DNA: Boolean,
+      HBV_DNA_value: number,
+      HCV_Ab: Boolean,
+      HCV_RNA: Boolean,
+      HCV_RNA_value:Boolean
+    }
+    tuberculosis?: {
+      // 结核
+      PDD: number,//1 2 3 4
+      TB_SPOT: Boolean,
+      TB_SPOT_A: number,
+      TB_SPOT_B: number,
+
+    }
+    bloodRoutine_1?: {
+      //血常规
+      N: number，
+      RBC: number,
+      HCT:number,
+    }
+    Urinalysis?: {
+      //尿检
+      white: number,
+      red: Boolean
+      red_value: number
+      redBlood: number,
+      up: Boolean,
+      up_value: number,
+      24up_value: number,
+    }
+    liverKidney:? {
+      // 肝肾全
+      TP: number,
+      AG: number,
+      GGP: number,
+      ALP: number,
+      LDH: number,
+      CK: number,
+      Urea: number,
+      Ca: number,
+      p: number,
+
+    }
+    boneLoosening ?: {
+      //骨松检测
+      25d:
+
+    }
+    immuneFull:? {
+            //免疫全项
+            CH50: number,
+            C3: number,
+            C4: number,
+    }
+    selfAntibody: {
+      // 自身抗体
+      ANA: number
+      dsDNA: number
+      Sm: number
+      RNP: number,
+      SSA: number
+      SSB: number,
+      rRNP: number,
+      Scl_70: number,
+      Jo_1:number
+    }
+    coagulation:? {
+      // 凝血
+      D_Dimer: number,
+      PT: number,
+      APPT: number,
+      PTINR: number,
+
+    }
+    Sirolimus ?: {
+      // 西罗莫司
+      Sirolimus:number
+    }
+
+
+
+
+
+
+
+
   }
 }
 

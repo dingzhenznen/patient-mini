@@ -2,7 +2,7 @@
   <view class="main">
 
     <!-- 调试 inputChart -->
-    <InputChart></InputChart>
+    <InputChart title="WBC" v-model="form.xuechanggui.WBC" unit="gl" range="4 - 10"></InputChart>
 
     <wd-tabs v-model="tab">
       <block>
@@ -22,6 +22,8 @@
       </block>
     </wd-tabs>
 
+    <wd-button @click="handleClick"></wd-button>
+
   </view>
 </template>
 
@@ -29,13 +31,28 @@
 import { onMounted, reactive, watch, ref } from 'vue'
 
 import InputChart from "./components/inputChart"
+import wdButton from '@/uni_modules/wot-design-uni/components/wd-button/wd-button.vue'
 const tab = ref(0)
+
+const form = reactive({
+  xuechanggui: {
+    WBC: 0,
+    N: ''
+  }
+})
+
+console.log(form.xuechanggui.WBC)
+
+const handleClick = () => {
+  console.log(form.xuechanggui.WBC)
+}
 
 
 </script>
 
 <script lang="ts">
 export default {
+  components: { wdButton },
   options: {
     styleIsolation: 'shared',
 
