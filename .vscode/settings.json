@@ -1,5 +1,4 @@
 {
-
   "editor.fontFamily": "Courier New, Fira Code Retina, Monaco, YaHei Consolas Hybrid,Courier New",
   "editor.fontSize": 16,
   "editor.wordWrap": "on",
@@ -20,7 +19,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "none",
-
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.tree.renderIndentGuides": "none",
   "workbench.editor.scrollToSwitchTabs": true,
@@ -33,9 +31,7 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.smoothScrolling": true,
   "workbench.view.alwaysShowHeaderActions": true,
-
   "window.autoDetectColorScheme": true,
-
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
@@ -46,8 +42,7 @@
   "files.trimTrailingWhitespace": true,
   "debug.console.fontSize": 14,
   "git.confirmSync": false,
-
-  "workbench.colorTheme": "Default Light Modern",
+  "workbench.colorTheme": "Solarized Light",
   "explorer.confirmDelete": false,
   "git.ignoreLegacyWarning": true,
   "cSpell.userWords": [
@@ -150,5 +145,12 @@
   "accessibility.signals.terminalBell": {
     "sound": "on"
   },
-  "terminal.integrated.enableVisualBell": true
+  "terminal.integrated.enableVisualBell": true,
+  "i18n-ally.localesPaths": [
+    "src/uni_modules/wot-design-uni/locale",
+    "src/uni_modules/wot-design-uni/locale/lang"
+  ],
+  "cSpell.words": [
+    "persistedstate"
+  ]
 }

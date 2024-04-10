@@ -1,3 +1,64 @@
+<template>
+  <view class="main">
+    <!-- 头像，姓名，手机号 -->
+    <view class="header">
+      <button class="avatar" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+        <image class="img" :src="userInfo.avatar || defaultAvatar"></image>
+      </button>
+      <view class="info">
+        <view class="name">{{ userInfo.name }}</view>
+        <!-- <view v-if="userInfo.nickname != ''" class="name">{{ userInfo.nickname }}</view> -->
+        <view class="phone">{{ userInfo.phone }}</view>
+      </view>
+    </view>
+    <!-- 需随访患者 -->
+    <view class="need-follow">
+      <view class="title">需跟踪随访患者</view>
+      <view class="content">
+        <view class="item">
+          <view style="color: red;">5</view>
+          <view class="label">3天内</view>
+        </view>
+        <view class="item">
+          <view style="color: green;">10</view>
+          <view class="label">7天内</view>
+        </view>
+        <view class="item">
+          <view class="value">20</view>
+          <view class="label">20天内</view>
+        </view>
+      </view>
+    </view>
+    <!-- 患者录入 和 诊疗记录 -->
+    <view class="input-wrap">
+      <view class="card">
+        <wd-icon name="edit-1" size="32rpx" color="rgba(0, 191, 140)"></wd-icon>
+        <text style="color: rgba(0, 191, 140);margin-left: 10rpx;">患者录入</text>
+      </view>
+      <view></view>
+      <view class="card">
+        <wd-icon name="list" size="32rpx" color="rgba(255, 141, 26)"></wd-icon>
+        <text style="color: rgba(255, 141, 26);margin-left: 10rpx;">诊疗记录</text>
+      </view>
+    </view>
+    <view class="setting">
+      <wd-cell-group>
+        <wd-cell title="问题反馈" value="" is-link>
+          <template #icon>
+            <view class="cell-icon" style="background: url('../../static/img/fankui.png') no-repeat"></view>
+          </template>
+        </wd-cell>
+        <wd-cell style="margin-top: 20rpx;" title="版本号" value="" is-link>
+          <template #icon>
+            <view class="cell-icon" style="background: url('../../static/img/version.png') no-repeat"></view>
+          </template>
+        </wd-cell>
+      </wd-cell-group>
+    </view>
+    <wd-toast />
+  </view>
+</template>
+
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { useUserStore } from '@/store/user'
@@ -42,125 +103,7 @@ const onChooseAvatar = async (e: any) => {
 }
 </script>
 
-<template>
-  <view class="main">
-    <view class="header">
-      <view class="title"> </view>
-      <view class="base">
-        <button class="img-btn" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-          <image class="img" :src="userInfo.avatar || defaultAvatar"></image>
-        </button>
-        <view class="info">
-          <view class="name">{{ userInfo.name }}</view>
-          <!-- <view v-if="userInfo.nickname != ''" class="name">{{ userInfo.nickname }}</view> -->
-          <view class="phone">{{ userInfo.phone }}</view>
-        </view>
-      </view>
-    </view>
-    <view class="setting">
-      <wd-cell-group>
-        <wd-cell title="问题反馈" value="" is-link>
-          <template #icon>
-            <view class="cell-icon" style="background: url('../../static/img/fankui.png') no-repeat"></view>
-          </template>
-        </wd-cell>
-        <wd-cell title="版本号" value="" is-link>
-          <template #icon>
-            <view class="cell-icon" style="background: url('../../static/img/version.png') no-repeat"></view>
-          </template>
-        </wd-cell>
-      </wd-cell-group>
-    </view>
-    <wd-toast />
-  </view>
-</template>
 
-<style lang="scss">
-.main {
-  .header {
-    opacity: 1;
-    background: linear-gradient(180deg,
-        rgba(226, 244, 243, 1) 0%,
-        rgba(194, 209, 208, 0) 100%);
-    height: 320rpx;
-    padding: 20rpx 0 20rpx 40rpx;
-
-    .title {
-      height: 88rpx;
-      font-size: 36rpx;
-      font-weight: 600;
-      letter-spacing: -0.36px;
-      line-height: 25.99px;
-      color: rgba(56, 56, 56, 1);
-    }
-
-    .base {
-      display: flex;
-      height: 120rpx;
-
-      .img-btn {
-        border: 0;
-        border-radius: 260rpx;
-        width: 120rpx;
-        height: 120rpx;
-        padding: 0;
-        margin: 0;
-
-        .img {
-          width: 100%;
-          height: 100%;
-          border-radius: 260rpx;
-          margin: 0;
-        }
-      }
-
-      .info {
-        margin-left: 36rpx;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-
-        .name {
-          font-size: 32rpx;
-          font-weight: 700;
-          letter-spacing: 0px;
-          line-height: 46rpx;
-          color: rgba(51, 51, 51, 1);
-        }
-
-        .phone {
-          font-size: 28rpx;
-          font-weight: 700;
-          letter-spacing: 0px;
-          line-height: 40rpx;
-          color: rgba(85, 85, 85, 1);
-        }
-      }
-    }
-
-  }
-
-  .setting {
-    border-top: 1px solid rgb(202, 232, 240);
-    box-shadow: 0 0 10px rgba(102, 124, 123, 0);
-    margin-top: -40rpx;
-    opacity: 1;
-    border-radius: 40px 40px, 0px, 0px;
-    background: rgba(255, 255, 255, 1);
-    padding: 30rpx;
-    height: calc(100vh - 320rpx);
-
-    .cell-icon {
-      display: block;
-      box-sizing: border-box;
-      width: 18px;
-      height: 18px;
-      margin-right: 4px;
-      margin-top: 4px;
-      background: url('../../static/logo.png') no-repeat;
-      background-size: cover;
-    }
-  }
-}
+<style lang="scss" scoped>
+@import "./index.scss";
 </style>
