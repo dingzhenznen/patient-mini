@@ -106,6 +106,14 @@
     },
 
     {
+      "path": "pages/patient/updateCheck",
+      "style": {
+        "navigationBarTitleText": "检验单项目信息",
+        "navigationBarBackgroundColor": "#5ae8b1"
+      }
+    },
+
+    {
       "path": "pages/patient/components/echarts",
       "style": {
         "navigationBarTitleText": "echarts",

@@ -3,7 +3,7 @@
   <view class="charts-box">
     <wd-icon name="translate-bold" size="22px" @click="handleClick"></wd-icon>
     <wd-popup v-model="show" closable custom-style="height: 600rpx;width:100%;">
-      <qiun-data-charts type="column" :chartData="chartData" />
+      <qiun-data-charts type="line" :chartData="chartData" />
     </wd-popup>
 
   </view>
