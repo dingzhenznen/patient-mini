@@ -1,0 +1,152 @@
+/*每个页面公共css */
+body,
+html {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+@mixin title {
+  font-size: 36rpx;
+  font-weight: 700;
+  letter-spacing: 0px;
+  line-height: 50rpx;
+  color: rgba(51, 51, 51, 1);
+}
+
+@mixin grey-label {
+  font-size: 24rpx;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 40rpx;
+  color: rgba(85, 85, 85, 1);
+  opacity: 0.5;
+}
+
+.main {
+  overflow-x: hidden;
+  background-color: rgb(245, 245, 245);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .header {
+    width: 90%;
+    height: 220rpx;
+    padding-left: 40rpx;
+    border-radius: 16rpx;
+    background: rgba(0, 191, 140, 1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .avatar {
+      width: 140rpx;
+      height: 140rpx;
+      border-radius: 50%;
+      margin: 0;
+      .img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .info {
+      margin-left: 36rpx;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+
+      .name {
+        font-size: 32rpx;
+        font-weight: 700;
+        letter-spacing: 0px;
+        line-height: 46rpx;
+        color: rgba(51, 51, 51, 1);
+      }
+
+      .phone {
+        font-size: 28rpx;
+        font-weight: 700;
+        letter-spacing: 0px;
+        line-height: 40rpx;
+        color: rgba(85, 85, 85, 1);
+      }
+    }
+  }
+  .need-follow {
+    width: 90%;
+    height: 220rpx;
+    margin: 20rpx 0;
+    padding-left: 40rpx;
+    border-radius: 16rpx;
+    background-color: #fff;
+    .title {
+      @include title;
+      margin-top: 20rpx;
+    }
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20rpx 40rpx 0 0;
+      .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .label {
+          @include grey-label;
+        }
+      }
+      .divider {
+        width: 10rpx;
+        height: 30rpx;
+        background-color: #b3acac;
+      }
+    }
+  }
+  .input-wrap {
+    width: 95%;
+    height: 160rpx;
+    display: grid;
+    grid-template-columns: auto 40rpx auto;
+    padding: 0;
+    .card {
+      height: 140rpx;
+      background-color: #fff;
+      border-radius: 16rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        width: 40rpx;
+        height: 40rpx;
+        background: url("../../static/logo.png") no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+
+  .setting {
+    width: 95%;
+    margin-top: 20rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+    .cell-icon {
+      display: block;
+      box-sizing: border-box;
+      width: 18px;
+      height: 18px;
+      margin-right: 4px;
+      margin-top: 4px;
+      background: url("../../static/logo.png") no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}

@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getUserPhone } from '@/apis/user/index'
+import { getUserPhone, updateUserInfo } from '@/apis/user/index'
 
 import { useUserStore } from "@/store/user"
 
@@ -52,13 +52,14 @@ const getPhoneNumber = async (data: any) => {
   if (res.code == 0) {
 
     userStore.updateUserInfo(res.data.user)
+    updateUserInfo(res.data.user)
     saveToken(res.data.access_token, res.data.exp)
     // 登录后直接跳转首页
     uni.switchTab({ 'url': '/pages/index/index' })
 
   } else {
     showError('对不起您没有权限')
-    show.value= true
+    show.value = true
     console.log('errors', res)
   }
 

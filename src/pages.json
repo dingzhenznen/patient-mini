@@ -24,10 +24,9 @@
       "path": "pages/my/index",
       "style": {
         "navigationBarTitleText": "我的",
-        "navigationBarBackgroundColor": "#5ae8b1"
+        "navigationBarBackgroundColor": "#fff"
       }
     },
-
     {
       "path": "pages/patient/info",
       "style": {
@@ -35,7 +34,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/idCard",
       "style": {
@@ -43,7 +41,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/selectDisease",
       "style": {
@@ -51,7 +48,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/updateBaseInfo",
       "style": {
@@ -73,7 +69,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/updateFollow",
       "style": {
@@ -88,7 +83,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/follow",
       "style": {
@@ -96,7 +90,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/updateChecklist",
       "style": {
@@ -104,7 +97,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/updateCheck",
       "style": {
@@ -112,7 +104,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/components/echarts",
       "style": {
@@ -120,7 +111,6 @@
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
-
     {
       "path": "pages/patient/finish",
       "style": {
