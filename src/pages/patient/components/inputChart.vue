@@ -11,6 +11,7 @@
       </view>
       <view class="fanwei">4-11</view>
       <Mychart></Mychart>
+      <!-- <Line></Line> -->
     </view>
 
   </view>
@@ -21,6 +22,7 @@ import { ref } from 'vue'
 
 
 import Mychart from "./chart.vue"
+// import Line from "./line.vue"
 
 
 const value = ref(0)
