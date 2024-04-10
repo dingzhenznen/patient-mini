@@ -2,8 +2,6 @@
   <view class="main">
 
     <!-- 调试 inputChart -->
-    <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC" unit="*10^9个/L" range="4 - 10">
-    </InputChart>
 
     <wd-tabs v-model="tab">
       <block>
@@ -43,7 +41,7 @@
       </block>
     </wd-tabs>
 
-    <wd-button @click="handleClick"></wd-button>
+
 
   </view>
 </template>

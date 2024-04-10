@@ -100,7 +100,7 @@ export default {
 
   .item {
     display: flex;
-    padding: 0 20rpx;
+    padding: 10rpx 20rpx;
     // justify-content: space-around;
     border-style: solid;
     border-bottom: 1rpx;
@@ -113,12 +113,12 @@ export default {
       width: 200rpx;
 
       .en {
-        font-size: 32rpx;
+        font-size: 28rpx;
 
       }
 
       .china {
-        font-size: 24rpx;
+        font-size: 20rpx;
       }
     }
 
