@@ -3,15 +3,22 @@
 
 
     <view class="item">
-      <view class="title">{{ title }}</view>
+      <view class="title">
+        <view class="en">{{ title }}</view>
+        <view class="china">{{ china }}</view>
+
+      </view>
       <view class="input">
         <wd-input v-model="value" no-border placeholder="必填"
-          custom-style="display: inline-block; width: 50rpx; margin-left:100rpx;vertical-align: middle;"
+          custom-style="display: inline-block; width: 60rpx; margin-left:20rpx;vertical-align: middle;"
           @change="handleChange" />
-        <text class="unit">{{ unit }}</text>
+        <view class="unit">{{ unit }}</view>
       </view>
-      <view class="range">{{ range }}</view>
-      <Mychart></Mychart>
+      <view class="right">
+        <view class="range">{{ range }}</view>
+        <Mychart></Mychart>
+      </view>
+
       <!-- <Line></Line> -->
     </view>
 
@@ -27,6 +34,10 @@ import Mychart from "./chart.vue"
 
 const props = defineProps({
   title: {
+    type: String,
+    default: ''
+  },
+  china: {
     type: String,
     default: ''
   },
@@ -74,19 +85,69 @@ export default {
 </script>
 
 <style lang="scss">
+:deep(.wd-cell__wrapper) {
+  align-items: center;
+}
+
+:deep(.wd-radio-group) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .main {
   opacity: 1;
 
   .item {
     display: flex;
-    justify-content: space-around;
+    padding: 0 20rpx;
+    // justify-content: space-around;
+    border-style: solid;
+    border-bottom: 1rpx;
+    border-width: 0.5px;
+    /* 可以根据需要调整边框宽度 */
+    border-color: grey;
 
-    .unit {
-      margin-left: 5rpx;
+    .title {
+      text-align: left;
+      width: 200rpx;
+
+      .en {
+        font-size: 32rpx;
+
+      }
+
+      .china {
+        font-size: 24rpx;
+      }
     }
 
-    .range {
-      margin-left: 160rpx;
+    .input {
+
+      display: flex;
+      align-items: center;
+      width: 200rpx;
+      font-size: 24rpx;
+      margin-left: 60rpx;
+
+      .unit {
+        margin-left: 5rpx;
+        font-size: 24rpx;
+        width: 120rpx;
+      }
+    }
+
+
+    .right {
+      display: flex;
+      align-items: center;
+      margin-left: 60rpx;
+
+      .range {
+        width: 100rpx;
+        margin-right: 20rpx;
+        font-size: 24rpx;
+      }
     }
   }
 
