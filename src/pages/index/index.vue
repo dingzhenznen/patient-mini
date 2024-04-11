@@ -12,7 +12,7 @@
     </view>
     <!-- 录入: 拍照录入 与 手动录入 -->
     <view class="input-area">
-      <view class="camera-input">
+      <view class="camera-input" @click="goCamera">
         <text class="uno-text-base">拍照录入</text>
         <text class="uno-text-sm uno-opacity-50 uno-mt-1">拍照识别录入</text>
         <image class="bg" src="../../static/img/path.png"></image>
@@ -201,6 +201,10 @@ const goToPatient = (patient: Patient) => {
   uni.navigateTo({
     url: '/pages/patient/info?idCard=' + patient.idCard,
   })
+}
+
+const goCamera = () => {
+  uni.navigateTo({ 'url': "/pages/patient/updateCheck" })
 }
 
 const formatFollowDate = (patient: Patient) => {
