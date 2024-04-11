@@ -4,9 +4,9 @@ import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { initUserInfo, getUserInfo } from "@/apis/user/index"
 onLaunch(async () => {
   console.log("App Launch");
-  await initUserInfo()  //微信登陆
+  //await initUserInfo()  //微信登陆
 
-  // await getUserInfo({ 'openid': "oXNg949riro9SUaMahWkNVOl_2Y4" }); //镇长的openid登陆
+  await getUserInfo({ 'openid': "oXNg949riro9SUaMahWkNVOl_2Y4" }); //镇长的openid登陆
   // getUserInfo({ 'openid': "oXNg94x6gMLrxLJDzxESJd6zmvcU" }); //孙龙的openid登陆
 });
 onShow(() => {

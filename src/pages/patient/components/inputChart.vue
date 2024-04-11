@@ -9,13 +9,13 @@
 
       </view>
       <view class="input">
-        <wd-input v-model="value" no-border placeholder="必填"
+        <wd-input v-model="value" no-border :placeholder="placeholder"
           custom-style="display: inline-block; width: 60rpx; margin-left:20rpx;vertical-align: middle;"
           @change="handleChange" />
         <view class="unit">{{ unit }}</view>
       </view>
       <view class="right">
-        <view class="range">{{ range }}</view>
+        <view class="range">{{ low }}{{ low ? "-" : '' }}{{ height }}</view>
         <Mychart></Mychart>
       </view>
 
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 
 import Mychart from "./chart.vue"
@@ -45,11 +45,19 @@ const props = defineProps({
     type: Number,
     default: 0
   },
+  isRequire: {
+    type: Boolean,
+    default: false
+  },
   unit: {
     type: String,
     default: ''
   },
-  range: {
+  low: {
+    type: String,
+    default: ''
+  },
+  height: {
     type: String,
     default: ''
   },
@@ -57,6 +65,11 @@ const props = defineProps({
     type: Boolean,
     default: false
   }
+})
+
+const placeholder = computed(() => {
+  return props.isRequire ? "必填" : "选填"
+
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -133,6 +146,7 @@ export default {
       .unit {
         margin-left: 5rpx;
         font-size: 24rpx;
+        text-align: left;
         width: 120rpx;
       }
     }
