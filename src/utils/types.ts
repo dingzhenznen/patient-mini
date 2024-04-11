@@ -113,6 +113,7 @@ export type CheckList = {
   hepatitis?: {
     // 肝炎  0 为选 1 阳性 2 阴性
     HBsAg?: number
+    HBsAb?: number
     HBeAg?: number
     HBeAb?: number
     HBcAb?: number
