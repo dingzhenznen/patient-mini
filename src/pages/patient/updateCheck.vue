@@ -2,7 +2,7 @@
   <view class="main">
 
 
-    <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC" unit="*10^9个/L" low="4" height="10">
+    <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.renalFunction.ALT" unit="g/L" range="4 - 10">
     </InputChart>
 
     <wd-tabs v-model="tab">
@@ -72,9 +72,6 @@
 
           <InputChart title="空腹血糖" china="" v-model="form.renalFunction.ALB" unit="g/L">
           </InputChart>
-
-
-
         </wd-tab>
       </block>
 
@@ -101,8 +98,6 @@
 
       <block>
         <wd-tab title="免疫">
-
-
           <InputChart title="ESP" china="(血沉)" isRequire="true" v-model="form.immunity.ESR" unit="mm/1h" low="0"
             height="20">
           </InputChart>
@@ -126,6 +121,27 @@
         </wd-tab>
       </block>
 
+      <block>
+        <wd-tab title="肝炎">
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="结核">
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="血常规">
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="尿检查">
+        </wd-tab>
+      </block>
+
+
 
     </wd-tabs>
 
@@ -144,14 +160,14 @@ import type { CheckList } from '@/utils/types'
 const tab = ref(0)
 
 const form = reactive<CheckList>({
-  bloodRoutine: {
+  bloodRoutine: {//血常规
     status: 0,
     WBC: '',
     L: '',
     Hb: '',
     PLT: ''
   },
-  renalFunction: {
+  renalFunction: {//肝肾功
     status: 0,
     ALT: '',
     AST: '',
@@ -163,7 +179,7 @@ const form = reactive<CheckList>({
     UA: '',
     BS: ''
   },
-  bloodFat: {
+  bloodFat: {//血脂
     CHO: '',
     TG: '',
     HDL_C: '',
@@ -177,6 +193,38 @@ const form = reactive<CheckList>({
     IgA: '',
     IgM: '',
     RF: ''
+  },
+  hepatitis: { //肝炎
+    HBsAg: 0,
+    HBeAg: 0,
+    HBeAb: 0,
+    HBcAb: 0,
+    HBV_DNA: 0,
+    HBV_DNA_value: '',
+    HCV_Ab: 0,
+    HCV_RNA: 0,
+    HCV_RNA_value: ''
+  },
+  tuberculosis: { //结核
+    PDD: -1, // -1未选 0阴性 1 2 3 4
+    TB_SPOT: 0,
+    TB_SPOT_A: '',
+    TB_SPOT_B: ''
+  },
+  bloodRoutine_2: { //血常规
+    N: '',
+    RBC: '',
+    HCT: '',
+  },
+  Urinalysis: {
+    //鸟检查
+    white: '',
+    red: 0,
+    red_value: '',
+    redBlood: '',
+    up: 0,
+    up_value: '',
+    up24_value: '',
   }
 
 })
