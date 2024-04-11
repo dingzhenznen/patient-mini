@@ -149,13 +149,13 @@ export type CheckList = {
     // 肝肾全
     TP?: string
     AG?: string
-    GGP?: string
+    GGT?: string
     ALP?: string
     LDH?: string
     CK?: string
     Urea?: string
     Ca?: string
-    p?: string
+    P?: string
   }
   boneLoosening?: {
     //骨松检测

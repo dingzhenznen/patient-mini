@@ -2,7 +2,7 @@
   <view class="main">
 
 
-    <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.renalFunction.ALT" unit="g/L" range="4 - 10">
+    <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.renalFunction.ALT" unit="g/L" low="10.4" height="20.6">
     </InputChart>
 
     <wd-tabs v-model="tab">
@@ -133,14 +133,106 @@
 
       <block>
         <wd-tab title="血常规">
+          <InputChart title="N" china="(中性粒细胞)" v-model="form.bloodRoutine_2.N" unit="*10^9个/L" low="2" height="7.5">
+          </InputChart>
+
+          <InputChart title="RBC" china="(红细胞)" v-model="form.bloodRoutine_2.RBC" unit="*10^12个/L" low="3.5"
+            height="5.1">
+          </InputChart>
+
+          <InputChart title="HCT" china="(红细胞比容)" v-model="form.bloodRoutine_2.HCT" unit="(%)" low="" height="">
+          </InputChart>
         </wd-tab>
       </block>
 
       <block>
         <wd-tab title="尿检查">
+
         </wd-tab>
       </block>
 
+      <block>
+        <wd-tab title="肝肾全">
+
+          <InputChart title="TP" china="(总蛋白)" v-model="form.liverKidney.TP" unit="g/L" low="60" height="80">
+          </InputChart>
+
+          <InputChart title="A/G" china="(白蛋白球蛋白比)" v-model="form.liverKidney.AG" unit="" low="" height="">
+          </InputChart>
+
+          <InputChart title="GGT" china="(谷氨酰转化酶)" v-model="form.liverKidney.GGT" unit="U/L" low="0" height="40">
+          </InputChart>
+
+          <InputChart title="ALP" china="(碱性磷酸酶)" v-model="form.liverKidney.ALP" unit="U/L" low="40" height="150">
+          </InputChart>
+
+          <InputChart title="LDH" china="(乳酸脱氢酶)" v-model="form.liverKidney.LDH" unit="U/L" low="115" height="220">
+          </InputChart>
+
+          <InputChart title="CK" china="(肌酸激酶)" v-model="form.liverKidney.GGT" unit="U/L" low="25" height="173">
+          </InputChart>
+
+          <InputChart title="Urea" china="(尿素)" v-model="form.liverKidney.Urea" unit="g/L" low="2.78" height="7.14">
+          </InputChart>
+
+          <InputChart title="Ca" china="(钙)" v-model="form.liverKidney.Ca" unit="mmol/L" low="2" height="2.7">
+          </InputChart>
+
+          <InputChart title="P" china="(磷代谢)" v-model="form.liverKidney.P" unit="U/L" low="0.8" height="2.26">
+          </InputChart>
+
+
+
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="骨松检测">
+          <InputChart title="25-羟维生素D" china="" v-model="form.boneLoosening.d25" unit="U/ml" low="26" height="55">
+          </InputChart>
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="免疫全项">
+          <InputChart title="CH50" china="总补体活性" v-model="form.immuneFull.CH50" unit="U/ml" low="26" height="55">
+          </InputChart>
+
+          <InputChart title="C3" china="补体3" v-model="form.immuneFull.C3" unit="g/L" low="0.73" height="1.46">
+
+          </InputChart>
+          <InputChart title="C4" china="补体4" v-model="form.immuneFull.C4" unit="g/L" low="0.1" height="0.4">
+          </InputChart>
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="自身抗体">
+
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="凝血">
+          <InputChart title="D-Dimer" china="D-二聚体" v-model="form.coagulation.D_Dimer" unit="U/ml" low="" height="">
+          </InputChart>
+
+          <InputChart title="PT" china="凝血酶原时间" v-model="form.coagulation.PT" unit="s" low="10.4" height="12.6">
+
+          </InputChart>
+          <InputChart title="APPT" china="活化部分活血凝酶时间" v-model="form.coagulation.APPT" unit="s" low="22.7" height="31.8">
+          </InputChart>
+          <InputChart title="C4" china="国际标准化比值" v-model="form.coagulation.C4" unit="" low="" height="">
+          </InputChart>
+        </wd-tab>
+      </block>
+
+      <block>
+        <wd-tab title="西罗莫司血药谷浓度">
+          <InputChart title="西罗莫司血药谷浓度" china="" v-model="form.Sirolimus.Sirolimus" unit="ng/ml" low="4" height="14">
+          </InputChart>
+        </wd-tab>
+      </block>
 
 
     </wd-tabs>
@@ -230,13 +322,13 @@ const form = reactive<CheckList>({
     // 肝肾全
     TP: '',
     AG: '',
-    GGP: '',
+    GGT: '',
     ALP: '',
     LDH: '',
     CK: '',
     Urea: '',
     Ca: '',
-    p: '',
+    P: '',
   },
   boneLoosening: {
     //骨松检测
