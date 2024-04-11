@@ -98,11 +98,11 @@
 
       <block>
         <wd-tab title="免疫">
-          <InputChart title="ESP" china="(血沉)" isRequire="true" v-model="form.immunity.ESR" unit="mm/1h" low="0"
+          <InputChart title="ESP" china="(血沉)" :isRequire="isRequire" v-model="form.immunity.ESR" unit="mm/1h" low="0"
             height="20">
           </InputChart>
 
-          <InputChart title="CRP或hsCRP" china="" isRequire="true" v-model="form.immunity.CRP" unit="mg/L" low="0"
+          <InputChart title="CRP或hsCRP" china="" :isRequire="isRequire" v-model="form.immunity.CRP" unit="mg/L" low="0"
             height="10">
           </InputChart>
 
@@ -250,6 +250,8 @@ import InputChart from "./components/inputChart"
 
 import type { CheckList } from '@/utils/types'
 const tab = ref(0)
+
+const isRequire = ref(true)
 
 const form = reactive<CheckList>({
   bloodRoutine: {//血常规

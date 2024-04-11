@@ -42,8 +42,8 @@ const props = defineProps({
     default: ''
   },
   modelValue: {
-    type: Number,
-    default: 0
+    type: String,
+    default: ''
   },
   isRequire: {
     type: Boolean,
