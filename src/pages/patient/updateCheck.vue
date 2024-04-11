@@ -217,7 +217,7 @@ const form = reactive<CheckList>({
     HCT: '',
   },
   Urinalysis: {
-    //鸟检查
+    //尿检查
     white: '',
     red: 0,
     red_value: '',
@@ -225,6 +225,51 @@ const form = reactive<CheckList>({
     up: 0,
     up_value: '',
     up24_value: '',
+  },
+  liverKidney: {
+    // 肝肾全
+    TP: '',
+    AG: '',
+    GGP: '',
+    ALP: '',
+    LDH: '',
+    CK: '',
+    Urea: '',
+    Ca: '',
+    p: '',
+  },
+  boneLoosening: {
+    //骨松检测
+    d25: '',
+  },
+  immuneFull: {
+    //免疫全项
+    CH50: '',
+    C3: '',
+    C4: '',
+  },
+  selfAntibody: {
+    // 自身抗体
+    ANA: '',
+    dsDNA: '',
+    Sm: '',
+    RNP: '',
+    SSA: '',
+    SSB: '',
+    rRNP: '',
+    Scl_70: '',
+    Jo_1: '',
+  },
+  coagulation: {
+    // 凝血
+    D_Dimer: '',
+    PT: '',
+    APPT: '',
+    PTINR: '',
+  },
+  Sirolimus: {
+    // 西罗莫司
+    Sirolimus: '',
   }
 
 })
