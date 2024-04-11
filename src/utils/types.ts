@@ -71,132 +71,125 @@ export type Patient = {
   checkList?: CheckList
 }
 
-export type CheckList ={
+export type CheckList = {
   // 检验单
   bloodRoutine?: {
     // 血常规
     status: number // 0 未做 1 正常 2 异常
-    WBC: string
-    L: string
-    Hb: string
-    PLT:string
-
+    WBC?: string
+    L?: string
+    Hb?: string
+    PLT?: string
   }
   renalFunction?: {
-    // 肾功能
+    // 肝肾功
     status: number
-    ALT:string,
-    AST: string,
-    TBIL: string
-    DBIL: string,
-    ALB: string,
-    PA: string,
-    Cr: string,
-    UA: string,
-    BS:string
+    ALT?: string
+    AST?: string
+    TBIL?: string
+    DBIL?: string
+    ALB?: string
+    PA?: string
+    Cr?: string
+    UA?: string
+    BS?: string
   }
   bloodFat?: {
     // 血脂
-    CHO: string,
-    TG: string,
-    HDL_C: string
-    LDL_C: string,
+    CHO?: string
+    TG?: string
+    HDL_C?: string
+    LDL_C?: string
   }
   immunity?: {
     //免疫
-    ESR: string,
-    CRP: string,
-    IgG: string,
-    IgA: string,
-    IgM: string,
-    RF:string
+    ESR?: string
+    CRP?: string
+    IgG?: string
+    IgA?: string
+    IgM?: string
+    RF?: string
   }
   hepatitis?: {
-    // 肝炎
-    HBsAg: Boolean,
-    HBsAg: Boolean,
-    HBeAg: Boolean,
-    HBeAb: Boolean,
-    HBcAb: Boolean,
-    HBV_DNA: Boolean,
-    HBV_DNA_value: number,
-    HCV_Ab: Boolean,
-    HCV_RNA: Boolean,
-    HCV_RNA_value:Boolean
+    // 肝炎  0 为选 1 阳性 2 阴性
+    HBsAg?: number
+    HBeAg?: number
+    HBeAb?: number
+    HBcAb?: number
+    HBV_DNA?: number
+    HBV_DNA_value?: string
+    HCV_Ab?: number
+    HCV_RNA?: number
+    HCV_RNA_value?: string
   }
   tuberculosis?: {
     // 结核
-    PDD: number,//1 2 3 4
-    TB_SPOT: Boolean,
-    TB_SPOT_A: string,
-    TB_SPOT_B: string,
-
+    PDD?: number // -1未选 0阴性 1 2 3 4
+    TB_SPOT?: number
+    TB_SPOT_A?: string
+    TB_SPOT_B?: string
   }
-  bloodRoutine_1?: {
+  bloodRoutine_2?: {
     //血常规
-    N: string
-    RBC: string,
-    HCT:string,
+    N?: string
+    RBC?: string
+    HCT?: string
   }
   Urinalysis?: {
     //尿检
-    white: string,
-    red: Boolean
-    red_value: string
-    redBlood: string,
-    up: Boolean,
-    up_value: string,
-    24up_value: string,
+    white?: string
+    red?: number
+    red_value?: string
+    redBlood?: string
+    up?: number
+    up_value?: string
+    up24_value?: string
   }
-  liverKidney:? {
+  liverKidney?: {
     // 肝肾全
-    TP: string,
-    AG: string,
-    GGP: string,
-    ALP: string,
-    LDH: string,
-    CK: string,
-    Urea: string,
-    Ca: string,
-    p: string,
-
+    TP?: string
+    AG?: string
+    GGP?: string
+    ALP?: string
+    LDH?: string
+    CK?: string
+    Urea?: string
+    Ca?: string
+    p?: string
   }
-  boneLoosening ?: {
+  boneLoosening?: {
     //骨松检测
-    25d:string
-
+    d25?: string
   }
-  immuneFull:? {
-          //免疫全项
-          CH50: string,
-          C3: string,
-          C4: string,
+  immuneFull?: {
+    //免疫全项
+    CH50?: string
+    C3?: string
+    C4?: string
   }
-  selfAntibody: {
+  selfAntibody?: {
     // 自身抗体
-    ANA: string
-    dsDNA: string
-    Sm: string
-    RNP: string,
-    SSA: string
-    SSB: string,
-    rRNP: string,
-    Scl_70: string,
-    Jo_1:string
+    ANA?: string
+    dsDNA?: string
+    Sm?: string
+    RNP?: string
+    SSA?: string
+    SSB?: string
+    rRNP?: string
+    Scl_70?: string
+    Jo_1?: string
   }
-  coagulation:? {
+  coagulation?: {
     // 凝血
-    D_Dimer: string,
-    PT: string,
-    APPT: string,
-    PTINR: string,
-
+    D_Dimer?: string
+    PT?: string
+    APPT?: string
+    PTINR?: string
   }
-  Sirolimus ?: {
+  Sirolimus?: {
     // 西罗莫司
-    Sirolimus:string
+    Sirolimus?: string
   }
-
 }
 
 export type User = {

@@ -193,7 +193,8 @@ const messagePatient = async (patient: Patient) => {
 
 }
 const goIdCard = () => {
-  uni.navigateTo({ 'url': '/pages/patient/idCard' })
+  // uni.navigateTo({ 'url': '/pages/patient/idCard' })
+  uni.navigateTo({ 'url': "/pages/patient/updateChecklist" })
 }
 
 const goToPatient = (patient: Patient) => {

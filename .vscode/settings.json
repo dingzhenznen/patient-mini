@@ -1,6 +1,6 @@
 {
   "editor.fontFamily": "Courier New, Fira Code Retina, Monaco, YaHei Consolas Hybrid,Courier New",
-  "editor.fontSize": 16,
+  "editor.fontSize": 14,
   "editor.wordWrap": "on",
   "editor.cursorWidth": 3,
   "editor.letterSpacing": 0.5,
@@ -42,7 +42,7 @@
   "files.trimTrailingWhitespace": true,
   "debug.console.fontSize": 14,
   "git.confirmSync": false,
-  "workbench.colorTheme": "Solarized Light",
+  "workbench.colorTheme": "Default Dark+",
   "explorer.confirmDelete": false,
   "git.ignoreLegacyWarning": true,
   "cSpell.userWords": [
