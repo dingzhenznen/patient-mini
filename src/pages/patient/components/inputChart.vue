@@ -110,6 +110,7 @@ export default {
 
 .main {
   opacity: 1;
+  height: 90rpx;
 
   .item {
     display: flex;

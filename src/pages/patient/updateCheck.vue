@@ -146,8 +146,9 @@
     </wd-tabs>
     <InputChart title="RF" china="(类风湿因子)" v-model="form.immunity.RF" unit="U/ml" low="0" height="25">
     </InputChart>
-    <RadioTable title="测试" :options="optionList" />
-    <wd-button @click="handleClick">ddd</wd-button>
+    <RadioTable v-model="hello" title="测试" :options="optionList" :disabled="disabled" :table-data="testDataList" />
+
+    <wd-button @click="handleClick" style="margin-top: 40rpx;">click</wd-button>
 
 
   </view>
@@ -161,6 +162,7 @@ import RadioTable from './components/radioTable.vue'
 
 import type { CheckList } from '@/utils/types'
 const tab = ref(0)
+const disabled = ref(false)
 
 const isRequire = ref(true)
 
@@ -284,6 +286,12 @@ const optionList = [
   { value: 3, label: '未做' },
   { value: 4, label: '未知' },
 ]
+const testDataList = [
+  { date: '2021-09-01', value: 1.4 },
+  { date: '2021-09-01', value: 3.4 },
+  { date: '2021-09-01', value: 6.8 },
+]
+const hello = ref(0)
 
 console.log(form)
 
