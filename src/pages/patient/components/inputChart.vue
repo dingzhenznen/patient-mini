@@ -155,11 +155,11 @@ export default {
     .right {
       display: flex;
       align-items: center;
-      margin-left: 60rpx;
+      margin-left: 50rpx;
 
       .range {
-        width: 100rpx;
-        margin-right: 20rpx;
+        width: 120rpx;
+        margin-right: 10rpx;
         font-size: 24rpx;
       }
     }
