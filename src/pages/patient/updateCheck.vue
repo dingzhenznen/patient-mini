@@ -144,7 +144,9 @@
 
 
     </wd-tabs>
-
+    <InputChart title="RF" china="(类风湿因子)" v-model="form.immunity.RF" unit="U/ml" low="0" height="25">
+    </InputChart>
+    <RadioTable title="测试" :options="optionList" />
     <wd-button @click="handleClick">ddd</wd-button>
 
 
@@ -155,6 +157,7 @@
 import { onMounted, reactive, watch, ref } from 'vue'
 
 import InputChart from "./components/inputChart"
+import RadioTable from './components/radioTable.vue'
 
 import type { CheckList } from '@/utils/types'
 const tab = ref(0)
@@ -275,6 +278,12 @@ const form = reactive<CheckList>({
   }
 
 })
+const optionList = [
+  { value: 1, label: '正常' },
+  { value: 2, label: '异常' },
+  { value: 3, label: '未做' },
+  { value: 4, label: '未知' },
+]
 
 console.log(form)
 
