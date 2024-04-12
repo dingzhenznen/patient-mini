@@ -244,6 +244,8 @@
 
 
     </wd-tabs>
+    
+    <button @click="handleSubmit">submit</button>
 
 
   </view>
@@ -254,8 +256,12 @@ import { onMounted, reactive, watch, ref } from 'vue'
 import { checks } from '@/utils/data'
 import InputChart from "./components/inputChart"
 import RadioTable from './components/radioTable.vue'
-
 import type { CheckList } from '@/utils/types'
+import { usePatientStore }  from "@/store/patient"
+import { updatePatient } from "@/apis/patient/index"
+
+const patientStore = usePatientStore();
+
 const tab = ref(0)
 const disabled = ref(false)
 const isRequire = ref(true)
@@ -332,13 +338,13 @@ const form = reactive<CheckList>({
     // 肝肾全
     TP: '',
     AG: '',
-    GGP: '',
+    GGT: '',
     ALP: '',
     LDH: '',
     CK: '',
     Urea: '',
     Ca: '',
-    p: '',
+    P: '',
   },
   boneLoosening: {
     //骨松检测
@@ -380,8 +386,17 @@ const testDataList = [
   { date: '2021-09-01', value: 3.4 },
   { date: '2021-09-01', value: 6.8 },
 ]
-const handleClick = () => {
-  console.log(form)
+
+
+const handleSubmit= async()=>{
+
+  const formData = {idCard:patientStore.patientInfo.idCard,userInfo:{checkList:form}};
+
+  console.log(formData)
+
+  const res = await updatePatient(formData);
+
+  console.log(res)
 }
 
 
