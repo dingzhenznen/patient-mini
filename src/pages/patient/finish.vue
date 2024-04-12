@@ -44,6 +44,7 @@ const followStatus = ref(0)
 onLoad((option: any) => {
   console.log(option)
   followStatus.value = option.status
+  patientStore.updateFollowStatus(option.status)
 })
 
 const handleSelect = (item: any) => {

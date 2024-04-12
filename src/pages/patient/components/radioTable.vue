@@ -10,7 +10,7 @@
       <!-- 2. 单选按钮 -->
       <view class="radio-wrap">
         <button v-for="(item, index) in props.diagInfo.options" :key="index"
-          :class="selected === item.value ? 'btn' : 'btn-selected'" :disabled="props.disabled"
+          :class="selected === item.value ? 'btn' : 'btn-selected'" :disabled="disabled"
           @click="clickBtn(item.value)">{{ item.label }}</button>
       </view>
       <!-- 3. 展示数据表格按钮 -->
@@ -48,34 +48,8 @@
 <script lang="ts" setup>
 import { watch } from 'vue';
 import { ref, reactive } from 'vue'
-
-const show = ref() // 表格popup
-const selected = ref(0 as any)
-// const popupStyle = "height: 50vh;width:100%;padding-top:60rpx;"
-
-watch(() => props.modelValue, (val) => {
-  selected.value = val
-})
-
-type Options = {
-  label: string
-  value: number | string
-}
-type tableData = {
-  date: string
-  value: number | string
-}
-type DiagInfo = {
-  options: Options[] // 单选内容及值
-  en: string
-  china: string
-}
-
+import { usePatientStore } from '@/store';
 const props = defineProps({
-  disabled: {
-    type: Boolean,
-    default: false
-  },
   modelValue: {
     type: [String, Number],
     default: ''
@@ -92,6 +66,33 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue'])
 
+
+const show = ref() // 表格popup
+const selected = ref(0 as any)
+const disabled = usePatientStore().followStatus !== '1'
+selected.value = props.modelValue
+// const popupStyle = "height: 50vh;width:100%;padding-top:60rpx;"
+
+watch(() => props.modelValue, (val) => {
+  selected.value = val
+  console.log(`${props.diagInfo.en} : ${props.modelValue} : ${selected.value}`)
+})
+
+type Options = {
+  label: string
+  value: number | string
+}
+type tableData = {
+  date: string
+  value: number | string
+}
+type DiagInfo = {
+  options: Options[] // 单选内容及值
+  en: string
+  china: string
+}
+
+
 const clickBtn = (value: string | number) => {
   selected.value = value
   emits('update:modelValue', value)
@@ -104,6 +105,8 @@ const showTable = () => {
 const closeTable = () => {
   show.value.close()
 }
+
+console.log('props', props)
 
 </script>
 

@@ -1,3 +1,9 @@
+type followInfo = {
+  checkList: CheckList
+  thisDate: number
+  nextDate: number
+}
+
 export type Patient = {
   _id?: string
   doctorId?: string //sys_user id
@@ -12,7 +18,7 @@ export type Patient = {
   weight?: string //体重
   remark?: string //备注
   tags?: [] // 其他
-  followList?: []
+  followList: followInfo[]
   history?: {
     // 病史
     attackTime?: number // 发病时间
@@ -50,11 +56,11 @@ export type Patient = {
   }
 
   followUpType?: string // 随访类型
-  thisDate?: number // "1712056432364" 本次随访时间
-  nextDate?: number // "1712056432364", 下次随访时间
+  thisDate: number // "1712056432364" 本次随访时间
+  nextDate: number // "1712056432364", 下次随访时间
   followRemark?: string
 
-  selectDisease?: {
+  selectDisease: {
     // 选择的疾病
     en: string // tak 英文名称
     china: string // "干燥综合征",

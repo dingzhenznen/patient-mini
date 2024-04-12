@@ -170,6 +170,7 @@ const callPatient = (patient: Patient) => {
 
 const followPatient = async (patient: Patient) => {
   await usePatientStore().updatePatientInfo(patient)
+  await usePatientStore().setPatientChecks(patient)
   uni.navigateTo({ url: `/pages/patient/info?idCard=${patient.idCard}` })
 }
 
