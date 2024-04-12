@@ -185,7 +185,7 @@ const flag = ref<boolean>(true)
 const isExistGoing = ref(0)
 
 const Collapse = ref<string[]>(['item1'])
-
+console.log(usePatientStore().checks)
 const form = reactive<Patient>(
   {
     name: '',

@@ -120,12 +120,12 @@
       <block>
         <wd-tab title="肝炎">
           <RadioTable v-model="form.hepatitis.HBsAg" :diag-info="checks.hepatitis.HBsAg" :disabled="disabled"
-            :table-data="testDataList" />
+            :table-data="checksData?.hepatitis?.HBsAg" />
           <RadioTable v-model="form.hepatitis.HBsAb" :diag-info="checks.hepatitis.HBsAb" :disabled="disabled"
-            :table-data="testDataList" />
+            :table-data="checksData?.hepatitis?.HBsAb" />
           <RadioTable v-model="form.hepatitis.HBeAg" :diag-info="checks.hepatitis.HBeAg" :disabled="disabled"
-            :table-data="testDataList" />
-          <RadioTable v-model="form.hepatitis.HBeAb" :diag-info="checks.hepatitis.HBeAb" :disabled="disabled"
+            :table-data="checksData?.hepatitis?.HBeAg" />
+          <!-- <RadioTable v-model="form.hepatitis.HBeAb" :diag-info="checks.hepatitis.HBeAb" :disabled="disabled"
             :table-data="testDataList" />
           <RadioTable v-model="form.hepatitis.HBcAb" :diag-info="checks.hepatitis.HBcAb" :disabled="disabled"
             :table-data="testDataList" />
@@ -134,7 +134,7 @@
           <RadioTable v-model="form.hepatitis.HCV_Ab" :diag-info="checks.hepatitis.HCV_Ab" :disabled="disabled"
             :table-data="testDataList" />
           <RadioTable v-model="form.hepatitis.HCV_RNA" :diag-info="checks.hepatitis.HCV_RNA" :disabled="disabled"
-            :table-data="testDataList" />
+            :table-data="testDataList" /> -->
         </wd-tab>
       </block>
 
@@ -262,14 +262,15 @@ import RadioTable from './components/radioTable.vue'
 import type { CheckList } from '@/utils/types'
 import { usePatientStore } from "@/store/patient"
 import { updatePatient } from "@/apis/patient/index"
+import { storeToRefs } from 'pinia'
 
-const patientStore = usePatientStore();
-
+const patientStore = usePatientStore()
 const tab = ref(0)
 const disabled = ref(false)
 const isRequire = ref(true)
-
-const form = reactive<CheckList>({
+const { checks: checksData } = storeToRefs(usePatientStore())
+console.log('checksData: ', checksData.value)
+const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
   bloodRoutine: {//血常规
     status: 0,
     WBC: '',
@@ -384,24 +385,20 @@ const form = reactive<CheckList>({
   }
 
 })
-const testDataList = [
-  { date: '2021-09-01', value: 1.4 },
-  { date: '2021-09-01', value: 3.4 },
-  { date: '2021-09-01', value: 6.8 },
-]
-
 
 const handleSubmit = async () => {
 
   const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
 
   console.log(formData)
-  return
 
   const res = await updatePatient(formData);
 
-  console.log(res)
+  usePatientStore().updatePatientInfo(res.data)
+
+  uni.navigateBack()
 }
+console.log('form', form)
 
 
 </script>
