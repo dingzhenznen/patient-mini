@@ -404,7 +404,7 @@ export default {
         .right {
           display: flex;
           width: 200rpx;
-          margin-left: 100rpx;
+          margin-left: 90rpx;
           font-size: 20rpx;
 
           justify-content: space-around;
@@ -464,6 +464,10 @@ export default {
 
         .top {
           display: flex;
+
+          .status {
+            width: 120rpx;
+          }
 
           .date {
             margin-left: 300rpx;
