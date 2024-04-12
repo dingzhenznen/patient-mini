@@ -104,6 +104,8 @@ const handleSelect = (data: any) => {
 
   const selectedCheckName = data[0];
   const selectedTitle = data[1];
+  if (options.series.length > 0)
+    return
 
   if (selectedCheckName) {
 
