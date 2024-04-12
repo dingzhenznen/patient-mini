@@ -23,9 +23,11 @@ export const usePatientStore = defineStore('patient', {
     },
     setPatientChecks(patient: Patient) {
       let checks: any = {}
-
+      const sortedArray = patient.followList?.sort(
+        (a, b) => b.thisDate - a.thisDate
+      )
       // 遍历每一次随访（使用 for 循环）
-      for (let i = 0; i < (patient.followList?.length || 0); i++) {
+      for (let i = 0; i < (sortedArray?.length || 0); i++) {
         const item = patient.followList[i]
         const date = dayjs(item.thisDate).format('YYYY-MM-DD') // 当前随访日期
         // 遍历每一次随访的检查项（使用 for...in 循环）

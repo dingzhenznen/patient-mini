@@ -34,9 +34,9 @@
             <uni-th align="center">结果</uni-th>
           </uni-tr>
           <!-- 表格数据行 -->
-          <uni-tr v-for="(item, index) in props.tableData" :key="index">
+          <uni-tr v-for="(item, index) in tabData" :key="index">
             <uni-td align="center">{{ item.date }}</uni-td>
-            <uni-td align="center">{{ item.value }}</uni-td>
+            <uni-td align="center">{{ val2label(item.value) || item.value }}</uni-td>
           </uni-tr>
         </uni-table>
       </view>
@@ -48,7 +48,23 @@
 <script lang="ts" setup>
 import { watch } from 'vue';
 import { ref, reactive } from 'vue'
-import { usePatientStore } from '@/store';
+import { usePatientStore } from '@/store'
+
+type Options = {
+  label: string
+  value: number | string
+}
+type tableData = {
+  date: string
+  value: number | string
+}
+type DiagInfo = {
+  options: Options[] // 单选内容及值
+  parent: string // 父级
+  en: string
+  china: string
+}
+
 const props = defineProps({
   modelValue: {
     type: [String, Number],
@@ -66,32 +82,19 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue'])
 
-
 const show = ref() // 表格popup
 const selected = ref(0 as any)
 const disabled = usePatientStore().followStatus !== '1'
 selected.value = props.modelValue
-// const popupStyle = "height: 50vh;width:100%;padding-top:60rpx;"
+const tabData = usePatientStore().checks[props.diagInfo.parent]?.[props.diagInfo.en] || []
 
 watch(() => props.modelValue, (val) => {
   selected.value = val
-  console.log(`${props.diagInfo.en} : ${props.modelValue} : ${selected.value}`)
 })
 
-type Options = {
-  label: string
-  value: number | string
+const val2label = (val: string | number) => {
+  return props.diagInfo.options.find((item) => item.value === val)?.label
 }
-type tableData = {
-  date: string
-  value: number | string
-}
-type DiagInfo = {
-  options: Options[] // 单选内容及值
-  en: string
-  china: string
-}
-
 
 const clickBtn = (value: string | number) => {
   selected.value = value
@@ -106,8 +109,6 @@ const closeTable = () => {
   show.value.close()
 }
 
-console.log('props', props)
-
 </script>
 
 <style lang="scss" scoped>
@@ -116,12 +117,14 @@ console.log('props', props)
   background-color: $bgColor;
   height: 60rpx;
   width: 100%;
-  font-size: 24rpx;
+  font-size: 28rpx;
+  writing-mode: horizontal-tb !important;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8rpx;
   border: 1px solid #fff;
+  padding: 0;
 }
 
 .popup {

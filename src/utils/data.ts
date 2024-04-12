@@ -2,6 +2,7 @@ export const checks = {
   // 肝炎
   hepatitis: {
     HBsAg: {
+      parent: 'hepatitis',
       en: 'HBsAg',
       china: '乙肝表面抗原',
       options: [
@@ -16,6 +17,7 @@ export const checks = {
       ]
     },
     HBsAb: {
+      parent: 'hepatitis',
       en: 'HBsAb',
       china: '乙肝表面抗体',
       options: [
@@ -30,6 +32,7 @@ export const checks = {
       ]
     },
     HBeAg: {
+      parent: 'hepatitis',
       en: 'HBeAg',
       china: '乙肝e抗原',
       options: [
@@ -44,6 +47,7 @@ export const checks = {
       ]
     },
     HBeAb: {
+      parent: 'hepatitis',
       en: 'HBeAb',
       china: '乙肝e抗体',
       options: [
@@ -58,6 +62,7 @@ export const checks = {
       ]
     },
     HBcAb: {
+      parent: 'hepatitis',
       en: 'HBcAb',
       china: '乙肝核心抗体',
       options: [
@@ -72,6 +77,7 @@ export const checks = {
       ]
     },
     HBV_DNA: {
+      parent: 'hepatitis',
       en: 'HBV_DNA',
       china: '乙肝病毒DNA',
       options: [
@@ -87,6 +93,7 @@ export const checks = {
     },
     HBV_DNA_value: 0,
     HCV_Ab: {
+      parent: 'hepatitis',
       en: 'HCV_Ab',
       china: '丙肝抗体',
       options: [
@@ -101,6 +108,7 @@ export const checks = {
       ]
     },
     HCV_RNA: {
+      parent: 'hepatitis',
       en: 'HCV_RNA',
       china: '丙肝RNA',
       options: [
@@ -123,6 +131,7 @@ export const checks = {
   //结核
   tuberculosis: {
     PDD: {
+      parent: 'tuberculosis',
       en: 'PDD',
       china: '结核菌素试验',
       options: [
@@ -149,6 +158,7 @@ export const checks = {
       ]
     }, // -1未选 0阴性 1 2 3 4
     TB_SPOT: {
+      parent: 'tuberculosis',
       en: 'TB_SPOT',
       china: '结核菌素试验',
       options: [
@@ -168,6 +178,7 @@ export const checks = {
   // 自身抗体
   selfAntibody: {
     ANA: {
+      parent: 'selfAntibody',
       en: 'ANA',
       china: '抗核抗体',
       options: [
@@ -186,6 +197,7 @@ export const checks = {
       ]
     },
     dsDNA: {
+      parent: 'selfAntibody',
       en: 'dsDNA',
       china: 'dsDNA',
       options: [
@@ -204,6 +216,7 @@ export const checks = {
       ]
     },
     Sm: {
+      parent: 'selfAntibody',
       en: 'Sm',
       china: '抗Sm',
       options: [
@@ -222,6 +235,7 @@ export const checks = {
       ]
     },
     RNP: {
+      parent: 'selfAntibody',
       en: 'RNP',
       china: '抗RNP',
       options: [
@@ -240,6 +254,7 @@ export const checks = {
       ]
     },
     SSA: {
+      parent: 'selfAntibody',
       en: 'SSA',
       china: '抗SSA',
       options: [
@@ -258,6 +273,7 @@ export const checks = {
       ]
     },
     SSB: {
+      parent: 'selfAntibody',
       en: 'SSB',
       china: '抗SSB',
       options: [
@@ -276,6 +292,7 @@ export const checks = {
       ]
     },
     rRNP: {
+      parent: 'selfAntibody',
       en: 'rRNP',
       china: '抗rRNP',
       options: [
@@ -294,6 +311,7 @@ export const checks = {
       ]
     },
     Scl_70: {
+      parent: 'selfAntibody',
       en: 'Scl_70',
       china: '抗Scl-70',
       options: [
@@ -312,6 +330,7 @@ export const checks = {
       ]
     },
     Jo_1: {
+      parent: 'selfAntibody',
       en: 'Jo_1',
       china: '抗Jo-1',
       options: [
@@ -329,5 +348,44 @@ export const checks = {
         }
       ]
     }
+  },
+  // 尿检查
+  Urinalysis: {
+    //尿检查
+    white: '',
+    red: {
+      parent: 'Urinalysis',
+      en: 'red',
+      china: '尿红细胞',
+      options: [
+        {
+          value: 0,
+          label: '阴性'
+        },
+        {
+          value: 1,
+          label: '阳性'
+        }
+      ]
+    },
+    red_value: '',
+    redBlood: '',
+    up: {
+      parent: 'Urinalysis',
+      en: 'up',
+      china: '尿蛋白',
+      options: [
+        {
+          value: 0,
+          label: '阴性'
+        },
+        {
+          value: 1,
+          label: '阳性'
+        }
+      ]
+    },
+    up_value: '',
+    up24_value: ''
   }
 }
