@@ -12,7 +12,7 @@ import uCharts from './u-charts.js';
 var uChartsInstance = {};
 export default {
 
-  props: ['options'],
+  props: ['options', 'title', 'checkname'],
 
   data() {
     return {
@@ -68,10 +68,10 @@ export default {
     handleClick() {
       this.show = true
       this.cWidth = uni.upx2px(750);
-      console.log(this.options)
       //这里的 500 对应 css .charts 的 height
       this.cHeight = uni.upx2px(500);
-      console.log(this.cHeight, this.cWidth, 111)
+      console.log('chartcheckname', this.checkname)
+      this.$emit('handleClick', [this.checkname, this.title])
       this.getServerData();
     },
     tap(e) {

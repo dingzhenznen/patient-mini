@@ -13,17 +13,20 @@
             </wd-cell>
           </wd-cell-group>
 
-          <InputChart checkname="bloodRoutine"  title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC" unit="*10^9个/L" low="4"
-            height="10">
+          <InputChart checkname="bloodRoutine" title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC"
+            unit="*10^9个/L" low="4" height="10">
           </InputChart>
 
-          <InputChart checkName="bloodRoutine"  title="L" china="(淋巴细胞)" v-model="form.bloodRoutine.L" unit="*10^9个/L" low="0.8" height="4">
+          <InputChart checkname="bloodRoutine" title="L" china="(淋巴细胞)" v-model="form.bloodRoutine.L" unit="*10^9个/L"
+            low="0.8" height="4">
           </InputChart>
 
-          <InputChart checkName="bloodRoutine"  title="Hb" china="(血红蛋白)" v-model="form.bloodRoutine.Hb" unit="g/L" low="110" height="150">
+          <InputChart checkname="bloodRoutine" title="Hb" china="(血红蛋白)" v-model="form.bloodRoutine.Hb" unit="g/L"
+            low="110" height="150">
           </InputChart>
 
-          <InputChart checkName="bloodRoutine"  title="PLT" china="(血小板)" v-model="form.bloodRoutine.PLT" unit="*10^9个/L" low="100" height="300">
+          <InputChart checkname="bloodRoutine" title="PLT" china="(血小板)" v-model="form.bloodRoutine.PLT" unit="*10^9个/L"
+            low="100" height="300">
           </InputChart>
         </wd-tab>
       </block>
@@ -244,7 +247,7 @@
 
 
     </wd-tabs>
-    
+
     <button @click="handleSubmit">submit</button>
 
 
@@ -257,7 +260,7 @@ import { checks } from '@/utils/data'
 import InputChart from "./components/inputChart"
 import RadioTable from './components/radioTable.vue'
 import type { CheckList } from '@/utils/types'
-import { usePatientStore }  from "@/store/patient"
+import { usePatientStore } from "@/store/patient"
 import { updatePatient } from "@/apis/patient/index"
 
 const patientStore = usePatientStore();
@@ -388,9 +391,9 @@ const testDataList = [
 ]
 
 
-const handleSubmit= async()=>{
+const handleSubmit = async () => {
 
-  const formData = {idCard:patientStore.patientInfo.idCard,userInfo:{checkList:form}};
+  const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
 
   console.log(formData)
   return

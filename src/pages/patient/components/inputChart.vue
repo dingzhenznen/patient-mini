@@ -16,7 +16,7 @@
       </view>
       <view class="right">
         <view class="range">{{ low }}{{ low ? "-" : '' }}{{ height }}</view>
-        <Mychart :options="options"></Mychart>
+        <Mychart :title="title" :checkname="checkname" :options="options" @handleClick="handleSelect"></Mychart>
       </view>
 
       <!-- <Line></Line> -->
@@ -27,14 +27,14 @@
 
 <script lang="ts" setup>
 import { computed, reactive, ref } from 'vue'
-import { usePatientStore }  from "@/store/patient"
-import type { Patient,CheckList } from '@/utils/types'
+import { usePatientStore } from "@/store/patient"
+import type { Patient, CheckList } from '@/utils/types'
 import dayjs from 'dayjs'
 import Mychart from "./chart.vue"
 // import Line from "./line.vue"
 
 const props = defineProps({
-  checkname:{
+  checkname: {
     type: String,
     default: ''
   },
@@ -94,43 +94,53 @@ const handleChange = (event: any) => {
 
 // 处理 chart 数据
 
-const options = reactive({categories:[],series:[]})
+const options = reactive({ categories: [], series: [] })
 
 const patientStore = usePatientStore();
 
-const checkName = props.checkname
+
+const handleSelect = (data: any) => {
 
 
+  const selectedCheckName = data[0];
+  const selectedTitle = data[1];
 
-if(checkName){
+  if (selectedCheckName) {
 
-  console.log('patientinfoddd',patientStore.patientInfo.followList)
+    const series = { name: props.title, data: [] }
 
-  const series ={name:props.title,data:[]}
+    patientStore.patientInfo.followList?.forEach((value: Patient, index) => {
 
-  patientStore.patientInfo.followList?.forEach((value:Patient,index)=>{
+      const checkList = value.checkList as CheckList
+      if (checkList) {
+        if (checkList[selectedCheckName]) {
+          const checkNameValue = checkList[selectedCheckName];
+          if (checkNameValue[selectedTitle]) {
 
-    const checkList = value.checkList as CheckList
-    if(checkList){
-      if(checkList[checkName]){
-        const checkNameValue = checkList[checkName];
-        if(checkNameValue[props.title]){
+            series.data.push(checkNameValue[selectedTitle])
 
-          series.data.push(checkNameValue[props.title])
+            const checkDate = dayjs(value.thisDate).format('YYYY-MM-DD')
 
-          const checkDate = dayjs(value.thisDate).format('YYYY-MM-DD') 
+            options.categories.push(checkDate)
 
-          options.categories.push(checkDate)
-
+          }
         }
+
       }
-      
-    }
-  })
+    })
 
-  options.series.push(series)
+    options.series.push(series)
 
+  }
 }
+
+
+
+
+
+
+
+
 
 </script>
 
