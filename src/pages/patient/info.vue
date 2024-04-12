@@ -64,7 +64,8 @@
         <wd-collapse-item title="随诊" name="item1">
           <view class="zlList">
 
-            <view class="item" v-for="item in form.followList" :key="item._id" @click="handleSelect(item.status)">
+            <view class="item" v-for="item in form.followList?.sort((a, b) => { return a.thisDate - b.thisDate })"
+              :key="item._id" @click="handleSelect(item.status)">
               <view class="top">
                 <view class="status">{{ item.status == 0 ? "未诊疗" : item.status == 1 ? "诊疗中" : "诊疗结束" }}</view>
                 <view class="date">{{ dayjs(item.thisDate).format('YYYY-MM-DD') }}</view>
