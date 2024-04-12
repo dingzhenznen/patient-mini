@@ -11,6 +11,9 @@
 import uCharts from './u-charts.js';
 var uChartsInstance = {};
 export default {
+
+  props: ['options'],
+
   data() {
     return {
       cWidth: 750,
@@ -28,19 +31,21 @@ export default {
   methods: {
     getServerData() {
       //模拟从服务器获取数据时的延时
-      setTimeout(() => {
-        let res = {
-          categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
-          series: [
+      // setTimeout(() => {
+      //   let res = {
+      //     categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
+      //     series: [
 
-            {
-              name: "完成量",
-              data: [18, 27, 21, 24, 6, 28]
-            }
-          ]
-        };
-        this.drawCharts('myid', res);
-      }, 500);
+      //       {
+      //         name: "完成量",
+      //         data: [18, 27, 21, 24, 6, 28]
+      //       }
+      //     ]
+      //   };
+      //   this.drawCharts('myid', res);
+      // }, 500);
+
+      this.drawCharts('myid', this.options);
     },
     drawCharts(id, data) {
       const ctx = uni.createCanvasContext(id, this);
@@ -63,6 +68,7 @@ export default {
     handleClick() {
       this.show = true
       this.cWidth = uni.upx2px(750);
+      console.log(this.options)
       //这里的 500 对应 css .charts 的 height
       this.cHeight = uni.upx2px(500);
       console.log(this.cHeight, this.cWidth, 111)

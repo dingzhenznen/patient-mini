@@ -13,17 +13,17 @@
             </wd-cell>
           </wd-cell-group>
 
-          <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC" unit="*10^9个/L" low="4"
+          <InputChart checkname="bloodRoutine"  title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC" unit="*10^9个/L" low="4"
             height="10">
           </InputChart>
 
-          <InputChart title="L" china="(淋巴细胞)" v-model="form.bloodRoutine.L" unit="*10^9个/L" low="0.8" height="4">
+          <InputChart checkName="bloodRoutine"  title="L" china="(淋巴细胞)" v-model="form.bloodRoutine.L" unit="*10^9个/L" low="0.8" height="4">
           </InputChart>
 
-          <InputChart title="Hb" china="(血红蛋白)" v-model="form.bloodRoutine.Hb" unit="g/L" low="110" height="150">
+          <InputChart checkName="bloodRoutine"  title="Hb" china="(血红蛋白)" v-model="form.bloodRoutine.Hb" unit="g/L" low="110" height="150">
           </InputChart>
 
-          <InputChart title="PLT" china="(血小板)" v-model="form.bloodRoutine.PLT" unit="*10^9个/L" low="100" height="300">
+          <InputChart checkName="bloodRoutine"  title="PLT" china="(血小板)" v-model="form.bloodRoutine.PLT" unit="*10^9个/L" low="100" height="300">
           </InputChart>
         </wd-tab>
       </block>
@@ -393,6 +393,7 @@ const handleSubmit= async()=>{
   const formData = {idCard:patientStore.patientInfo.idCard,userInfo:{checkList:form}};
 
   console.log(formData)
+  return
 
   const res = await updatePatient(formData);
 
