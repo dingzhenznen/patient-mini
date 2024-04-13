@@ -194,8 +194,8 @@ const messagePatient = async (patient: Patient) => {
 
 }
 const goIdCard = () => {
-  // uni.navigateTo({ 'url': '/pages/patient/idCard' })
-  uni.navigateTo({ 'url': "/pages/patient/updateChecklist" })
+  uni.navigateTo({ 'url': '/pages/patient/idCard' })
+  //uni.navigateTo({ 'url': "/pages/patient/updateChecklist" })
 }
 
 const goToPatient = (patient: Patient) => {
@@ -206,7 +206,7 @@ const goToPatient = (patient: Patient) => {
 }
 
 const goCamera = () => {
-  uni.navigateTo({ 'url': "/pages/patient/updateCheck" })
+  uni.navigateTo({ 'url': "/pages/patient/updateChecklist" })
 }
 
 const formatFollowDate = (patient: Patient) => {

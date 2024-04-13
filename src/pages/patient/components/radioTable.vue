@@ -155,17 +155,13 @@ const closeTable = () => {
 }
 
 .main {
-  height: 90rpx;
+  // height: 90rpx;
 
   .item {
     display: flex;
     padding: 10rpx 20rpx;
     align-items: center;
-    border-style: solid;
-    border-bottom: 1rpx;
-    border-width: 0.5px;
-    /* 可以根据需要调整边框宽度 */
-    border-color: grey;
+    border: 1px solid rgba(237, 240, 240, 1);
 
     .title {
       text-align: left;
