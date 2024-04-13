@@ -4,10 +4,11 @@
       <view class="search">
         <uni-easyinput prefixIcon="search" placeholder="搜索" v-model="q" @input="searchInput" @confirm="search"
           @clear="search" @iconClick="search" />
-        <view class="filter-btn" @click="showFilter = true">
-          <text>筛选</text>
-          <uni-icons type="bars" color="white"></uni-icons>
-        </view>
+
+      </view>
+      <view class="filter-btn" @click="showFilter = true">
+        <text>筛选</text>
+        <uni-icons type="bars" color="white"></uni-icons>
       </view>
     </view>
     <!-- 录入: 拍照录入 与 手动录入 -->
@@ -24,7 +25,7 @@
       </view>
     </view>
     <!-- 病人信息列表 -->
-    <view class="patient-list">
+    <scroll-view class="patient-list" :show-scrollbar="false">
       <wd-status-tip v-if="patientList.length === 0" image="content" tip="暂无患者" />
       <wd-card v-else custom-class="item" v-for="item in patientList" :key="item._id" @click="goToPatient(item)">
         <!-- 病人信息展示 -->
@@ -53,7 +54,7 @@
         </view>
       </wd-card>
 
-    </view>
+    </scroll-view>
     <Filter v-model="showFilter" @update:confirm="onConfirmFilter" />
     <wd-toast />
     <wd-message-box />
