@@ -161,7 +161,7 @@ const closeTable = () => {
     display: flex;
     padding: 10rpx 20rpx;
     align-items: center;
-    border: 1px solid rgba(237, 240, 240, 1);
+    border-bottom: 1px solid rgba(237, 240, 240, 1);
 
     .title {
       text-align: left;

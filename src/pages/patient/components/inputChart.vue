@@ -174,7 +174,7 @@ export default {
     display: flex;
     padding: 10rpx 20rpx;
     // justify-content: space-around;
-    border: 1px solid rgba(237, 240, 240, 1);
+    border-bottom: 1px solid rgba(237, 240, 240, 1);
 
     .title {
       text-align: left;
