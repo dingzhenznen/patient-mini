@@ -56,8 +56,8 @@ export type Patient = {
   }
 
   followUpType?: string // 随访类型
-  thisDate: number // "1712056432364" 本次随访时间
-  nextDate: number // "1712056432364", 下次随访时间
+  thisDate?: number // "1712056432364" 本次随访时间
+  nextDate?: number // "1712056432364", 下次随访时间
   followRemark?: string
 
   selectDisease: {

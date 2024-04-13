@@ -327,6 +327,10 @@ export default {
   opacity: 1;
   background: rgba(255, 255, 255, 1);
 
+  :deep(.wd-collapse-item__wrapper) {
+    height: auto;
+  }
+
   .header {
     height: 328rpx;
     opacity: 1;
