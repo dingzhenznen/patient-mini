@@ -14,8 +14,8 @@
         <wd-checkbox modelValue="女" shape="button">女</wd-checkbox>
       </wd-checkbox-group>
       <view class="btn-wrap">
-        <button @click="reset">重置 </button>
-        <button @click="confirm" style="margin-left: 30rpx;">筛选</button>
+        <button @click="reset" class="btn-reset">重置 </button>
+        <button @click="confirm" style="margin-left: 30rpx;" class="btn-filter">筛选</button>
       </view>
 
     </view>
@@ -71,10 +71,10 @@ const confirm = () => {
 }
 
 :deep(.wd-checkbox.is-button-box) {
-    display: inline-flex;
-    width: 40%;
-    padding: 12px 30rpx 12rpx 20rpx;
-    box-sizing: border-box;
+  display: inline-flex;
+  width: 40%;
+  padding: 12px 30rpx 12rpx 20rpx;
+  box-sizing: border-box;
 }
 
 
@@ -97,17 +97,27 @@ const confirm = () => {
   .btn-wrap {
     display: flex;
     justify-content: flex-start;
-    margin: 40rpx 0;
+    margin: 60rpx 20rpx;
     width: 100%;
 
-    button {
-      height: 80rpx;
-      border-radius: 20rpx;
-      background-color: #f5f5f5;
-      color: #333;
-      font-size: 32rpx;
-      font-weight: bold;
+    @mixin btn-default {
+      height: 70rpx;
+      width: 160rpx;
       margin: 0;
+      font-size: 30rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-reset {
+      @include btn-default;
+    }
+
+    .btn-filter {
+      @include btn-default;
+      background-color: rgba(17, 194, 147);
+      color: #fff;
     }
   }
 }
