@@ -2,11 +2,18 @@ html,
 body {
   overflow: hidden;
 }
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
-  background-color: transparent;
+  transition: all 0.6s;
+  transform: scale(1.4);
+}
+
+::-webkit-scrollbar-thumb{
+  display: none;
+  width: 0rpx;
+  background-color: #fff;
 }
 
 .main {
