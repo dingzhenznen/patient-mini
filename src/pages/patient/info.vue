@@ -203,7 +203,6 @@ const form = reactive<Patient>(
       coronaryHeartDisease: 0,
       cerebralApoplexy: 0,
       fragilityFractures: 0,
-      brainTumor: 0,
     },
 
     tags: [],
@@ -302,8 +301,11 @@ onLoad(async (option: any) => {
   // idCard.value = '340602197006152466'
   const res = await getPatient({ 'idCard': idCard.value })
 
+
   patientStore.updatePatientInfo(res.data.data[0])
   Object.assign(form, res.data.data[0]);
+
+  console.log(222, form)
 
   const goingFollow: any = form.followList?.filter((item, index) => item.status == 1)
 

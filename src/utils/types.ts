@@ -47,8 +47,10 @@ export type Patient = {
     coronaryHeartDisease?: number //冠心病  0 ,1
     cerebralApoplexy?: number // 脑卒中 0 ,1
     fragilityFractures?: number // 脆性骨折 0 ,1
-    brainTumor?: number // 脑瘤  // 0 ,1
+    tumor?: { value: number; type: string } // 肿瘤  // 0 ,1
     arthroplasty?: number //关节置换术
+    CerebralInfarction?: number //脑梗
+    infect?: {} // 感染
     diabetes?: number // 糖尿病
     hypertension?: number // 高血压
     hyperlipidemia?: number // 高血脂

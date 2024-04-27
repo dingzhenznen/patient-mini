@@ -56,7 +56,6 @@
 import { onLoad } from "@dcloudio/uni-app";
 import { reactive, ref } from "vue"
 
-import InputChart from "./components/inputChart"
 
 import Radios from "./components/radios"
 

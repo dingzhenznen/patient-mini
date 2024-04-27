@@ -1,167 +1,158 @@
 <template>
   <view class="main">
 
-   <view class="body">
-    <wd-form ref="formRef" :model="form">
-  
-      <wd-cell-group border>
-    
-        <view class="other">
-          <wd-cell title="冠心病" title-width="100px" prop="count">
+    <view class="body">
+      <wd-form ref="formRef" :model="form">
 
-            <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline >
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
+        <wd-cell-group border>
 
-          </wd-cell>
+          <view class="other">
+            <wd-cell title="高血压" title-width="100px" prop="count">
+              <wd-radio-group v-model="form.hypertension" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+            </wd-cell>
+          </view>
 
+          <view class="other">
+            <wd-cell title="糖尿病" title-width="100px" prop="count">
+              <wd-radio-group v-model="form.diabetes" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+            </wd-cell>
+          </view>
+
+          <view class="other">
+            <wd-cell title="冠心病" title-width="100px" prop="count">
+
+              <wd-radio-group v-model="form.coronaryHeartDisease" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+
+            </wd-cell>
+
+          </view>
+
+          <view class="other">
+            <wd-cell title="高血脂" title-width="100px" prop="count">
+              <wd-radio-group v-model="form.hyperlipidemia" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+            </wd-cell>
+          </view>
+
+          <view class="other">
+            <wd-cell title="脑梗/脑出血" title-width="100px" prop="count">
+              <wd-radio-group v-model="form.CerebralInfarction" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+            </wd-cell>
+          </view>
+
+
+          <view class="other">
+            <wd-cell title="结核病" title-width="100px" prop="count">
+              <wd-radio-group v-model="form.tuberculosis" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+            </wd-cell>
+          </view>
+
+
+
+          <view class="other">
+
+            <wd-cell title="肿瘤" title-width="100px" prop="count">
+
+              <wd-radio-group v-model="form.tumor.value" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+
+            </wd-cell>
+
+            <wd-input label="类型" label-width="100px" prop="remark" v-model="form.tumor.type" placeholder="请输入肿瘤类型"
+              :rules="[]" />
+
+          </view>
+
+          <view class="other">
+
+            <wd-cell title="感染" title-width="100px" prop="count">
+
+              <wd-radio-group v-model="form.infect.value" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
+
+            </wd-cell>
+
+            <wd-input label="种类" label-width="100px" prop="remark" v-model="form.infect.type" placeholder="请输入感染种类"
+              :rules="[]" />
+
+          </view>
+
+
+          <view class="other">
+            <wd-input label="其他" label-width="100px" prop="remark" v-model="form.other" placeholder="" :rules="[]" />
+          </view>
+
+
+        </wd-cell-group>
+
+        <view class="submit" @click="handleSubmit">
+          更新
         </view>
+      </wd-form>
 
-        <view class="other">
-
-          <wd-cell title="脑卒中" title-width="100px" prop="count">
-          
-            <wd-radio-group v-model="form.cerebralApoplexy" shape="dot" inline >
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          
-          </wd-cell>
-
-        </view>
-
-        <view class="other">
-
-          <wd-cell title="脆性骨折" title-width="100px" prop="count">
-          
-            <wd-radio-group v-model="form.fragilityFractures" shape="dot" inline >
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-            
-          </wd-cell>
-
-        </view>
-
-
-        <view class="other">
-
-          <wd-cell title="脑瘤" title-width="100px" prop="count">
-            
-            <wd-radio-group v-model="form.brainTumor" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          
-          </wd-cell>
-
-        </view>
-
-        <view class="other">
-          <wd-cell title="关节置换术" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.arthroplasty" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-        <view class="other">
-          <wd-cell title="糖尿病" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.diabetes" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-        <view class="other">
-          <wd-cell title="高血压" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.hypertension" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-        <view class="other">
-          <wd-cell title="高血脂" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.hyperlipidemia" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-        <view class="other">
-          <wd-cell title="代谢综合症" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.metabolicSyndrome" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-        <view class="other">
-          <wd-cell title="慢性肝炎" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.chronicHepatitis" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-        <view class="other">
-          <wd-cell title="结核病" title-width="100px" prop="count">
-            <wd-radio-group v-model="form.tuberculosis" shape="dot" inline>
-              <wd-radio value="1">有</wd-radio>
-              <wd-radio value="2">无</wd-radio>
-            </wd-radio-group>
-          </wd-cell>
-        </view>
-
-      </wd-cell-group>  
-
-      <view class="submit" @click="handleSubmit">
-        更新
-      </view>
-    </wd-form>
-
-   </view>
+    </view>
 
 
   </view>
- </template>
+</template>
 
- <script lang="ts" setup>
-import { ref ,reactive} from 'vue'
+<script lang="ts" setup>
+import { ref, reactive } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
 import { updatePatient } from "@/apis/patient/index"
 
-import { usePatientStore }  from "@/store/patient"
+import { usePatientStore } from "@/store/patient"
 import { showError } from '@/utils/show'
 
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
 
+console.log(patientStore.patientInfo.complication)
 
-const form = reactive({
 
-  coronaryHeartDisease: patientInfo.value.complication?.coronaryHeartDisease,
-  cerebralApoplexy: patientInfo.value.complication?.cerebralApoplexy,
-  fragilityFractures: patientInfo.value.complication?.fragilityFractures,
-  brainTumor: patientInfo.value.complication?.brainTumor,
-  arthroplasty:patientInfo.value.complication?.arthroplasty,
-  diabetes:patientInfo.value.complication?.diabetes??"2",
-  hypertension:patientInfo.value.complication?.hypertension??"2",
-  hyperlipidemia:patientInfo.value.complication?.hyperlipidemia??"2",
-  metabolicSyndrome:patientInfo.value.complication?.metabolicSyndrome??"2",
-  chronicHepatitis:patientInfo.value.complication?.chronicHepatitis??"2",
-  tuberculosis:patientInfo.value.complication?.tuberculosis??"2",
+
+const form = patientStore.patientInfo.complication || reactive({
+
+  hypertension: '2',  // 高血压
+  diabetes: "2",//糖尿病
+  coronaryHeartDisease: '2', // 冠心病
+  hyperlipidemia: '2', // 高血脂
+
+  CerebralInfarction: 2,// 脑梗
+
+  tuberculosis: 2,  //结核
+
+  tumor: { value: 2, type: '' },//肿瘤
+
+  infect: {},// 感染
+  other: ''
+
+
+
 
 })
 
@@ -170,21 +161,21 @@ const formRef = ref()
 
 const handleSubmit = () => {
 
-  const formInfo = {complication:form}
+  const formInfo = { complication: form }
 
-  console.log('forminfo',formInfo)
+  console.log('forminfo', formInfo)
   formRef.value
     .validate()
-    .then(async (data:any) => {
+    .then(async (data: any) => {
       if (data.valid) {
-  
-        const res = await updatePatient({idCard:patientInfo.value.idCard,userInfo:formInfo});
-    
-        if(res.code==0){
-          patientStore.updatePatientInfo(res.data)
-          uni.navigateTo({'url':"/pages/patient/finish"})
 
-        }else{
+        const res = await updatePatient({ idCard: patientInfo.value.idCard, userInfo: formInfo });
+
+        if (res.code == 0) {
+          patientStore.updatePatientInfo(res.data)
+          uni.navigateTo({ 'url': "/pages/patient/finish" })
+
+        } else {
           showError(res.msg)
         }
       } else {
@@ -192,13 +183,13 @@ const handleSubmit = () => {
         return
       }
     })
-    .catch((error:any) => {
+    .catch((error: any) => {
       showError('异常信息请重新操作')
       console.log(error, 'error')
     })
 }
 
- </script>
+</script>
 
 <script lang="ts">
 export default {
@@ -209,27 +200,29 @@ export default {
 }
 </script>
 
- <style lang="scss">
+<style lang="scss">
+.main {
+  opacity: 1;
+  background: rgba(245, 245, 245, 1);
 
+  .body {
+    padding: 30rpx;
 
- .main{
-   opacity: 1;
-   background: rgba(245, 245, 245, 1);
-   .body{
-    padding: 30rpx ;
-    .base_info{
+    .base_info {
       display: flex;
       align-items: center;
       margin-bottom: 40rpx;
 
-      image{
+      image {
         width: 26rpx;
         height: 28rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
-      view{
+
+      view {
         margin-left: 8rpx;
         font-size: 16px;
         font-weight: 700;
@@ -239,14 +232,14 @@ export default {
       }
     }
 
-    .other{
+    .other {
       margin-top: 20rpx;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
 
     }
 
-    .history{
+    .history {
       display: flex;
       align-items: center;
       margin-bottom: 40rpx;
@@ -254,15 +247,17 @@ export default {
       display: flex;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
-      image{
+
+      image {
         width: 26rpx;
         height: 28rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
 
-      view{
+      view {
         margin-left: 8rpx;
         font-size: 16px;
         font-weight: 700;
@@ -271,7 +266,8 @@ export default {
         color: rgba(56, 56, 56, 1);
       }
     }
-    .submit{
+
+    .submit {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -287,12 +283,13 @@ export default {
 
 
     // 背景色
-    :deep(.wd-cell-group__body){
+    :deep(.wd-cell-group__body) {
       opacity: 1;
       background: rgba(245, 245, 245, 1);
     }
+
     // input 文字位置
-    :deep(.wd-input__value){
+    :deep(.wd-input__value) {
 
       opacity: 1;
       background: rgba(255, 255, 255, 1);
@@ -314,17 +311,18 @@ export default {
 
 
     // 冠心病 脑卒
-    :deep(.wd-cell__wrapper){
+    :deep(.wd-cell__wrapper) {
       align-items: center;
     }
-    :deep(.wd-radio-group){
+
+    :deep(.wd-radio-group) {
       display: flex;
       align-items: center;
       justify-content: flex-end;
     }
 
-   }
+  }
 
 
- }
- </style>
+}
+</style>
