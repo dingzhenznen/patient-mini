@@ -19,6 +19,9 @@ export type Patient = {
   remark?: string //备注
   tags?: [] // 其他
   followList: followInfo[]
+  attackTime?: number // 发病时间
+  confirmTime?: number // 确诊时间
+  chiefComplaint?: string
   history?: {
     // 病史
     attackTime?: number // 发病时间

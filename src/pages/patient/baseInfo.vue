@@ -42,63 +42,25 @@
             <view>病史</view>
           </view>
           <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="history.attackTime" :align-right="flag"
-            v-model="form.history.attackTime" @confirm="attackConfirm"
+            v-model="form.attackTime" @confirm="attackConfirm"
             :rules="[{ required: false, pattern: /\S/, message: '请选择发病时间日期' }]" />
           <wd-calendar label="确诊时间" label-width="100px" placeholder="必填" prop="history.confirmTime" :align-right="flag"
-            v-model="form.history.confirmTime" @confirm="confirmConfirm"
+            v-model="form.confirmTime" @confirm="confirmConfirm"
             :rules="[{ required: false, pattern: /\S/, message: '请选择发病时间日期' }]" />
 
           <view class="other">
 
-
-            <wd-cell title="冠心病" title-width="100px" prop="count">
-
-              <wd-radio-group v-model="form.complication.coronaryHeartDisease" shape="dot" inline>
-                <wd-radio value="1">有</wd-radio>
-                <wd-radio value="2">无</wd-radio>
-              </wd-radio-group>
-
-            </wd-cell>
-
-          </view>
-
-          <view class="other">
-
-            <wd-cell title="脑卒中" title-width="100px" prop="count">
-              <view>
-                <wd-radio-group v-model="form.complication.cerebralApoplexy" shape="dot" inline>
-                  <wd-radio value="1">有</wd-radio>
-                  <wd-radio value="2">无</wd-radio>
-                </wd-radio-group>
-              </view>
-            </wd-cell>
-
-          </view>
-
-          <view class="other">
-
-            <wd-cell title="脆性骨折" title-width="100px" prop="count">
-              <view>
-                <wd-radio-group v-model="form.complication.fragilityFractures" shape="dot" inline>
-                  <wd-radio value="1">有</wd-radio>
-                  <wd-radio value="2">无</wd-radio>
-                </wd-radio-group>
-              </view>
-            </wd-cell>
-
-          </view>
-
-
-          <view class="other">
-
-            <wd-cell title="脑瘤" title-width="100px" prop="count">
+            <!-- <wd-cell title="脑瘤" title-width="100px" prop="count">
               <view>
                 <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline>
                   <wd-radio value="1">有</wd-radio>
                   <wd-radio value="2">无</wd-radio>
                 </wd-radio-group>
               </view>
-            </wd-cell>
+            </wd-cell> -->
+
+            <wd-input label="主诉" label-width="100px" prop="remark" v-model="form.chiefComplaint" placeholder="请输入主诉"
+              :rules="[]" />
 
           </view>
 
@@ -133,25 +95,18 @@ const patientStore = usePatientStore();
 console.log('patientinfo', patientStore.patientInfo)
 
 
-const form = reactive({
+const form = patientStore.patientInfo || reactive({
   name: '',
-  idCard: patientStore.patientInfo.idCard,
+  idCard: '',
   phone: "",
   caseId: '',
   height: '',
   weight: '',
   tags: [],// 其他
   remark: '',
-  history: {
-    attackTime: new Date(new Date().toLocaleDateString()).getTime(),
-    confirmTime: '',
-  },
-  complication: {
-    coronaryHeartDisease: 0,
-    cerebralApoplexy: 0,
-    fragilityFractures: 0,
-    brainTumor: 0
-  }
+  attackTime: new Date(new Date().toLocaleDateString()).getTime(),
+  confirmTime: '',
+  chiefComplaint: ''
 
 })
 const formRef = ref()
@@ -166,11 +121,11 @@ const handleTagsSelect = (data: any) => {
 
 const attackConfirm = (data: any) => {
 
-  form.history.attackTime = data.value
+  form.attackTime = data.value
 
 }
 const confirmConfirm = (data: any) => {
-  form.history.confirmTime = data.value
+  form.confirmTime = data.value
 }
 
 

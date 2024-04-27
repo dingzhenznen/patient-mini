@@ -1,172 +1,155 @@
 <template>
   <view class="main">
 
-   <view class="body">
-    <wd-form ref="formRef" :model="form">
-      <view class="base_info">
-        <image class="img" src="../../static/img/base-info.png"></image>
+    <view class="body">
+      <wd-form ref="formRef" :model="form">
+        <view class="base_info">
+          <image class="img" src="../../static/img/base-info.png"></image>
 
-        <view>基本信息</view>
-      </view>
-      <wd-cell-group border>
-          <wd-input
-          label="姓名"
-          label-width="100px"
-          prop="name"
+          <view>基本信息</view>
+        </view>
+        <wd-cell-group border>
+          <wd-input label="姓名" label-width="160rpx" prop="name" v-model="form.name" placeholder="请输入患者姓名"
+            :rules="[{ required: true, pattern: /\S/, message: '请输入姓名' }]" />
+          <wd-input label="身份证" label-width="160rpx" prop="idCard" readonly v-model="form.idCard"
+            placeholder="340602197006152466" :rules="[{ required: true, pattern: /\d{18}/, message: '请输入合法身份证' }]" />
+          <wd-input label="手机号" label-width="100px" prop="phone" v-model="form.phone" placeholder="请输入手机号码"
+            :rules="[{ required: true, pattern: /\d{11}/, message: '请输入合法手机号' }]" />
 
-          v-model="form.name"
-          placeholder="请输入患者姓名"
-          :rules="[{ required: true, pattern: /\S/, message: '姓名不能为空' }]"
-        />
-        <wd-input
-          label="身份证"
-          label-width="160rpx"
-          prop="idCard"
-          readonly
-          v-model="form.idCard"
-          placeholder="340602197006152466"
-          :rules="[{ required: true, pattern: /\d{18}/, message: '请输入合法身份证' }]"
-        />
-        <wd-input
-          label="手机号"
-          label-width="100px"
-          prop="phone"
-        
-          v-model="form.phone"
-          placeholder="请输入手机号码"
-          :rules="[{ required: true, pattern: /\d{11}/, message: '请输入合法手机号' }]"
-        />
+          <wd-input label="ID或病历号" label-width="200rpx" prop="caseId" v-model="form.caseId" placeholder="请输入ID或病历号"
+            :rules="[{ required: true, pattern: /\S/, message: '请输入病例号' }]" />
 
-        <wd-input
-          label="ID或病历号"
-          label-width="200rpx"
-          prop="caseId"
-         
-          v-model="form.caseId"
-          placeholder="请输入ID或病历号"
-          :rules="[{ required: true,pattern: /\S/, message: '请输入病例号' }]"
-        />
+          <wd-input label="身高(cm)" label-width="100px" prop="height" v-model="form.height" placeholder="请输入身高"
+            :rules="[{ required: true, pattern: /\S/, message: '请输入身高' }]" />
 
-        <wd-input
-          label="身高(cm)"
-          label-width="100px"
-          prop="height"
-        
-          v-model="form.height"
-          placeholder="请输入身高"
-          :rules="[{ required: true,pattern: /\S/, message: '请输入身高' }]"
-        />
+          <wd-input label="体重(kg)" label-width="100px" prop="weight" v-model="form.weight" placeholder="请输入体重"
+            :rules="[{ required: true, pattern: /\S/, message: '请输入体重' }]" />
 
-        <wd-input
-          label="体重(kg)"
-          label-width="100px"
-          prop="weight"
-         
-          v-model="form.weight"
-          placeholder="请输入体重"
-          :rules="[{ required: true, pattern: /\S/,message: '请输入体重' }]"
-        />
+          <view class="other">
 
-    <view class="other">
-
-      <!-- <wd-cell title="其他" value="内容" is-link @click="handleClick" /> -->
-      <Tags @handleSelect="handleTagsSelect" :originTags="form.tags"></Tags>
+            <!-- <wd-cell title="其他" value="内容" is-link @click="handleClick" /> -->
+            <Tags @handleSelect="handleTagsSelect" :originTags="form.tags"></Tags>
 
 
-      <wd-input
-        label="备注"
-        label-width="100px"
-        prop="remark"
-        v-model="form.remark"
-        placeholder="请输入备注(可选)"
-        :rules="[]"
-      />
+            <wd-input label="备注" label-width="100px" prop="remark" v-model="form.remark" placeholder="请输入备注(可选)"
+              :rules="[]" />
+          </view>
+
+
+
+          <view class="history">
+            <image class="img" src="../../static/img/base-info.png"></image>
+            <view>病史</view>
+          </view>
+          <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="history.attackTime" :align-right="flag"
+            v-model="form.attackTime" @confirm="attackConfirm"
+            :rules="[{ required: false, pattern: /\S/, message: '请选择发病时间日期' }]" />
+          <wd-calendar label="确诊时间" label-width="100px" placeholder="必填" prop="history.confirmTime" :align-right="flag"
+            v-model="form.confirmTime" @confirm="confirmConfirm"
+            :rules="[{ required: false, pattern: /\S/, message: '请选择发病时间日期' }]" />
+
+          <view class="other">
+
+            <!-- <wd-cell title="脑瘤" title-width="100px" prop="count">
+              <view>
+                <wd-radio-group v-model="form.complication.brainTumor" shape="dot" inline>
+                  <wd-radio value="1">有</wd-radio>
+                  <wd-radio value="2">无</wd-radio>
+                </wd-radio-group>
+              </view>
+            </wd-cell> -->
+
+            <wd-input label="主诉" label-width="100px" prop="remark" v-model="form.chiefComplaint" placeholder="请输入主诉"
+              :rules="[]" />
+
+          </view>
+
+        </wd-cell-group>
+
+        <view class="submit" @click="handleSubmit">
+          更新
+        </view>
+      </wd-form>
+
     </view>
 
 
-
-
-  </wd-cell-group>
-
-      <view class="submit" @click="handleSubmit">
-        更新
-      </view>
-    </wd-form>
-
-   </view>
-
-
   </view>
- </template>
+</template>
 
- <script lang="ts" setup>
-import { ref ,reactive} from 'vue'
-import { storeToRefs } from 'pinia'
+<script lang="ts" setup>
+import { ref, reactive } from 'vue'
 
-import Tags from '../../components/tags.vue'
+import Tags from '../../components/tags.vue';
 
-import { updatePatient } from "@/apis/patient/index"
+import { addPatient } from "@/apis/patient/index"
 
-import { usePatientStore }  from "@/store/patient"
-
+import { usePatientStore } from "@/store/patient"
+import { useUserStore } from "@/store/user"
 import { showError } from '@/utils/show'
+
+const userStore = useUserStore();
 
 const patientStore = usePatientStore();
 
-const { patientInfo } = storeToRefs(patientStore)
-
-console.log('patientInfo',patientInfo.value.name)
+console.log('patientinfo', patientStore.patientInfo)
 
 
-const form = reactive({
-  name: patientInfo.value.name,
-  idCard:patientInfo.value.idCard,
-  phone:patientInfo.value.phone,
-  caseId:patientInfo.value.caseId,
-  height:patientInfo.value.height,
-  weight:patientInfo.value.weight,
-  remark:patientInfo.value.remark,
-  tags:patientInfo.value.tags
-
-})
+const form = patientStore.patientInfo
 const formRef = ref()
 
-const handleTagsSelect =(data:any)=>{
+const flag = ref<boolean>(true)
+
+const handleTagsSelect = (data: any) => {
 
   form.tags = data
 
 }
 
+const attackConfirm = (data: any) => {
+
+  form.attackTime = data.value
+
+}
+const confirmConfirm = (data: any) => {
+  form.confirmTime = data.value
+}
+
+
+
 const handleSubmit = () => {
+
+  //uni.navigateTo({'url':"/pages/patient/follow"}
+  console.log(form)
 
   formRef.value
     .validate()
-    .then(async (data:any) => {
+    .then(async (data: any) => {
       if (data.valid) {
 
-        const res = await updatePatient({idCard:form.idCard,userInfo:form});
-    
-        if(res.code==0){
+        console.log(form)
 
+        const res = await addPatient({ idCard: form.idCard, doctorId: userStore.userInfo._id, userInfo: form });
+
+        if (res.code == 0) {
           patientStore.updatePatientInfo(res.data)
+          uni.navigateTo({ 'url': "/pages/patient/finish" })
 
-          uni.navigateTo({'url':"/pages/patient/finish"})
-
-        }else{
+        } else {
           showError(res.msg)
         }
       } else {
+        console.log(data)
         showError(data.errors[0].message)
-        return
       }
     })
-    .catch((error:any) => {
+    .catch((error: any) => {
       showError('异常信息请重新操作')
       console.log(error, 'error')
     })
 }
 
- </script>
+</script>
 
 <script lang="ts">
 export default {
@@ -177,27 +160,29 @@ export default {
 }
 </script>
 
- <style lang="scss">
+<style lang="scss">
+.main {
+  opacity: 1;
+  background: rgba(245, 245, 245, 1);
 
+  .body {
+    padding: 30rpx;
 
- .main{
-   opacity: 1;
-   background: rgba(245, 245, 245, 1);
-   .body{
-    padding: 30rpx ;
-    .base_info{
+    .base_info {
       display: flex;
       align-items: center;
       margin-bottom: 40rpx;
 
-      image{
+      image {
         width: 26rpx;
         height: 28rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
-      view{
+
+      view {
         margin-left: 8rpx;
         font-size: 16px;
         font-weight: 700;
@@ -207,14 +192,14 @@ export default {
       }
     }
 
-    .other{
+    .other {
       margin-top: 20rpx;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
 
     }
 
-    .history{
+    .history {
       display: flex;
       align-items: center;
       margin-bottom: 40rpx;
@@ -222,15 +207,17 @@ export default {
       display: flex;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
-      image{
+
+      image {
         width: 26rpx;
         height: 28rpx;
-        .img{
+
+        .img {
           width: 100%;
         }
       }
 
-      view{
+      view {
         margin-left: 8rpx;
         font-size: 16px;
         font-weight: 700;
@@ -239,7 +226,8 @@ export default {
         color: rgba(56, 56, 56, 1);
       }
     }
-    .submit{
+
+    .submit {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -255,12 +243,13 @@ export default {
 
 
     // 背景色
-    :deep(.wd-cell-group__body){
+    :deep(.wd-cell-group__body) {
       opacity: 1;
       background: rgba(245, 245, 245, 1);
     }
+
     // input 文字位置
-    :deep(.wd-input__value){
+    :deep(.wd-input__value) {
 
       opacity: 1;
       background: rgba(255, 255, 255, 1);
@@ -280,19 +269,27 @@ export default {
 
     }
 
+    :deep(.wd-calendar__error-message) {
+      display: none;
+      content: none;
+      color: transparent;
+
+    }
+
 
     // 冠心病 脑卒
-    :deep(.wd-cell__wrapper){
+    :deep(.wd-cell__wrapper) {
       align-items: center;
     }
-    :deep(.wd-radio-group){
+
+    :deep(.wd-radio-group) {
       display: flex;
       align-items: center;
       justify-content: flex-end;
     }
 
-   }
+  }
 
 
- }
- </style>
+}
+</style>

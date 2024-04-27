@@ -1,321 +1,194 @@
 <template>
-  <view class="main">
+
+  <view class="body">
+
+    <wd-input type="text" v-model="value" placeholder="请输入用户名" @change="handleChange" />
 
 
-    <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.renalFunction.ALT" unit="g/L" range="4 - 10">
-    </InputChart>
+    <view v-for="(items, index) in content" :key="index">
 
-    <wd-tabs v-model="tab">
-      <block>
-        <wd-tab title="血常规">
-          <wd-cell-group border>
-            <wd-cell title="血常规" title-width="100px" prop="count">
-              <wd-radio-group v-model="form.bloodRoutine.status" shape="dot" inline>
-                <wd-radio value="1">正常</wd-radio>
-                <wd-radio value="2">异常</wd-radio>
-                <wd-radio value="2">未做</wd-radio>
-              </wd-radio-group>
-            </wd-cell>
-          </wd-cell-group>
+      <view v-if="items.type == 2">
 
-          <InputChart title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC" unit="*10^9个/L" low="4"
-            height="10">
-          </InputChart>
+        <Radios :title="items.title" v-model="items.value" :options="RadioOptions.enhance"></Radios>
 
-          <InputChart title="L" china="(淋巴细胞)" v-model="form.bloodRoutine.L" unit="*10^9个/L" low="0.8" height="4">
-          </InputChart>
+      </view>
 
-          <InputChart title="Hb" china="(血红蛋白)" v-model="form.bloodRoutine.Hb" unit="g/L" low="110" height="150">
-          </InputChart>
+      <view v-else-if="items.type == 3">
 
-          <InputChart title="PLT" china="(血小板)" v-model="form.bloodRoutine.PLT" unit="*10^9个/L" low="100" height="300">
-          </InputChart>
-        </wd-tab>
-      </block>
+        <Radios :title="items.title" v-model="items.value" :options="RadioOptions.enhanceDegree"></Radios>
 
-      <block>
-        <wd-tab title="肝肾功">
-          <wd-cell-group border>
-            <wd-cell title="肝肾功" title-width="100px" prop="count">
-              <wd-radio-group v-model="form.renalFunction.status" shape="dot" inline>
-                <wd-radio value="1">正常</wd-radio>
-                <wd-radio value="2">异常</wd-radio>
-                <wd-radio value="2">未做</wd-radio>
-              </wd-radio-group>
-            </wd-cell>
-          </wd-cell-group>
+      </view>
 
-          <InputChart title="ALT" china="(丙氨酸氨基转移酶)" v-model="form.renalFunction.ALT" unit="U/L" low="0" height="40">
-          </InputChart>
+      <view v-else-if="items.type == 1">
 
-          <InputChart title="AST" china="(天门冬氨酸氨基转移酶)" v-model="form.renalFunction.ALT" unit="U/L" low="0" height="40">
-          </InputChart>
+        <Radios :title="items.title" v-model="items.value" :options="RadioOptions.yn"></Radios>
 
-          <InputChart title="TBIL" china="(总胆红素)" v-model="form.renalFunction.TBIL" unit="mmol/L" low="5.1" height="19">
-          </InputChart>
+        <view v-if="items.value && items.type == 1">
 
-          <InputChart title="DBIL" china="(直接胆红素)" v-model="form.renalFunction.DBIL" unit="mmol/L" low="1.5"
-            height="6.8">
-          </InputChart>
+          <Radios title="动脉瘤" v-model="items.age" :options="RadioOptions.four"></Radios>
 
-          <InputChart title="ALB" china="(白蛋白)" v-model="form.renalFunction.ALB" unit="g/L" low="35" height="55">
-          </InputChart>
+          <Radios title="夹层动脉瘤" v-model="items.height" :options="RadioOptions.four"></Radios>
 
-          <InputChart title="PA" china="(前白蛋白)" v-model="form.renalFunction.PA" unit="mg/L" low="200" height="400">
-          </InputChart>
+          <Radios title="" v-model="items.height" :options="RadioOptions.three"></Radios>
 
-          <InputChart title="Cr" china="(肌酐)" v-model="form.renalFunction.Cr" unit="umol/L" low="53" height="132">
-          </InputChart>
+          <Radios v-if="items.hasOwnProperty('weight')" title="weight" v-model="items.weight"
+            :options="RadioOptions.three">
+          </Radios>
 
-          <InputChart title="UA" china="(尿酸)" v-model="form.renalFunction.UA" unit="umol/L" low="85" height="350">
-          </InputChart>
+        </view>
 
-          <InputChart title="空腹血糖" china="" v-model="form.renalFunction.ALB" unit="g/L">
-          </InputChart>
-        </wd-tab>
-      </block>
-
-      <block>
-        <wd-tab title="血脂">
-
-
-          <InputChart title="CHO" china="(总胆固醇)" v-model="form.bloodFat.CHO" unit="mmol/L" low="3.35" height="6.4">
-          </InputChart>
-
-          <InputChart title="TG" china="(甘油三酯)" v-model="form.bloodFat.TG" unit="mmol/L" low="0.58" height="1.8">
-          </InputChart>
-
-          <InputChart title="HDL-C" china="(高密度脂蛋白胆固醇)" v-model="form.bloodFat.HDL_C" unit="mmol/L" low="0.8"
-            height="1.8">
-          </InputChart>
-
-          <InputChart title="LDL-c" china="(低密度脂蛋白胆固醇)" v-model="form.bloodFat.LDL_C" unit="mmol/L" low="1.5"
-            height="3.1">
-          </InputChart>
-
-        </wd-tab>
-      </block>
-
-      <block>
-        <wd-tab title="免疫">
-          <InputChart title="ESP" china="(血沉12)" :isRequire="isRequire" v-model="form.immunity.ESR" unit="mm/1h" low="0"
-            height="20">
-          </InputChart>
-
-          <InputChart title="CRP或hsCRP" china="" :isRequire="isRequire" v-model="form.immunity.CRP" unit="mg/L" low="0"
-            height="10">
-          </InputChart>
-
-          <InputChart title="IgG" china="(免疫球蛋白G)" v-model="form.immunity.IgG" unit="g/L">
-          </InputChart>
-
-          <InputChart title="IgA" china="(免疫球蛋白A)" v-model="form.immunity.IgA" unit="g/L" low="0.7" height="4">
-          </InputChart>
-
-          <InputChart title="IgM" china="(免疫球蛋白M)" v-model="form.immunity.IgM" unit="g/L" low="0.4" height="2.6">
-          </InputChart>
-
-          <InputChart title="RF" china="(类风湿因子)" v-model="form.immunity.RF" unit="U/ml" low="0" height="25">
-          </InputChart>
-
-        </wd-tab>
-      </block>
-
-      <block>
-        <wd-tab title="肝炎">
-        </wd-tab>
-      </block>
-
-      <block>
-        <wd-tab title="结核">
-        </wd-tab>
-      </block>
-
-      <block>
-        <wd-tab title="血常规">
-        </wd-tab>
-      </block>
-
-      <block>
-        <wd-tab title="尿检查">
-        </wd-tab>
-      </block>
+      </view>
 
 
 
-    </wd-tabs>
-    <InputChart title="RF" china="(类风湿因子)" v-model="form.immunity.RF" unit="U/ml" low="0" height="25">
-    </InputChart>
-    <RadioTable v-model="hello" title="测试" :options="optionList" :disabled="disabled" :table-data="testDataList" />
 
-    <wd-button @click="handleClick" style="margin-top: 40rpx;">click</wd-button>
 
+    </view>
+
+    <button @click="handleClick">dddd</button>
 
   </view>
-</template>
 
+
+
+</template>
 <script lang="ts" setup>
-import { onMounted, reactive, watch, ref } from 'vue'
+import { onLoad } from "@dcloudio/uni-app";
+import { reactive, ref } from "vue"
 
 import InputChart from "./components/inputChart"
-import RadioTable from './components/radioTable.vue'
 
-import type { CheckList } from '@/utils/types'
-const tab = ref(0)
-const disabled = ref(false)
+import Radios from "./components/radios"
 
-const isRequire = ref(true)
+type Item = {
+  title?: string,
+  name?: string,
+  type?: number,
+  value?: [number, string]
+  age?: string,
+  weight?: string,
+  height?: string
+}
 
-const form = reactive<CheckList>({
-  bloodRoutine: {//血常规
-    status: 0,
-    WBC: '',
-    L: '',
-    Hb: '',
-    PLT: ''
-  },
-  renalFunction: {//肝肾功
-    status: 0,
-    ALT: '',
-    AST: '',
-    TBIL: '',
-    DBIL: '',
-    ALB: '',
-    PA: '',
-    Cr: '',
-    UA: '',
-    BS: ''
-  },
-  bloodFat: {//血脂
-    CHO: '',
-    TG: '',
-    HDL_C: '',
-    LDL_C: ''
-  },
-  immunity: {
-    //免疫
-    ESR: '',
-    CRP: '',
-    IgG: '',
-    IgA: '',
-    IgM: '',
-    RF: ''
-  },
-  hepatitis: { //肝炎
-    HBsAg: 0,
-    HBeAg: 0,
-    HBeAb: 0,
-    HBcAb: 0,
-    HBV_DNA: 0,
-    HBV_DNA_value: '',
-    HCV_Ab: 0,
-    HCV_RNA: 0,
-    HCV_RNA_value: ''
-  },
-  tuberculosis: { //结核
-    PDD: -1, // -1未选 0阴性 1 2 3 4
-    TB_SPOT: 0,
-    TB_SPOT_A: '',
-    TB_SPOT_B: ''
-  },
-  bloodRoutine_2: { //血常规
-    N: '',
-    RBC: '',
-    HCT: '',
-  },
-  Urinalysis: {
-    //尿检查
-    white: '',
-    red: 0,
-    red_value: '',
-    redBlood: '',
-    up: 0,
-    up_value: '',
-    up24_value: '',
-  },
-  liverKidney: {
-    // 肝肾全
-    TP: '',
-    AG: '',
-    GGP: '',
-    ALP: '',
-    LDH: '',
-    CK: '',
-    Urea: '',
-    Ca: '',
-    p: '',
-  },
-  boneLoosening: {
-    //骨松检测
-    d25: '',
-  },
-  immuneFull: {
-    //免疫全项
-    CH50: '',
-    C3: '',
-    C4: '',
-  },
-  selfAntibody: {
-    // 自身抗体
-    ANA: '',
-    dsDNA: '',
-    Sm: '',
-    RNP: '',
-    SSA: '',
-    SSB: '',
-    rRNP: '',
-    Scl_70: '',
-    Jo_1: '',
-  },
-  coagulation: {
-    // 凝血
-    D_Dimer: '',
-    PT: '',
-    APPT: '',
-    PTINR: '',
-  },
-  Sirolimus: {
-    // 西罗莫司
-    Sirolimus: '',
-  }
+const content = reactive<Item[]>([]);
 
-})
-const optionList = [
-  { value: 1, label: '正常' },
-  { value: 2, label: '异常' },
-  { value: 3, label: '未做' },
-  { value: 4, label: '未知' },
-]
-const testDataList = [
-  { date: '2021-09-01', value: 1.4 },
-  { date: '2021-09-01', value: 3.4 },
-  { date: '2021-09-01', value: 6.8 },
-]
-const hello = ref(0)
+const value = ref('0')
 
-console.log(form)
+const handleChange = () => {
+
+}
+
+
+const RadioOptions = {
+  yn: [
+    {
+      value: 1,
+      label: '有'
+    },
+    {
+      value: 0,
+      label: '无'
+    }
+  ],
+
+  enhance: [
+    {
+      value: 1,
+      label: '增强'
+    },
+    {
+      value: 0,
+      label: '无增强'
+    }
+  ],
+
+  enhanceDegree: [
+    {
+      value: 0,
+      label: '同前'
+    },
+    {
+      value: 1,
+      label: '消失'
+    },
+    {
+      value: 2,
+      label: '减轻'
+    },
+    {
+      value: 3,
+      label: '加重'
+    }
+  ],
+  three: [
+    {
+      value: 0,
+      label: '轻'
+    },
+    {
+      value: 1,
+      label: '中'
+    },
+    {
+      value: 2,
+      label: '重'
+    }
+  ],
+  four: [
+    {
+      value: 0,
+      label: '新发'
+    },
+    {
+      value: 1,
+      label: '加重'
+    },
+    {
+      value: 2,
+      label: '同前'
+    },
+    {
+      value: 3,
+      label: '有改善'
+    }
+
+  ]
+}
 
 const handleClick = () => {
-  console.log(form)
+  console.log(value)
+  console.log(content)
 }
 
+onLoad(() => {
+  const array = [
+    { "title": "超声造影", name: 'cz', type: 2, },
+    { "title": "超声造影程度", name: 'czc', type: 3, },
+    { "title": "颈总动脉（右）", name: 'jy', type: 1, },
+    { "title": "颈总动脉（左）", name: 'jz', type: 1, }
+  ]
 
-</script>
+  //const type = param.type; 根据传来的 类型判断 option里有哪些属性
 
-<script lang="ts">
-export default {
-  options: {
-    styleIsolation: 'shared',
+  const type = 2;
 
+  let option = {}
+
+  if (type == 1) {
+    option = { value: '', age: '', height: '', weight: '' }
+  } else {
+    option = { value: '', age: '', height: '' }
   }
-}
+
+
+  array.forEach((item, index) => {
+    content.push(Object.assign({}, item, option))
+  })
+
+  console.log(content)
+
+})
+
 </script>
 
-<style lang="scss">
-.main {
-  opacity: 1;
-
-
-
-}
-</style>
+<style lang="scss"></style>
