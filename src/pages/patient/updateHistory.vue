@@ -25,40 +25,40 @@
               </wd-radio-group>
 
             </wd-cell>
+            <view v-if="['2', '3'].includes(form.smoke.value)">
 
-            <wd-calendar label="吸烟时间" label-width="100px" placeholder="必填" :align-right="flag"
-              v-model="form.smoke.startTime" />
+              <wd-datetime-picker type="date" v-model="form.smoke.startTime" :min-date="minDate" :align-right="flag"
+                label="吸烟时间" />
 
-            <wd-input label="支数（支/日）" label-width="100px" prop="remark" v-model="form.smoke.num" placeholder="必填"
-              :rules="[]" />
+              <wd-input label="支数（支/日）" label-width="100px" prop="remark" v-model="form.smoke.num" placeholder="必填"
+                :rules="[]" />
 
-            <wd-calendar label="戒烟时间" label-width="100px" placeholder="必填" :align-right="flag"
-              v-model="form.smoke.endTime" />
-
-
+              <wd-datetime-picker v-if="form.smoke.value == 2" type="date" v-model="form.smoke.endTime"
+                :min-date="minDate" :align-right="flag" label="戒烟时间" />
+            </view>
           </view>
 
           <view class="other">
             <wd-cell title="饮酒史" title-width="100px" prop="count">
-
-              <wd-radio-group v-model="form.smoke.value" shape="dot" inline>
+              <wd-radio-group v-model="form.drink.value" shape="dot" inline>
                 <wd-radio value="1">从不</wd-radio>
                 <wd-radio value="2">已戒酒</wd-radio>
                 <wd-radio value="3">喝酒</wd-radio>
               </wd-radio-group>
 
             </wd-cell>
+            <view v-if="['2', '3'].includes(form.drink.value)">
 
-            <wd-calendar label="喝酒时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
-              v-model="form.drink.startTime" />
+              <wd-datetime-picker type="date" v-model="form.drink.startTime" :min-date="minDate" :align-right="flag"
+                label="喝酒时间" />
 
-            <wd-input label="酒精量（g/日）" label-width="100px" prop="remark" v-model="form.drink.num" placeholder="必填"
-              :rules="[]" />
+              <wd-input label="酒精量（g/日）" label-width="100px" prop="remark" v-model="form.drink.num" placeholder="必填"
+                :rules="[]" />
 
-            <wd-calendar label="戒酒时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
-              v-model="form.drink.endTime" />
+              <wd-datetime-picker v-if="form.drink.value == 2" type="date" v-model="form.drink.endTime"
+                :min-date="minDate" :align-right="flag" label="戒酒时间" />
 
-
+            </view>
           </view>
 
           <view class="other">
@@ -71,12 +71,12 @@
 
             </wd-cell>
 
-            <wd-input label="子女" label-width="100px" prop="remark" v-model="form.marry.num" placeholder="请输入子女个数"
-              :rules="[]" />
+            <wd-input v-if="form.marry.value == 1" label="子女" label-width="100px" prop="remark" v-model="form.marry.num"
+              placeholder="请输入子女个数" :rules="[]" />
 
           </view>
 
-          <view class="other">
+          <view class="other" v-if="patientInfo.sex == 2">
 
             <wd-input label="初潮年龄/岁" label-width="100px" prop="remark" v-model="form.female.menarche" placeholder=""
               :rules="[]" />
@@ -87,11 +87,9 @@
             <wd-input label="周期/天" label-width="100px" prop="remark" v-model="form.female.cycle" placeholder=""
               :rules="[]" />
 
-
-
           </view>
 
-          <view class="other">
+          <view class="other" v-if="patientInfo.sex == 2">
 
             <wd-cell title="是否绝经" title-width="100px" prop="count">
 
@@ -102,15 +100,15 @@
 
             </wd-cell>
 
-            <wd-input label="绝经年龄/岁" label-width="100px" prop="remark" v-model="form.female.g" placeholder=""
-              :rules="[]" />
+            <wd-input v-if="form.female.menopause == 1" label="绝经年龄/岁" label-width="100px" prop="remark"
+              v-model="form.female.g" placeholder="" :rules="[]" />
 
-            <wd-calendar label="末次月经" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
-              v-model="form.female.last" />
+            <wd-datetime-picker v-if="form.female.menopause == 2" type="date" v-model="form.female.last"
+              :min-date="minDate" :align-right="flag" label="末次月经" />
 
           </view>
 
-          <view class="other">
+          <view class="other" v-if="patientInfo.sex == 2">
 
             <wd-input label="孕/次" label-width="100px" prop="remark" v-model="form.female.g" placeholder=""
               :rules="[]" />
@@ -135,6 +133,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
+import dayjs from 'dayjs'
 
 import { storeToRefs } from 'pinia'
 
@@ -147,19 +146,14 @@ import { showError } from '@/utils/show'
 const patientStore = usePatientStore();
 
 const { patientInfo } = storeToRefs(patientStore)
-
-interface PhoneItem {
-  datetime: number
-  content: string
-}
-
-
+const flag = ref<boolean>(true)
+const minDate = dayjs().subtract(50, 'year').valueOf()
 const form = reactive({
 
   attackTime: patientInfo.value.history?.attackTime,
   confirmTime: patientInfo.value.history?.confirmTime,
-  smoke: { value: 2, startTime: "", num: "", endTime: '' },
-  drink: { value: 2, startTime: "", num: "", endTime: '' },
+  smoke: { value: 0, startTime: "", num: "", endTime: '' },
+  drink: { value: 0, startTime: "", num: "", endTime: '' },
   marry: { value: "", num: '' },
   female: {
     menarche: '',// 初潮年龄
@@ -175,7 +169,6 @@ const form = reactive({
 })
 const formRef = ref()
 
-const flag = ref<boolean>(true)
 
 const handleSubmit = () => {
 

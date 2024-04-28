@@ -77,8 +77,8 @@
 
             </wd-cell>
 
-            <wd-input label="类型" label-width="100px" prop="remark" v-model="form.tumor.type" placeholder="请输入肿瘤类型"
-              :rules="[]" />
+            <wd-input v-if="form.tumor.value == 1" label="类型" label-width="100px" prop="remark"
+              v-model="form.tumor.type" placeholder="请输入肿瘤类型" :rules="[]" />
 
           </view>
 
@@ -93,8 +93,8 @@
 
             </wd-cell>
 
-            <wd-input label="种类" label-width="100px" prop="remark" v-model="form.infect.type" placeholder="请输入感染种类"
-              :rules="[]" />
+            <wd-input v-if="form.infect.value == 1" label="种类" label-width="100px" prop="remark"
+              v-model="form.infect.type" placeholder="请输入感染种类" :rules="[]" />
 
           </view>
 
@@ -106,28 +106,35 @@
 
           <view class="other">
 
-            <wd-cell title="时间">
+            <wd-cell title="是否手术" title-width="100px" prop="count">
 
-              病史<wd-icon name="add" size="22px" @click=""></wd-icon>
+              <wd-radio-group v-model="form.operation" shape="dot" inline>
+                <wd-radio value="1">有</wd-radio>
+                <wd-radio value="2">无</wd-radio>
+              </wd-radio-group>
 
             </wd-cell>
 
-            <wd-cell>
+            <wd-cell v-if="form.operation == 1" title="时间">
+
+              手术史<wd-icon name="add" size="22px"></wd-icon>
+
+            </wd-cell>
+
+            <wd-cell v-if="form.operation == 1">
 
               <template #title>
-                <wd-calendar use-default-slot>
-                  选择日期
-                </wd-calendar>
+                <wd-datetime-picker type="date" v-model="form.history.date" use-default-slot>
+                  {{ form.history.date ? dayjs(form.history.date).format('YYYY-MM-DD') : "选择日期" }}
+                </wd-datetime-picker>
               </template>
 
-              <wd-input no-border label-width="100px" prop="remark" v-model="form.other" placeholder="" :rules="[]" />
+              <wd-input no-border label-width="100px" prop="remark" v-model="form.history.content" placeholder=""
+                :rules="[]" />
 
             </wd-cell>
 
           </view>
-
-
-
 
 
         </wd-cell-group>
@@ -147,6 +154,8 @@
 import { ref, reactive } from 'vue'
 
 import { storeToRefs } from 'pinia'
+
+import dayjs from 'dayjs'
 
 import { updatePatient } from "@/apis/patient/index"
 
@@ -172,10 +181,12 @@ const form = patientStore.patientInfo.complication || reactive({
 
   tuberculosis: 2,  //结核
 
-  tumor: { value: 2, type: '' },//肿瘤
+  tumor: { value: "0", type: '' },//肿瘤
 
-  infect: {},// 感染
-  other: ''
+  infect: { value: "0", type: '' },// 感染
+  other: '',
+  operation: '',//手术
+  history: { date: '', content: '' }
 
 
 
@@ -190,6 +201,7 @@ const handleSubmit = () => {
   const formInfo = { complication: form }
 
   console.log('forminfo', formInfo)
+  return
   formRef.value
     .validate()
     .then(async (data: any) => {

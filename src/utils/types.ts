@@ -57,7 +57,9 @@ export type Patient = {
     metabolicSyndrome?: number // 代谢综合症
     chronicHepatitis?: number // 慢性肝炎（乙丙）
     tuberculosis?: number // 结核
-    other?: [] // 其他病史
+    other?: '' // 其他病史
+    operation?: number
+    history?: {}
   }
 
   followUpType?: string // 随访类型
