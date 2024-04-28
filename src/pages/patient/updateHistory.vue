@@ -28,49 +28,51 @@
           </view>
 
           <view class="other">
-            <wd-cell title="家族史" title-width="100px" prop="count">
+            <wd-cell title="已婚" title-width="100px" prop="count">
 
-              <wd-radio-group v-model="form.family" shape="dot" inline>
-                <wd-radio value="1">有</wd-radio>
-                <wd-radio value="2">无</wd-radio>
+              <wd-radio-group v-model="form.marry" shape="dot" inline>
+                <wd-radio value="1">是</wd-radio>
+                <wd-radio value="2">否</wd-radio>
               </wd-radio-group>
 
             </wd-cell>
+
+            <wd-input label="子女" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+              :rules="[]" />
 
           </view>
 
           <view class="other">
-            <wd-cell title="过敏史" title-width="100px" prop="count">
 
-              <wd-radio-group v-model="form.allergy" shape="dot" inline>
-                <wd-radio value="1">有</wd-radio>
-                <wd-radio value="2">无</wd-radio>
+            <wd-input label="初潮年龄" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+              :rules="[]" />
+
+            <wd-input label="持续时间" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+              :rules="[]" />
+
+            <wd-input label="周期" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+              :rules="[]" />
+
+            <wd-input label="孕" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+              :rules="[]" />
+
+            <wd-input label="产" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+              :rules="[]" />
+
+
+            <wd-cell title="是否绝经" title-width="100px" prop="count">
+
+              <wd-radio-group v-model="form.marry" shape="dot" inline>
+                <wd-radio value="1">是</wd-radio>
+                <wd-radio value="2">否</wd-radio>
               </wd-radio-group>
 
             </wd-cell>
 
+
           </view>
 
-          <!-- <wd-cell title="其他病史" center>
 
-        </wd-cell> -->
-
-          <!-- <wd-cell title="时间" center>
-          <wd-cell title="病史内容">
-            <wd-icon name="add" size="22px" @click="handleAdd"></wd-icon>
-          </wd-cell>
-        </wd-cell> -->
-
-          <!-- <view class="otherHistory">
-          <view class="item">
-
-            <wd-calendar use-default-slot >
-              <wd-button >选择日期</wd-button>
-            </wd-calendar>
-
-            <wd-input custom-class="otherInput"></wd-input>
-          </view>
-        </view> -->
         </wd-cell-group>
 
         <view class="submit" @click="handleSubmit">
@@ -110,7 +112,7 @@ const form = reactive({
   attackTime: patientInfo.value.history?.attackTime,
   confirmTime: patientInfo.value.history?.confirmTime,
   smoke: patientInfo.value.history?.smoke ?? "2",
-  family: patientInfo.value.history?.family ?? "2",
+  marry: "2",
   allergy: patientInfo.value.history?.allergy ?? "2",
 
   otherHistory: [] as PhoneItem[]

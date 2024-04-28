@@ -104,6 +104,32 @@
           </view>
 
 
+          <view class="other">
+
+            <wd-cell title="时间">
+
+              病史<wd-icon name="add" size="22px" @click=""></wd-icon>
+
+            </wd-cell>
+
+            <wd-cell>
+
+              <template #title>
+                <wd-calendar use-default-slot>
+                  选择日期
+                </wd-calendar>
+              </template>
+
+              <wd-input no-border label-width="100px" prop="remark" v-model="form.other" placeholder="" :rules="[]" />
+
+            </wd-cell>
+
+          </view>
+
+
+
+
+
         </wd-cell-group>
 
         <view class="submit" @click="handleSubmit">
@@ -236,6 +262,10 @@ export default {
       margin-top: 20rpx;
       opacity: 1;
       background: rgba(245, 245, 245, 1);
+
+      .item {
+        display: flex;
+      }
 
     }
 
