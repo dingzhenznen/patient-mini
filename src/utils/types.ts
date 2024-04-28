@@ -4,6 +4,27 @@ type followInfo = {
   nextDate: number
 }
 
+export type DrugInfo = {
+  drugType: string // 药物类别
+  chemicalName: string // 化学名称
+  productName: string // 商品名
+
+  dose: string // 剂量
+  unit: string // 单位
+
+  method: string // 给药方式
+  frequency: string // 给药频率
+  process?: string // 调药过程
+
+  startTime: number // 开始时间
+  endTime: number // 结束时间
+  reason: string // 调药原因
+}
+
+type TreatInfo = {
+  drugs: DrugInfo[]
+}
+
 export type Patient = {
   _id?: string
   doctorId?: string //sys_user id
@@ -39,6 +60,8 @@ export type Patient = {
     birthRequirement?: number // 生育要求
     other?: number
   }
+
+  treat?: TreatInfo
 
   diseaseName?: string // 疾病名称
 

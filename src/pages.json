@@ -106,6 +106,20 @@
       }
     },
     {
+      "path": "pages/patient/updateTreat",
+      "style": {
+        "navigationBarTitleText": "治疗方案",
+        "navigationBarBackgroundColor": "#5ae8b1"
+      }
+    },
+    {
+      "path": "pages/patient/addDrug",
+      "style": {
+        "navigationBarTitleText": "添加药物",
+        "navigationBarBackgroundColor": "#5ae8b1"
+      }
+    },
+    {
       "path": "pages/patient/finish",
       "style": {
         "navigationBarTitleText": "随诊",
