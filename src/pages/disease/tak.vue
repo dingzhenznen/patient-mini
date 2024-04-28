@@ -11,9 +11,41 @@
 
       <view class="content">
         <form>
-          <DiseaseCheckbox :optionList="optionList" :selectedList="form.selectedOption"
-            @handleCheckbox="handleCheckbox"></DiseaseCheckbox>
+          <DiseaseCheckbox :optionList="optionList" v-model="form.selectedOption"></DiseaseCheckbox>
         </form>
+      </view>
+
+
+      <view class="desc">
+        <view class="one">
+          2018年ACR修订标准
+        </view>
+        <view class="two">2条准入条件必须满足，且分类标准评分总分>=5分</view>
+      </view>
+      <view class="content2">
+
+        <wd-form :model="form2">
+
+          <wd-cell-group border>
+            <wd-cell center="true" title="诊断年龄<=60岁">
+              <wd-switch v-model="form2.age" />
+            </wd-cell>
+
+            <wd-cell center="true" title="影像学存在血管炎证据">
+              <wd-switch v-model="form2.age" />
+            </wd-cell>
+
+            <wd-cell title="临床表现" />
+            <!-- <DiseaseCheckbox :optionList="lcOption" :selectedList="form2.linchuang" @handleCheckbox="handleLc">
+            </DiseaseCheckbox> -->
+
+
+          </wd-cell-group>
+
+        </wd-form>
+
+
+
       </view>
       <DateSelect :date="form.datetime" @handleDatetime="handleDate"></DateSelect>
       <view class="button">
@@ -51,6 +83,10 @@ const optionList = [
   '6.血管造影异常:主动脉及其一级分支、四肢近端动脉狭窄或闭塞(除外动脉栓塞、肌纤维营养不良等原因)',
 ]
 
+const lcOption = [
+  '1.女性 ', '2.血管炎引起的心绞痛或缺血性心脏疼痛', '3.上肢和（或）下肢跛行',
+]
+
 const form = reactive({
   en: "tak",
   china: '大动脉炎症',
@@ -59,10 +95,18 @@ const form = reactive({
   selectedOption: patientInfo.value.selectDisease?.selectedOption ?? []
 })
 
+const form2 = reactive({
+  age: false,
+  linchuang: []
+
+})
 
 const handleCheckbox = (data: any) => {
   form.selectedOption = data.value
+}
 
+const handleLc = (data: any) => {
+  form2.linchuang = data.value
 }
 
 const handleDate = (date: any) => {
@@ -71,6 +115,9 @@ const handleDate = (date: any) => {
 }
 
 const handleSubmit = async () => {
+
+  console.log(form2)
+
 
   const formData = { idCard: patientInfo.value.idCard, userInfo: { selectDisease: form } };
 
@@ -140,7 +187,15 @@ export default {
 
     }
 
-    .content {}
+    .content {
+
+      // .checkbox {
+      //   padding: 0 40rpx;
+      //   padding-bottom: 20rpx;
+      // }
+    }
+
+
 
   }
 
