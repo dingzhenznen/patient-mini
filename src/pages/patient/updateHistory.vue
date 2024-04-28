@@ -10,66 +10,113 @@
             <image class="img" src="../../static/img/base-info.png"></image>
             <view>病史</view>
           </view>
-          <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
+          <!-- <wd-calendar label="发病时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
             v-model="form.attackTime" @confirm="attackConfirm" />
           <wd-calendar label="确诊时间" label-width="100px" placeholder="必填" prop="confirmTime" :align-right="flag"
-            v-model="form.confirmTime" @confirm="confirmConfirm" />
+            v-model="form.confirmTime" @confirm="confirmConfirm" /> -->
 
           <view class="other">
             <wd-cell title="吸烟史" title-width="100px" prop="count">
 
-              <wd-radio-group v-model="form.smoke" shape="dot" inline>
-                <wd-radio value="1">有</wd-radio>
-                <wd-radio value="2">无</wd-radio>
+              <wd-radio-group v-model="form.smoke.value" shape="dot" inline>
+                <wd-radio value="1">从不</wd-radio>
+                <wd-radio value="2">已戒烟</wd-radio>
+                <wd-radio value="3">吸烟</wd-radio>
               </wd-radio-group>
 
             </wd-cell>
+
+            <wd-calendar label="吸烟时间" label-width="100px" placeholder="必填" :align-right="flag"
+              v-model="form.smoke.startTime" />
+
+            <wd-input label="支数（支/日）" label-width="100px" prop="remark" v-model="form.smoke.num" placeholder="必填"
+              :rules="[]" />
+
+            <wd-calendar label="戒烟时间" label-width="100px" placeholder="必填" :align-right="flag"
+              v-model="form.smoke.endTime" />
+
+
+          </view>
+
+          <view class="other">
+            <wd-cell title="饮酒史" title-width="100px" prop="count">
+
+              <wd-radio-group v-model="form.smoke.value" shape="dot" inline>
+                <wd-radio value="1">从不</wd-radio>
+                <wd-radio value="2">已戒酒</wd-radio>
+                <wd-radio value="3">喝酒</wd-radio>
+              </wd-radio-group>
+
+            </wd-cell>
+
+            <wd-calendar label="喝酒时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
+              v-model="form.drink.startTime" />
+
+            <wd-input label="酒精量（g/日）" label-width="100px" prop="remark" v-model="form.drink.num" placeholder="必填"
+              :rules="[]" />
+
+            <wd-calendar label="戒酒时间" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
+              v-model="form.drink.endTime" />
+
 
           </view>
 
           <view class="other">
             <wd-cell title="已婚" title-width="100px" prop="count">
 
-              <wd-radio-group v-model="form.marry" shape="dot" inline>
+              <wd-radio-group v-model="form.marry.value" shape="dot" inline>
                 <wd-radio value="1">是</wd-radio>
                 <wd-radio value="2">否</wd-radio>
               </wd-radio-group>
 
             </wd-cell>
 
-            <wd-input label="子女" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+            <wd-input label="子女" label-width="100px" prop="remark" v-model="form.marry.num" placeholder="请输入子女个数"
               :rules="[]" />
 
           </view>
 
           <view class="other">
 
-            <wd-input label="初潮年龄" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+            <wd-input label="初潮年龄/岁" label-width="100px" prop="remark" v-model="form.female.menarche" placeholder=""
               :rules="[]" />
 
-            <wd-input label="持续时间" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+            <wd-input label="持续时间/天" label-width="100px" prop="remark" v-model="form.female.duration" placeholder=""
               :rules="[]" />
 
-            <wd-input label="周期" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
+            <wd-input label="周期/天" label-width="100px" prop="remark" v-model="form.female.cycle" placeholder=""
               :rules="[]" />
 
-            <wd-input label="孕" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
-              :rules="[]" />
 
-            <wd-input label="产" label-width="100px" prop="remark" v-model="form.marry" placeholder="请输入子女个数"
-              :rules="[]" />
 
+          </view>
+
+          <view class="other">
 
             <wd-cell title="是否绝经" title-width="100px" prop="count">
 
-              <wd-radio-group v-model="form.marry" shape="dot" inline>
+              <wd-radio-group v-model="form.female.menopause" shape="dot" inline>
                 <wd-radio value="1">是</wd-radio>
                 <wd-radio value="2">否</wd-radio>
               </wd-radio-group>
 
             </wd-cell>
 
+            <wd-input label="绝经年龄/岁" label-width="100px" prop="remark" v-model="form.female.g" placeholder=""
+              :rules="[]" />
 
+            <wd-calendar label="末次月经" label-width="100px" placeholder="必填" prop="attackTime" :align-right="flag"
+              v-model="form.female.last" />
+
+          </view>
+
+          <view class="other">
+
+            <wd-input label="孕/次" label-width="100px" prop="remark" v-model="form.female.g" placeholder=""
+              :rules="[]" />
+
+            <wd-input label="产/次" label-width="100px" prop="remark" v-model="form.female.p" placeholder=""
+              :rules="[]" />
           </view>
 
 
@@ -111,37 +158,24 @@ const form = reactive({
 
   attackTime: patientInfo.value.history?.attackTime,
   confirmTime: patientInfo.value.history?.confirmTime,
-  smoke: patientInfo.value.history?.smoke ?? "2",
-  marry: "2",
-  allergy: patientInfo.value.history?.allergy ?? "2",
-
-  otherHistory: [] as PhoneItem[]
+  smoke: { value: 2, startTime: "", num: "", endTime: '' },
+  drink: { value: 2, startTime: "", num: "", endTime: '' },
+  marry: { value: "", num: '' },
+  female: {
+    menarche: '',// 初潮年龄
+    duration: '',// 持续时间
+    cycle: '',// 周期
+    menopause: "",//是否绝经
+    last: '',//末次时间
+    menopauseAge: '',//绝经年龄
+    g: '',//怀孕次数
+    p: ''// 分娩次数
+  }
 
 })
 const formRef = ref()
 
 const flag = ref<boolean>(true)
-
-const attackConfirm = (data: any) => {
-
-  form.attackTime = data.value
-
-}
-const confirmConfirm = (data: any) => {
-  form.confirmTime = data.value
-}
-
-const handleAdd = () => {
-
-  form.otherHistory.push({
-    datetime: Date.now(),
-    content: ''
-  })
-
-}
-
-
-
 
 const handleSubmit = () => {
 
@@ -151,6 +185,8 @@ const handleSubmit = () => {
     idCard: patientInfo.value.idCard,
     userInfo: { history: form }
   }
+  console.log(formData)
+  return
 
   console.log('formData', formData)
   // return
