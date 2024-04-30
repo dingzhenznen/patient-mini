@@ -27,17 +27,25 @@
         <wd-form :model="form2">
 
           <wd-cell-group border>
-            <wd-cell center="true" title="诊断年龄<=60岁">
+            <wd-cell :center="flag" title="诊断年龄<=60岁">
               <wd-switch v-model="form2.age" />
             </wd-cell>
 
-            <wd-cell center="true" title="影像学存在血管炎证据">
+            <wd-cell :center="flag" title="影像学存在血管炎证据">
               <wd-switch v-model="form2.age" />
             </wd-cell>
 
             <wd-cell title="临床表现" />
-            <!-- <DiseaseCheckbox :optionList="lcOption" :selectedList="form2.linchuang" @handleCheckbox="handleLc">
-            </DiseaseCheckbox> -->
+            <DiseaseCheckbox :optionList="lcOption" v-model="form2.linchuang">
+            </DiseaseCheckbox>
+
+            <wd-cell title="血管体检" />
+            <DiseaseCheckbox :optionList="tjOption" v-model="form2.tijian">
+            </DiseaseCheckbox>
+
+            <wd-cell title="血管造影或血管超声" />
+            <DiseaseCheckbox :optionList="zyOption" v-model="form2.zaoying">
+            </DiseaseCheckbox>
 
 
           </wd-cell-group>
@@ -87,6 +95,16 @@ const lcOption = [
   '1.女性 ', '2.血管炎引起的心绞痛或缺血性心脏疼痛', '3.上肢和（或）下肢跛行',
 ]
 
+const tjOption = [
+  '动脉杂音', '上肢动脉搏动减弱', '颈动脉搏动减弱或触动', '双上肢收缩压差值>=20mmHg'
+]
+
+const zyOption = [
+  '受累血管1支', '受累血管2支', '受累血管3支及以上', '血管炎症累及双侧', '腹主动脉伴肾动脉或肠系膜动脉受累'
+]
+
+const flag = ref(true)
+
 const form = reactive({
   en: "tak",
   china: '大动脉炎症',
@@ -97,17 +115,12 @@ const form = reactive({
 
 const form2 = reactive({
   age: false,
-  linchuang: []
+  linchuang: [],
+  tijian: [],
+  zaoying: []
 
 })
 
-const handleCheckbox = (data: any) => {
-  form.selectedOption = data.value
-}
-
-const handleLc = (data: any) => {
-  form2.linchuang = data.value
-}
 
 const handleDate = (date: any) => {
   form.datetime = date.value
