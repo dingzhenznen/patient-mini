@@ -1,11 +1,11 @@
 {
   // ==================== Editor ====================
   "editor.fontFamily": "Courier New, Fira Code Retina, Monaco, YaHei Consolas Hybrid,Courier New",
-  "editor.fontSize": 12,
+  "editor.fontSize": 15,
   "editor.wordWrap": "on",
   "editor.cursorWidth": 3,
   "editor.letterSpacing": 0.5,
-  "editor.fontWeight": "bold",
+  "editor.fontWeight": 300,
   "editor.lineHeight": 25,
   "editor.renderLineHighlight": "all",
   "editor.inlineSuggest.enabled": true,
@@ -21,7 +21,7 @@
   "prettier.singleQuote": true,
   "prettier.trailingComma": "none",
   // ==================== workbench ====================
-  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.renderIndentGuides": "none",
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.startupEditor": "newUntitledFile",
@@ -47,7 +47,7 @@
   "debug.console.fontSize": 14,
   "git.confirmSync": false,
   // ==================== Custom Plugin Config ====================
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Solarized Light",
   "explorer.confirmDelete": false,
   "git.ignoreLegacyWarning": true,
   "cSpell.userWords": [
