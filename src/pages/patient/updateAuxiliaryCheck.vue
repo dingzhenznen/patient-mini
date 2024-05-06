@@ -19,19 +19,16 @@
         <!-- 每一行 -->
         <view v-for="(item, index) in drugs" :key="index" class="table-row">
           <view class="drug-name">
-            <view>{{ item.chemicalName }}</view>
-            <view>({{ item.productName }})</view>
+            <view>{{ item.checkName }}</view>
           </view>
           <view class="time">
-            <view>{{ formatTime(item.startTime) }}</view>
-            <view>{{ formatTime(item.endTime) }}</view>
+            <view>{{ formatTime(item.checkTime) }}</view>
           </view>
           <view class="dose">
-            <view>{{ item.dose }} {{ item.unit }}</view>
-            <view>{{ item.frequency }}</view>
+            <view>{{ item.isNormal ? '正常' : '否' }} {{ item.unit }}</view>
           </view>
           <view class="operate">
-            <button class="btn" @click="updateAuxiliaryCheck(item)">编辑</button>
+            <button class="btn" @click="updateAuxiliaryCheck(item)">查看</button>
             <button class="btn" @click="deleteAuxiliaryCheck(item)">删除</button>
           </view>
         </view>
@@ -46,7 +43,7 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
-import { listDrug, delDrug } from '@/apis/follow'
+import { listAuxChecks, delAuxCheck } from '@/apis/follow'
 import { usePatientStore } from '@/store/patient'
 import { showError } from '@/utils/show'
 import { onShow } from '@dcloudio/uni-app'
@@ -66,8 +63,8 @@ onShow(async () => {
 })
 
 const getAuxiliaryChecks = async () => {
-  const r = await listDrug(patientInfo.value.idCard as string)
-  if (r.code) return showError('获取治疗方案失败')
+  const r = await listAuxChecks(patientInfo.value.idCard as string)
+  if (r.code) return showError('获取辅助信息失败')
   drugs.value = r.data
 }
 
@@ -87,10 +84,10 @@ const deleteAuxiliaryCheck = async (auxiliaryCheck: any) => {
       title: '确认删除'
     })
     .then(async () => {
-      const r = await delDrug({ auxiliaryCheck: auxiliaryCheck?._id || '' })
+      const r = await delAuxCheck({ auxiliaryCheck: auxiliaryCheck?._id || '' })
       if (r.code) return showError('删除失败')
       toast.success('删除成功')
-      await getChecks()
+      await getAuxiliaryChecks()
     })
     .catch(() => {
       console.log('点击了取消按钮')
@@ -99,7 +96,7 @@ const deleteAuxiliaryCheck = async (auxiliaryCheck: any) => {
 }
 
 const updateAuxiliaryCheck = async (auxiliaryCheck: any) => {
-  console.log('更新辅助检查: ', auxiliaryCheck._id)
+  console.log('查看辅助检查: ', auxiliaryCheck._id)
   uni.navigateTo({
     url: `/pages/patient/auxiliaryCheckDetails?checkId=${auxiliaryCheck._id}`
   })
