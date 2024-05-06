@@ -120,6 +120,20 @@
       }
     },
     {
+      "path": "pages/patient/updateAuxiliaryCheck",
+      "style": {
+        "navigationBarTitleText": "辅助检查",
+        "navigationBarBackgroundColor": "#5ae8b1"
+      }
+    },
+    {
+      "path": "pages/patient/auxiliaryCheckDetails",
+      "style": {
+        "navigationBarTitleText": "辅助检查详情",
+        "navigationBarBackgroundColor": "#5ae8b1"
+      }
+    },
+    {
       "path": "pages/patient/finish",
       "style": {
         "navigationBarTitleText": "随诊",
