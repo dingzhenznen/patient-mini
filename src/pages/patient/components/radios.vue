@@ -1,7 +1,7 @@
 <template>
   <view class="main">
 
-    <view class="item">
+    <view class="item" :class="{ addBackground: hasBackground }">
       <!-- 1. 标题 -->
       <view class="title">
         <view class="en">{{ title }}</view>
@@ -46,6 +46,10 @@ const props = defineProps({
   options: {
     type: Array as () => Options[],
     default: []
+  },
+  hasBackground: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -112,6 +116,10 @@ const clickBtn = (value: string | number) => {
 
 .main {
   // height: 90rpx;
+
+  .addBackground {
+    background: rgba(230, 240, 240, 1);
+  }
 
   .item {
     display: flex;
