@@ -1,0 +1,111 @@
+.main {
+  opacity: 1;
+  background: rgba(245, 245, 245, 1);
+  height: 100vh;
+  .body {
+    padding: 30rpx;
+    .other {
+      margin-top: 20rpx;
+      opacity: 1;
+      background: rgba(245, 245, 245, 1);
+
+      .item {
+        display: flex;
+        border-top: 1px solid #ccc;
+        background-color: #fff;
+        height: 60rpx;
+        align-items: center;
+        font-size: 30rpx;
+        padding: 10rpx 30rpx;
+        justify-content: space-between;
+        .normal {
+          display: flex;
+          .btn {
+            color: white;
+            background-color: rgba(62, 141, 246);
+            height: 60rpx;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+            border: 1px solid #fff;
+          }
+
+          .btn-selected {
+            color: rgba(62, 141, 246);
+            background-color: #fff;
+            height: 60rpx;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+            border: 1px solid #fff;
+          }
+        }
+      }
+
+      .item-upload {
+        background-color: #fff;
+        height: 200rpx;
+        border-top: 1px solid #ccc;
+        align-items: center;
+        padding: 20rpx 25rpx;
+      }
+    }
+    .submit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100rpx;
+      height: 100rpx;
+      opacity: 1;
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 1);
+      font-size: 16px;
+      font-weight: 700;
+      background: rgba(0, 191, 140, 1);
+    }
+
+    // 背景色
+    :deep(.wd-cell-group__body) {
+      opacity: 1;
+      background: rgba(245, 245, 245, 1);
+    }
+
+    // input 文字位置
+    :deep(.wd-input__value) {
+      opacity: 1;
+      background: rgba(255, 255, 255, 1);
+      padding-left: 16rpx;
+      margin-left: 100rpx;
+      // padding-top: 16rpx;
+      border-radius: 16rpx;
+      text-align: right;
+      // height: 84rpx;
+    }
+
+    // 报错信息
+    :deep(.wd-input__error-message) {
+      display: none;
+      content: none;
+      color: transparent;
+    }
+
+    // 冠心病 脑卒
+    :deep(.wd-cell__wrapper) {
+      align-items: center;
+    }
+
+    :deep(.wd-radio-group) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    :deep(.otherInput) {
+      margin-left: 200rpx;
+    }
+  }
+}

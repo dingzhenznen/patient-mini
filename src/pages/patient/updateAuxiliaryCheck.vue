@@ -1,18 +1,17 @@
 <template>
-  <!-- 治疗方案界面 -->
+  <!-- 辅助检查界面 -->
   <view class="main">
     <view class="body">
-      <!-- 添加用药信息入口 -->
-      <view class="add-wrap" @click="addDrug">
-        <view class="title">用药快速录入</view>
+      <!-- 添加辅助检查入口 -->
+      <view class="add-wrap" @click="addAuxiliaryCheck">
+        <view class="title">添加检查单</view>
       </view>
-
-      <!-- 用药信息 -->
+      <!-- 辅助检查信息信息 -->
       <!-- 表头 -->
       <view class="table-header">
-        <view class="drug-name">药品名称</view>
-        <view class="time">用药时间</view>
-        <view class="dose">用量</view>
+        <view class="drug-name">检查名称</view>
+        <view class="time">检查日期</view>
+        <view class="dose">是否正常</view>
         <view class="operate">操作</view>
       </view>
       <!-- 表格内容 -->
@@ -20,25 +19,23 @@
         <!-- 每一行 -->
         <view v-for="(item, index) in drugs" :key="index" class="table-row">
           <view class="drug-name">
-            <view>{{ item.chemicalName }}</view>
-            <view>({{ item.productName }})</view>
+            <view>{{ item.checkName }}</view>
           </view>
           <view class="time">
-            <view>{{ formatTime(item.startTime) }}</view>
-            <view>{{ formatTime(item.endTime) }}</view>
+            <view>{{ formatTime(item.checkTime) }}</view>
           </view>
           <view class="dose">
-            <view>{{ item.dose }} {{ item.unit }}</view>
-            <view>{{ item.frequency }}</view>
+            <view>{{ item.isNormal ? '正常' : '否' }} {{ item.unit }}</view>
           </view>
           <view class="operate">
-            <button class="btn" @click="updateDrug(item)">编辑</button>
-            <button class="btn" @click="deleteDrug(item)">删除</button>
+            <button class="btn" @click="updateAuxiliaryCheck(item)">查看</button>
+            <button class="btn" @click="deleteAuxiliaryCheck(item)">删除</button>
           </view>
         </view>
       </view>
 
       <view class="submit" @click="handleSubmit"> 更新 </view>
+      <wd-message-box />
     </view>
   </view>
 </template>
@@ -46,8 +43,7 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
-import { updatePatient } from '@/apis/patient/index'
-import { listDrug, delDrug } from '@/apis/follow'
+import { listAuxChecks, delAuxCheck } from '@/apis/follow'
 import { usePatientStore } from '@/store/patient'
 import { showError } from '@/utils/show'
 import { onShow } from '@dcloudio/uni-app'
@@ -62,37 +58,36 @@ const { patientInfo } = storeToRefs(patientStore)
 
 const drugs = ref([] as any)
 
-const flag = ref<boolean>(true)
-
 onShow(async () => {
-  await getDrugs()
+  await getAuxiliaryChecks()
 })
 
-const getDrugs = async () => {
-  const r = await listDrug(patientInfo.value.idCard as string)
-  if (r.code) return showError('获取治疗方案失败')
+const getAuxiliaryChecks = async () => {
+  const r = await listAuxChecks(patientInfo.value.idCard as string)
+  if (r.code) return showError('获取辅助信息失败')
   drugs.value = r.data
 }
 
-const addDrug = () => {
-  console.log('跳转添加用药信息页面')
+const addAuxiliaryCheck = () => {
+  console.log('跳转添加辅助检查页面')
   uni.navigateTo({
-    url: '/pages/patient/addDrug'
+    url: '/pages/patient/auxiliaryCheckDetails'
   })
 }
 
-const deleteDrug = async (drug: any) => {
-  console.log('删除用药: ', drug)
+const deleteAuxiliaryCheck = async (auxiliaryCheck: any) => {
+  console.log('删除辅助检查: ', auxiliaryCheck)
+  console.log(message)
   message
     .confirm({
-      msg: '删除用药',
+      msg: '删除该检查？',
       title: '确认删除'
     })
     .then(async () => {
-      const r = await delDrug({ drugId: drug?._id || '' })
+      const r = await delAuxCheck({ auxiliaryCheck: auxiliaryCheck?._id || '' })
       if (r.code) return showError('删除失败')
       toast.success('删除成功')
-      await getDrugs()
+      await getAuxiliaryChecks()
     })
     .catch(() => {
       console.log('点击了取消按钮')
@@ -100,10 +95,10 @@ const deleteDrug = async (drug: any) => {
 
 }
 
-const updateDrug = async (drug: any) => {
-  console.log('更新药物: ', drug._id)
+const updateAuxiliaryCheck = async (auxiliaryCheck: any) => {
+  console.log('查看辅助检查: ', auxiliaryCheck._id)
   uni.navigateTo({
-    url: `/pages/patient/addDrug?drugId=${drug._id}`
+    url: `/pages/patient/auxiliaryCheckDetails?checkId=${auxiliaryCheck._id}`
   })
 }
 

@@ -1,6 +1,6 @@
 {
   // ==================== Editor ====================
-  "editor.fontFamily": "Courier New, Fira Code Retina, Monaco, YaHei Consolas Hybrid,Courier New",
+  "editor.fontFamily": "Fira Code Retina, Courier New, Monaco, YaHei Consolas Hybrid,Courier New",
   "editor.fontSize": 15,
   "editor.wordWrap": "on",
   "editor.cursorWidth": 3,
@@ -21,7 +21,7 @@
   "prettier.singleQuote": true,
   "prettier.trailingComma": "none",
   // ==================== workbench ====================
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "vscode-great-icons",
   "workbench.tree.renderIndentGuides": "none",
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.startupEditor": "newUntitledFile",
