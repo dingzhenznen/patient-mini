@@ -7,7 +7,7 @@
           <wd-calendar label="检查日期" label-width="100px" placeholder="必填" :align-right="flag" v-model="form.checkTime" />
           <view class="item">
             <text>检查名称</text>
-            <wd-input v-model="form.checkName" placeholder="必填" clearable="" />
+            <wd-input v-model="form.checkName" placeholder="必填" clearable />
           </view>
           <view class="item">
             <text>正常</text>
@@ -17,17 +17,22 @@
                 @click="form.isNormal = false">否</button>
             </view>
           </view>
-          <view class="item">检查报告上传</view>
+          <view v-if="!checkId" class="item">检查报告上传</view>
+          <view v-else class="item">检查报告</view>
           <!-- 检查结果上传 -->
-          <view class="item-upload">
+          <view v-if="!checkId" class="item-upload">
             <wd-upload :file-list="checkFiles" :limit="3" action="https://p9s5xa.laf.run/mini/files/upload"
               @change="handleChange"></wd-upload>
+          </view>
+          <view v-else class="image-wrap">
+            <image class="image" v-for="(item, index) in checkFiles" :key="index" :src="item.url"
+              @click="previewImage" />
           </view>
         </view>
 
         <!-- <view v-if="drugId != ''" class="submit" @click="handleSubmit"> 更新 </view> -->
         <!-- <view v-else class="submit" @click="handleSubmit"> 添加 </view> -->
-        <view class="submit" @click="handleSubmit"> 添加 </view>
+        <view v-if="!checkId" class="submit" @click="handleSubmit"> 添加 </view>
       </wd-form>
     </view>
   </view>
@@ -65,14 +70,24 @@ const flag = ref<boolean>(true)
 // 进页面确定页面类型
 onLoad(async (option: any) => {
   // 0 未开始，1 进行中，2 已结束
-  checkId.value = option.drugId || ''
+  checkId.value = option.checkId || ''
   if (!checkId.value) return
   // 获取当前辅助检查信息，回显页面
   const r = await getAuxCheck(checkId.value)
   if (r.code) return showError('获取辅助检查信息失败')
-  form.value = r.data
-  console.log('drugId: ', checkId.value)
+  const checkResult = r.data as any
+  checkFiles.value = checkResult.checkFiles
+  form.value.checkTime = checkResult.checkTime
+  form.value.isNormal = checkResult.isNormal
+  form.value.checkName = checkResult.checkName
+  console.log('checkId: ', r.data)
 })
+
+const previewImage = (item: any) => {
+  uni.previewImage({
+    urls: checkFiles.value.map(item => item.url),
+  })
+}
 
 // 添加辅助检查信息
 const handleSubmit = async () => {

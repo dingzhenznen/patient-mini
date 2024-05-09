@@ -105,14 +105,14 @@
       }
     },
     {
-      "path": "pages/patient/updateTreat",
+      "path": "pages/follow/updateTreat",
       "style": {
         "navigationBarTitleText": "治疗方案",
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
-      "path": "pages/patient/addDrug",
+      "path": "pages/follow/addDrug",
       "style": {
         "navigationBarTitleText": "添加药物",
         "navigationBarBackgroundColor": "#5ae8b1",
@@ -120,14 +120,14 @@
       }
     },
     {
-      "path": "pages/patient/updateAuxiliaryCheck",
+      "path": "pages/follow/updateAuxiliaryCheck",
       "style": {
         "navigationBarTitleText": "辅助检查",
         "navigationBarBackgroundColor": "#5ae8b1"
       }
     },
     {
-      "path": "pages/patient/auxiliaryCheckDetails",
+      "path": "pages/follow/auxiliaryCheckDetails",
       "style": {
         "navigationBarTitleText": "辅助检查详情",
         "navigationBarBackgroundColor": "#5ae8b1"

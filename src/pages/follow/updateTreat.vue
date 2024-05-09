@@ -77,7 +77,7 @@ const getDrugs = async () => {
 const addDrug = () => {
   console.log('跳转添加用药信息页面')
   uni.navigateTo({
-    url: '/pages/patient/addDrug'
+    url: '/pages/follow/addDrug'
   })
 }
 
@@ -103,7 +103,7 @@ const deleteDrug = async (drug: any) => {
 const updateDrug = async (drug: any) => {
   console.log('更新药物: ', drug._id)
   uni.navigateTo({
-    url: `/pages/patient/addDrug?drugId=${drug._id}`
+    url: `/pages/follow/addDrug?drugId=${drug._id}`
   })
 }
 

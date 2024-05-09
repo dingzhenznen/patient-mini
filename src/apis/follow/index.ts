@@ -83,11 +83,11 @@ export const updateAuxCheck = async (data: any) => {
 }
 
 // 获取某一辅助检查信息
-export const getAuxCheck = async (drugId: string) => {
+export const getAuxCheck = async (checkId: string) => {
   return await request({
     url: '/mini/auxiliaryCheck/get',
     method: 'POST',
-    data: { drugId }
+    data: { checkId }
   })
 }
 

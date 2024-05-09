@@ -53,6 +53,20 @@
         align-items: center;
         padding: 20rpx 25rpx;
       }
+
+      .image-wrap {
+        background-color: #fff;
+        padding: 20rpx;
+        display: grid;
+        min-height: 500rpx;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10rpx;
+        .image {
+          border: 1px solid #ccc;
+          height: 200rpx;
+          width: 200rpx;
+        }
+      }
     }
     .submit {
       display: flex;

@@ -5,122 +5,52 @@
       <wd-form ref="formRef" :model="form">
         <wd-cell-group border>
           <view class="other">
-            <wd-input
-              label="药品类别"
-              label-width="100px"
-              prop="drugType"
-              v-model="form.drugType"
-              placeholder="必填"
-              :rules="[
-                { required: true, pattern: /\S/, message: '请输入药品类别' }
-              ]"
-            />
-            <wd-input
-              label="化学名称"
-              label-width="100px"
-              prop="chemicalName"
-              v-model="form.chemicalName"
-              placeholder="必填"
+            <wd-input label="药品类别" label-width="100px" prop="drugType" v-model="form.drugType" placeholder="必填" :rules="[
+              { required: true, pattern: /\S/, message: '请输入药品类别' }
+            ]" />
+            <wd-input label="化学名称" label-width="100px" prop="chemicalName" v-model="form.chemicalName" placeholder="必填"
               :rules="[
                 { required: true, pattern: /\S/, message: '请输入化学名称' }
-              ]"
-            />
-            <wd-input
-              label="商品名称"
-              label-width="100px"
-              prop="productName"
-              v-model="form.productName"
-              placeholder="必填"
+              ]" />
+            <wd-input label="商品名称" label-width="100px" prop="productName" v-model="form.productName" placeholder="必填"
               :rules="[
                 { required: true, pattern: /\S/, message: '请输入商品名称' }
-              ]"
-            />
+              ]" />
           </view>
 
           <view class="other">
-            <wd-input
-              label="剂量"
-              label-width="100px"
-              prop="dose"
-              v-model="form.dose"
-              placeholder="必填"
-              :rules="[
-                { required: true, pattern: /\S/, message: '请输入剂量' }
-              ]"
-            />
-            <wd-input
-              label="单位"
-              label-width="100px"
-              prop="unit"
-              v-model="form.unit"
-              placeholder="必填"
-              :rules="[
-                { required: true, pattern: /\S/, message: '请输入剂量单位' }
-              ]"
-            />
+            <wd-input label="剂量" label-width="100px" prop="dose" v-model="form.dose" placeholder="必填" :rules="[
+              { required: true, pattern: /\S/, message: '请输入剂量' }
+            ]" />
+            <wd-input label="单位" label-width="100px" prop="unit" v-model="form.unit" placeholder="必填" :rules="[
+              { required: true, pattern: /\S/, message: '请输入剂量单位' }
+            ]" />
           </view>
 
           <view class="other">
-            <wd-input
-              label="给药方式"
-              label-width="100px"
-              prop="method"
-              v-model="form.method"
-              placeholder="必填"
-              required
+            <wd-input label="给药方式" label-width="100px" prop="method" v-model="form.method" placeholder="必填" required
               :rules="[
                 { required: true, pattern: /\S/, message: '请输入给药方式' }
-              ]"
-            />
-            <wd-input
-              label="给药频率"
-              label-width="100px"
-              prop="frequency"
-              v-model="form.frequency"
-              placeholder="必填"
-              required
-              :rules="[
+              ]" />
+            <wd-input label="给药频率" label-width="100px" prop="frequency" v-model="form.frequency" placeholder="必填"
+              required :rules="[
                 { required: true, pattern: /\S/, message: '请输入给药频率' }
-              ]"
-            />
-            <wd-input
-              label="调药过程"
-              label-width="100px"
-              prop="process"
-              v-model="form.process"
-              placeholder="选填"
-              :rules="[]"
-            />
+              ]" />
+            <wd-input label="调药过程" label-width="100px" prop="process" v-model="form.process" placeholder="选填"
+              :rules="[]" />
           </view>
 
           <view class="other">
-            <wd-calendar
-              label="起始时间"
-              label-width="100px"
-              placeholder="必填"
-              :align-right="flag"
-              v-model="form.startTime"
-            />
-            <wd-calendar
-              label="终止时间"
-              label-width="100px"
-              placeholder="必填"
-              :align-right="flag"
-              v-model="form.endTime"
-            />
-            <wd-input
-              label="调药原因"
-              label-width="100px"
-              prop="remark"
-              v-model="form.reason"
-              placeholder="选填"
-              :rules="[]"
-            />
+            <wd-calendar label="起始时间" label-width="100px" placeholder="必填" :align-right="flag"
+              v-model="form.startTime" />
+            <wd-calendar label="终止时间" label-width="100px" placeholder="必填" :align-right="flag" v-model="form.endTime" />
+            <wd-input label="调药原因" label-width="100px" prop="remark" v-model="form.reason" placeholder="选填"
+              :rules="[]" />
           </view>
         </wd-cell-group>
 
 
-        <view v-if="drugId != '' " class="submit" @click="handleSubmit"> 更新 </view>
+        <view v-if="drugId != ''" class="submit" @click="handleSubmit"> 更新 </view>
         <view v-else class="submit" @click="handleSubmit"> 添加 </view>
       </wd-form>
     </view>

@@ -28,7 +28,7 @@
             <view>{{ item.isNormal ? '正常' : '否' }} {{ item.unit }}</view>
           </view>
           <view class="operate">
-            <button class="btn" @click="updateAuxiliaryCheck(item)">查看</button>
+            <button class="btn" @click="viewAuxiliaryCheck(item)">查看</button>
             <button class="btn" @click="deleteAuxiliaryCheck(item)">删除</button>
           </view>
         </view>
@@ -71,7 +71,7 @@ const getAuxiliaryChecks = async () => {
 const addAuxiliaryCheck = () => {
   console.log('跳转添加辅助检查页面')
   uni.navigateTo({
-    url: '/pages/patient/auxiliaryCheckDetails'
+    url: '/pages/follow/auxiliaryCheckDetails'
   })
 }
 
@@ -95,10 +95,10 @@ const deleteAuxiliaryCheck = async (auxiliaryCheck: any) => {
 
 }
 
-const updateAuxiliaryCheck = async (auxiliaryCheck: any) => {
+const viewAuxiliaryCheck = async (auxiliaryCheck: any) => {
   console.log('查看辅助检查: ', auxiliaryCheck._id)
   uni.navigateTo({
-    url: `/pages/patient/auxiliaryCheckDetails?checkId=${auxiliaryCheck._id}`
+    url: `/pages/follow/auxiliaryCheckDetails?checkId=${auxiliaryCheck._id}`
   })
 }
 
