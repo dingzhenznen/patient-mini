@@ -102,6 +102,8 @@ export type Patient = {
     }
     spaDefault?: {}
     spaASAS?: {}
+    sleSLICC?: {}
+    sleEULAR?: {}
   }
 
   checkList?: CheckList
