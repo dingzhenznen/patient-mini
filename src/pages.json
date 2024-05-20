@@ -169,6 +169,13 @@
       }
     },
     {
+      "path": "pages/disease/sle",
+      "style": {
+        "navigationBarTitleText": "狼斑红疮诊断",
+        "navigationBarBackgroundColor": "#5ae8b1"
+      }
+    },
+    {
       "path": "pages/401/401",
       "style": {
         "navigationBarTitleText": "无权访问"
