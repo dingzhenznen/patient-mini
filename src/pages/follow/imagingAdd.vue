@@ -187,8 +187,9 @@ const handleSubmit = () => {
     delFlag: '0'
   }
 
-  if (imagingId) {
-    const res = updateImaging(formData)
+  if (imagingId.value) {
+    //delete formData.createdAt
+    const res = updateImaging({ imagingId: imagingId.value, info: formData })
   } else {
     const res = addImaging(formData)
   }
