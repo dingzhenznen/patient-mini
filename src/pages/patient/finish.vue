@@ -36,6 +36,7 @@ const List = reactive([
   { 'title': "检验单", 'url': "/pages/patient/updateChecklist", 'src': "../../static/img/jianyandan.png", 'bg': 'linear-gradient(153.97deg, rgba(254, 147, 0, 1) 0%, rgba(255, 136, 0, 1) 20%, rgba(255, 125, 0, 1) 40%, rgba(255, 114, 0, 1) 60%, rgba(255, 102, 0, 1) 80%, rgba(255, 88, 0, 1) 100%)' },
   { 'title': "治疗方案", 'url': "/pages/follow/updateTreat", 'src': "../../static/img/zhiliaofangan.png", 'bg': 'linear-gradient(153.97deg, rgba(254, 147, 0, 1) 0%, rgba(255, 136, 0, 1) 20%, rgba(255, 125, 0, 1) 40%, rgba(255, 114, 0, 1) 60%, rgba(255, 102, 0, 1) 80%, rgba(255, 88, 0, 1) 100%);' },
   { 'title': "辅助检查", 'url': "/pages/follow/updateAuxiliaryCheck", 'src': "../../static/img/fuzhujiancha.png", 'bg': 'linear-gradient(148.45deg, rgba(254, 91, 199, 1) 0%, rgba(253, 85, 198, 1) 20%, rgba(253, 78, 197, 1) 40%, rgba(252, 71, 195, 1) 60%, rgba(252, 64, 194, 1) 80%, rgba(251, 55, 193, 1) 100%);' },
+  { 'title': "血管影像学检查", 'url': "/pages/follow/imagingList", 'src': "../../static/img/fuzhujiancha.png", 'bg': 'linear-gradient(148.45deg, rgba(254, 91, 199, 1) 0%, rgba(253, 85, 198, 1) 20%, rgba(253, 78, 197, 1) 40%, rgba(252, 71, 195, 1) 60%, rgba(252, 64, 194, 1) 80%, rgba(251, 55, 193, 1) 100%);' },
 
 ])
 const followStatus = ref(0)

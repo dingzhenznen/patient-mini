@@ -23,6 +23,7 @@
 import { watch } from 'vue';
 import { ref, reactive } from 'vue'
 import { usePatientStore } from '@/store'
+import { onShow } from '@dcloudio/uni-app';
 
 type Options = {
   label: string
@@ -64,9 +65,13 @@ watch(() => props.modelValue, (val) => {
 
 
 const clickBtn = (value: string | number) => {
+  console.log(111)
   selected.value = value
   emits('update:modelValue', value)
 }
+onShow(() => {
+  console.log(222)
+})
 
 
 </script>

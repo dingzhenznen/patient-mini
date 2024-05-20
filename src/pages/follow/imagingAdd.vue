@@ -4,7 +4,7 @@
 
     <view v-for="(items, index) in content" :key="index">
 
-      <Radios :title="items.title" v-model="items.value" :options="RadioOptions.sl" hasBackground="true"></Radios>
+      <Radios :title="items.title" v-model="items.value" :options="RadioOptions.sl"></Radios>
 
       <view v-if="items.value && (items.type == 1 || items.type == 2)">
 
@@ -43,7 +43,7 @@
 <script lang="ts" setup>
 import { onLoad } from "@dcloudio/uni-app";
 import { reactive, ref } from "vue"
-import Radios from "./components/radios"
+import Radios from '@/pages/follow/components/radios.vue'
 import { usePatientStore } from "@/store/patient"
 import { addImaging, updateImaging, getImaging } from '@/apis/follow/imaging'
 import dayjs from "dayjs";
@@ -69,43 +69,47 @@ type Item = {
 
 const content = reactive<Item[]>([
   { "title": "颈总动脉（右）", name: 'jdmy', type: 1, },
-  { "title": "颈总动脉（左）", name: 'jdmz', type: 1, },
-  { "title": "锁骨下动脉（左）", name: 'sgxdmz', type: 1, },
-  { "title": "锁骨下动脉（右）", name: 'sgxdmy', type: 1, },
-  { "title": "升主动脉", name: 'szdm', type: 1, },
-  { "title": "主动脉弓", name: 'zdmg', type: 1, },
-  { "title": "降主动脉", name: 'jzdm', type: 1, },
-  { "title": "腹主动脉", name: 'fzdm', type: 1, },
-  { "title": "腹腔干", name: 'fqg', type: 1, },
-  { "title": "肾动脉", name: 'sdm', type: 1, },
-  { "title": "肠系膜动脉", name: 'cxmdm', type: 1, },
-  { "title": "髂动脉", name: 'kdm', type: 1, },
-  { "title": "冠状动脉", name: 'gzdm', type: 2, },
-  { "title": "肺动脉", name: 'fdm', type: 2, },
-  { "title": "颅内动脉", name: 'lndm', type: 2, },
-  { "title": "主动脉瓣", name: 'zdmb', type: 3, },
-  { "title": "二尖瓣", name: 'erjb', type: 3, },
-  { "title": "三尖瓣", name: 'sanjb', type: 3, }
+  // { "title": "颈总动脉（左）", name: 'jdmz', type: 1, },
+  // { "title": "锁骨下动脉（左）", name: 'sgxdmz', type: 1, },
+  // { "title": "锁骨下动脉（右）", name: 'sgxdmy', type: 1, },
+  // { "title": "升主动脉", name: 'szdm', type: 1, },
+  // { "title": "主动脉弓", name: 'zdmg', type: 1, },
+  // { "title": "降主动脉", name: 'jzdm', type: 1, },
+  // { "title": "腹主动脉", name: 'fzdm', type: 1, },
+  // { "title": "腹腔干", name: 'fqg', type: 1, },
+  // { "title": "肾动脉", name: 'sdm', type: 1, },
+  // { "title": "肠系膜动脉", name: 'cxmdm', type: 1, },
+  // { "title": "髂动脉", name: 'kdm', type: 1, },
+  // { "title": "冠状动脉", name: 'gzdm', type: 2, },
+  // { "title": "肺动脉", name: 'fdm', type: 2, },
+  // { "title": "颅内动脉", name: 'lndm', type: 2, },
+  // { "title": "主动脉瓣", name: 'zdmb', type: 3, },
+  // { "title": "二尖瓣", name: 'erjb', type: 3, },
+  // { "title": "三尖瓣", name: 'sanjb', type: 3, }
 ]);
 const option = { value: '', thickening: '', narrow: '', block: '', sandwiching: '', aneurysm: '', delayedEnhance: '', radiography: '', vessel: '', close: '', degree: '' }
 content.forEach((item, index) => {
   item = Object.assign(item, option)
 })
-console.log(222, content)
 
 const imagingId = ref('')
 
 
 onLoad(async (option: any) => {
   // 0 未开始，1 进行中，2 已结束
-  //imagingId.value = option.drugId || ''
-  imagingId.value = "663daeac31554cd383e11634"
-  if (!imagingId.value) return
-  // 获取当前药物信息，回显页面
-  const r = await getImaging(imagingId.value)
-  console.log('333', r)
-  Object.assign(content, r.data.info)
-  console.log(content)
+  imagingId.value = option.imagingId || ''
+  //imagingId.value = "663daeac31554cd383e11634"
+  if (imagingId.value) {
+    // 获取当前药物信息，回显页面
+    const r = await getImaging(imagingId.value)
+    console.log('333', r)
+    Object.assign(content, r.data.info)
+    console.log(content)
+
+  }
+  console.log(1111, content)
+
+
 
 })
 
@@ -169,6 +173,8 @@ const RadioOptions = {
 }
 
 const handleSubmit = () => {
+
+  console.log(3333, content)
 
   const timeNowUnix = dayjs().valueOf()
   const timeNowReadable = dayjs().format()

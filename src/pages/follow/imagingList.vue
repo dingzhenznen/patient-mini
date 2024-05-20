@@ -3,37 +3,31 @@
   <view class="main">
     <view class="body">
       <!-- 添加用药信息入口 -->
-      <view class="add-wrap" @click="addDrug">
-        <view class="title">用药快速录入</view>
+      <view class="add-wrap" @click="addImaging">
+        <view class="title">影像学检查</view>
       </view>
 
       <!-- 用药信息 -->
       <!-- 表头 -->
       <view class="table-header">
-        <view class="drug-name">药品名称</view>
-        <view class="time">用药时间</view>
-        <view class="dose">用量</view>
+
+        <view class="time">检查时间</view>
+
         <view class="operate">操作</view>
       </view>
       <!-- 表格内容 -->
       <view class="table-data">
         <!-- 每一行 -->
         <view v-for="(item, index) in drugs" :key="index" class="table-row">
-          <view class="drug-name">
-            <view>{{ item.chemicalName }}</view>
-            <view>({{ item.productName }})</view>
-          </view>
+
           <view class="time">
             <view>{{ formatTime(item.startTime) }}</view>
-            <view>{{ formatTime(item.endTime) }}</view>
+
           </view>
-          <view class="dose">
-            <view>{{ item.dose }} {{ item.unit }}</view>
-            <view>{{ item.frequency }}</view>
-          </view>
+
           <view class="operate">
-            <button class="btn" @click="updateDrug(item)">编辑</button>
-            <button class="btn" @click="deleteDrug(item)">删除</button>
+            <button class="btn" @click="updateImaging(item)">编辑</button>
+            <button class="btn" @click="deleteImaging(item)">删除</button>
           </view>
         </view>
       </view>
@@ -47,7 +41,7 @@
 import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 import { updatePatient } from '@/apis/patient/index'
-import { listDrug, delDrug } from '@/apis/follow'
+import { listImaging, delImaging } from '@/apis/follow/imaging'
 import { usePatientStore } from '@/store/patient'
 import { showError } from '@/utils/show'
 import { onShow } from '@dcloudio/uni-app'
@@ -65,34 +59,35 @@ const drugs = ref([] as any)
 const flag = ref<boolean>(true)
 
 onShow(async () => {
-  await getDrugs()
+  await getImaging()
 })
 
-const getDrugs = async () => {
-  const r = await listDrug(patientInfo.value.idCard as string)
+const getImaging = async () => {
+  const r = await listImaging(patientInfo.value.idCard as string)
   if (r.code) return showError('获取治疗方案失败')
+  console.log(2222, r.data)
   drugs.value = r.data
 }
 
-const addDrug = () => {
+const addImaging = () => {
   console.log('跳转添加用药信息页面')
   uni.navigateTo({
-    url: '/pages/follow/addDrug'
+    url: '/pages/follow/imagingAdd'
   })
 }
 
-const deleteDrug = async (drug: any) => {
-  console.log('删除用药: ', drug)
+const deleteImaging = async (item: any) => {
+  console.log('删除用药: ', item)
   message
     .confirm({
       msg: '删除用药',
       title: '确认删除'
     })
     .then(async () => {
-      const r = await delDrug({ drugId: drug?._id || '' })
+      const r = await delImaging({ drugId: item?._id || '' })
       if (r.code) return showError('删除失败')
       toast.success('删除成功')
-      await getDrugs()
+      await getImaging()
     })
     .catch(() => {
       console.log('点击了取消按钮')
@@ -100,10 +95,10 @@ const deleteDrug = async (drug: any) => {
 
 }
 
-const updateDrug = async (drug: any) => {
-  console.log('更新药物: ', drug._id)
+const updateImaging = async (item: any) => {
+  console.log('更新药物: ', item._id)
   uni.navigateTo({
-    url: `/pages/follow/addDrug?drugId=${drug._id}`
+    url: `/pages/follow/imagingAdd?imagingId=${item._id}`
   })
 }
 
