@@ -31,6 +31,10 @@
 
       </view>
 
+      <view v-if="items.value && items.type == 4">
+        <wd-input label="内容" label-width="100px" prop="remark" v-model="items.content" placeholder="" :rules="[]" />
+      </view>
+
     </view>
 
     <button class="submit" @click="handleSubmit">提交</button>
@@ -64,28 +68,30 @@ type Item = {
   radiography?: string,
   vessel?: string,
   close?: string,
-  degree?: string
+  degree?: string,
+  content?: string
 }
 
 const content = reactive<Item[]>([
   { "title": "颈总动脉（右）", name: 'jdmy', type: 1, },
-  // { "title": "颈总动脉（左）", name: 'jdmz', type: 1, },
-  // { "title": "锁骨下动脉（左）", name: 'sgxdmz', type: 1, },
-  // { "title": "锁骨下动脉（右）", name: 'sgxdmy', type: 1, },
-  // { "title": "升主动脉", name: 'szdm', type: 1, },
-  // { "title": "主动脉弓", name: 'zdmg', type: 1, },
-  // { "title": "降主动脉", name: 'jzdm', type: 1, },
-  // { "title": "腹主动脉", name: 'fzdm', type: 1, },
-  // { "title": "腹腔干", name: 'fqg', type: 1, },
-  // { "title": "肾动脉", name: 'sdm', type: 1, },
-  // { "title": "肠系膜动脉", name: 'cxmdm', type: 1, },
-  // { "title": "髂动脉", name: 'kdm', type: 1, },
-  // { "title": "冠状动脉", name: 'gzdm', type: 2, },
-  // { "title": "肺动脉", name: 'fdm', type: 2, },
-  // { "title": "颅内动脉", name: 'lndm', type: 2, },
-  // { "title": "主动脉瓣", name: 'zdmb', type: 3, },
-  // { "title": "二尖瓣", name: 'erjb', type: 3, },
-  // { "title": "三尖瓣", name: 'sanjb', type: 3, }
+  { "title": "颈总动脉（左）", name: 'jdmz', type: 1, },
+  { "title": "锁骨下动脉（左）", name: 'sgxdmz', type: 1, },
+  { "title": "锁骨下动脉（右）", name: 'sgxdmy', type: 1, },
+  { "title": "升主动脉", name: 'szdm', type: 1, },
+  { "title": "主动脉弓", name: 'zdmg', type: 1, },
+  { "title": "降主动脉", name: 'jzdm', type: 1, },
+  { "title": "腹主动脉", name: 'fzdm', type: 1, },
+  { "title": "腹腔干", name: 'fqg', type: 1, },
+  { "title": "肾动脉", name: 'sdm', type: 1, },
+  { "title": "肠系膜动脉", name: 'cxmdm', type: 1, },
+  { "title": "髂动脉", name: 'kdm', type: 1, },
+  { "title": "冠状动脉", name: 'gzdm', type: 2, },
+  { "title": "肺动脉", name: 'fdm', type: 2, },
+  { "title": "颅内动脉", name: 'lndm', type: 2, },
+  { "title": "主动脉瓣", name: 'zdmb', type: 3, },
+  { "title": "二尖瓣", name: 'erjb', type: 3, },
+  { "title": "三尖瓣", name: 'sanjb', type: 3, },
+  { "title": "心肌病变", name: 'xinjibb', type: 4, }
 ]);
 const option = { value: '', thickening: '', narrow: '', block: '', sandwiching: '', aneurysm: '', delayedEnhance: '', radiography: '', vessel: '', close: '', degree: '' }
 content.forEach((item, index) => {
