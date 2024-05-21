@@ -108,9 +108,6 @@ onLoad(async (option: any) => {
 
   }
   console.log(1111, content)
-
-
-
 })
 
 const handleChange = () => {
@@ -172,7 +169,7 @@ const RadioOptions = {
   ]
 }
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
 
   console.log(3333, content)
 
@@ -189,9 +186,17 @@ const handleSubmit = () => {
 
   if (imagingId.value) {
     //delete formData.createdAt
-    const res = updateImaging({ imagingId: imagingId.value, info: formData })
+    const res = await updateImaging({ imagingId: imagingId.value, info: formData })
+    if (res.code == 0) {
+      uni.redirectTo({ 'url': '/pages/follow/imagingList' })
+    }
+    console.log(res)
   } else {
-    const res = addImaging(formData)
+    const res = await addImaging(formData)
+    if (res.code == 0) {
+      uni.redirectTo({ 'url': '/pages/follow/imagingList' })
+    }
+
   }
 }
 

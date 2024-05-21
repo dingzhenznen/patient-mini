@@ -1,6 +1,7 @@
 <template>
   <!-- 治疗方案界面 -->
   <view class="main">
+    <wd-message-box />
     <view class="body">
       <!-- 添加用药信息入口 -->
       <view class="add-wrap" @click="addImaging">
@@ -43,7 +44,7 @@ import { storeToRefs } from 'pinia'
 import { updatePatient } from '@/apis/patient/index'
 import { listImaging, delImaging } from '@/apis/follow/imaging'
 import { usePatientStore } from '@/store/patient'
-import { showError } from '@/utils/show'
+import { showError, showSuccess } from '@/utils/show'
 import { onShow } from '@dcloudio/uni-app'
 import dayjs from 'dayjs'
 
@@ -80,13 +81,13 @@ const deleteImaging = async (item: any) => {
   console.log('删除用药: ', item)
   message
     .confirm({
-      msg: '删除用药',
+      msg: '删除记录',
       title: '确认删除'
     })
     .then(async () => {
-      const r = await delImaging({ drugId: item?._id || '' })
+      const r = await delImaging({ imagingId: item?._id || '' })
       if (r.code) return showError('删除失败')
-      toast.success('删除成功')
+      showSuccess('删除成功')
       await getImaging()
     })
     .catch(() => {
