@@ -38,13 +38,12 @@ const patientStore = usePatientStore();
 
 console.log(11111, patientStore.patientInfo)
 
-const form = patientStore.patientInfo || reactive({
-  idCard: '',
+const form = reactive({
+  idCard: patientStore.patientInfo.idCard,
   followUpType: '正常随访',
   thisDate: new Date(new Date().toLocaleDateString()).getTime(),
   nextDate: 0,
   followRemark: '',
-
 })
 
 const formRef = ref()
