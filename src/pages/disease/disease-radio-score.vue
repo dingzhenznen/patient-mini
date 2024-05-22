@@ -4,13 +4,13 @@
     <view v-if="desc != ''" class="desc">{{ desc }}</view>
     <view class="radio-wrap">
       <button :class="selected === 1 ? 'btn' : 'btn-selected'" :disabled="props.disabled"
-        @click="clickBtn(1)">有</button>
+        @click="clickBtn(1)">是</button>
       <button :class="selected === 0 ? 'btn' : 'btn-selected'" :disabled="props.disabled"
-        @click="clickBtn(0)">无</button>
+        @click="clickBtn(0)">否</button>
       <button v-if="props.optionNumber > 2 && !props.optionLabel" :class="selected === 2 ? 'btn' : 'btn-selected'"
-        :disabled="props.disabled" @click="clickBtn(2)">未做</button>
-      <button v-if="props.optionNumber > 2 && props.optionLabel === '不详'"
-        :class="selected === 3 ? 'btn' : 'btn-selected'" :disabled="props.disabled" @click="clickBtn(3)">不详</button>
+        :disabled="props.disabled" @click="clickBtn(2)">不详</button>
+      <button v-if="props.optionNumber > 2 && props.optionLabel === '未做'"
+        :class="selected === 3 ? 'btn' : 'btn-selected'" :disabled="props.disabled" @click="clickBtn(3)">未做</button>
     </view>
   </view>
 </template>

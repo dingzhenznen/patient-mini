@@ -1,5 +1,6 @@
 <template>
   <view class="main">
+    <!-- 第一种标准 -->
     <view class="diagnose-standard">
       <view class="title-wrap">
         EULAR/ACR 2019分类标准
@@ -11,102 +12,125 @@
     </view>
     <view class="content">
       <form>
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          title="1. 下背痛的病程至少3个月, 疼痛随活动改善, 休息不缓解" v-model="form.sleEULAR.indicator1" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="2. 腰椎在前、后屈和侧屈方向活动受限"
-          v-model="form.sleEULAR.indicator2" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="3. 胸廓扩张范围小于同年龄和同性别者的正常值"
-          v-model="form.sleEULAR.indicator3" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="4. 双侧骶髂关节炎2-4级"
-          desc="(0=正常, 1=可疑, 2=轻度关节面破坏, 硬化, 3=中度关节间隙增宽, 狭窄, 部分强直, 4=全部强直)" :option-number="3"
-          v-model="form.sleEULAR.indicator4" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="5.单侧骶髂关节炎3-4级"
-          desc="(0=正常, 1=可疑, 2=轻度关节面破坏, 硬化, 3=中度关节间隙增宽, 狭窄, 部分强直, 4=全部强直)" :option-number="3"
-          v-model="form.sleEULAR.indicator5" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="抗核抗体（ANA)滴度曾≥1:80（HEp-2细胞方法）"
+          v-model="form.sleEULAR.ana" :option-number="3" />
+        <view v-if="form.sleEULAR.ana === 1">
+          <view class="cate">附加标准: <wd-icon name="warning" style="margin-left: 10px;" size="16px"
+              @click="showSubStandard = true"></wd-icon>
+          </view>
+          <view class="no-want">临床分类标准及权重：</view>
+          <view class="no-want">全身状态: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.quanshen" title="发热 ＞38.3° （2分）" />
+          <view class="no-want">血液学: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.xueye1" title="1. 白细胞减少症＜4000/mm³ （3分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.xueye2" title="2. 血小板减少症＜100,000/mm³ （4分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.xueye3" title="3. 溶血性贫血 （4分）" />
+          <view class="no-want">神经精神症状: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.shenjing1" title="1. 谵妄 （2分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.shenjing2" title="2. 精神错乱 （3分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.shenjing3" title="3. 癫痫 （5分）" />
+          <view class="no-want">皮肤黏膜病变: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.pifu1" title="1. 非瘢痕性秃发 （2分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.pifu2" title="2. 口腔溃疡 （2分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.pifu3" title="3. 亚急性皮肤狼疮或盘状狼疮 （4分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.pifu4" title="4. 急性皮肤狼疮 （6分）" />
+          <view class="no-want">浆膜炎: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.jiangmo1" title="1、 胸膜或心包渗出液 （5分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.jiangmo2" title="2、 急性心包炎 （6分）" />
+          <view class="no-want">肌肉骨骼症状: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.jirou" title="关节受累 （6分）" />
+          <view class="no-want">肾脏病变: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.shenzhang1" title="1. 尿蛋白＞0.5g/24小时 （4分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.shenzhang2" title="2. 肾脏病理WHO Ⅱ或Ⅴ型狼疮肾炎 （8分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.shenzhang3" title="3. 肾脏病理WHO Ⅲ或Ⅳ型狼疮肾炎 （10分）" />
+          <view class="no-want">免疫学分类标准及权重: </view>
+          <view class="no-want">抗磷脂抗体: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.kanglinzhi" title="抗心磷脂抗体/β2GP1/狼疮抗凝物 一项及以上阳性 （2分）" />
+          <view class="no-want">补体: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.buti1" title="1、 补体C3或补体C4下降 （3分）" />
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.buti2" title="2、 补体C3和补体C4下降 （4分）" />
+          <view class="no-want">SLE特异性抗体: </view>
+          <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" :option-number="3"
+            v-model="form.sleEULAR.sleKangti" title="dsDNA或抗Sm抗体阳性 （6分）" />
+        </view>
+
         <text></text>
       </form>
     </view>
-    <view class="diagnose-standard">
-      <view class="title"> 脊柱关节炎诊断标准 </view>
-      <view class="desc">(ASAS标准)</view>
+    <!-- 第二种标准 -->
+    <view class="diagnose-standard" style="height: 60rpx;">
+      <view class="title" style="margin-top: 20rpx;font-weight:bold;font-size:13px;"> SLE SLICC 2012标准的确认<wd-icon
+          name="warning" style="margin-left: 10px;" size="16px" @click="showSLE2012 = true"></wd-icon> </view>
     </view>
     <view class="content">
       <form>
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="1. 背痛持续三个月"
-          v-model="form.sleSLICC.indicator1" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="2. 45岁之前起病"
-          v-model="form.sleSLICC.indicator2" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="3. 炎性背痛"
-          desc="1)既往或现在有背部疼痛, 2)40岁以前出现, 3)隐匿起病, 4)锻炼后好转, 5)休息加重,夜间痛(起床后好转).符合5条中的4条"
-          v-model="form.sleSLICC.indicator3" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator3 === 1" title="3.1. 过去" v-model="form.sleSLICC.indicator31" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator3 === 1" title="3.2. 现在(近一周)" v-model="form.sleSLICC.indicator32" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="4. 关节炎"
-          desc="既往或现在出现被医生诊断的滑膜炎" v-model="form.sleSLICC.indicator4" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator4 === 1" title="4.1. 过去" v-model="form.sleSLICC.indicator41" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator4 === 1" title="4.2. 现在(近一周)" v-model="form.sleSLICC.indicator42" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="5. 足跟痛" desc="既往或现在出现足跟痛"
-          v-model="form.sleSLICC.indicator5" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator5 === 1" title="5.1. 过去" v-model="form.sleSLICC.indicator51" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator5 === 1" title="5.2. 现在(近一周)" v-model="form.sleSLICC.indicator52" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="6. 足跟痛"
-          desc="既往或现在被医生诊断的指炎/趾炎" v-model="form.sleSLICC.indicator6" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator6 === 1" title="6.1. 过去" v-model="form.sleSLICC.indicator61" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator6 === 1" title="6.2. 现在(近一周)" v-model="form.sleSLICC.indicator62" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="7. 虹膜炎"
-          desc="既往或现在被眼科医生确诊的前葡萄膜炎" v-model="form.sleSLICC.indicator7" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="8. 银屑病" desc="既往或现在被医生诊断的银屑病"
-          v-model="form.sleSLICC.indicator8" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator8 === 1" title="8.1. 银屑病" desc="既往或现在被医生诊断的银屑病,或者一级/二级亲属中有银屑病"
-          v-model="form.sleSLICC.indicator81" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator8 === 1" title="8.2. 指甲病变" desc="甲剥离, 指甲凹陷,角化过度"
-          v-model="form.sleSLICC.indicator82" :option-number="3" option-label="不详" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator8 === 1" title="8.3. RF阴性" v-model="form.sleSLICC.indicator83" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator8 === 1" title="8.4. x-ray阳性" desc="手或足平片可见关节边缘新骨形成（不包括骨赘形成）"
-          v-model="form.sleSLICC.indicator84" :option-number="3" option-label="不详" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="9. 炎性肠病"
-          desc="既往或现在被医生诊断为克罗恩病或溃疡性结肠炎" v-model="form.sleSLICC.indicator9" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator9 === 1" title="9.1. 克罗恩病" v-model="form.sleSLICC.indicator91" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect"
-          v-if="form.sleSLICC.indicator9 === 1" title="9.2. 溃疡性结肠炎" v-model="form.sleSLICC.indicator92" />
-
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="10. 对NSAIDs反应好"
-          desc="服用足量NSAIDs后24-48小时内背痛消失或明显缓解" v-model="form.sleSLICC.indicator10" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="11. 家族史"
-          desc="出现在第一级母亲、父亲、姐妹、兄弟、子女或二级祖父母、婶婶/姨、叔伯/舅、侄女、侄子被诊断为强直性脊柱炎,银屑病,葡萄膜炎,反应性关节炎,炎性肠病"
-          v-model="form.sleSLICC.indicator11" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="12. 前驱感染"
-          desc="在关节炎,附着点炎,指炎/趾炎发病前1个月内出现的尿道炎/宫颈炎/腹泻" v-model="form.sleSLICC.indicator12" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="13. HLA-B27阳性"
-          v-model="form.sleSLICC.indicator13" :option-number="3" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="14. CRP升高"
-          desc="出现背痛时,CRP高于正常范围,并除外其他原因引起的CRP升高" :option-number="3" v-model="form.sleSLICC.indicator14" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="15. X线显示骶髂关节炎"
-          desc="骶髂关节双侧2-4级或单侧3-4级。0=正常,1=可疑,2=轻度关节面破坏,硬化,3=中度关节间隙增宽,狭窄,部分强直,4=全部强直"
-          v-model="form.sleSLICC.indicator15" />
-        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" title="16. MRI显示骶髂关节炎"
-          desc="有活动性炎症表现,如骨髓水肿或骨炎" v-model="form.sleSLICC.indicator16" />
+        <view style="border-bottom: 1px solid #ccc;padding: 10rpx 0 10rpx 20rpx;opacity: 0.8;">临床标准</view>
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator1"
+          :option-number="3" title="1. 皮疹" desc="急性或亚急性皮肤狼疮表现" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator2"
+          :option-number="3" title="2. 皮疹" desc="慢性皮肤狼疮表现" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator3"
+          :option-number="3" title="3. 溃疡" desc="口腔或鼻部溃疡" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator4"
+          :option-number="3" title="4. 脱发" desc="非瘢痕性秃发" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator5"
+          :option-number="3" title="5. 关节炎" desc="医师观察到的2个或以上关节肿或压痛伴有晨僵" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator6"
+          :option-number="3" title="6. 浆膜炎" desc="胸膜炎或心包炎" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator7"
+          :option-number="3" title="7. 肾脏病变" desc="尿蛋白/肌酐（或24-hr尿蛋白）至少相当于500mg/24hr,或出现红细胞管型" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator8"
+          :option-number="3" title="8. 神经病变" desc="抽搐，精神病，多发性单神经炎，脊髓炎，周围或颅神经病，脑炎（急性意识模糊状态）" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator9"
+          :option-number="3" title="9. 血液学病变" desc="溶血性贫血" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator10"
+          :option-number="3" title="10.  血液学病变" desc="白细胞减少（至少一次＜4000/mm³）或淋巴细胞减少（至少一次1000/mm³）" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.indicator11"
+          :option-number="3" title="11. 血液学病变" desc="血小板减少（＜100,000/mm³）至少一次" />
+        <view style="border-bottom: 1px solid #ccc;padding: 10rpx 0 10rpx 20rpx;opacity: 0.8">免疫学标准</view>
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.mianyi1"
+          :option-number="3" title="1. 抗核抗体" desc="ANA滴度高于实验室参考范围" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.mianyi2"
+          :option-number="3" title="2. 抗dsDNA" desc="抗dsDNA抗体高于实验室参考范围（ELISA法需＞2倍实验室参考范围）" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.mianyi3"
+          :option-number="3" title="3. 抗Sm抗体" desc="抗Sm抗体阳性" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.mianyi4"
+          :option-number="3" title="4. 抗磷脂抗体" desc="狼疮抗凝物阳性，梅毒血清学试验假阳性，抗心磷脂抗体至少是正常值的2倍或中-高滴度，抗β2GPI阳性" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.mianyi5"
+          :option-number="3" title="5. 补体" desc="C3减低，C4减低，CH50减低" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.mianyi6"
+          :option-number="3" title="6. Coombs试验" desc="无溶血性贫血但直接Coombs试验阳性" />
+        <DiseaseRadio :disabled="btnDisabled" @update:select-disease="handleSelect" v-model="form.sleSLICC.shenzang"
+          :option-number="3" title="肾脏病理证实为狼疮性肾炎" />
+        <wd-checkbox-group v-if="form.sleSLICC.shenzang == 1" v-model="form.sleSLICC.shenzangMulti" cell shape="button">
+          <wd-checkbox modelValue="1">不详</wd-checkbox>
+          <wd-checkbox modelValue="2">Ⅰ型</wd-checkbox>
+          <wd-checkbox modelValue="3">Ⅱ型</wd-checkbox>
+          <wd-checkbox modelValue="4">Ⅲ型</wd-checkbox>
+          <wd-checkbox modelValue="5">Ⅳ型</wd-checkbox>
+          <wd-checkbox modelValue="6">Ⅴ型</wd-checkbox>
+          <wd-checkbox modelValue="7">Ⅵ型</wd-checkbox>
+        </wd-checkbox-group>
         <text></text>
       </form>
     </view>
@@ -115,6 +139,7 @@
       <view v-if="!status" class="submit" @click="handleSubmit">患者注册</view>
       <view v-if="status == '0' || status == '1'" class="submit" @click="handleSubmit">更新</view>
     </view>
+    <!-- 标准弹框介绍 -->
     <wd-popup v-model="showCheckStandard" custom-style="width:80vw; padding: 20px;border-radius:10px;">
       <view class="popup-title">入围标准说明</view>
       <view class="popup-content">
@@ -155,7 +180,19 @@ import { updatePatient } from "@/apis/patient/index"
 const patientStore = usePatientStore()
 const { patientInfo } = patientStore
 
+// 总得分
 const totalScore = ref(0)
+// 全身状态得分
+// 血液学得分
+// 神经精神症状得分
+// 皮肤黏膜病变得分
+// 浆膜炎得分
+// 肌肉骨骼症状得分
+// 肾脏病变得分
+// 抗磷脂抗体得分
+// 步梯得分
+// SLE 特异性抗体得分
+
 const showCheckStandard = ref(false)
 const showSubStandard = ref(false)
 const showSLE2012 = ref(false)
@@ -184,44 +221,50 @@ const form = reactive({
   } as Record<string, unknown>,
   // 该疾病下指标1-8, 0为无, 1为有, 2为未做
   sleEULAR: patientInfo.selectDisease?.sleEULAR as any || {
-    indicator1: 0,
-    indicator2: 0,
-    indicator3: 0,
-    indicator4: 0,
-    indicator5: 0,
+    ana: 0,
+    quanshen: 0,
+    xueye1: 0,
+    xueye2: 0,
+    xueye3: 0,
+    shenjing1: 0,
+    shenjing2: 0,
+    shenjing3: 0,
+    pifu1: 0,
+    pifu2: 0,
+    pifu3: 0,
+    pifu4: 0,
+    jiangmo1: 0,
+    jiangmo2: 0,
+    jirou: 0,
+    shenzang1: 0,
+    shenzang2: 0,
+    shenzang3: 0,
+    kanglinzhi: 0,
+    buti1: 0,
+    buti2: 0,
+    sleKangti: 0,
   },
   // 该疾病下指标1-16, 0为无, 1为有, 2为未做, 3为不详
   sleSLICC: patientInfo.selectDisease?.sleSLICC as any || {
     indicator1: 0,
     indicator2: 0,
     indicator3: 0,
-    indicator31: 0,
-    indicator32: 0,
     indicator4: 0,
-    indicator41: 0,
-    indicator42: 0,
     indicator5: 0,
-    indicator51: 0,
-    indicator52: 0,
     indicator6: 0,
-    indicator61: 0,
-    indicator62: 0,
     indicator7: 0,
     indicator8: 0,
-    indicator81: 0,
-    indicator82: 0,
-    indicator83: 0,
-    indicator84: 0,
     indicator9: 0,
-    indicator91: 0,
-    indicator92: 0,
     indicator10: 0,
     indicator11: 0,
-    indicator12: 0,
-    indicator13: 0,
-    indicator14: 0,
-    indicator15: 0,
-    indicator16: 0,
+    mianyi1: 0,
+    mianyi2: 0,
+    mianyi3: 0,
+    mianyi4: 0,
+    mianyi5: 0,
+    mianyi6: 0,
+    shenzang: 0,
+    shenzangMulti: []
   }
 })
 
@@ -229,10 +272,10 @@ const handleDate = (date: any) => {
   form.datetime = date.value
 }
 const options = {
-  0: '无',
-  1: '有',
-  2: '未做',
-  3: '不详'
+  0: '是',
+  1: '否',
+  2: '不详',
+  3: '未做'
 }
 
 const handleSelect = (data: emitData) => {
@@ -250,7 +293,7 @@ const handleSelect = (data: emitData) => {
 }
 
 const handleSubmit = async () => {
-  console.log('submit spa info')
+  console.log('submit sle info')
   const formData = {
     idCard: patientInfo.idCard,
     userInfo: { selectDisease: form }
