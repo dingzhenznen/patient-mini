@@ -1,7 +1,7 @@
 {
   // ==================== Editor ====================
   "editor.fontFamily": "Fira Code Retina, Courier New, Monaco, YaHei Consolas Hybrid,Courier New",
-  "editor.fontSize": 15,
+  "editor.fontSize": 12,
   "editor.wordWrap": "on",
   "editor.cursorWidth": 3,
   "editor.letterSpacing": 0.5,
@@ -47,7 +47,7 @@
   "debug.console.fontSize": 14,
   "git.confirmSync": false,
   // ==================== Custom Plugin Config ====================
-  "workbench.colorTheme": "Solarized Light",
+  "workbench.colorTheme": "Default Dark+",
   "explorer.confirmDelete": false,
   "git.ignoreLegacyWarning": true,
   "cSpell.userWords": [
