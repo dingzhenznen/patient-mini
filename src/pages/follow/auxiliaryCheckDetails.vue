@@ -3,32 +3,36 @@
   <view class="main">
     <view class="body">
       <wd-form :model="form">
-        <view class="other">
-          <wd-calendar label="检查日期" label-width="100px" placeholder="必填" :align-right="flag" v-model="form.checkTime" />
-          <view class="item">
-            <text>检查名称</text>
-            <wd-input v-model="form.checkName" placeholder="必填" clearable />
-          </view>
-          <view class="item">
-            <text>正常</text>
-            <view class="normal">
-              <button :class="form.isNormal === true ? 'btn' : 'btn-selected'" @click="form.isNormal = true">是</button>
-              <button :class="form.isNormal === false ? 'btn' : 'btn-selected'"
-                @click="form.isNormal = false">否</button>
+        <wd-cell-group border>
+          <view class="other">
+            <wd-calendar label="检查日期" label-width="100px" placeholder="必填" :align-right="flag"
+              v-model="form.checkTime" />
+
+            <wd-input label="检查名称" v-model="form.checkName" placeholder="必填" clearable />
+
+            <view class="item">
+              <text>正常</text>
+              <view class="normal">
+                <button :class="form.isNormal === true ? 'btn' : 'btn-selected'"
+                  @click="form.isNormal = true">是</button>
+                <button :class="form.isNormal === false ? 'btn' : 'btn-selected'"
+                  @click="form.isNormal = false">否</button>
+              </view>
+            </view>
+            <view v-if="!checkId" class="item">检查报告上传</view>
+            <view v-else class="item">检查报告</view>
+            <!-- 检查结果上传 -->
+            <view v-if="!checkId" class="item-upload">
+              <wd-upload :file-list="checkFiles" :limit="3" action="https://p9s5xa.laf.run/mini/files/upload"
+                @change="handleChange"></wd-upload>
+            </view>
+            <view v-else class="image-wrap">
+              <image class="image" v-for="(item, index) in checkFiles" :key="index" :src="item.url"
+                @click="previewImage" />
             </view>
           </view>
-          <view v-if="!checkId" class="item">检查报告上传</view>
-          <view v-else class="item">检查报告</view>
-          <!-- 检查结果上传 -->
-          <view v-if="!checkId" class="item-upload">
-            <wd-upload :file-list="checkFiles" :limit="3" action="https://p9s5xa.laf.run/mini/files/upload"
-              @change="handleChange"></wd-upload>
-          </view>
-          <view v-else class="image-wrap">
-            <image class="image" v-for="(item, index) in checkFiles" :key="index" :src="item.url"
-              @click="previewImage" />
-          </view>
-        </view>
+
+        </wd-cell-group>
 
         <!-- <view v-if="drugId != ''" class="submit" @click="handleSubmit"> 更新 </view> -->
         <!-- <view v-else class="submit" @click="handleSubmit"> 添加 </view> -->

@@ -1,6 +1,8 @@
 <template>
   <!-- 治疗方案界面 -->
   <view class="main">
+    <wd-message-box />
+    <wd-toast />
     <view class="body">
       <!-- 添加用药信息入口 -->
       <view class="add-wrap" @click="addDrug">

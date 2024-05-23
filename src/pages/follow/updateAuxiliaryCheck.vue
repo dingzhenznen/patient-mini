@@ -84,7 +84,7 @@ const deleteAuxiliaryCheck = async (auxiliaryCheck: any) => {
       title: '确认删除'
     })
     .then(async () => {
-      const r = await delAuxCheck({ auxiliaryCheck: auxiliaryCheck?._id || '' })
+      const r = await delAuxCheck({ checkId: auxiliaryCheck?._id || '' })
       if (r.code) return showError('删除失败')
       toast.success('删除成功')
       await getAuxiliaryChecks()
