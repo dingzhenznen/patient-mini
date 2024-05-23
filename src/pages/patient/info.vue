@@ -303,6 +303,7 @@ onLoad(async (option: any) => {
 
 
   patientStore.updatePatientInfo(res.data.data[0])
+  patientStore.setFollowList(res.data.data[0])
   Object.assign(form, res.data.data[0]);
 
   console.log(222, form)

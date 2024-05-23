@@ -10,25 +10,33 @@ export const usePatientStore = defineStore('patient', {
       patientInfo: {} as Patient,
       patients: [] as Patient[],
       checks: {} as any,
+      followList: [] as any,
       followStatus: '1' // 0 未开始 1 进行中 2 已完成
     }
   },
   actions: {
     updatePatientInfo(patient: any) {
       this.patientInfo = patient
-      this.setPatientChecks(patient)
+      // this.setPatientChecks(patient)
     },
     setPatients(patients: Patient[]) {
       this.patients = patients
     },
-    setPatientChecks(patient: Patient) {
-      let checks: any = {}
+    setFollowList(patient: Patient) {
       const sortedArray = patient.followList?.sort(
         (a, b) => b.thisDate - a.thisDate
       )
+      this.followList = sortedArray
+      this.setPatientChecks(sortedArray)
+    },
+    setPatientChecks(followList: any) {
+      let checks: any = {}
+      // const sortedArray = patient.followList?.sort(
+      //   (a, b) => b.thisDate - a.thisDate
+      // )
       // 遍历每一次随访（使用 for 循环）
-      for (let i = 0; i < (sortedArray?.length || 0); i++) {
-        const item = patient.followList[i]
+      for (let i = 0; i < (followList?.length || 0); i++) {
+        const item = followList[i]
         const date = dayjs(item.thisDate).format('YYYY-MM-DD') // 当前随访日期
         // 遍历每一次随访的检查项（使用 for...in 循环）
         for (const key in item.checkList) {
