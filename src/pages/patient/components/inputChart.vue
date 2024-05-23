@@ -111,7 +111,7 @@ const handleSelect = (data: any) => {
 
     const series = { name: props.title, data: [] }
 
-    patientStore.patientInfo.followList?.forEach((value: Patient, index) => {
+    patientStore.followList.forEach((value: Patient, index) => {
 
       const checkList = value.checkList as CheckList
       if (checkList) {

@@ -87,7 +87,7 @@ const selected = ref(0 as any)
 const disabled = usePatientStore().followStatus !== '1'
 selected.value = props.modelValue
 const tabData = usePatientStore().checks[props.diagInfo.parent]?.[props.diagInfo.en] || []
-console.log(44444, tabData)
+//console.log(44444, tabData)
 
 watch(() => props.modelValue, (val) => {
   selected.value = val
