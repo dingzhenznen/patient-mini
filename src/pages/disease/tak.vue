@@ -24,27 +24,27 @@
       </view>
       <view class="content2">
 
-        <wd-form :model="form2">
+        <wd-form :model="form">
 
           <wd-cell-group border>
             <wd-cell :center="flag" title="诊断年龄<=60岁">
-              <wd-switch v-model="form2.age" />
+              <wd-switch v-model="form.tak2018.age" />
             </wd-cell>
 
             <wd-cell :center="flag" title="影像学存在血管炎证据">
-              <wd-switch v-model="form2.age" />
+              <wd-switch v-model="form.tak2018.exist" />
             </wd-cell>
 
             <wd-cell title="临床表现" />
-            <DiseaseCheckbox :optionList="lcOption" v-model="form2.linchuang">
+            <DiseaseCheckbox :optionList="lcOption" v-model="form.tak2018.linchuang">
             </DiseaseCheckbox>
 
             <wd-cell title="血管体检" />
-            <DiseaseCheckbox :optionList="tjOption" v-model="form2.tijian">
+            <DiseaseCheckbox :optionList="tjOption" v-model="form.tak2018.tijian">
             </DiseaseCheckbox>
 
             <wd-cell title="血管造影或血管超声" />
-            <DiseaseCheckbox :optionList="zyOption" v-model="form2.zaoying">
+            <DiseaseCheckbox :optionList="zyOption" v-model="form.tak2018.zaoying">
             </DiseaseCheckbox>
 
 
@@ -110,11 +110,20 @@ const form = reactive({
   china: '大动脉炎症',
   datetime: patientInfo.value.selectDisease?.datetime ?? Date.now(),
   type: 1,
-  selectedOption: patientInfo.value.selectDisease?.selectedOption ?? []
+  selectedOption: patientInfo.value.selectDisease?.selectedOption ?? [],
+  tak2018: patientInfo.value.selectDisease?.tak2018 ||{
+    age:false,
+    exist: false,
+    linchuang: [],
+    tijian: [],
+    zaoying: []
+  }
+
 })
 
 const form2 = reactive({
   age: false,
+  exist: false,
   linchuang: [],
   tijian: [],
   zaoying: []
