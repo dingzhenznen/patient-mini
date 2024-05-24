@@ -70,7 +70,7 @@ const handleSubmit = async () => {
   if (followStatus.value == 1) {
 
     if (!patientStore.patientInfo.selectDisease || !patientStore.patientInfo.name || !patientStore.patientInfo.history
-      || !patientStore.patientInfo.complication || !patientStore.patientInfo.complication) {
+      || !patientStore.patientInfo.complication) {
       showError('信息不完善')
       return;
     }

@@ -100,7 +100,7 @@ export type Patient = {
     content?: {
       // 选择内容
     }
-    tak2018: {}
+    tak2018?: {}
     spaDefault?: {}
     spaASAS?: {}
     sleSLICC?: {}

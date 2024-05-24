@@ -140,9 +140,26 @@
 
             <view class="content">
               <view v-if="form.selectDisease?.type == 1">
+                <view>1990年ACR修订标准</view>
                 <view v-for="item in form.selectDisease.selectedOption" :key="item">
                   {{ item }}
                 </view>
+                <view>
+                  2018年
+                </view>
+
+                <view v-for="item in form.selectDisease?.tak2018?.linchuang" :key="item">
+                  {{ item }}
+                </view>
+
+                <view v-for="item in form.selectDisease?.tak2018?.tijian" :key="item">
+                  {{ item }}
+                </view>
+
+                <view v-for="item in form.selectDisease?.tak2018?.zaoying" :key="item">
+                  {{ item }}
+                </view>
+
               </view>
               <view v-else>
                 <view v-for="item in form.selectDisease.selectedOption" :key="item">
@@ -211,7 +228,8 @@ const form = reactive<Patient>(
       en: '',
       china: '',
       type: 1,
-      selectedOption: []
+      selectedOption: [],
+      tak2018:{}
     }
 
   })
