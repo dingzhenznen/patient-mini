@@ -148,10 +148,10 @@ const patientStore = usePatientStore();
 const { patientInfo } = storeToRefs(patientStore)
 const flag = ref<boolean>(true)
 const minDate = dayjs().subtract(50, 'year').valueOf()
-const form = reactive({
+const form = patientInfo.value.history|| reactive({
 
-  attackTime: patientInfo.value.history?.attackTime,
-  confirmTime: patientInfo.value.history?.confirmTime,
+  // attackTime: patientInfo.value.history?.attackTime,
+  // confirmTime: patientInfo.value.history?.confirmTime,
   smoke: { value: 0, startTime: "", num: "", endTime: '' },
   drink: { value: 0, startTime: "", num: "", endTime: '' },
   marry: { value: "", num: '' },
@@ -178,8 +178,6 @@ const handleSubmit = () => {
     idCard: patientInfo.value.idCard,
     userInfo: { history: form }
   }
-  console.log(formData)
-  return
 
   console.log('formData', formData)
   // return

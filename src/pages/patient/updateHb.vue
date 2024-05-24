@@ -187,10 +187,6 @@ const form = patientStore.patientInfo.complication || reactive({
   other: '',
   operation: '',//手术
   history: { date: '', content: '' }
-
-
-
-
 })
 
 const formRef = ref()
@@ -201,7 +197,7 @@ const handleSubmit = () => {
   const formInfo = { complication: form }
 
   console.log('forminfo', formInfo)
-  return
+  //return
   formRef.value
     .validate()
     .then(async (data: any) => {
