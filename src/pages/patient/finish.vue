@@ -50,9 +50,15 @@ onLoad((option: any) => {
 const handleSelect = (item: any) => {
   // console.log(item)
   console.log('store: ', patientStore.patientInfo)
-  const diagnosisUrl = `/pages/disease/${patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase()}?status=${followStatus.value}` || item.url
   if (item.title == "诊断确认") {
-    uni.navigateTo({ url: diagnosisUrl })
+    const selectDiseaseName = patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase()
+
+    if(selectDiseaseName === undefined){
+      uni.navigateTo({ url: '/pages/patient/selectDisease' })
+    }else{
+      const diagnosisUrl = `/pages/disease/${selectDiseaseName}?status=${followStatus.value}` || item.url
+      uni.navigateTo({ url: diagnosisUrl })
+    }
   }
   else {
     uni.navigateTo({ 'url': item.url })
