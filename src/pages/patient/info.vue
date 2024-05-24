@@ -222,7 +222,7 @@ const formatFollowDate = (patient: Patient) => {
   if (diffDay >= 0) {
     return `距离下次诊疗还有 ${Math.abs(diffDay)} 天`
   } else {
-    return `距离下次诊疗已逾期 ${diffDay} 天`
+    return `距离下次诊疗已逾期 ${Math.abs(diffDay)} 天`
   }
 }
 
@@ -411,7 +411,7 @@ export default {
         .right {
           display: flex;
           width: 200rpx;
-          margin-left: 90rpx;
+          margin-left: 60rpx;
           font-size: 20rpx;
 
           justify-content: space-around;
