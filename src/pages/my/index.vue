@@ -12,7 +12,7 @@
       </view>
     </view>
     <!-- 需随访患者 -->
-    <view class="need-follow">
+    <!-- <view class="need-follow">
       <view class="title">需跟踪随访患者</view>
       <view class="content">
         <view class="item">
@@ -28,10 +28,10 @@
           <view class="label">20天内</view>
         </view>
       </view>
-    </view>
+    </view> -->
     <!-- 患者录入 和 诊疗记录 -->
     <view class="input-wrap">
-      <view class="card">
+      <view class="card" @click="addPatient">
         <wd-icon name="edit-1" size="32rpx" color="rgba(0, 191, 140)"></wd-icon>
         <text style="color: rgba(0, 191, 140);margin-left: 10rpx;">患者录入</text>
       </view>
@@ -73,6 +73,12 @@ const defaultAvatar = ref('https://oss.laf.run/p9s5xa-files/pictures/default-ava
 onShow(() => {
   console.log('user info: ', userStore.userInfo)
 })
+
+const addPatient = ()=>{
+  uni.navigateTo({"url":"/pages/patient/idCard"})
+
+}
+
 const onChooseAvatar = async (e: any) => {
   console.log('choose avatar: ', e)
   // 注: e.detail.avatarUrl 是一个临时 url，需要上传到服务器
