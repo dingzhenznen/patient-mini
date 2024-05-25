@@ -6,8 +6,8 @@
       <wd-cell-group border>
         <wd-picker :columns="columns" label="单列选项" :align-right="flag" v-model="form.followUpType" @confirm="handleConfirm"  />
         <wd-calendar label="本次访视实施日期" label-width="240rpx"   prop="thisDate" :center= "flag" :align-right="flag" v-model="form.thisDate" @confirm="thisConfirm" />
-        <wd-calendar label="下次访视实施日期" label-width="240rpx" 
-          placeholder=" " prop="nextDate"  :center= "flag" :align-right="flag" 
+        <wd-calendar label="下次访视实施日期" label-width="240rpx"
+          placeholder=" " prop="nextDate"  :center= "flag" :align-right="flag"
           v-model="form.nextDate"  :rules="[{ required: false,pattern: /\d{13}/, message: '请选择下次访视实施日期' }]" @confirm="nextConfirm" />
         <wd-cell title="医嘱">
           <wd-input v-model="form.followRemark" no-border placeholder=" 请输入"></wd-input>
@@ -81,20 +81,20 @@ const handleSubmit = () => {
     .validate()
     .then(async (data:any) => {
       if (data.valid) {
-       
+
         const res = await updatePatient(formData);
         if(res.code==0){
 
           patientStore.updatePatientInfo(res.data)
 
-          uni.navigateTo({'url':'/pages/patient/finish'})
+          uni.navigateBack()
 
         }else{
           showError(res.msg)
         }
 
       } else {
-    
+
         showError(data.errors[0].message)
       }
     })

@@ -191,8 +191,7 @@ const handleSubmit = () => {
 
         if (res.code == 0) {
           patientStore.updatePatientInfo(res.data)
-          uni.navigateTo({ 'url': "/pages/patient/finish" })
-
+          uni.navigateBack()
         } else {
           showError(res.msg)
         }

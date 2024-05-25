@@ -103,7 +103,7 @@ const viewAuxiliaryCheck = async (auxiliaryCheck: any) => {
 }
 
 const handleSubmit = () => {
-  console.log('更新')
+  uni.navigateBack()
 }
 
 const formatTime = (timeUnix: number) => {

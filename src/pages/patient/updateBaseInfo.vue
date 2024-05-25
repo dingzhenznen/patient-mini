@@ -82,7 +82,7 @@ import { ref, reactive } from 'vue'
 
 import Tags from '../../components/tags.vue';
 
-import { addPatient } from "@/apis/patient/index"
+import { addPatient,updatePatient } from "@/apis/patient/index"
 
 import { usePatientStore } from "@/store/patient"
 import { useUserStore } from "@/store/user"
@@ -128,12 +128,13 @@ const handleSubmit = () => {
       if (data.valid) {
 
         console.log(form)
+        delete form._id
 
-        const res = await addPatient({ idCard: form.idCard, doctorId: userStore.userInfo._id, userInfo: form });
+        const res = await updatePatient({ idCard: form.idCard, userInfo: form });
 
         if (res.code == 0) {
           patientStore.updatePatientInfo(res.data)
-          uni.navigateTo({ 'url': "/pages/patient/finish" })
+          uni.navigateBack()
 
         } else {
           showError(res.msg)

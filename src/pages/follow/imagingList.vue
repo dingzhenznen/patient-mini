@@ -105,7 +105,7 @@ const updateImaging = async (item: any) => {
 }
 
 const handleSubmit = () => {
-  console.log('更新')
+  uni.navigateBack()
 }
 
 const formatTime = (timeUnix: number) => {

@@ -152,7 +152,7 @@ const handleSubmit = async () => {
     //@ts-ignore
     if (patientInfo.value?.selectDisease?.selectedOption?.length > 0) {
       patientStore.updatePatientInfo(res.data)
-      uni.navigateTo({ 'url': "/pages/patient/finish" })
+      uni.navigateBack()
     } else {
       patientStore.updatePatientInfo(res.data)
       uni.navigateTo({ url: "/pages/patient/follow" })

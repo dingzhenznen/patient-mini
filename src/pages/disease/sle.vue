@@ -303,9 +303,9 @@ const handleSubmit = async () => {
 
   if (res.code == 0) {
     //@ts-ignore
-    if (patientInfo?.selectDisease?.sleEULAR?.length > 0 || patientInfo?.selectDisease?.sleSLICC?.length > 0) {
+    if (patientInfo?.selectDisease?.selectedOption?.length > 0 || patientInfo?.selectDisease?.selectedOption?.length > 0) {
       patientStore.updatePatientInfo(res.data)
-      uni.navigateTo({ 'url': "/pages/patient/finish" })
+      uni.navigateBack()
     } else {
       patientStore.updatePatientInfo(res.data)
       uni.navigateTo({ url: "/pages/patient/follow" })
