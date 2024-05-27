@@ -1,11 +1,15 @@
 <template>
   <view class="main">
     <view style="height: 88vh;">
+      <view class="upload" @click="handleUpload">
+        <wd-button block>拍照上传</wd-button>
+      </view>
+
 
       <wd-tabs v-model="tab" swipeable animated>
         <block>
           <wd-tab title="血常规">
-            <wd-cell-group border>
+            <!-- <wd-cell-group border>
               <wd-cell title="血常规" title-width="100px" prop="count">
                 <wd-radio-group v-model="form.bloodRoutine.status" shape="dot" inline>
                   <wd-radio value="1">正常</wd-radio>
@@ -13,7 +17,7 @@
                   <wd-radio value="2">未做</wd-radio>
                 </wd-radio-group>
               </wd-cell>
-            </wd-cell-group>
+            </wd-cell-group> -->
 
             <InputChart checkname="bloodRoutine" title="WBC" china="(低密度脂蛋白胆固醇)" v-model="form.bloodRoutine.WBC"
               unit="*10^9个/L" low="4" height="10">
@@ -35,7 +39,7 @@
 
         <block>
           <wd-tab title="肝肾功">
-            <wd-cell-group border>
+            <!-- <wd-cell-group border>
               <wd-cell title="肝肾功" title-width="100px" prop="count">
                 <wd-radio-group v-model="form.renalFunction.status" shape="dot" inline>
                   <wd-radio value="1">正常</wd-radio>
@@ -43,7 +47,7 @@
                   <wd-radio value="2">未做</wd-radio>
                 </wd-radio-group>
               </wd-cell>
-            </wd-cell-group>
+            </wd-cell-group> -->
 
             <InputChart checkname="renalFunction" title="ALT" china="(丙氨酸氨基转移酶)" v-model="form.renalFunction.ALT"
               unit="U/L" low="0" height="40">
@@ -420,6 +424,10 @@ const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
 
 })
 
+const handleUpload = async()=>{
+  console.log('upload')
+}
+
 const handleData =(originData:string[],form:any)=>{
 
   const indexs =[]
@@ -457,15 +465,11 @@ const handleData =(originData:string[],form:any)=>{
 const handleSubmit = async () => {
 
   try{
-
-    console.log(form)
-
     const originData = [
       'other','11','WBC','haha','444','Hb','gsg','244','Sirolimus','fff','222','33'
     ]
 
     const uploadData= handleData(originData,form)
-
     Object.entries(form).forEach(([key, value]) => {
       uploadData.forEach((item,index)=>{
         if(Object.keys(value).includes(item.name)){
@@ -494,6 +498,10 @@ const handleSubmit = async () => {
 .main {
   position: relative;
   // height: 100vh;
+
+  .upload{
+    margin:40rpx 40rpx;
+  }
 
   .submit-btn {
     width: 95vw;
