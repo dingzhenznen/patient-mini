@@ -420,12 +420,71 @@ const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
 
 })
 
+const handleData =(originData:string[],form:any)=>{
+
+  const indexs =[]
+  // 获取所有匹配字符的索引
+  Object.entries(form).forEach(([key, value]) => {
+      originData.forEach((item,index)=>{
+          if(Object.keys(value).includes(item)){
+            indexs.push(index)
+          }
+      })
+    })
+    // 获取索引间距
+    const difference = indexs[1]-indexs[0]
+    console.log(indexs)
+    console.log(difference)
+    // 截取数组
+    originData.splice(0,indexs[0])
+    console.log(originData)
+
+    const outData =[]
+    originData.forEach((item2,index2)=>{
+      if(index2%difference==0){
+        let value =0;
+        if(originData[index2+difference-1]){
+          value = originData[index2+difference-1]
+        }
+        outData.push({name:item2,value:value})
+      }
+    })
+
+  return outData
+
+}
+
 const handleSubmit = async () => {
-  const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
-  // console.log(formData)
-  const res = await updatePatient(formData);
-  usePatientStore().updatePatientInfo(res.data)
-  uni.navigateBack()
+
+  try{
+
+    console.log(form)
+
+    const originData = [
+      'other','11','WBC','haha','444','Hb','gsg','244','Sirolimus','fff','222','33'
+    ]
+
+    const uploadData= handleData(originData,form)
+
+    Object.entries(form).forEach(([key, value]) => {
+      uploadData.forEach((item,index)=>{
+        if(Object.keys(value).includes(item.name)){
+          form[key][item.name] = item.value
+        }
+      })
+    })
+    console.log(form)
+    return
+    const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
+    // console.log(formData)
+    const res = await updatePatient(formData);
+    usePatientStore().updatePatientInfo(res.data)
+    uni.navigateBack()
+
+  }catch(e){
+    console.log(e)
+  }
+
 }
 
 
