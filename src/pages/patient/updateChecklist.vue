@@ -798,8 +798,8 @@ const handleSubmit = async () => {
     ]
     const uploadData = handleData(originData, form)
     Object.entries(form).forEach(([key, value]) => {
-      console.log(key)
-      uploadData.forEach((item, index) => {
+      //console.log(key)
+      uploadData.forEach((item:any, index) => {
         if (Object.keys(value).includes(item.name)) {
           //@ts-ignore
           form[key][item.name] = item.value
@@ -823,8 +823,6 @@ const handleSubmit = async () => {
   }
 
 }
-//@ts-ignore
-form.bloodRoutine.WBC="2"
 
 watch(form,(newval,oldval)=>{
 
