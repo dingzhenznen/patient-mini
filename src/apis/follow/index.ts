@@ -99,3 +99,12 @@ export const listAuxChecks = async (idCard: string) => {
     data: { idCard }
   })
 }
+
+// 调用OCR接口
+export const ocr = async (data: any) => {
+  return await request({
+    url: '/mini/files/ocr',
+    method: 'POST',
+    data
+  })
+}

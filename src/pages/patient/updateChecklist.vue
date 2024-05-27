@@ -302,6 +302,19 @@ import type { CheckList } from '@/utils/types'
 import { usePatientStore } from "@/store/patient"
 import { updatePatient } from "@/apis/patient/index"
 import { storeToRefs } from 'pinia'
+import { ocr } from '@/apis/follow'
+
+type uploadRes = {
+  data: {
+    filename: string
+    url: string
+    type: string
+    size: number
+  }
+  code: number
+  message: string
+
+}
 
 const patientStore = usePatientStore()
 const tab = ref(0)
@@ -424,39 +437,95 @@ const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
 
 })
 
-const handleUpload = async()=>{
-  console.log('upload')
+// 1. 选择图片/拍照 2.上传至服务器 3. 调用OCR接口 4. 提示识别结果
+const handleUpload = async () => {
+  // 为减少缩进，将成功回调函数提取出来
+  const chooseImageSuccessCallBack = (res: any) => {
+    // 因为限制了图片数量只有1个，所以选择第一张
+    // @ts-ignore
+    const uploadFile = res.tempFiles[0]
+    // 受限于微信OCR接口，提供的图片大小不能超过2M
+    if (uploadFile.size > 1024 * 1024 * 2) {
+      return uni.showToast({
+        title: '图片大小不能超过2M',
+        icon: 'none'
+      })
+    }
+    const uploadFileSuccessCallback = async (res: any) => {
+      if (res.statusCode !== 200) {
+        return uni.showToast({
+          title: '上传失败',
+          icon: 'none'
+        })
+      }
+      const apiRes = JSON.parse(res.data) as uploadRes
+
+      // 确定上传后的图片路径，调用OCR接口
+      const r = await ocr({ imageUrl: apiRes.data.url })
+      console.log('ocr result: ', r)
+      // 识别出错提示
+      if (r.code) {
+        return uni.showToast({
+          title: r.msg,
+          icon: 'none'
+        })
+      }
+      // 识别结果处理
+      uni.showToast({
+        // @ts-ignore
+        title: '识别成功, ' + r.data.join(','),
+        icon: 'success'
+      })
+    }
+    // 上传至服务器进行OCR识别
+    uni.uploadFile(
+      {
+        url: 'https://p9s5xa.laf.run/mini/files/upload',
+        filePath: uploadFile.path,
+        name: 'file',
+        success: uploadFileSuccessCallback,
+        fail: (err) => {
+          console.log(err)
+        }
+      }
+    )
+  }
+  uni.chooseImage({
+    count: 1,
+    sourceType: ['album', 'camera'],
+    success: chooseImageSuccessCallBack
+  })
 }
 
-const handleData =(originData:string[],form:any)=>{
+const handleData = (originData: string[], form: any) => {
 
-  const indexs =[]
+  const indexs = []
   // 获取所有匹配字符的索引
   Object.entries(form).forEach(([key, value]) => {
-      originData.forEach((item,index)=>{
-          if(Object.keys(value).includes(item)){
-            indexs.push(index)
-          }
-      })
-    })
-    // 获取索引间距
-    const difference = indexs[1]-indexs[0]
-    console.log(indexs)
-    console.log(difference)
-    // 截取数组
-    originData.splice(0,indexs[0])
-    console.log(originData)
-
-    const outData =[]
-    originData.forEach((item2,index2)=>{
-      if(index2%difference==0){
-        let value =0;
-        if(originData[index2+difference-1]){
-          value = originData[index2+difference-1]
-        }
-        outData.push({name:item2,value:value})
+    originData.forEach((item, index) => {
+      if (Object.keys(value).includes(item)) {
+        indexs.push(index)
       }
     })
+  })
+  // 获取索引间距
+  const difference = indexs[1] - indexs[0]
+  console.log(indexs)
+  console.log(difference)
+  // 截取数组
+  originData.splice(0, indexs[0])
+  console.log(originData)
+
+  const outData = []
+  originData.forEach((item2, index2) => {
+    if (index2 % difference == 0) {
+      let value = 0;
+      if (originData[index2 + difference - 1]) {
+        value = originData[index2 + difference - 1]
+      }
+      outData.push({ name: item2, value: value })
+    }
+  })
 
   return outData
 
@@ -464,15 +533,15 @@ const handleData =(originData:string[],form:any)=>{
 
 const handleSubmit = async () => {
 
-  try{
+  try {
     const originData = [
-      'other','11','WBC','haha','444','Hb','gsg','244','Sirolimus','fff','222','33'
+      'other', '11', 'WBC', 'haha', '444', 'Hb', 'gsg', '244', 'Sirolimus', 'fff', '222', '33'
     ]
 
-    const uploadData= handleData(originData,form)
+    const uploadData = handleData(originData, form)
     Object.entries(form).forEach(([key, value]) => {
-      uploadData.forEach((item,index)=>{
-        if(Object.keys(value).includes(item.name)){
+      uploadData.forEach((item, index) => {
+        if (Object.keys(value).includes(item.name)) {
           form[key][item.name] = item.value
         }
       })
@@ -485,7 +554,7 @@ const handleSubmit = async () => {
     usePatientStore().updatePatientInfo(res.data)
     uni.navigateBack()
 
-  }catch(e){
+  } catch (e) {
     console.log(e)
   }
 
@@ -499,8 +568,8 @@ const handleSubmit = async () => {
   position: relative;
   // height: 100vh;
 
-  .upload{
-    margin:40rpx 40rpx;
+  .upload {
+    margin: 40rpx 40rpx;
   }
 
   .submit-btn {

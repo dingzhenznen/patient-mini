@@ -207,7 +207,7 @@ const goToPatient = (patient: Patient) => {
 }
 
 const goCamera = () => {
-  uni.navigateTo({ 'url': "/pages/follow/imagingAdd" })
+  uni.navigateTo({ 'url': "/pages/patient/updateChecklist" })
 }
 
 const formatFollowDate = (patient: Patient) => {
