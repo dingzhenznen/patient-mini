@@ -494,7 +494,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref, watch } from 'vue'
 import { checks } from '@/utils/data'
 import InputChart from "./components/inputChart"
 import RadioTable from './components/radioTable.vue'
@@ -521,7 +521,7 @@ const tab = ref(0)
 const isRequire = ref(true)
 const { checks: checksData } = storeToRefs(usePatientStore())
 console.log('checksData: ', checksData.value)
-const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
+let form = patientStore.patientInfo?.checkList || reactive({
   bloodRoutine: {//血常规
     status: 0,
     WBC: '',
@@ -719,11 +719,6 @@ const handleUpload = async () => {
         })
       }
       // 识别结果处理
-      uni.showToast({
-        // @ts-ignore
-        title: '识别成功, ' + r.data.join(','),
-        icon: 'success'
-      })
     }
     // 上传至服务器进行OCR识别
     uni.uploadFile(
@@ -747,7 +742,19 @@ const handleUpload = async () => {
 
 const handleData = (originData: string[], form: any) => {
 
-  const indexs = []
+  const rules = [
+    {value:'-',repValue:'_'},
+    {value:'%',repValue:'100'},
+    {value:'+',repValue:'add'},
+    {value:'-',repValue:'sub'},
+  ]
+  rules.forEach((item,index)=>{
+
+    originData = originData.map((str)=>{ return str.split(item.value).join(item.repValue)})
+
+  })
+
+  const indexs = [] as any;
   // 获取所有匹配字符的索引
   Object.entries(form).forEach(([key, value]) => {
     originData.forEach((item, index) => {
@@ -764,10 +771,11 @@ const handleData = (originData: string[], form: any) => {
   originData.splice(0, indexs[0])
   console.log(originData)
 
-  const outData = []
+  // 拼接对象
+  const outData = [] as any
   originData.forEach((item2, index2) => {
     if (index2 % difference == 0) {
-      let value = 0;
+      let value = '';
       if (originData[index2 + difference - 1]) {
         value = originData[index2 + difference - 1]
       }
@@ -779,34 +787,52 @@ const handleData = (originData: string[], form: any) => {
 
 }
 
+
 const handleSubmit = async () => {
+
+  console.log(444,form)
 
   try {
     const originData = [
-      'other', '11', 'WBC', 'haha', '444', 'Hb', 'gsg', '244', 'Sirolimus', 'fff', '222', '33'
+      'other', '11', 'WBC', 'haha', '444', 'IL-1β', 'gsg', '244', 'anti-Scl-70', 'fff', '222', '33'
     ]
-
     const uploadData = handleData(originData, form)
     Object.entries(form).forEach(([key, value]) => {
+      console.log(key)
       uploadData.forEach((item, index) => {
         if (Object.keys(value).includes(item.name)) {
+          //@ts-ignore
           form[key][item.name] = item.value
+
         }
       })
     })
+    await nextTick(()=>{
+      console.log(111)
+    })
     console.log(form)
-    return
-    const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
-    // console.log(formData)
-    const res = await updatePatient(formData);
-    usePatientStore().updatePatientInfo(res.data)
-    uni.navigateBack()
+    // return
+    // const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
+    // // console.log(formData)
+    // const res = await updatePatient(formData);
+    // usePatientStore().updatePatientInfo(res.data)
+    // uni.navigateBack()
 
   } catch (e) {
     console.log(e)
   }
 
 }
+//@ts-ignore
+form.bloodRoutine.WBC="2"
+
+watch(form,(newval,oldval)=>{
+
+  console.log(4444,newval)
+
+  nextTick(()=>console.log(333))
+
+},{ immediate: true })
 
 
 </script>
