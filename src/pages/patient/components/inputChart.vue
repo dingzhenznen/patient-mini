@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { usePatientStore } from "@/store/patient"
 import type { Patient, CheckList } from '@/utils/types'
 import dayjs from 'dayjs'
@@ -90,6 +90,10 @@ const handleChange = (event: any) => {
   emit('update:modelValue', value.value)
 
 }
+
+watch(() => props.modelValue, (val) => {
+  value.value = val
+})
 
 
 // 处理 chart 数据

@@ -521,7 +521,7 @@ const tab = ref(0)
 const isRequire = ref(true)
 const { checks: checksData } = storeToRefs(usePatientStore())
 console.log('checksData: ', checksData.value)
-let form = patientStore.patientInfo?.checkList || reactive({
+const form = patientStore.patientInfo.checkList || reactive({
   bloodRoutine: {//血常规
     status: 0,
     WBC: '',
@@ -719,6 +719,19 @@ const handleUpload = async () => {
         })
       }
       // 识别结果处理
+
+      const uploadData = handleData(r.data, form)
+      Object.entries(form).forEach(([key, value]) => {
+      //console.log(key)
+        uploadData.forEach((item:any, index) => {
+          if (Object.keys(value).includes(item.name)) {
+            //@ts-ignore
+            form[key][item.name] = item.value
+
+          }
+        })
+    })
+
     }
     // 上传至服务器进行OCR识别
     uni.uploadFile(
@@ -793,30 +806,12 @@ const handleSubmit = async () => {
   console.log(444,form)
 
   try {
-    const originData = [
-      'other', '11', 'WBC', 'haha', '444', 'IL-1β', 'gsg', '244', 'anti-Scl-70', 'fff', '222', '33'
-    ]
-    const uploadData = handleData(originData, form)
-    Object.entries(form).forEach(([key, value]) => {
-      //console.log(key)
-      uploadData.forEach((item:any, index) => {
-        if (Object.keys(value).includes(item.name)) {
-          //@ts-ignore
-          form[key][item.name] = item.value
 
-        }
-      })
-    })
-    await nextTick(()=>{
-      console.log(111)
-    })
-    console.log(form)
-    // return
-    // const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
-    // // console.log(formData)
-    // const res = await updatePatient(formData);
-    // usePatientStore().updatePatientInfo(res.data)
-    // uni.navigateBack()
+    const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
+    // console.log(formData)
+    const res = await updatePatient(formData);
+    usePatientStore().updatePatientInfo(res.data)
+    uni.navigateBack()
 
   } catch (e) {
     console.log(e)
@@ -824,13 +819,6 @@ const handleSubmit = async () => {
 
 }
 
-watch(form,(newval,oldval)=>{
-
-  console.log(4444,newval)
-
-  nextTick(()=>console.log(333))
-
-},{ immediate: true })
 
 
 </script>
