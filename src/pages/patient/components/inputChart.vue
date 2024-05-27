@@ -90,7 +90,7 @@ const handleChange = (event: any) => {
   emit('update:modelValue', value.value)
 
 }
-
+// v-model  如果直接绑定的是 props.modelValue 就不要监听
 watch(() => props.modelValue, (val) => {
   value.value = val
 })

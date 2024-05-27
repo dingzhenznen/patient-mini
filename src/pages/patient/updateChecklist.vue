@@ -755,58 +755,74 @@ const handleUpload = async () => {
 
 const handleData = (originData: string[], form: any) => {
 
-  const rules = [
-    {value:'-',repValue:'_'},
-    {value:'%',repValue:'100'},
-    {value:'+',repValue:'add'},
-    {value:'-',repValue:'sub'},
-  ]
-  rules.forEach((item,index)=>{
+  try {
+    const rules = [
+      {value:'-',repValue:'_'},
+      {value:'%',repValue:'100'},
+      {value:'+',repValue:'add'},
+      {value:'-',repValue:'sub'},
+    ]
+    rules.forEach((item,index)=>{
+      originData = originData.map((str)=>{ return str.split(item.value).join(item.repValue)})
+    })
 
-    originData = originData.map((str)=>{ return str.split(item.value).join(item.repValue)})
+    const indexs = [] as any;
+    // 获取所有匹配字符的索引
+    Object.entries(form).forEach(([key, value]) => {
+      originData.forEach((item, index) => {
+        if (Object.keys(value).includes(item)) {
+          indexs.push(index)
+        }
+      })
+    })
+    if(indexs.length<2){
+      return []
+    }
+    // 获取索引间距
+    const difference = indexs[1] - indexs[0]
 
-  })
+    // 截取数组
+    originData.splice(0, indexs[0])
+    console.log(originData)
 
-  const indexs = [] as any;
-  // 获取所有匹配字符的索引
-  Object.entries(form).forEach(([key, value]) => {
-    originData.forEach((item, index) => {
-      if (Object.keys(value).includes(item)) {
-        indexs.push(index)
+    // 拼接对象
+    const outData = [] as any
+    originData.forEach((item2, index2) => {
+      if (index2 % difference == 0) {
+        let value = '';
+        if (originData[index2 + difference - 1]) {
+          value = originData[index2 + difference - 1]
+        }
+        outData.push({ name: item2, value: value })
       }
     })
-  })
-  // 获取索引间距
-  const difference = indexs[1] - indexs[0]
-  console.log(indexs)
-  console.log(difference)
-  // 截取数组
-  originData.splice(0, indexs[0])
-  console.log(originData)
 
-  // 拼接对象
-  const outData = [] as any
-  originData.forEach((item2, index2) => {
-    if (index2 % difference == 0) {
-      let value = '';
-      if (originData[index2 + difference - 1]) {
-        value = originData[index2 + difference - 1]
-      }
-      outData.push({ name: item2, value: value })
-    }
-  })
+    return outData
 
-  return outData
+  } catch (error){
+    return []
+  }
 
 }
 
 
 const handleSubmit = async () => {
 
-  console.log(444,form)
-
   try {
-
+    // const originData = [
+    //   'other', '11', 'WBC', 'haha', '444', 'IL-1β', 'gsg', '244', 'anti', 'fff', '222', '33'
+    // ]
+    // const uploadData = handleData(originData, form)
+    // Object.entries(form).forEach(([key, value]) => {
+    //   uploadData.forEach((item:any, index) => {
+    //     console.log('uploaddata',item)
+    //     if (Object.keys(value).includes(item.name)) {
+    //       //@ts-ignore
+    //       form[key][item.name] = item.value
+    //     }
+    //   })
+    // })
+    // return
     const formData = { idCard: patientStore.patientInfo.idCard, userInfo: { checkList: form } };
     // console.log(formData)
     const res = await updatePatient(formData);
