@@ -387,5 +387,52 @@ export const checks = {
     },
     up_value: '',
     up24_value: ''
+  },
+  immunity: {
+    anti_ACL: {
+      parent: 'immunity',
+      en: 'anti-ACL',
+      china: '抗心磷脂抗体',
+      options: [
+        {
+          value: 0,
+          label: '阴性'
+        },
+        {
+          value: 1,
+          label: '阳性'
+        }
+      ]
+    },
+    anti_β2GPI: {
+      parent: 'immunity',
+      en: 'anti-β2GPI',
+      china: '抗β2糖蛋白抗体',
+      options: [
+        {
+          value: 0,
+          label: '阴性'
+        },
+        {
+          value: 1,
+          label: '阳性'
+        }
+      ]
+    },
+    ANCA: {
+      parent: 'immunity',
+      en: 'ANCA',
+      china: '抗心磷脂抗体',
+      options: [
+        {
+          value: 0,
+          label: '阴性'
+        },
+        {
+          value: 1,
+          label: '阳性'
+        }
+      ]
+    }
   }
 }

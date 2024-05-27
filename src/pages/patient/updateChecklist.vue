@@ -1,6 +1,6 @@
 <template>
   <view class="main">
-    <view style="height: 88vh;">
+    <view style="min-height: 88vh;">
       <view class="upload" @click="handleUpload">
         <wd-button block>拍照上传</wd-button>
       </view>
@@ -117,20 +117,192 @@
               v-model="form.immunity.CRP" unit="mg/L" low="0" height="10">
             </InputChart>
 
-            <InputChart title="IgG" checkname="immunity" china="(免疫球蛋白G)" v-model="form.immunity.IgG" unit="g/L">
-            </InputChart>
-
             <InputChart title="IgA" checkname="immunity" china="(免疫球蛋白A)" v-model="form.immunity.IgA" unit="g/L"
               low="0.7" height="4">
+            </InputChart>
+
+            <InputChart title="IgG" checkname="immunity" china="(免疫球蛋白G)" v-model="form.immunity.IgG" unit="g/L">
             </InputChart>
 
             <InputChart title="IgM" checkname="immunity" china="(免疫球蛋白M)" v-model="form.immunity.IgM" unit="g/L"
               low="0.4" height="2.6">
             </InputChart>
 
-            <InputChart title="RF" checkname="immunity" china="(类风湿因子)" v-model="form.immunity.RF" unit="U/ml" low="0"
-              height="25">
+
+            <InputChart title="IL-1β" checkname="immunity" china="" v-model="form.immunity.IL_1β" unit="pg/ml"
+            low="0" height="24.3" >
             </InputChart>
+
+            <InputChart title="IL-2" checkname="immunity" china="" v-model="form.immunity.IL_2" unit="pg/ml"
+            low="0" height="4.96" >
+            </InputChart>
+
+
+            <InputChart title="IL-4" checkname="immunity" china="" v-model="form.immunity.IL_4" unit="pg/ml"
+            low="0" height="3.54" >
+            </InputChart>
+
+            <InputChart title="IL-5" checkname="immunity" china="" v-model="form.immunity.IL_5" unit="pg/ml"
+            low="0" height="7.12" >
+            </InputChart>
+
+
+            <InputChart title="IL-6" checkname="immunity" china="" v-model="form.immunity.IL_6" unit="pg/ml"
+            low="0" height="15.02" >
+            </InputChart>
+
+            <InputChart title="IL-8" checkname="immunity" china="" v-model="form.immunity.IL_8" unit="pg/ml"
+            low="0" height="53.09" >
+            </InputChart>
+
+
+            <InputChart title="IL-10" checkname="immunity" china="" v-model="form.immunity.IL_10" unit="pg/ml"
+            low="0" height="6.23" >
+            </InputChart>
+
+            <InputChart title="IL-12p70" checkname="immunity" china="" v-model="form.immunity.IL_12p70" unit="pg/ml"
+            low="0" height="5.32" >
+            </InputChart>
+
+
+            <InputChart title="IL-17" checkname="immunity" china="" v-model="form.immunity.IL_17" unit="pg/ml"
+            low="0" height="28.25" >
+            </InputChart>
+
+            <InputChart title="TTNF-α" checkname="immunity" china="" v-model="form.immunity.TNF_α" unit="pg/ml"
+            low="0" height="17.11" >
+            </InputChart>
+
+
+            <InputChart title="IFN-α" checkname="immunity" china="" v-model="form.immunity.IFN_α" unit="pg/ml"
+            low="0" height="12.57" >
+            </InputChart>
+
+            <InputChart title="IFN-γ" checkname="immunity" china="" v-model="form.immunity.IFN_γ" unit="pg/ml"
+            low="0" height="3.11" >
+            </InputChart>
+
+            <InputChart title="anti-RNP" checkname="immunity" china="" v-model="form.immunity.anti_RNP" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-Sm" checkname="immunity" china="" v-model="form.immunity.anti_Sm" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+
+            <InputChart title="anti-SSA" checkname="immunity" china="" v-model="form.immunity.anti_SSA" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-Ro-52" checkname="immunity" china="" v-model="form.immunity.anti_Ro_52" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-SSB" checkname="immunity" china="" v-model="form.immunity.anti_SSB" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-Scl-70" checkname="immunity" china="" v-model="form.immunity.anti_Scl_70" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti_PM_Scl" checkname="immunity" china="" v-model="form.immunity.anti_PM_Scl" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-Jo-1" checkname="immunity" china="" v-model="form.immunity.anti_Jo_1" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-CENP-B" checkname="immunity" china="" v-model="form.immunity.anti_CENP_B" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-PCNA" checkname="immunity" china="" v-model="form.immunity.anti_PCNA" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-dsDNA" checkname="immunity" china="" v-model="form.immunity.anti_dsDNA" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-AnuA" checkname="immunity" china="" v-model="form.immunity.anti_AnuA" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-Histone" checkname="immunity" china="" v-model="form.immunity.anti_Histone" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-RibP" checkname="immunity" china="" v-model="form.immunity.anti_RibP" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <InputChart title="anti-AMA-M2" checkname="immunity" china="" v-model="form.immunity.anti_AMA_M2" unit="AU/ml"
+            low="0" height="100" >
+            </InputChart>
+
+            <RadioTable v-model="form.immunity.anti_ACL" :diag-info="checks.immunity.anti_ACL" />
+            <RadioTable v-model="form.immunity.anti_β2GPI" :diag-info="checks.immunity.anti_β2GPI" />
+            <RadioTable v-model="form.immunity.ANCA" :diag-info="checks.immunity.ANCA" />
+
+            <InputChart title="RF" checkname="immunity" china="类风湿因子" v-model="form.immunity.RF" unit="IU/ml"
+            low="0" height="20" >
+            </InputChart>
+
+            <InputChart title="CD3+%" checkname="immunity" china="成熟T淋巴细胞百分比" v-model="form.immunity.CD3add100" unit="%" low="61" height="85"
+           >
+            </InputChart>
+
+            <InputChart title="CD3+/CD4+%" checkname="immunity" china="辅助/诱导性T细胞百分比" v-model="form.immunity.CD3add_CD4add100" unit="%" low="28" height="58"
+           >
+            </InputChart>
+
+            <InputChart title="CD3+/CD8+%" checkname="immunity" china="细胞毒性/抑制性T细胞百分比" v-model="form.immunity.CD3add_CD8add100" unit="%"  low="19" height="48"
+           >
+            </InputChart>
+
+            <InputChart title="CD3-/CD19+%" checkname="immunity" china="B淋巴细胞百分比" v-model="form.immunity.CD3sub_CD19add100" unit="%"  low="5" height="20"
+           >
+            </InputChart>
+
+
+            <InputChart title="CD3-/CD" checkname="immunity" china="自然杀伤细胞NK百分比" v-model="form.immunity.CD3sub_CD" unit="%"  low="8" height="26"
+           >
+            </InputChart>
+
+            <InputChart title="Th-Ts" checkname="immunity" china="T辅助细胞/T抑制细胞比值" v-model="form.immunity.Th_Ts"
+           >
+            </InputChart>
+
+
+            <InputChart title="CD3+" checkname="immunity" china="成熟T淋巴细胞绝对值" v-model="form.immunity.CD3add" unit="个/ul"  low="940" height="2140"
+           >
+            </InputChart>
+
+            <InputChart title="CD3+/CD4+" checkname="immunity" china="辅助/诱导性T细胞绝对值" v-model="form.immunity.CD3add_CD4add" unit="个/ul"  low="550" height="1200"
+           >
+            </InputChart>
+
+            <InputChart title="CD3+/CD8+" checkname="immunity" china="细胞毒性/抑制性T细胞绝对值" v-model="form.immunity.CD3add_CD8add" unit="个/ul"  low="380" height="790"
+           >
+            </InputChart>
+
+            <InputChart title="CD3-/CD19+" checkname="immunity" china="B淋巴细胞绝对值 " v-model="form.immunity.CD3add_CD8add" unit="个/ul"  low="160" height="350"
+           >
+            </InputChart>
+
+            <InputChart title="CD3-/CD(56+16+)" checkname="immunity" china="自然杀伤细胞NK绝对值 " v-model="form.immunity.CD3sub_CD" unit="个/ul"  low="155" height="550"
+           >
+            </InputChart>
+
+
+
+
+
+
+
 
           </wd-tab>
         </block>
@@ -143,8 +315,19 @@
             <RadioTable v-model="form.hepatitis.HBeAb" :diag-info="checks.hepatitis.HBeAb" />
             <RadioTable v-model="form.hepatitis.HBcAb" :diag-info="checks.hepatitis.HBcAb" />
             <RadioTable v-model="form.hepatitis.HBV_DNA" :diag-info="checks.hepatitis.HBV_DNA" />
+
+            <InputChart title="HBV_DNA" checkname="hepatitis" china="HBV_DNA " v-model="form.hepatitis.HBV_DNA"
+            unit="IU/ml"
+           >
+            </InputChart>
+
             <RadioTable v-model="form.hepatitis.HCV_Ab" :diag-info="checks.hepatitis.HCV_Ab" />
             <RadioTable v-model="form.hepatitis.HCV_RNA" :diag-info="checks.hepatitis.HCV_RNA" />
+
+            <InputChart title="HCV-RNA" checkname="hepatitis" china="HCV-RNA " v-model="form.hepatitis.HCV_RNA_value"
+            unit="IU/ml"
+           >
+            </InputChart>
           </wd-tab>
         </block>
 
@@ -262,20 +445,37 @@
 
         <block>
           <wd-tab title="凝血">
-            <InputChart title="D-Dimer" checkname="coagulation" china="D-二聚体" v-model="form.coagulation.D_Dimer"
-              unit="U/ml" low="" height="">
-            </InputChart>
-
             <InputChart title="PT" checkname="coagulation" china="凝血酶原时间" v-model="form.coagulation.PT" unit="s"
-              low="10.4" height="12.6">
-
+              low="10.4" height="12.6" >
             </InputChart>
+
+            <InputChart title="PT%" checkname="coagulation" china="" v-model="form.coagulation.PT100" unit="%"
+
+             >
+            </InputChart>
+
+            <InputChart title="INR" checkname="coagulation" china="" v-model="form.coagulation.INR" unit=""
+            low="0.8" height="1.2"
+             >
+            </InputChart>
+
             <InputChart title="APPT" checkname="coagulation" china="活化部分活血凝酶时间" v-model="form.coagulation.APPT" unit="s"
               low="22.7" height="31.8">
             </InputChart>
-            <InputChart title="C4" checkname="coagulation" china="国际标准化比值" v-model="form.coagulation.C4" unit="" low=""
-              height="">
+
+            <InputChart title="FBG" checkname="coagulation" china="" v-model="form.coagulation.FBG"
+              unit="g/l" low="2" height="4">
             </InputChart>
+
+            <InputChart title="Dimer" checkname="coagulation" china="D-二聚体" v-model="form.coagulation.Dimer"
+              unit="ng/ml" low="0" height="243">
+            </InputChart>
+
+            <InputChart title="FDP" checkname="coagulation" china="" v-model="form.coagulation.FDP"
+              unit="ug/ml" low="0" height="5">
+            </InputChart>
+
+
           </wd-tab>
         </block>
 
@@ -354,7 +554,51 @@ const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
     IgG: '',
     IgA: '',
     IgM: '',
-    RF: ''
+    C3: '',
+    C4: '',
+    IL_1β: '',
+    IL_2: '',
+    IL_4: '',
+    IL_5: '',
+    IL_6: '',
+    IL_8: '',
+    IL_10: '',
+    IL_12p70: '',
+    IL_17: '',
+    TNF_α: '',
+    IFN_α: '',
+    IFN_γ: '',
+    ANA: '',
+    anti_RNP: '',
+    anti_Sm: '',
+    anti_SSA: '',
+    anti_Ro_52: '',
+    anti_SSB: '',
+    anti_Scl_70: '',
+    anti_PM_Scl: '',
+    anti_Jo_1: '',
+    anti_CENP_B: '',
+    anti_PCNA: '',
+    anti_dsDNA: '',
+    anti_AnuA: '',
+    anti_Histone: '',
+    anti_RibP: '',
+    anti_AMA_M2: '',
+    anti_ACL: '',
+    anti_β2GPI: '',
+    ANCA:'',
+    RF: '',
+    CD3add100: '',
+    CD3add_CD4add100: '',
+    CD3add_CD8add100: '',
+    CD3sub_CD19add100: '',
+    CD3add_CD: '',
+    Th_Ts:'',
+    CD3add: '',
+    CD3add_CD4add: '',
+    CD3add_CD8add: '',
+    CD3sub_CD19add: '',
+    CD3sub_CD: '',
   },
   hepatitis: { //肝炎
     HBsAg: 0,
@@ -367,6 +611,7 @@ const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
     HCV_Ab: 0,
     HCV_RNA: 0,
     HCV_RNA_value: ''
+
   },
   tuberculosis: { //结核
     PDD: -1, // -1未选 0阴性 1 2 3 4
@@ -425,10 +670,13 @@ const form = patientStore.patientInfo?.checkList || reactive<CheckList>({
   },
   coagulation: {
     // 凝血
-    D_Dimer: '',
     PT: '',
+    PT100: '',
+    INR:'',
     APPT: '',
-    PTINR: '',
+    FBG:'',
+    Dimer:'',
+    FDP:'',
   },
   Sirolimus: {
     // 西罗莫司
@@ -566,18 +814,19 @@ const handleSubmit = async () => {
 <style lang="scss" scoped>
 .main {
   position: relative;
-  // height: 100vh;
+   height: 100vh;
 
   .upload {
     margin: 40rpx 40rpx;
   }
 
   .submit-btn {
+    margin-top: 50rpx;
     width: 95vw;
     height: 80rpx;
     border-radius: 16rpx;
     background: rgba(0, 191, 140);
-    margin: 0 auto;
+
     color: #fff;
     display: flex;
     justify-content: center;

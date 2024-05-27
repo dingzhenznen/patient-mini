@@ -144,10 +144,42 @@ export type CheckList = {
     //免疫
     ESR?: string
     CRP?: string
-    IgG?: string
     IgA?: string
+    IgG?: string
     IgM?: string
+    C3?: string
+    C4?: string
     RF?: string
+    IL_1β?: string
+    IL_2?: string
+    IL_4?: string
+    IL_5?: string
+    IL_6?: string
+    IL_8?: string
+    IL_10?: string
+    IL_12p70?: string
+    IL_17?: string
+    TNF_α?: string
+    IFN_α?: string
+    IFN_γ?: string
+    ANA?: string
+    anti_RNP?: string
+    anti_Sm?: string
+    anti_SSA?: string
+    anti_Ro_52?: string
+    anti_SSB?: string
+    anti_Scl_70?: string
+    anti_PM_Scl?: string
+    anti_Jo_1?: string
+    anti_CENP_B?: string
+    anti_PCNA?: string
+    anti_dsDNA?: string
+    anti_AnuA?: string
+    anti_Histone?: string
+    anti_RibP?: string
+    anti_AMA_M2?: string
+    anti_ACL?: string
+    anti_β2GPI?: string
   }
   hepatitis?: {
     // 肝炎  0 为选 1 阳性 2 阴性
@@ -221,9 +253,15 @@ export type CheckList = {
   }
   coagulation?: {
     // 凝血
-    D_Dimer?: string
     PT?: string
+    PT100?: string
+    INR?: string
     APPT?: string
+    FBG?: string
+    Dimer?: string
+    FDP?: string
+
+    D_Dimer?: string
     PTINR?: string
   }
   Sirolimus?: {
