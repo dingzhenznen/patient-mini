@@ -732,7 +732,18 @@ const handleUpload = async () => {
         icon: 'none'
       })
     }
-    // 4. 调用OCR接口
+    // 4. 赋值
+
+    const uploadData = handleData(r.data, form)
+    Object.entries(form).forEach(([key, value]) => {
+      uploadData.forEach((item:any, index) => {
+        console.log('uploaddata',item)
+        if (Object.keys(value).includes(item.name)) {
+          //@ts-ignore
+          form[key][item.name] = item.value
+        }
+      })
+    })
   } catch (error) {
     return uni.showToast({
       title: '识别失败',
