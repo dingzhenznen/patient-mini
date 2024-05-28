@@ -129,172 +129,171 @@
             </InputChart>
 
 
-            <InputChart title="IL-1β" checkname="immunity" china="" v-model="form.immunity.IL_1β" unit="pg/ml"
-            low="0" height="24.3" >
+            <InputChart title="IL-1β" checkname="immunity" china="" v-model="form.immunity.IL_1β" unit="pg/ml" low="0"
+              height="24.3">
             </InputChart>
 
-            <InputChart title="IL-2" checkname="immunity" china="" v-model="form.immunity.IL_2" unit="pg/ml"
-            low="0" height="4.96" >
-            </InputChart>
-
-
-            <InputChart title="IL-4" checkname="immunity" china="" v-model="form.immunity.IL_4" unit="pg/ml"
-            low="0" height="3.54" >
-            </InputChart>
-
-            <InputChart title="IL-5" checkname="immunity" china="" v-model="form.immunity.IL_5" unit="pg/ml"
-            low="0" height="7.12" >
+            <InputChart title="IL-2" checkname="immunity" china="" v-model="form.immunity.IL_2" unit="pg/ml" low="0"
+              height="4.96">
             </InputChart>
 
 
-            <InputChart title="IL-6" checkname="immunity" china="" v-model="form.immunity.IL_6" unit="pg/ml"
-            low="0" height="15.02" >
+            <InputChart title="IL-4" checkname="immunity" china="" v-model="form.immunity.IL_4" unit="pg/ml" low="0"
+              height="3.54">
             </InputChart>
 
-            <InputChart title="IL-8" checkname="immunity" china="" v-model="form.immunity.IL_8" unit="pg/ml"
-            low="0" height="53.09" >
+            <InputChart title="IL-5" checkname="immunity" china="" v-model="form.immunity.IL_5" unit="pg/ml" low="0"
+              height="7.12">
             </InputChart>
 
 
-            <InputChart title="IL-10" checkname="immunity" china="" v-model="form.immunity.IL_10" unit="pg/ml"
-            low="0" height="6.23" >
+            <InputChart title="IL-6" checkname="immunity" china="" v-model="form.immunity.IL_6" unit="pg/ml" low="0"
+              height="15.02">
+            </InputChart>
+
+            <InputChart title="IL-8" checkname="immunity" china="" v-model="form.immunity.IL_8" unit="pg/ml" low="0"
+              height="53.09">
+            </InputChart>
+
+
+            <InputChart title="IL-10" checkname="immunity" china="" v-model="form.immunity.IL_10" unit="pg/ml" low="0"
+              height="6.23">
             </InputChart>
 
             <InputChart title="IL-12p70" checkname="immunity" china="" v-model="form.immunity.IL_12p70" unit="pg/ml"
-            low="0" height="5.32" >
+              low="0" height="5.32">
             </InputChart>
 
 
-            <InputChart title="IL-17" checkname="immunity" china="" v-model="form.immunity.IL_17" unit="pg/ml"
-            low="0" height="28.25" >
+            <InputChart title="IL-17" checkname="immunity" china="" v-model="form.immunity.IL_17" unit="pg/ml" low="0"
+              height="28.25">
             </InputChart>
 
-            <InputChart title="TTNF-α" checkname="immunity" china="" v-model="form.immunity.TNF_α" unit="pg/ml"
-            low="0" height="17.11" >
+            <InputChart title="TTNF-α" checkname="immunity" china="" v-model="form.immunity.TNF_α" unit="pg/ml" low="0"
+              height="17.11">
             </InputChart>
 
 
-            <InputChart title="IFN-α" checkname="immunity" china="" v-model="form.immunity.IFN_α" unit="pg/ml"
-            low="0" height="12.57" >
+            <InputChart title="IFN-α" checkname="immunity" china="" v-model="form.immunity.IFN_α" unit="pg/ml" low="0"
+              height="12.57">
             </InputChart>
 
-            <InputChart title="IFN-γ" checkname="immunity" china="" v-model="form.immunity.IFN_γ" unit="pg/ml"
-            low="0" height="3.11" >
+            <InputChart title="IFN-γ" checkname="immunity" china="" v-model="form.immunity.IFN_γ" unit="pg/ml" low="0"
+              height="3.11">
             </InputChart>
 
             <InputChart title="anti-RNP" checkname="immunity" china="" v-model="form.immunity.anti_RNP" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-Sm" checkname="immunity" china="" v-model="form.immunity.anti_Sm" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
 
             <InputChart title="anti-SSA" checkname="immunity" china="" v-model="form.immunity.anti_SSA" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-Ro-52" checkname="immunity" china="" v-model="form.immunity.anti_Ro_52" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-SSB" checkname="immunity" china="" v-model="form.immunity.anti_SSB" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
-            <InputChart title="anti-Scl-70" checkname="immunity" china="" v-model="form.immunity.anti_Scl_70" unit="AU/ml"
-            low="0" height="100" >
+            <InputChart title="anti-Scl-70" checkname="immunity" china="" v-model="form.immunity.anti_Scl_70"
+              unit="AU/ml" low="0" height="100">
             </InputChart>
 
-            <InputChart title="anti_PM_Scl" checkname="immunity" china="" v-model="form.immunity.anti_PM_Scl" unit="AU/ml"
-            low="0" height="100" >
+            <InputChart title="anti_PM_Scl" checkname="immunity" china="" v-model="form.immunity.anti_PM_Scl"
+              unit="AU/ml" low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-Jo-1" checkname="immunity" china="" v-model="form.immunity.anti_Jo_1" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
-            <InputChart title="anti-CENP-B" checkname="immunity" china="" v-model="form.immunity.anti_CENP_B" unit="AU/ml"
-            low="0" height="100" >
+            <InputChart title="anti-CENP-B" checkname="immunity" china="" v-model="form.immunity.anti_CENP_B"
+              unit="AU/ml" low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-PCNA" checkname="immunity" china="" v-model="form.immunity.anti_PCNA" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-dsDNA" checkname="immunity" china="" v-model="form.immunity.anti_dsDNA" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-AnuA" checkname="immunity" china="" v-model="form.immunity.anti_AnuA" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
-            <InputChart title="anti-Histone" checkname="immunity" china="" v-model="form.immunity.anti_Histone" unit="AU/ml"
-            low="0" height="100" >
+            <InputChart title="anti-Histone" checkname="immunity" china="" v-model="form.immunity.anti_Histone"
+              unit="AU/ml" low="0" height="100">
             </InputChart>
 
             <InputChart title="anti-RibP" checkname="immunity" china="" v-model="form.immunity.anti_RibP" unit="AU/ml"
-            low="0" height="100" >
+              low="0" height="100">
             </InputChart>
 
-            <InputChart title="anti-AMA-M2" checkname="immunity" china="" v-model="form.immunity.anti_AMA_M2" unit="AU/ml"
-            low="0" height="100" >
+            <InputChart title="anti-AMA-M2" checkname="immunity" china="" v-model="form.immunity.anti_AMA_M2"
+              unit="AU/ml" low="0" height="100">
             </InputChart>
 
             <RadioTable v-model="form.immunity.anti_ACL" :diag-info="checks.immunity.anti_ACL" />
             <RadioTable v-model="form.immunity.anti_β2GPI" :diag-info="checks.immunity.anti_β2GPI" />
             <RadioTable v-model="form.immunity.ANCA" :diag-info="checks.immunity.ANCA" />
 
-            <InputChart title="RF" checkname="immunity" china="类风湿因子" v-model="form.immunity.RF" unit="IU/ml"
-            low="0" height="20" >
+            <InputChart title="RF" checkname="immunity" china="类风湿因子" v-model="form.immunity.RF" unit="IU/ml" low="0"
+              height="20">
             </InputChart>
 
-            <InputChart title="CD3+%" checkname="immunity" china="成熟T淋巴细胞百分比" v-model="form.immunity.CD3add100" unit="%" low="61" height="85"
-           >
+            <InputChart title="CD3+%" checkname="immunity" china="成熟T淋巴细胞百分比" v-model="form.immunity.CD3add100" unit="%"
+              low="61" height="85">
             </InputChart>
 
-            <InputChart title="CD3+/CD4+%" checkname="immunity" china="辅助/诱导性T细胞百分比" v-model="form.immunity.CD3add_CD4add100" unit="%" low="28" height="58"
-           >
+            <InputChart title="CD3+/CD4+%" checkname="immunity" china="辅助/诱导性T细胞百分比"
+              v-model="form.immunity.CD3add_CD4add100" unit="%" low="28" height="58">
             </InputChart>
 
-            <InputChart title="CD3+/CD8+%" checkname="immunity" china="细胞毒性/抑制性T细胞百分比" v-model="form.immunity.CD3add_CD8add100" unit="%"  low="19" height="48"
-           >
+            <InputChart title="CD3+/CD8+%" checkname="immunity" china="细胞毒性/抑制性T细胞百分比"
+              v-model="form.immunity.CD3add_CD8add100" unit="%" low="19" height="48">
             </InputChart>
 
-            <InputChart title="CD3-/CD19+%" checkname="immunity" china="B淋巴细胞百分比" v-model="form.immunity.CD3sub_CD19add100" unit="%"  low="5" height="20"
-           >
-            </InputChart>
-
-
-            <InputChart title="CD3-/CD" checkname="immunity" china="自然杀伤细胞NK百分比" v-model="form.immunity.CD3sub_CD" unit="%"  low="8" height="26"
-           >
-            </InputChart>
-
-            <InputChart title="Th-Ts" checkname="immunity" china="T辅助细胞/T抑制细胞比值" v-model="form.immunity.Th_Ts"
-           >
+            <InputChart title="CD3-/CD19+%" checkname="immunity" china="B淋巴细胞百分比"
+              v-model="form.immunity.CD3sub_CD19add100" unit="%" low="5" height="20">
             </InputChart>
 
 
-            <InputChart title="CD3+" checkname="immunity" china="成熟T淋巴细胞绝对值" v-model="form.immunity.CD3add" unit="个/ul"  low="940" height="2140"
-           >
+            <InputChart title="CD3-/CD" checkname="immunity" china="自然杀伤细胞NK百分比" v-model="form.immunity.CD3sub_CD"
+              unit="%" low="8" height="26">
             </InputChart>
 
-            <InputChart title="CD3+/CD4+" checkname="immunity" china="辅助/诱导性T细胞绝对值" v-model="form.immunity.CD3add_CD4add" unit="个/ul"  low="550" height="1200"
-           >
+            <InputChart title="Th-Ts" checkname="immunity" china="T辅助细胞/T抑制细胞比值" v-model="form.immunity.Th_Ts">
             </InputChart>
 
-            <InputChart title="CD3+/CD8+" checkname="immunity" china="细胞毒性/抑制性T细胞绝对值" v-model="form.immunity.CD3add_CD8add" unit="个/ul"  low="380" height="790"
-           >
+
+            <InputChart title="CD3+" checkname="immunity" china="成熟T淋巴细胞绝对值" v-model="form.immunity.CD3add" unit="个/ul"
+              low="940" height="2140">
             </InputChart>
 
-            <InputChart title="CD3-/CD19+" checkname="immunity" china="B淋巴细胞绝对值 " v-model="form.immunity.CD3add_CD8add" unit="个/ul"  low="160" height="350"
-           >
+            <InputChart title="CD3+/CD4+" checkname="immunity" china="辅助/诱导性T细胞绝对值"
+              v-model="form.immunity.CD3add_CD4add" unit="个/ul" low="550" height="1200">
             </InputChart>
 
-            <InputChart title="CD3-/CD(56+16+)" checkname="immunity" china="自然杀伤细胞NK绝对值 " v-model="form.immunity.CD3sub_CD" unit="个/ul"  low="155" height="550"
-           >
+            <InputChart title="CD3+/CD8+" checkname="immunity" china="细胞毒性/抑制性T细胞绝对值"
+              v-model="form.immunity.CD3add_CD8add" unit="个/ul" low="380" height="790">
+            </InputChart>
+
+            <InputChart title="CD3-/CD19+" checkname="immunity" china="B淋巴细胞绝对值 " v-model="form.immunity.CD3add_CD8add"
+              unit="个/ul" low="160" height="350">
+            </InputChart>
+
+            <InputChart title="CD3-/CD(56+16+)" checkname="immunity" china="自然杀伤细胞NK绝对值 "
+              v-model="form.immunity.CD3sub_CD" unit="个/ul" low="155" height="550">
             </InputChart>
 
 
@@ -317,16 +316,14 @@
             <RadioTable v-model="form.hepatitis.HBV_DNA" :diag-info="checks.hepatitis.HBV_DNA" />
 
             <InputChart title="HBV_DNA" checkname="hepatitis" china="HBV_DNA " v-model="form.hepatitis.HBV_DNA"
-            unit="IU/ml"
-           >
+              unit="IU/ml">
             </InputChart>
 
             <RadioTable v-model="form.hepatitis.HCV_Ab" :diag-info="checks.hepatitis.HCV_Ab" />
             <RadioTable v-model="form.hepatitis.HCV_RNA" :diag-info="checks.hepatitis.HCV_RNA" />
 
             <InputChart title="HCV-RNA" checkname="hepatitis" china="HCV-RNA " v-model="form.hepatitis.HCV_RNA_value"
-            unit="IU/ml"
-           >
+              unit="IU/ml">
             </InputChart>
           </wd-tab>
         </block>
@@ -446,33 +443,30 @@
         <block>
           <wd-tab title="凝血">
             <InputChart title="PT" checkname="coagulation" china="凝血酶原时间" v-model="form.coagulation.PT" unit="s"
-              low="10.4" height="12.6" >
+              low="10.4" height="12.6">
             </InputChart>
 
-            <InputChart title="PT%" checkname="coagulation" china="" v-model="form.coagulation.PT100" unit="%"
-
-             >
+            <InputChart title="PT%" checkname="coagulation" china="" v-model="form.coagulation.PT100" unit="%">
             </InputChart>
 
-            <InputChart title="INR" checkname="coagulation" china="" v-model="form.coagulation.INR" unit=""
-            low="0.8" height="1.2"
-             >
+            <InputChart title="INR" checkname="coagulation" china="" v-model="form.coagulation.INR" unit="" low="0.8"
+              height="1.2">
             </InputChart>
 
             <InputChart title="APPT" checkname="coagulation" china="活化部分活血凝酶时间" v-model="form.coagulation.APPT" unit="s"
               low="22.7" height="31.8">
             </InputChart>
 
-            <InputChart title="FBG" checkname="coagulation" china="" v-model="form.coagulation.FBG"
-              unit="g/l" low="2" height="4">
+            <InputChart title="FBG" checkname="coagulation" china="" v-model="form.coagulation.FBG" unit="g/l" low="2"
+              height="4">
             </InputChart>
 
             <InputChart title="Dimer" checkname="coagulation" china="D-二聚体" v-model="form.coagulation.Dimer"
               unit="ng/ml" low="0" height="243">
             </InputChart>
 
-            <InputChart title="FDP" checkname="coagulation" china="" v-model="form.coagulation.FDP"
-              unit="ug/ml" low="0" height="5">
+            <InputChart title="FDP" checkname="coagulation" china="" v-model="form.coagulation.FDP" unit="ug/ml" low="0"
+              height="5">
             </InputChart>
 
 
@@ -586,14 +580,14 @@ const form = patientStore.patientInfo.checkList || reactive({
     anti_AMA_M2: '',
     anti_ACL: '',
     anti_β2GPI: '',
-    ANCA:'',
+    ANCA: '',
     RF: '',
     CD3add100: '',
     CD3add_CD4add100: '',
     CD3add_CD8add100: '',
     CD3sub_CD19add100: '',
     CD3add_CD: '',
-    Th_Ts:'',
+    Th_Ts: '',
     CD3add: '',
     CD3add_CD4add: '',
     CD3add_CD8add: '',
@@ -672,11 +666,11 @@ const form = patientStore.patientInfo.checkList || reactive({
     // 凝血
     PT: '',
     PT100: '',
-    INR:'',
+    INR: '',
     APPT: '',
-    FBG:'',
-    Dimer:'',
-    FDP:'',
+    FBG: '',
+    Dimer: '',
+    FDP: '',
   },
   Sirolimus: {
     // 西罗莫司
@@ -685,85 +679,81 @@ const form = patientStore.patientInfo.checkList || reactive({
 
 })
 
-// 1. 选择图片/拍照 2.上传至服务器 3. 调用OCR接口 4. 提示识别结果
+// 1. 选择图片/拍照 2. 压缩 3.上传至服务器 4. 调用OCR接口 4. 提示识别结果
 const handleUpload = async () => {
-  // 为减少缩进，将成功回调函数提取出来
-  const chooseImageSuccessCallBack = (res: any) => {
-    // 因为限制了图片数量只有1个，所以选择第一张
-    // @ts-ignore
-    const uploadFile = res.tempFiles[0]
-    // 受限于微信OCR接口，提供的图片大小不能超过2M
+  try {
+    // 1. 选择图片/拍照
+    const res: any = await uni.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+    })
+    let uploadFile = res.tempFiles[0]
+    // 2. 对大小超过2M的图片进行压缩
     if (uploadFile.size > 1024 * 1024 * 2) {
-      return uni.showToast({
-        title: '图片大小不能超过2M',
+      uni.showToast({
+        title: '图片过大，正在压缩',
         icon: 'none'
       })
+      const compressResult = await uni.compressImage({
+        src: uploadFile.path,
+        quality: 60
+      })
+      uploadFile.path = compressResult.tempFilePath
     }
-    const uploadFileSuccessCallback = async (res: any) => {
-      if (res.statusCode !== 200) {
-        return uni.showToast({
-          title: '上传失败',
-          icon: 'none'
-        })
-      }
-      const apiRes = JSON.parse(res.data) as uploadRes
-
-      // 确定上传后的图片路径，调用OCR接口
-      const r = await ocr({ imageUrl: apiRes.data.url })
-      console.log('ocr result: ', r)
-      // 识别出错提示
-      if (r.code) {
-        return uni.showToast({
-          title: r.msg,
-          icon: 'none'
-        })
-      }
-      // 识别结果处理
-
-      const uploadData = handleData(r.data, form)
-      Object.entries(form).forEach(([key, value]) => {
-      //console.log(key)
-        uploadData.forEach((item:any, index) => {
-          if (Object.keys(value).includes(item.name)) {
-            //@ts-ignore
-            form[key][item.name] = item.value
-
-          }
-        })
-    })
-
-    }
-    // 上传至服务器进行OCR识别
-    uni.uploadFile(
+    // 3. 上传至服务器
+    const uploadResult = await uni.uploadFile(
       {
         url: 'https://p9s5xa.laf.run/mini/files/upload',
         filePath: uploadFile.path,
         name: 'file',
-        success: uploadFileSuccessCallback,
-        fail: (err) => {
-          console.log(err)
-        }
       }
     )
+    if (uploadResult.statusCode !== 200) {
+      return uni.showToast({
+        title: '上传失败',
+        icon: 'none'
+      })
+    }
+    const apiRes = JSON.parse(uploadResult.data) as uploadRes
+    if (apiRes.code !== 0) {
+      return uni.showToast({
+        title: '上传失败',
+        icon: 'none'
+      })
+    }
+    // 4. 确定上传后的图片路径，调用OCR接口
+    const r = await ocr({ imageUrl: apiRes.data.url })
+    console.log('ocr result: ', r)
+    // 识别出错提示
+    if (r.code) {
+      return uni.showToast({
+        title: r.msg,
+        icon: 'none'
+      })
+    }
+    // 4. 调用OCR接口
+  } catch (error) {
+    return uni.showToast({
+      title: '识别失败',
+      icon: 'none'
+    })
+    console.log('ocr caught error: ', error)
   }
-  uni.chooseImage({
-    count: 1,
-    sourceType: ['album', 'camera'],
-    success: chooseImageSuccessCallBack
-  })
+
 }
 
 const handleData = (originData: string[], form: any) => {
 
   try {
     const rules = [
-      {value:'-',repValue:'_'},
-      {value:'%',repValue:'100'},
-      {value:'+',repValue:'add'},
-      {value:'-',repValue:'sub'},
+      { value: '-', repValue: '_' },
+      { value: '%', repValue: '100' },
+      { value: '+', repValue: 'add' },
+      { value: '-', repValue: 'sub' },
     ]
-    rules.forEach((item,index)=>{
-      originData = originData.map((str)=>{ return str.split(item.value).join(item.repValue)})
+    rules.forEach((item, index) => {
+      originData = originData.map((str) => { return str.split(item.value).join(item.repValue) })
     })
 
     const indexs = [] as any;
@@ -775,7 +765,7 @@ const handleData = (originData: string[], form: any) => {
         }
       })
     })
-    if(indexs.length<2){
+    if (indexs.length < 2) {
       return []
     }
     // 获取索引间距
@@ -799,7 +789,7 @@ const handleData = (originData: string[], form: any) => {
 
     return outData
 
-  } catch (error){
+  } catch (error) {
     return []
   }
 
@@ -842,7 +832,7 @@ const handleSubmit = async () => {
 <style lang="scss" scoped>
 .main {
   position: relative;
-   height: 100vh;
+  height: 100vh;
 
   .upload {
     margin: 40rpx 40rpx;
