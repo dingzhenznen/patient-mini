@@ -5,7 +5,6 @@
         <wd-button block>拍照上传</wd-button>
       </view>
 
-
       <wd-tabs v-model="tab" swipeable animated>
         <block>
           <wd-tab title="血常规">
@@ -169,7 +168,7 @@
               height="28.25">
             </InputChart>
 
-            <InputChart title="TTNF-α" checkname="immunity" china="" v-model="form.immunity.TNF_α" unit="pg/ml" low="0"
+            <InputChart title="TNF-α" checkname="immunity" china="" v-model="form.immunity.TNF_α" unit="pg/ml" low="0"
               height="17.11">
             </InputChart>
 
@@ -736,8 +735,8 @@ const handleUpload = async () => {
 
     const uploadData = handleData(r.data, form)
     Object.entries(form).forEach(([key, value]) => {
-      uploadData.forEach((item:any, index) => {
-        console.log('uploaddata',item)
+      uploadData.forEach((item: any, index) => {
+        console.log('uploaddata', item)
         if (Object.keys(value).includes(item.name)) {
           //@ts-ignore
           form[key][item.name] = item.value

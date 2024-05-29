@@ -10,8 +10,7 @@
       </view>
       <view class="input">
         <wd-input v-model="value" no-border :placeholder="placeholder"
-          custom-style="display: inline-block; width: 80rpx;vertical-align: middle;"
-          custom-input-class='inputClass'
+          custom-style="display: inline-block; width: 80rpx;vertical-align: middle;" custom-input-class='inputClass'
           @change="handleChange" />
         <view class="unit">{{ unit }}</view>
       </view>
@@ -183,10 +182,10 @@ export default {
 
     .title {
       text-align: left;
-      width: 200rpx;
+      width: 220rpx;
 
       .en {
-        font-size: 28rpx;
+        font-size: 26rpx;
 
       }
 
@@ -199,8 +198,9 @@ export default {
 
       display: flex;
       align-items: center;
-      margin-left: 40rpx;
-      .inputClass{
+      margin-left: 30rpx;
+
+      .inputClass {
         font-size: 24rpx;
         text-align: right;
       }
