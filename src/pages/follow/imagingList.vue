@@ -6,7 +6,7 @@
     <view class="body">
       <!-- 添加用药信息入口 -->
       <view class="add-wrap" @click="addImaging">
-        <view class="title">影像学检查</view>
+        <view class="title">添加影像学检查</view>
       </view>
 
       <!-- 用药信息 -->
@@ -23,7 +23,7 @@
         <view v-for="(item, index) in drugs" :key="index" class="table-row">
 
           <view class="time">
-            <view>{{ formatTime(item.startTime) }}</view>
+            <view>{{ formatTime(item.createdAt) }}</view>
 
           </view>
 
