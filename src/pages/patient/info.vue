@@ -229,7 +229,7 @@ const form = reactive<Patient>(
       china: '',
       type: 1,
       selectedOption: [],
-      tak2018:{}
+      tak2018: {}
     }
 
   })
@@ -304,6 +304,7 @@ const handleSelect = (status: any) => {
     uni.navigateTo({ 'url': '/pages/patient/finish?status=1' })
 
   } else {
+    // 更新store
     uni.navigateTo({ 'url': '/pages/patient/finish?status=2' })
   }
 }

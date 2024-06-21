@@ -36,7 +36,7 @@ const List = reactive([
   { 'title': "检验单", 'url': "/pages/patient/updateChecklist", 'src': "../../static/img/jianyandan.png", 'bg': 'linear-gradient(153.97deg, rgba(254, 147, 0, 1) 0%, rgba(255, 136, 0, 1) 20%, rgba(255, 125, 0, 1) 40%, rgba(255, 114, 0, 1) 60%, rgba(255, 102, 0, 1) 80%, rgba(255, 88, 0, 1) 100%)' },
   { 'title': "治疗方案", 'url': "/pages/follow/updateTreat", 'src': "../../static/img/zhiliaofangan.png", 'bg': 'linear-gradient(153.97deg, rgba(254, 147, 0, 1) 0%, rgba(255, 136, 0, 1) 20%, rgba(255, 125, 0, 1) 40%, rgba(255, 114, 0, 1) 60%, rgba(255, 102, 0, 1) 80%, rgba(255, 88, 0, 1) 100%);' },
   { 'title': "辅助检查", 'url': "/pages/follow/updateAuxiliaryCheck", 'src': "../../static/img/fuzhujiancha.png", 'bg': 'linear-gradient(148.45deg, rgba(254, 91, 199, 1) 0%, rgba(253, 85, 198, 1) 20%, rgba(253, 78, 197, 1) 40%, rgba(252, 71, 195, 1) 60%, rgba(252, 64, 194, 1) 80%, rgba(251, 55, 193, 1) 100%);' },
-  { 'title': "血管影像学检查", 'url': "/pages/follow/imagingList", 'src': "../../static/img/fuzhujiancha.png", 'bg': 'linear-gradient(148.45deg, rgba(254, 91, 199, 1) 0%, rgba(253, 85, 198, 1) 20%, rgba(253, 78, 197, 1) 40%, rgba(252, 71, 195, 1) 60%, rgba(252, 64, 194, 1) 80%, rgba(251, 55, 193, 1) 100%);' },
+  { 'title': "血管影像学检查", 'url': "/pages/follow/imagingList", 'src': "../../static/img/xueguanyx.png", 'bg': 'linear-gradient(151.24deg, rgba(0, 203, 255, 1) 0%, rgba(9, 194, 255, 1) 20%, rgba(13, 185, 255, 1) 40%, rgba(13, 176, 255, 1) 60%, rgba(9, 167, 255, 1) 80%, rgba(0, 158, 255, 1) 100%)' },
 
 ])
 const followStatus = ref(0)
@@ -53,9 +53,9 @@ const handleSelect = (item: any) => {
   if (item.title == "诊断确认") {
     const selectDiseaseName = patientStore.patientInfo.selectDisease?.en.toLocaleLowerCase()
 
-    if(selectDiseaseName === undefined){
+    if (selectDiseaseName === undefined) {
       uni.navigateTo({ url: '/pages/patient/selectDisease' })
-    }else{
+    } else {
       const diagnosisUrl = `/pages/disease/${selectDiseaseName}?status=${followStatus.value}` || item.url
       uni.navigateTo({ url: diagnosisUrl })
     }
