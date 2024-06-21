@@ -119,6 +119,9 @@ export type CheckList = {
     L?: string
     Hb?: string
     PLT?: string
+    N?: string
+    RBC?: string
+    HCT?: string
   }
   renalFunction?: {
     // 肝肾功
@@ -132,6 +135,15 @@ export type CheckList = {
     Cr?: string
     UA?: string
     BS?: string
+    TP?: string
+    AG?: string
+    GGT?: string
+    ALP?: string
+    LDH?: string
+    CK?: string
+    Urea?: string
+    Ca?: string
+    P?: string
   }
   bloodFat?: {
     // 血脂
@@ -200,12 +212,6 @@ export type CheckList = {
     TB_SPOT?: number
     TB_SPOT_A?: string
     TB_SPOT_B?: string
-  }
-  bloodRoutine_2?: {
-    //血常规
-    N?: string
-    RBC?: string
-    HCT?: string
   }
   Urinalysis?: {
     //尿检

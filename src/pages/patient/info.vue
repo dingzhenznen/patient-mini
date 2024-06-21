@@ -64,8 +64,8 @@
         <wd-collapse-item title="随诊" name="item1">
           <view class="zlList">
 
-            <view class="item" v-for="item in form.followList?.sort((a, b) => { return b.thisDate - a.thisDate })"
-              :key="item._id" @click="handleSelect(item.status)">
+            <view class="item" v-for="item in patientStore.followList" :key="item._id"
+              @click="handleSelect(item.status, item)">
               <view class="top">
                 <view class="status">{{ item.status == 0 ? "未诊疗" : item.status == 1 ? "诊疗中" : "诊疗结束" }}</view>
                 <view class="date">{{ dayjs(item.thisDate).format('YYYY-MM-DD') }}</view>
@@ -266,7 +266,7 @@ const messagePatient = async (patient: Patient) => {
 }
 
 
-const handleSelect = (status: any) => {
+const handleSelect = (status: any, data: any) => {
 
 
   // 0 未开始  1 诊疗中 2 已结束
@@ -305,6 +305,7 @@ const handleSelect = (status: any) => {
 
   } else {
     // 更新store
+    console.log(data)
     uni.navigateTo({ 'url': '/pages/patient/finish?status=2' })
   }
 }
@@ -323,6 +324,7 @@ onLoad(async (option: any) => {
 
   patientStore.updatePatientInfo(res.data.data[0])
   patientStore.setFollowList(res.data.data[0])
+  patientStore.followList
   Object.assign(form, res.data.data[0]);
 
   console.log(222, form)

@@ -33,6 +33,18 @@
             <InputChart checkname="bloodRoutine" title="PLT" china="(血小板)" v-model="form.bloodRoutine.PLT"
               unit="*10^9个/L" low="100" height="300">
             </InputChart>
+
+            <InputChart title="N" checkname="bloodRoutine" china="(中性粒细胞)" v-model="form.bloodRoutine.N" unit="*10^9个/L"
+              low="2" height="7.5">
+            </InputChart>
+
+            <InputChart title="RBC" checkname="bloodRoutine" china="(红细胞)" v-model="form.bloodRoutine.RBC"
+              unit="*10^12个/L" low="3.5" height="5.1">
+            </InputChart>
+
+            <InputChart title="HCT" checkname="bloodRoutine" china="(红细胞比容)" v-model="form.bloodRoutine.HCT" unit="(%)"
+              low="" height="">
+            </InputChart>
           </wd-tab>
         </block>
 
@@ -80,8 +92,46 @@
               low="85" height="350">
             </InputChart>
 
-            <InputChart title="空腹血糖" checkname="renalFunction" china="" v-model="form.renalFunction.ALB" unit="g/L">
+            <InputChart title="空腹血糖" checkname="renalFunction" china="" v-model="form.renalFunction.BS" unit="g/L">
             </InputChart>
+
+            <InputChart title="TP" checkname="liverKidney" china="(总蛋白)" v-model="form.liverKidney.TP" unit="g/L"
+              low="60" height="80">
+            </InputChart>
+
+            <InputChart title="A/G" checkname="liverKidney" china="(白蛋白球蛋白比)" v-model="form.liverKidney.AG" unit=""
+              low="" height="">
+            </InputChart>
+
+            <InputChart title="GGT" checkname="liverKidney" china="(谷氨酰转化酶)" v-model="form.liverKidney.GGT" unit="U/L"
+              low="0" height="40">
+            </InputChart>
+
+            <InputChart title="ALP" checkname="liverKidney" china="(碱性磷酸酶)" v-model="form.liverKidney.ALP" unit="U/L"
+              low="40" height="150">
+            </InputChart>
+
+            <InputChart title="LDH" checkname="liverKidney" china="(乳酸脱氢酶)" v-model="form.liverKidney.LDH" unit="U/L"
+              low="115" height="220">
+            </InputChart>
+
+            <InputChart title="CK" checkname="liverKidney" china="(肌酸激酶)" v-model="form.liverKidney.CK" unit="U/L"
+              low="25" height="173">
+            </InputChart>
+
+            <InputChart title="Urea" checkname="liverKidney" china="(尿素)" v-model="form.liverKidney.Urea" unit="g/L"
+              low="2.78" height="7.14">
+            </InputChart>
+
+            <InputChart title="Ca" checkname="liverKidney" china="(钙)" v-model="form.liverKidney.Ca" unit="mmol/L"
+              low="2" height="2.7">
+            </InputChart>
+
+            <InputChart title="P" checkname="liverKidney" china="(磷代谢)" v-model="form.liverKidney.P" unit="U/L"
+              low="0.8" height="2.26">
+            </InputChart>
+
+
           </wd-tab>
         </block>
 
@@ -335,29 +385,13 @@
         </block>
 
         <block>
-          <wd-tab title="血常规">
-            <InputChart title="N" checkname="bloodRoutine_2" china="(中性粒细胞)" v-model="form.bloodRoutine_2.N"
-              unit="*10^9个/L" low="2" height="7.5">
-            </InputChart>
-
-            <InputChart title="RBC" checkname="bloodRoutine_2" china="(红细胞)" v-model="form.bloodRoutine_2.RBC"
-              unit="*10^12个/L" low="3.5" height="5.1">
-            </InputChart>
-
-            <InputChart title="HCT" checkname="bloodRoutine_2" china="(红细胞比容)" v-model="form.bloodRoutine_2.HCT"
-              unit="(%)" low="" height="">
-            </InputChart>
-          </wd-tab>
-        </block>
-
-        <block>
           <wd-tab title="尿检查">
             <RadioTable v-model="form.Urinalysis.red" :diag-info="checks.Urinalysis.red" />
             <RadioTable v-model="form.Urinalysis.up" :diag-info="checks.Urinalysis.up" />
           </wd-tab>
         </block>
 
-        <block>
+        <!-- <block>
           <wd-tab title="肝肾全">
 
             <InputChart title="TP" checkname="liverKidney" china="(总蛋白)" v-model="form.liverKidney.TP" unit="g/L"
@@ -399,7 +433,7 @@
 
 
           </wd-tab>
-        </block>
+        </block> -->
 
         <block>
           <wd-tab title="骨松检测">
@@ -520,7 +554,10 @@ const form = patientStore.patientInfo.checkList || reactive({
     WBC: '',
     L: '',
     Hb: '',
-    PLT: ''
+    PLT: '',
+    N: '',
+    RBC: '',
+    HCT: '',
   },
   renalFunction: {//肝肾功
     status: 0,
@@ -532,7 +569,16 @@ const form = patientStore.patientInfo.checkList || reactive({
     PA: '',
     Cr: '',
     UA: '',
-    BS: ''
+    BS: '',
+    TP: '',
+    AG: '',
+    GGT: '',
+    ALP: '',
+    LDH: '',
+    CK: '',
+    Urea: '',
+    Ca: '',
+    P: '',
   },
   bloodFat: {//血脂
     CHO: '',
@@ -612,11 +658,6 @@ const form = patientStore.patientInfo.checkList || reactive({
     TB_SPOT_A: '',
     TB_SPOT_B: ''
   },
-  bloodRoutine_2: { //血常规
-    N: '',
-    RBC: '',
-    HCT: '',
-  },
   Urinalysis: {
     //尿检查
     white: '',
@@ -629,15 +670,15 @@ const form = patientStore.patientInfo.checkList || reactive({
   },
   liverKidney: {
     // 肝肾全
-    TP: '',
-    AG: '',
-    GGT: '',
-    ALP: '',
-    LDH: '',
-    CK: '',
-    Urea: '',
-    Ca: '',
-    P: '',
+    // TP: '',
+    // AG: '',
+    // GGT: '',
+    // ALP: '',
+    // LDH: '',
+    // CK: '',
+    // Urea: '',
+    // Ca: '',
+    // P: '',
   },
   boneLoosening: {
     //骨松检测
